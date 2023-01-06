@@ -8,6 +8,9 @@
 # AWS User-specific
 .idea/**/aws.xml
 
+# Accidental package-lock.json files
+package-lock.json
+
 # Generated files
 .idea/**/contentModel.xml
 

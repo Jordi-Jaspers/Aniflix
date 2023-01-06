@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+
+    .headerIcon {
+        @apply h-6 w-6 text-[#e5e5e5] font-poppins cursor-pointer;
+    }
+
+    .headerLink {
+        @apply cursor-pointer text-sm font-poppins text-[#d1d1d1] transition duration-[.4s] hover:text-[#b3b3b3] self-center items-center;
+    }
+
+    .bannerButton {
+        @apply flex rounded items-center gap-x-2 px-4 py-0.5 text-sm font-semibold transition hover:opacity-75 lg:py-1.5 lg:px-6 lg:text-xl;
+    }
+}

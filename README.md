@@ -58,6 +58,11 @@ Still need to share a link to the deployment
 
 add information here please.
 
+```bash
+docker pull riimuru/consumet-api
+docker run -p {port}:3000 riimuru/consumet-api
+```
+
 ## 🛠️ Stack <a name = "stack"></a>
 
 - [Spring Boot](https://spring.io/projects/spring-boot) - Java framework for building back-end applications.
