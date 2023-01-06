@@ -7,7 +7,8 @@ import {Genres, getRandomGenres} from "../enum/Genre";
 import Banner from "../components/Banner";
 import {Page} from "../interfaces/Page";
 import Row from "../components/Row";
-import {useEffect, useState} from 'react'
+import {useRecoilValue} from "recoil";
+import {animeState} from "../atoms/AnimeAtom";
 
 interface Props {
     randomAnime: Anime;
@@ -32,9 +33,10 @@ export default function Home({
      genre4Animes,
     randomGenres
  }: Props) {
+    const anime = useRecoilValue(animeState)
     return (
         <div className={"bg-[#141414] -z-100"}>
-            <div className={"h-screen relative bg-gradient-to-t from-[#141414] to-transparent overflow-scroll lg:h-[140vh] z-0"}>
+            <div className={"h-screen relative bg-gradient overflow-scroll lg:h-[140vh] z-0"}>
                 {/*  TAB TITLE  */}
                 <Head>
                     <title>Home | Aniflix</title>
