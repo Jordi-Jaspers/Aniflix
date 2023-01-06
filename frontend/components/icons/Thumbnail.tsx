@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {useRecoilState} from 'recoil'
 import {GoEpisode} from "../../interfaces/GoEpisode";
 import {Anime} from "../../interfaces/Anime";
-import {animeState, modalState} from "../../atoms/modalAtom.";
+import {animeState, modalState} from "../../atoms/modalAtom";
 import {useState} from 'react';
 
 interface Props {
@@ -55,7 +55,7 @@ export default function Thumbnail({anime}: Props) {
                 src={anime.image}
                 alt={videoTitle(anime)}
                 className="rounded-sm object-cover md:rounded"
-                layout="fill"
+                fill={true}
                 sizes="(max-width: 768px) 100vw, 50vw"
             />
         </div>

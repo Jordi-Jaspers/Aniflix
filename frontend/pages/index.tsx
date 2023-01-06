@@ -18,9 +18,8 @@ interface Props {
     genre2Animes: Page<Anime>;
     genre3Animes: Page<Anime>;
     genre4Animes: Page<Anime>;
+    randomGenres: Genres[];
 }
-
-const randomGenres = getRandomGenres();
 
 export default function Home({
      randomAnime,
@@ -30,7 +29,8 @@ export default function Home({
      genre1Animes,
      genre2Animes,
      genre3Animes,
-     genre4Animes
+     genre4Animes,
+    randomGenres
  }: Props) {
     return (
         <div className={"bg-[#141414] -z-100"}>
@@ -43,13 +43,13 @@ export default function Home({
                 {/*  HEADER  */}
                 <Header/>
 
-                <main className="pt-24 lg:space-t-24 h-fit">
+                <main className="lg:space-t-24 h-fit">
                     {/*  RANDOM ANIME BANNER */}
                     <Banner randomAnime={randomAnime}/>
 
-                    <section className={"mt-[10vh]"}>
+                    <section>
                         <div className={"bg-gradient-to-b from-transparent via-black to-[#141414]"}>
-                            <div className={" pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12"}>
+                            <div className={"xs:pt-[5%] sm:pt-[7.5%] lg:pt-[10%] 2xl:pt-[15%] pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12"}>
                                 {/*  RECENTLY ADDED ANIME CAROUSEL */}
                                 <Row title="Recently Added" page={recentEpisodes}/>
                             </div>
@@ -89,6 +89,7 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
+    const randomGenres = getRandomGenres();
     const [
         recentEpisodes,
         trendingAnimes,
@@ -111,7 +112,6 @@ export async function getServerSideProps() {
     let animeList: Anime[] = [...popularAnimes.results, ...trendingAnimes.results];
     do {
         randomAnime = animeList[Math.floor(Math.random() * animeList.length)];
-        console.log(randomAnime)
     } while (!randomAnime.cover || !randomAnime.title)
 
     if (!randomAnime) {
@@ -127,7 +127,8 @@ export async function getServerSideProps() {
             genre1Animes: genre1Animes,
             genre2Animes: genre2Animes,
             genre3Animes: genre3Animes,
-            genre4Animes: genre4Animes
+            genre4Animes: genre4Animes,
+            randomGenres
         }
     }
 }

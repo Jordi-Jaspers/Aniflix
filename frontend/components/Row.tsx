@@ -13,10 +13,7 @@ interface Props {
 export default function Row({title, page}: Props) {
     const rowRef = useRef<HTMLDivElement>(null)
     const [isMoved, setIsMoved] = useState(false)
-
-    console.log('page', page)
     const animes: Anime[] | GoEpisode[] = page.results
-    console.log('animes', animes)
 
     const handleClick = (direction: string) => {
         setIsMoved(true)

@@ -17,7 +17,6 @@ function Header() {
             }
         }
 
-        console.log(isScrolled)
         window.addEventListener('scroll', handleScroll)
         return () => {
             window.removeEventListener('scroll', handleScroll)

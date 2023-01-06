@@ -48,8 +48,6 @@ export default function Banner({randomAnime}: Props) {
         if (muted) {
             player?.unMute()
             setMuted(false)
-            console.log('isplaying', isPlaying)
-            console.log('isready', isReady)
         } else {
             player?.mute()
             setMuted(true)
@@ -58,7 +56,7 @@ export default function Banner({randomAnime}: Props) {
 
     const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
     return (
-        <div className="flex flex-col space-y-2 pt-16 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12">
+        <div className="flex flex-col space-y-2 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
             <div className={`${isPlaying && isReady ? "hidden" : "absolute w-screen top-0 left-0 -z-20"}`}>
                 <Image
                     src={randomAnime.cover}
@@ -81,18 +79,21 @@ export default function Banner({randomAnime}: Props) {
                 />
             </div>
 
-            {videoTitle.length > 40
-                ?
-                <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.5vw] pt-[2.5%] sm:pt-[7.5%] md:pt-[10%] ">{videoTitle}</h1>
-                :
-                <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[4.5vw] pt-[2.5%] sm:pt-[7.5%] md:pt-[10%] ">{videoTitle}</h1>
-            }
-            <p className="font-poppins text-[#fefefe] text-shadow-md max-w-xs text-[1.2vw] md:max-w-lg lg:max-w-xl">
-                {(randomAnime.description.length > 350)
-                    ? randomAnime.description.replace(/<[^>]*>?/gm, '').substring(0, 350) + "..."
-                    : randomAnime.description.replace(/<[^>]*>?/gm, '')
+            <div className={"pt-[7.5vh] md:pt-[12.5vh] xl:pt-[15vh] 2xl:pt-[20vh] flex flex-col space-y-2 justify-between"}>
+                {videoTitle.length > 40
+                    ?
+                    <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.0vw]">{videoTitle}</h1>
+                    :
+                    <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.5vw]">{videoTitle}</h1>
                 }
-            </p>
+                <p className="font-poppins text-[#fefefe] text-shadow-md max-w-xs text-[1.75vw] md:text-[1.2vw] md:max-w-lg lg:max-w-xl">
+                    {(randomAnime.description.length > 350)
+                        ? randomAnime.description.replace(/<[^>]*>?/gm, '').substring(0, 350) + "..."
+                        : randomAnime.description.replace(/<[^>]*>?/gm, '')
+                    }
+                </p>
+            </div>
+
             <div className="flex flex-row justify-between w-full">
                 <div className="flex space-x-3">
                     <button className="bannerButton rounded bg-white text-black h-fit w-fit">
