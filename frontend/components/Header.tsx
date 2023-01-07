@@ -6,7 +6,7 @@ import Image from "next/image";
 import AniFlixLogo from "./icons/AniFlixLogo";
 import BasicMenu from "./BasicMenu";
 
-function Header() {
+export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
     useEffect(() => {
         const handleScroll = () => {
@@ -55,5 +55,3 @@ function Header() {
         </header>
     )
 }
-
-export default Header

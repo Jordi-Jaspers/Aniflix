@@ -9,6 +9,7 @@ import {Page} from "../interfaces/Page";
 import Row from "../components/Row";
 import {useRecoilValue} from "recoil";
 import {animeState} from "../atoms/AnimeAtom";
+import InfoScreen from "../components/InfoScreen";
 
 interface Props {
     randomAnime: Anime;
@@ -78,6 +79,9 @@ export default function Home({
                         </div>
                     </section>
                 </main>
+
+                {/*  ANIME INFO SCREEN */}
+                {anime && <InfoScreen/>}
 
                 {/* FOOTER */}
                 <footer className={"flex flex-row items-center justify-center p-8 w-full"}>

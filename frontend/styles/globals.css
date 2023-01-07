@@ -14,7 +14,7 @@
     }
 
     .bannerButton {
-        @apply flex rounded items-center gap-x-2 px-4 py-0.5 text-sm font-semibold transition hover:opacity-75 lg:py-1.5 lg:px-6 lg:text-xl h-fit w-fit;
+        @apply flex rounded items-center gap-x-2 px-4 py-0.5 text-sm transition hover:opacity-75 lg:py-1.5 lg:px-6 lg:text-xl h-fit w-fit;
     }
 
     .arrowIcon {
@@ -23,5 +23,9 @@
 
     .bg-gradient {
         background: linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);
+    }
+
+    .infoScreenEpisode {
+        @apply text-2xl font-poppins font-semibold text-white;
     }
 }

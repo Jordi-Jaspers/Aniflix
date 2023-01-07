@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React, {useState} from 'react';
 import YouTube, {YouTubeProps} from 'react-youtube';
 import {Anime} from "../interfaces/Anime";
+import {animeState, infoScreenState} from "../atoms/AnimeAtom";
+import {useRecoilState} from "recoil";
 
 interface Props {
     randomAnime: Anime
@@ -22,6 +24,11 @@ const opts = {
 };
 
 export default function Banner({randomAnime}: Props) {
+    // Atoms which can be accessed by any component.
+    const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
+    const [clickedAnime, setClickedAnime] = useRecoilState(animeState)
+
+    // Some hooks to handle the state of the banner with the video.
     const [player, setPlayer] = useState<any>(null)
     const [isMuted, setIsMuted] = useState(true)
     const [isError, setIsError] = useState(false)
@@ -54,6 +61,13 @@ export default function Banner({randomAnime}: Props) {
         }
     }
 
+    const handleInfoScreen = () => {
+        setShowInfoScreen(true)
+        setClickedAnime(randomAnime)
+        player?.pauseVideo()
+        setIsPlaying(false)
+    }
+
     const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
     return (
         <div className="flex flex-col space-y-2 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
@@ -70,7 +84,7 @@ export default function Banner({randomAnime}: Props) {
             <div className={`${isPlaying && !isError ? "-z-10" : "hidden"}`}>
                 <YouTube
                     videoId={randomAnime.trailer.id}
-                    className={"absolute z-10 top-0 left-0 w-screen aspect-video object-cover max-h-[51.25vw]"}
+                    className={"absolute z-10 top-0 left-0 w-screen aspect-video object-cover "}
                     opts={opts}
                     onReady={onReady}
                     onError={onError}
@@ -100,7 +114,8 @@ export default function Banner({randomAnime}: Props) {
                         <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
                     </button>
 
-                    <button className="bannerButton bg-[#4f4f50] opacity-75 text-white">
+                    <button className="bannerButton bg-[#4f4f50] opacity-75 text-white"
+                            onClick={handleInfoScreen}>
                         <InformationCircleIcon className="h-4 w-4 md:h-6 md:w-6"/> More Information
                     </button>
                 </div>
