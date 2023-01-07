@@ -106,6 +106,10 @@ export default function InfoScreen() {
                                     HD
                                 </div>
                             </div>
+                            <h1 className="text-3xl font-bold text-white">
+                                {anime?.title.romaji ? anime.title.romaji : anime?.title.english}
+                                {anime?.subOrDub ? ` (${anime.subOrDub})` : ""}
+                            </h1>
                             <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
                                 <p className="text-white w-5/6 text-sm font-poppins">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
                                 <div className="flex flex-col space-y-3 text-sm">
@@ -125,6 +129,16 @@ export default function InfoScreen() {
                                     <div className={"text-white"}>
                                         <span className="text-[gray]">Status:</span>{' '}
                                         {anime?.status}
+                                    </div>
+
+                                    <div className={"text-white"}>
+                                        <span className="text-[gray]">Type:</span>{' '}
+                                        {anime?.type}
+                                    </div>
+
+                                    <div className={"text-white"}>
+                                        <span className="text-[gray]">Average Duration:</span>{' '}
+                                        {anime?.duration} min
                                     </div>
                                 </div>
                             </div>

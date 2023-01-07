@@ -24,6 +24,16 @@ export default function Thumbnail({anime}: Props) {
         return 'Error retrieving title';
     };
 
+    const handleClickedAnime = (clickedAnime: Anime | GoEpisode) => {
+        // check if the anime is a GoEpisode or Anime object
+        if (anime.hasOwnProperty('trailer')) {
+            setCurrentAnime(anime as Anime);
+        } else {
+            // if it's a GoEpisode, we need to fetch the anime data from the API
+
+        }
+    }
+
     const rating = (anime: Anime | GoEpisode): string => {
         if (anime.hasOwnProperty('rating') && "rating" in anime && anime.rating !== null) {
             return anime.rating + '%';
