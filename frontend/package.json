@@ -14,16 +14,12 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -Rf dist node_modules .next/cache cypress/videos cypress/screenshots cypress-terminal-report",
     "clean-start": "npm run clean && npm i && npm start",
-    "test:unit": "cross-env NODE_ENV=test jest --coverage",
-    "test": "npm run test:unit",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettier": "prettier --config .prettierrc \"./**/*.+(js|json|jsx)\" --write",
     "clean:example": "rnb --c"
   },
