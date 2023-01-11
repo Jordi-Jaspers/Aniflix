@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Header from "../components/Header";
 import {Anime} from "../interfaces/Anime";
 import {GoEpisode} from "../interfaces/GoEpisode";
-import requests from "../utils/requests";
+import ConsumetApi from "../utils/ConsumetApi";
 import {Genres, getRandomGenres} from "../enum/Genre";
 import Banner from "../components/Banner";
 import {Page} from "../interfaces/Page";
@@ -105,13 +105,13 @@ export async function getServerSideProps() {
         genre3Animes,
         genre4Animes
     ] = await Promise.all([
-        fetch(requests.fetchRecentEpisodes).then((res) => res.json()),
-        fetch(requests.fetchTrending).then((res) => res.json()),
-        fetch(requests.fetchPopularAnime).then((res) => res.json()),
-        fetch(requests.fetchGenre.replace("{genre}", randomGenres[0])).then((res) => res.json()),
-        fetch(requests.fetchGenre.replace("{genre}", randomGenres[1])).then((res) => res.json()),
-        fetch(requests.fetchGenre.replace("{genre}", randomGenres[2])).then((res) => res.json()),
-        fetch(requests.fetchGenre.replace("{genre}", randomGenres[3])).then((res) => res.json()),
+        fetch(ConsumetApi.fetchRecentEpisodes).then((res) => res.json()),
+        fetch(ConsumetApi.fetchTrending).then((res) => res.json()),
+        fetch(ConsumetApi.fetchPopularAnime).then((res) => res.json()),
+        fetch(ConsumetApi.fetchGenre.replace("{genre}", randomGenres[0])).then((res) => res.json()),
+        fetch(ConsumetApi.fetchGenre.replace("{genre}", randomGenres[1])).then((res) => res.json()),
+        fetch(ConsumetApi.fetchGenre.replace("{genre}", randomGenres[2])).then((res) => res.json()),
+        fetch(ConsumetApi.fetchGenre.replace("{genre}", randomGenres[3])).then((res) => res.json()),
     ])
 
     let randomAnime: Anime;
@@ -121,7 +121,7 @@ export async function getServerSideProps() {
     } while (!randomAnime.cover || !randomAnime.title)
 
     if (!randomAnime) {
-        randomAnime = await fetch(requests.fetchAnimeDetails.replace("{id}", "16498")).then((res) => res.json());
+        randomAnime = await fetch(ConsumetApi.fetchAnimeDetails.replace("{id}", "16498")).then((res) => res.json());
     }
 
     return {

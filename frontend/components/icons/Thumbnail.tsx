@@ -17,19 +17,20 @@ export default function Thumbnail({anime}: Props) {
         if (anime.hasOwnProperty('title')) {
             if (typeof anime.title === 'object') {
                 return anime.title.romaji ? anime.title.romaji : anime.title.english;
-            } else {
-                return anime.title;
+            } else if (anime.hasOwnProperty('episodeNumber')) {
+                return anime.title + " (Episode " + anime.episodeNumber + ")";
             }
         }
         return 'Error retrieving title';
     };
 
     const handleClickedAnime = (clickedAnime: Anime | GoEpisode) => {
-        // check if the anime is a GoEpisode or Anime object
+        // Check whether the clicked thumbnail is an object of class 'GoEpisode' or 'Anime'.
         if (anime.hasOwnProperty('trailer')) {
             setCurrentAnime(anime as Anime);
         } else {
             // if it's a GoEpisode, we need to fetch the anime data from the API
+
 
         }
     }
@@ -44,7 +45,7 @@ export default function Thumbnail({anime}: Props) {
     return (
         <div
             className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
-            onClick={() => {setCurrentAnime(anime)}}
+            onClick={() => {handleClickedAnime(anime)}}
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >

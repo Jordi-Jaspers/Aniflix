@@ -5,3 +5,7 @@ export interface GoEpisode {
     title: string,
     image: string
 }
+
+export function isGoEpisode(obj: any): boolean {
+    return obj && obj.id && obj.episodeId && obj.episodeNumber && obj.title && obj.image;
+}

@@ -1,6 +1,6 @@
 const BASE_URL = process.env.CONSUMET_API_BASE_URL
 
-const requests = {
+const ConsumetApi = {
   fetchRecentEpisodes: `${BASE_URL}/anime/gogoanime/recent-episodes?type=1`,
   fetchRecentEpisodesDub: `${BASE_URL}/anime/gogoanime/recent-episodes?type=3`,
   fetchRandomAnime: `${BASE_URL}/meta/anilist/random-anime`,
@@ -12,4 +12,4 @@ const requests = {
   fetchAnimeDetails: `${BASE_URL}/meta/anilist/info/{id}?provider=gogoanime`
 }
 
-export default requests
+export default ConsumetApi
