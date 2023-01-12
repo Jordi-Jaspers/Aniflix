@@ -58,10 +58,23 @@ Still need to share a link to the deployment
 
 add information here please.
 
+
+
 ```bash
 docker pull riimuru/consumet-api
 docker run -p {port}:3000 riimuru/consumet-api
 ```
+
+Configure the following env variables
+
+| ENV VARIABLE                  | DESCRIPTION                              |
+|-------------------------------|------------------------------------------|
+| NEXT_PUBLIC_CONSUMET_BASE_URL | The base url for the consumet Anime API. |
+| NEXT_PUBLIC_CONSUMET_API_KEY  | The API key for the consumet Anime API.  |
+
+
+to use env variable at runtime or at client side instead of just server side you can use next.config.js or prefix env variable with NEXT_PUBLIC_*. more details....
+
 
 ## 🛠️ Stack <a name = "stack"></a>
 
