@@ -3,9 +3,10 @@ import {PlayIcon} from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
-import {Anime} from "../interfaces/Anime";
+import {Anime, hasAllAnimeProperties} from "../interfaces/Anime";
 import {animeState, infoScreenState} from "../atoms/AnimeAtom";
 import {useRecoilState} from "recoil";
+import ConsumetApi from "../utils/ConsumetApi";
 
 interface Props {
     randomAnime: Anime
@@ -68,15 +69,24 @@ export default function Banner({randomAnime}: Props) {
         }
     }
 
-    const handleInfoScreen = () => {
-        setShowInfoScreen(true)
-        setClickedAnime(randomAnime)
+    const handleInfoScreen = async () => {
+        if (randomAnime.hasOwnProperty('id')) {
+            const id: string = randomAnime.id.toString();
+            if (hasAllAnimeProperties(randomAnime)) {
+                setShowInfoScreen(true)
+                setClickedAnime(randomAnime)
+            } else {
+                const details: Anime = await fetch(ConsumetApi.fetchAnimeDetails.replace('{id}', id)).then((res) => res.json());
+                setShowInfoScreen(true)
+                setClickedAnime(details)
+            }
+        }
     }
 
     const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
     return (
-        <div className="flex flex-col space-y-2 ht-[56.25vw] w-[200vh] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
-            <div className={"absolute h-[65vw] sm:h-[60vw] lg:h-[45vw] w-screen top-0 left-0"}>
+        <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
+            <div className={"absolute h-[65vw] sm:h-[60vw] lg:h-[45vw] w-full top-0 left-0"}>
                 <Image
                     src={randomAnime.cover}
                     alt={randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english}
@@ -85,15 +95,17 @@ export default function Banner({randomAnime}: Props) {
                     className={`${!isPlaying || isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
                 />
 
-                <YouTube
-                    videoId={randomAnime.trailer.id}
-                    className={`${isPlaying && !isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
-                    opts={opts}
-                    onReady={onReady}
-                    onError={onError}
-                    onEnd={onEnd}
-                    onPlay={onPlay}
-                />
+                {randomAnime?.trailer?.id && (
+                    <YouTube
+                        videoId={randomAnime.trailer.id}
+                        className={`${isPlaying && !isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
+                        opts={opts}
+                        onReady={onReady}
+                        onError={onError}
+                        onEnd={onEnd}
+                        onPlay={onPlay}
+                    />
+                )}
             </div>
 
             <div className={"pt-[7.5vh] md:pt-[12.5vh] xl:pt-[15vh] 2xl:pt-[20vh] flex flex-col space-y-2 justify-between"}>

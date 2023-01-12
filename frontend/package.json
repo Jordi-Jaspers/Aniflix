@@ -20,7 +20,7 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -Rf dist node_modules .next/cache cypress/videos cypress/screenshots cypress-terminal-report",
-    "clean-start": "npm run clean && npm i && npm start",
+    "clean-start": "npm run clean && npm i && npm run dev",
     "prettier": "prettier --config .prettierrc \"./**/*.+(js|json|jsx)\" --write",
     "clean:example": "rnb --c"
   },

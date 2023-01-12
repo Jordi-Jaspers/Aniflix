@@ -1,14 +1,12 @@
 import Image from 'next/image'
 import {useRecoilState} from 'recoil'
-import {GoEpisode} from "../../interfaces/GoEpisode";
-import {Anime, hasAllProperties, isAnime} from "../../interfaces/Anime";
-import {animeState, infoScreenState, videoPlayerState} from "../../atoms/AnimeAtom";
-import {useEffect, useState} from 'react';
-import consumetApi from "../../utils/ConsumetApi";
+import {Anime, hasAllAnimeProperties} from "../../interfaces/Anime";
+import {animeState, infoScreenState} from "../../atoms/AnimeAtom";
+import {useState} from 'react';
 import ConsumetApi from "../../utils/ConsumetApi";
 
 interface Props {
-    anime: Anime | GoEpisode
+    anime: Anime
 }
 
 export default function Thumbnail({anime}: Props) {
@@ -19,14 +17,8 @@ export default function Thumbnail({anime}: Props) {
     const [isShown, setIsShown] = useState(false);
 
     const videoTitle = (): string => {
-        if (anime.hasOwnProperty('title')) {
-            if (typeof anime.title === 'object') {
-                return anime.title.romaji ? anime.title.romaji : anime.title.english;
-            } else if (anime.hasOwnProperty('episodeNumber')) {
-                return anime.title + " (Episode " + anime.episodeNumber + ")";
-            }
-        }
-        return 'Error retrieving title';
+        let title: string = anime.title.romaji ? anime.title.romaji : anime.title.english;
+        return anime.hasOwnProperty('episodeNumber') ? title + " (Episode " + anime.episodeNumber + ")" : title;
     };
 
     const rating = (): string => {
@@ -37,18 +29,16 @@ export default function Thumbnail({anime}: Props) {
     }
 
     const handleClickedAnime = async () => {
-        // Check whether the clicked thumbnail has all the properties needed for the info screen.
-        if (hasAllProperties(anime)) {
-            setCurrentAnime(anime as Anime);
-            setShowInfoScreen(true);
-        } else {
-            if (anime.hasOwnProperty('episodeId')) {
-                // Retrieve the details of the go-anime episode.
-                // TODO: play video.
+        if (anime.hasOwnProperty('episodeNumber')) {
+            window.location.href = "/watch/" + anime.id + "/" + anime.episodeNumber;
+        } else if (anime.hasOwnProperty('id')) {
+            const id: string = anime.id.toString();
+            if (hasAllAnimeProperties(anime)) {
+                setCurrentAnime(anime);
+                setShowInfoScreen(true);
             } else {
-                console.log(consumetApi.fetchAnimeDetails);
-                const json = await fetch(ConsumetApi.fetchAnimeDetails.replace('{id}', anime.id)).then((res) => res.json());
-                setCurrentAnime(json);
+                const details: Anime = await fetch(ConsumetApi.fetchAnimeDetails.replace('{id}', id)).then((res) => res.json());
+                setCurrentAnime(details);
                 setShowInfoScreen(true);
             }
         }
@@ -57,14 +47,17 @@ export default function Thumbnail({anime}: Props) {
     return (
         <div
             className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
-            onClick={() => {handleClickedAnime()}}
+            onClick={() => {
+                handleClickedAnime()
+            }}
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >
             {/* add a gradient over the image with the title */}
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent z-20"/>
             <div className="relative flex flex-col justify-between items-end p-2 w-full h-full justify-center z-20">
-                <div className={`${isShown ? "opacity-80" : "opacity-30"} transition duration-300 w-fit min-w-[2rem] min-h-[1rem] rounded py-0.5 px-1.5 border-[#ce111c] bg-[#ce111c]`}>
+                <div
+                    className={`${isShown ? "opacity-80" : "opacity-30"} transition duration-300 w-fit min-w-[2rem] min-h-[1rem] rounded py-0.5 px-1.5 border-[#ce111c] bg-[#ce111c]`}>
                     <p className={`font-poppins leading-none justify-center text-sm text-[#e5e5e5] text-shadow font-bold text-center`}>{rating()}</p>
                 </div>
                 <p className="font-poppins w-full leading-none text-sm text-[#e5e5e5] font-bold">{videoTitle()}</p>

@@ -1,6 +1,8 @@
 import {Title} from "./Title";
 import {Trailer} from "./Trailer";
 import {Date} from "./Date";
+import {Episode} from "./Episode";
+import {Recommendation} from "./Recommendation";
 
 export interface Anime {
     interfaceType: "Anime";
@@ -16,6 +18,9 @@ export interface Anime {
     description: string,
     status: string,
     totalEpisodes: number,
+    episodes: Episode[]
+    episodeTitle?: string,
+    episodeNumber?: 2,
     rating: number,
     duration: number,
     genres: string[],
@@ -24,10 +29,10 @@ export interface Anime {
     type: string,
     studios: string[],
     countryOfOrigin: string,
-    recommendations: number[],
+    recommendations: Recommendation[],
 }
 
-export function hasAllProperties(object:any): object is Anime {
+export function hasAllAnimeProperties(object:any): object is Anime {
     return "id" in object
         && "title" in object
         && "startDate" in object
@@ -40,6 +45,7 @@ export function hasAllProperties(object:any): object is Anime {
         && "description" in object
         && "status" in object
         && "totalEpisodes" in object
+        && "episodes" in object
         && "rating" in object
         && "duration" in object
         && "genres" in object

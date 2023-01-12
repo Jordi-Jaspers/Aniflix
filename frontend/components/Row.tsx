@@ -1,18 +1,17 @@
 import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
-import {useEffect, useRef, useState} from 'react'
+import {useRef} from 'react'
 import {Anime} from "../interfaces/Anime";
-import {GoEpisode} from "../interfaces/GoEpisode";
 import Thumbnail from "./icons/Thumbnail";
 import {Page} from "../interfaces/Page";
 
 interface Props {
     title: string
-    page: Page<Anime> | Page<GoEpisode>
+    page: Page<Anime>
 }
 
 export default function Row({title, page}: Props) {
     const rowRef = useRef<HTMLDivElement>(null)
-    const animes: Anime[] | GoEpisode[] = page.results
+    const animes: Anime[] = page.results
 
     const handleClick = (direction: string) => {
         if (rowRef.current) {

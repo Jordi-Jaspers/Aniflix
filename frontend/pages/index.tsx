@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from "../components/Header";
 import {Anime} from "../interfaces/Anime";
-import {GoEpisode} from "../interfaces/GoEpisode";
+import {Episode} from "../interfaces/Episode";
 import ConsumetApi from "../utils/ConsumetApi";
 import {Genres, getRandomGenres} from "../enum/Genre";
 import Banner from "../components/Banner";
@@ -13,7 +13,7 @@ import InfoScreen from "../components/InfoScreen";
 
 interface Props {
     randomAnime: Anime;
-    recentEpisodes: Page<GoEpisode>;
+    recentEpisodes: Page<Anime>;
     trendingAnimes: Page<Anime>;
     popularAnimes: Page<Anime>;
     genre1Animes: Page<Anime>;
