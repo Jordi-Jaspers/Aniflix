@@ -1,4 +1,5 @@
 export interface GoEpisode {
+    interfaceType: "GoEpisode";
     id: string,
     episodeId: string,
     episodeNumber: number,
@@ -6,6 +7,3 @@ export interface GoEpisode {
     image: string
 }
 
-export function isGoEpisode(obj: any): boolean {
-    return obj && obj.id && obj.episodeId && obj.episodeNumber && obj.title && obj.image;
-}

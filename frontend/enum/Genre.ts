@@ -1,7 +1,6 @@
 export enum Genres {
     Action = "Action",
     Adventure = "Adventure",
-    Cars = "Cars",
     Comedy = "Comedy",
     Drama = "Drama",
     Fantasy = "Fantasy",

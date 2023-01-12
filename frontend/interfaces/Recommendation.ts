@@ -1,6 +1,7 @@
 import {Title} from "./Title";
 
 export interface Recommendation {
+    interfaceType: "Recommendation";
     id: number,
     title: Title
     episodes: number,

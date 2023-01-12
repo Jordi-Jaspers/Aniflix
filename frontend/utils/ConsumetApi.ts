@@ -1,4 +1,4 @@
-const BASE_URL = process.env.CONSUMET_API_BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_CONSUMET_BASE_URL
 
 const ConsumetApi = {
   fetchRecentEpisodes: `${BASE_URL}/anime/gogoanime/recent-episodes?type=1`,

@@ -51,14 +51,14 @@ export default function Home({
                     <Banner randomAnime={randomAnime}/>
 
                     <section>
-                        <div className={"bg-gradient-to-b from-transparent via-black to-[#141414]"}>
-                            <div className={"xs:pt-[5%] sm:pt-[7.5%] lg:pt-[10%] 2xl:pt-[15%] pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12"}>
+                        <div className={"bg-gradient-to-b from-transparent via-black to-[#141414] "}>
+                            <div className={"pt-[7.5%]"}>
                                 {/*  RECENTLY ADDED ANIME CAROUSEL */}
                                 <Row title="Recently Added" page={recentEpisodes}/>
                             </div>
                         </div>
 
-                        <div className={"pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 h-fit"}>
+                        <div className={"h-fit"}>
                             {/*  TRENDING ANIME CAROUSEL */}
                             <Row title="Trending" page={trendingAnimes}/>
 

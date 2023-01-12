@@ -5,6 +5,7 @@ import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import React, {useState} from "react";
 import {HandThumbUpIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline';
 import YouTube from "react-youtube";
+import Image from "next/image";
 
 const opts = {
     height: '100%',
@@ -28,11 +29,6 @@ export default function InfoScreen() {
     const [player, setPlayer] = useState<any>(null)
     const [isMuted, setIsMuted] = useState(true)
 
-    const onError = () => {
-        console.error("Error while playing the trailer.")
-        handleClose()
-    }
-
     const onReady = (event: any) => {
         setPlayer(event.target)
     }
@@ -51,11 +47,10 @@ export default function InfoScreen() {
         }
     }
 
-    console.log(anime)
-
     return (
         <MuiModal open={showInfoScreen} onClose={handleClose}>
-            <div className={"bg-[#181818] h-screen min-w-[850px] fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"}>
+            <div
+                className={"bg-[#181818] h-screen min-w-[850px] fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"}>
                 <button
                     className={"absolute m-[1em] right-5 h-9 w-9 flex justify-center items-center top-5 bg-[#181818] rounded-full text-white !z-40"}
                     onClick={handleClose}>
@@ -63,13 +58,21 @@ export default function InfoScreen() {
                 </button>
                 <div className={"bg-gradient-to-b from-black/10 via-black/95 to-[#181818] !z-40"}>
                     <div className="relative pt-[56.25%]">
-                        <YouTube
-                            videoId={anime?.trailer.id}
-                            className={"absolute top-0 left-0 w-screen aspect-video object-cover -z-10"}
-                            opts={opts}
-                            onReady={onReady}
-                            onError={onError}
-                        />
+                        {anime?.trailer ? (
+                            <YouTube
+                                videoId={anime?.trailer.id}
+                                className={"absolute top-0 left-0 w-full aspect-video object-cover -z-10"}
+                                opts={opts}
+                                onReady={onReady}
+                            />) : (
+                            <Image
+                                src={anime?.cover as string}
+                                alt={anime?.title.romaji ? anime.title.romaji as string : anime?.title.english as string}
+                                className={"absolute top-0 left-0 w-full aspect-video object-cover -z-10"}
+                                height={2160}
+                                width={3840}
+                            />
+                        )}
                         <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
                             <div className="flex items-center space-x-4">
                                 <button className="bannerButton rounded bg-white text-black">
@@ -80,20 +83,22 @@ export default function InfoScreen() {
                                     <HandThumbUpIcon className="text-white h-6 w-6"/>
                                 </button>
                             </div>
-                            <button
-                                className={"flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white"}
-                                onClick={toggleMute}>
-                                {isMuted
-                                    ? <SpeakerXMarkIcon className="h-6 w-6 text-white"/>
-                                    : <SpeakerWaveIcon className="h-6 w-6 text-white"/>}
-                            </button>
+                            {anime?.trailer &&
+                                <button
+                                    className={"flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white"}
+                                    onClick={toggleMute}>
+                                    {isMuted
+                                        ? <SpeakerXMarkIcon className="h-6 w-6 text-white"/>
+                                        : <SpeakerWaveIcon className="h-6 w-6 text-white"/>}
+                                </button>
+                            }
                         </div>
                     </div>
                     <div className="flex space-x-16 rounded-b-md px-10 py-8">
-                        <div className="space-y-6 text-lg">
+                        <div className="space-y-6 text-lg w-full">
                             <div className="flex items-center space-x-2 text-sm">
                                 <p className="text-[#46d369] text-lg !z-40">
-                                    {anime?.rating? anime.rating : "0"} % match
+                                    {anime?.rating ? anime.rating : "0"} % match
                                 </p>
                                 <p className="text-white text-lg font-light !z-40">
                                     | {anime?.releaseDate ? anime?.releaseDate : anime?.startDate.year} |
@@ -110,7 +115,7 @@ export default function InfoScreen() {
                                 {anime?.title.romaji ? anime.title.romaji : anime?.title.english}
                                 {anime?.subOrDub ? ` (${anime.subOrDub})` : ""}
                             </h1>
-                            <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
+                            <div className="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row md:justify-between">
                                 <p className="text-white w-5/6 text-sm font-poppins">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
                                 <div className="flex flex-col space-y-3 text-sm">
                                     <div className={"text-white"}>
@@ -126,20 +131,36 @@ export default function InfoScreen() {
                                         </div>
                                     ) : null}
 
-                                    <div className={"text-white"}>
-                                        <span className="text-[gray]">Status:</span>{' '}
-                                        {anime?.status}
-                                    </div>
+                                    {anime?.studios ? (
+                                        <div className={"text-white"}>
+                                            <span className="text-[gray]">Studios:</span>
+                                            {' '}
+                                            {anime?.studios.map((studio) => studio).join(', ')}
+                                        </div>
+                                    ) : null}
 
-                                    <div className={"text-white"}>
-                                        <span className="text-[gray]">Type:</span>{' '}
-                                        {anime?.type}
-                                    </div>
+                                    {anime?.status ? (
+                                        <div className={"text-white"}>
+                                            <span className="text-[gray]">Status:</span>
+                                            {' '}
+                                            {anime?.status}
+                                        </div>
+                                    ) : null}
 
-                                    <div className={"text-white"}>
-                                        <span className="text-[gray]">Average Duration:</span>{' '}
-                                        {anime?.duration} min
-                                    </div>
+                                    {anime?.type ? (
+                                        <div className={"text-white"}>
+                                            <span className="text-[gray]">Type:</span>
+                                            {' '}
+                                            {anime?.type}
+                                        </div>
+                                    ) : null}
+
+                                    {anime?.duration ? (
+                                        <div className={"text-white"}>
+                                            <span className="text-[gray]">Average Duration:</span>{' '}
+                                            {anime?.duration} min
+                                        </div>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>
