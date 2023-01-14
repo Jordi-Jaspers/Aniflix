@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Header from "../components/Header";
 import {Anime} from "../interfaces/Anime";
-import {Episode} from "../interfaces/Episode";
 import ConsumetApi from "../utils/ConsumetApi";
 import {Genres, getRandomGenres} from "../enum/Genre";
 import Banner from "../components/Banner";
@@ -19,21 +18,19 @@ interface Props {
     genre1Animes: Page<Anime>;
     genre2Animes: Page<Anime>;
     genre3Animes: Page<Anime>;
-    genre4Animes: Page<Anime>;
     randomGenres: Genres[];
 }
 
 export default function Home({
-     randomAnime,
-     recentEpisodes,
-     trendingAnimes,
-     popularAnimes,
-     genre1Animes,
-     genre2Animes,
-     genre3Animes,
-     genre4Animes,
-    randomGenres
- }: Props) {
+                                 randomAnime,
+                                 recentEpisodes,
+                                 trendingAnimes,
+                                 popularAnimes,
+                                 genre1Animes,
+                                 genre2Animes,
+                                 genre3Animes,
+                                 randomGenres
+                             }: Props) {
     const anime = useRecoilValue(animeState)
     return (
         <div className={"bg-[#141414] -z-100"}>
@@ -73,9 +70,6 @@ export default function Home({
 
                             {/*  GENRE 3 ANIME CAROUSEL */}
                             <Row title={randomGenres[2]} page={genre3Animes}/>
-
-                            {/*  GENRE 4 ANIME CAROUSEL */}
-                            <Row title={randomGenres[3]} page={genre4Animes}/>
                         </div>
                     </section>
                 </main>
@@ -95,7 +89,7 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-    const randomGenres = getRandomGenres();
+    const randomGenres = getRandomGenres(4)
     const [
         recentEpisodes,
         trendingAnimes,
@@ -115,7 +109,7 @@ export async function getServerSideProps() {
     ])
 
     let randomAnime: Anime;
-    let animeList: Anime[] = [...popularAnimes.results, ...trendingAnimes.results];
+    let animeList: Anime[] = [...popularAnimes.results, ...trendingAnimes.results, ...genre1Animes.results, ...genre2Animes.results, ...genre3Animes.results, ...genre4Animes.results]
     do {
         randomAnime = animeList[Math.floor(Math.random() * animeList.length)];
     } while (!randomAnime.cover || !randomAnime.title)
@@ -133,7 +127,6 @@ export async function getServerSideProps() {
             genre1Animes: genre1Animes,
             genre2Animes: genre2Animes,
             genre3Animes: genre3Animes,
-            genre4Animes: genre4Animes,
             randomGenres
         }
     }

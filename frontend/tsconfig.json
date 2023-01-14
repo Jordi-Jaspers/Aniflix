@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@icons/*": ["./components/icons/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@atoms/*": ["./atoms/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@utils/*": ["./utils/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -15,6 +23,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.jsx", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

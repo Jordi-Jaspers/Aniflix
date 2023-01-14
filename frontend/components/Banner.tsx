@@ -1,12 +1,12 @@
+import {animeState, infoScreenState} from "@atoms/AnimeAtom";
 import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
+import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
+import ConsumetApi from "@utils/ConsumetApi";
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
-import {Anime, hasAllAnimeProperties} from "../interfaces/Anime";
-import {animeState, infoScreenState} from "../atoms/AnimeAtom";
 import {useRecoilState} from "recoil";
-import ConsumetApi from "../utils/ConsumetApi";
 
 interface Props {
     randomAnime: Anime
@@ -35,6 +35,8 @@ export default function Banner({randomAnime}: Props) {
     const [isError, setIsError] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
 
+    const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
+
     useEffect(() => {
         if (showInfoScreen && isPlaying) {
             player?.pauseVideo()
@@ -59,7 +61,6 @@ export default function Banner({randomAnime}: Props) {
     }
 
     const toggleMute = () => {
-        console.log("toggleMute");
         if (isMuted) {
             player?.unMute()
             setIsMuted(false)
@@ -83,7 +84,6 @@ export default function Banner({randomAnime}: Props) {
         }
     }
 
-    const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
     return (
         <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
             <div className={"absolute h-[65vw] sm:h-[60vw] lg:h-[45vw] w-full top-0 left-0"}>
@@ -93,6 +93,7 @@ export default function Banner({randomAnime}: Props) {
                     height={2160}
                     width={3840}
                     className={`${!isPlaying || isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
+                    priority
                 />
 
                 {randomAnime?.trailer?.id && (

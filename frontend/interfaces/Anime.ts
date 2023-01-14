@@ -3,6 +3,7 @@ import {Trailer} from "./Trailer";
 import {Date} from "./Date";
 import {Episode} from "./Episode";
 import {Recommendation} from "./Recommendation";
+import {Character} from "./Character";
 
 export interface Anime {
     interfaceType: "Anime";
@@ -18,6 +19,7 @@ export interface Anime {
     description: string,
     status: string,
     totalEpisodes: number,
+    episodeId: string,
     episodes: Episode[]
     episodeTitle?: string,
     episodeNumber?: 2,
@@ -28,6 +30,7 @@ export interface Anime {
     subOrDub: string,
     type: string,
     studios: string[],
+    characters: Character[],
     countryOfOrigin: string,
     recommendations: Recommendation[],
 }

@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import {Router, useRouter} from "next/router";
 import {useRecoilState} from 'recoil'
-import {Anime, hasAllAnimeProperties} from "../../interfaces/Anime";
-import {animeState, infoScreenState} from "../../atoms/AnimeAtom";
+import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
+import {animeState, infoScreenState} from "@atoms/AnimeAtom";
 import {useState} from 'react';
-import ConsumetApi from "../../utils/ConsumetApi";
+import ConsumetApi from "@utils/ConsumetApi";
 
 interface Props {
     anime: Anime
@@ -11,9 +12,10 @@ interface Props {
 
 export default function Thumbnail({anime}: Props) {
     // Atoms which can be accessed by any component.
+    const router = useRouter()
+
     const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
     const [currentAnime, setCurrentAnime] = useRecoilState(animeState)
-
     const [isShown, setIsShown] = useState(false);
 
     const videoTitle = (): string => {
@@ -30,7 +32,16 @@ export default function Thumbnail({anime}: Props) {
 
     const handleClickedAnime = async () => {
         if (anime.hasOwnProperty('episodeNumber')) {
-            window.location.href = "/watch/" + anime.id + "/" + anime.episodeNumber;
+            //remove any special characters from the title
+            // dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv-fuka-shou-yakusai-hen-episode-2
+            // dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv-shin-shou-yakusaihen-episode-2
+            //     dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv:-shin-shou-yakusai-hen-episode-2
+
+            const title = anime.title.romaji.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, '-').toLowerCase();
+            console.log("no special character" + title);
+            let episodeId = title + "-" + "episode-" + anime.episodeNumber;
+            console.log("new id" + episodeId);
+            await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime.id}/${episodeId}`)
         } else if (anime.hasOwnProperty('id')) {
             const id: string = anime.id.toString();
             if (hasAllAnimeProperties(anime)) {
@@ -47,9 +58,7 @@ export default function Thumbnail({anime}: Props) {
     return (
         <div
             className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
-            onClick={() => {
-                handleClickedAnime()
-            }}
+            onClick={() => {handleClickedAnime()}}
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >

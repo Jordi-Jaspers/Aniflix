@@ -6,7 +6,7 @@ export const animeState = atom<Anime | null>({
     default: null,
 })
 
-export const infoScreenState = atom({
+export const infoScreenState = atom<boolean>({
     key: 'infoScreenState',
     default: false,
 })

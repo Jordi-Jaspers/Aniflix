@@ -1,5 +1,5 @@
 export interface AniFlixProps {
-  className: string;
+  className?: string;
 }
 
 const AniFlixIcon: React.FC<AniFlixProps> = ({ className }) => (
@@ -9,7 +9,7 @@ const AniFlixIcon: React.FC<AniFlixProps> = ({ className }) => (
     viewBox="0 0 512 512"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={className}
+    className={className ? className : ""}
   >
     <path
       d="M257.498 293.782L277.084 389.793H419.004L391.023 293.782H257.498Z"

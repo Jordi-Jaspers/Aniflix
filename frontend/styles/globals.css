@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
 
     .headerIcon {
@@ -18,7 +17,7 @@
     }
 
     .arrowIcon {
-        @apply text-[#ce111c] h-12 w-12 absolute top-0 bottom-0  z-40 m-auto cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100;
+        @apply text-white h-full w-16 absolute top-0 bottom-0 z-40 m-auto cursor-pointer flex justify-center from-[#141414]/75 to-transparent hover:from-[#141414]/75 hover:via-[#141414]/75 transition-colors duration-300;
     }
 
     .bg-gradient {
@@ -26,6 +25,14 @@
     }
 
     .infoScreenTitle {
-        @apply text-2xl font-poppins font-semibold text-white;
+        @apply text-2xl font-poppins font-semibold text-white py-4;
+    }
+
+    .defaultButtonRound {
+        @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white;
+    }
+
+    .metaInfoTitle {
+        @apply text-white text-sm py-2 font-poppins font-light;
     }
 }
