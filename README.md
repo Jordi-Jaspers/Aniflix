@@ -75,6 +75,8 @@ Configure the following env variables
 
 to use env variable at runtime or at client side instead of just server side you can use next.config.js or prefix env variable with NEXT_PUBLIC_*. more details....
 
+https://developer.chrome.com/blog/autoplay/ ==> chrome autoplay policy
+
 
 ## 🛠️ Stack <a name = "stack"></a>
 

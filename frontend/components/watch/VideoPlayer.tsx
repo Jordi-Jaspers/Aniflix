@@ -1,62 +1,71 @@
 import CustomControls from "@components/watch/CustomControls";
-import {MediaSources} from "@interfaces/MediaSources";
+import {Anime} from "@interfaces/Anime";
+import {Episode} from "@interfaces/Episode";
 import {MediaSource} from "@interfaces/MediaSource";
+import {MediaSources} from "@interfaces/MediaSources";
 import Hls from 'hls.js';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 interface Props {
     className?: string;
     media: MediaSources;
+    episode: Episode;
     controls: boolean;
 }
 
-export default function VideoPlayer({className, media, controls}: Props) {
-    const videoSource = useRef<HTMLVideoElement>(null);
-    const mediaSources: MediaSource[] = media?.sources || [];
+const NATIVE_HLS: string = 'application/vnd.apple.mpegurl';
+export default function VideoPlayer({className, media, episode, controls}: Props) {
+    const [isShown, setIsShown] = useState(false);
     const referer: string = media?.headers?.referer || '';
+    const mediaSources: Map<string, string[]> = new Map();
+    media?.sources?.forEach((source: MediaSource) => {
+        if (source?.url) {
+            if (mediaSources.has(source?.quality)) {
+                mediaSources.get(source?.quality)?.push(source?.url);
+            } else {
+                mediaSources.set(source?.quality, [source?.url]);
+            }
+        }
+    });
+
+    const [currentResolution, setCurrentResolution] = useState(Array.from(mediaSources.keys())[0]);
+    const videoElement = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        if (mediaSources.length > 0) {
-            mediaSources.forEach((mediaSource: MediaSource) => {
-                const source = document.createElement('source');
-                source.src = mediaSource.url;
-                source.type = 'application/x-mpegURL';
-                source.setAttribute("data-res", mediaSource.quality);
-                videoSource.current.appendChild(source);
-            });
-        }
+        const videoRef = videoElement.current
+        if (!videoRef) return;
 
-        if (Hls.isSupported()) {
+        const url = mediaSources.get(currentResolution)[0];
+        if (!url) return;
+
+        if (videoRef.canPlayType(NATIVE_HLS)) {
+            console.info('Using native HLS in browser');
+            videoRef.src = url;
+        } else if (Hls.isSupported()) {
+            console.log('Using HLS supported browser')
             const hls = new Hls({
                 xhrSetup: xhr => {
                     xhr.setRequestHeader("Referer", referer);
                 }
             })
-
-            hls.loadSource(mediaSources[0].url);
-            hls.attachMedia(videoSource.current);
+            hls.loadSource(url);
+            hls.attachMedia(videoElement.current);
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                videoSource.current.play();
+                videoElement.current?.play();
             });
-            hls.on(Hls.Events.LEVEL_LOADED, (event, data) => {
-                const currentRes = hls.levels[data.level].attrs.RESOLUTION;
-                const sources = videoSource.current.getElementsByTagName("source");
-                for (let i = 0; i < sources.length; i++) {
-                    const source = sources[i] as HTMLSourceElement;
-                    if (source.getAttribute("data-res") === currentRes) {
-                        source.src = hls.levels[data.level].url;
-                        source.type = 'application/x-mpegURL';
-                        videoSource.current.src = source.src;
-                    }
-                }
-            });
+            return () => hls.destroy();
+        } else {
+            console.error('HLS is not supported in this browser. Please use a supported browser.')
         }
-    }, [mediaSources]);
+    }, [mediaSources, videoElement])
 
     return (
         <div className={`${className} w-full h-full`}>
-            {/*<video ref={videoSource} controls={false}/>*/}
-            {/*{controls && (<CustomControls ref={videoSource}/>)}*/}
+            <div className={`absolute top-0 bottom-0 my-auto w-screen`}>
+                <video className={"w-screen h-full max-h-screen"} ref={videoElement} controls={false} muted={true}/>
+                {/* if the "controls == true && videoElement != undefined" then show the customControls */}
+                {controls && <CustomControls className={"hover:opacity-100 opacity-0"} ref={videoElement} episode={episode}/>}
+            </div>
         </div>
     );
 }

@@ -3,6 +3,7 @@
     "paths": {
       "@components/*": ["./components/*"],
       "@icons/*": ["./components/icons/*"],
+      "@svg/*": ["./public/icons/*"],
       "@interfaces/*": ["./interfaces/*"],
       "@enum/*": ["./enum/*"],
       "@atoms/*": ["./atoms/*"],

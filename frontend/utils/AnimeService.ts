@@ -1,5 +1,7 @@
 import {Anime} from "@interfaces/Anime";
+import {Episode} from "@interfaces/Episode";
 import {GoEpisode} from "@interfaces/GoEpisode";
+import {MediaSources} from "@interfaces/MediaSources";
 import {Page} from "@interfaces/Page";
 import ConsumetApi from "@utils/ConsumetApi";
 
@@ -8,7 +10,7 @@ import ConsumetApi from "@utils/ConsumetApi";
  */
 export async function getAnimeByGenre(genre: string): Promise<Anime[]> {
     const response: Page<Anime> = await fetch(ConsumetApi.fetchGenre.replace("{genre}", genre)).then((res) => res.json());
-    console.log(`INFO: invoked '${ConsumetApi.fetchGenre}' with following response: `, response.hasNextPage ? response.results.length : response);
+    console.info(`invoked '${ConsumetApi.fetchGenre.replace("{genre}", genre)}' with following response: `, response.hasNextPage ? response.results.length : response);
     return response.results;
 
 }
@@ -18,7 +20,7 @@ export async function getAnimeByGenre(genre: string): Promise<Anime[]> {
  */
 export async function getPopularAnime(): Promise<Anime[]> {
     const response: Page<Anime> = await fetch(ConsumetApi.fetchPopularAnime).then((res) => res.json());
-    console.log(`INFO: invoked '${ConsumetApi.fetchPopularAnime}' with following response: `, response.hasNextPage ? response.results.length : response);
+    console.info(`invoked '${ConsumetApi.fetchPopularAnime}' with following response: `, response.hasNextPage ? response.results.length : response);
     return response.results;
 }
 
@@ -27,7 +29,7 @@ export async function getPopularAnime(): Promise<Anime[]> {
  */
 export async function getTrendingAnime(): Promise<Anime[]> {
     const response: Page<Anime> = await fetch(ConsumetApi.fetchTrending).then((res) => res.json());
-    console.log(`INFO: invoked '${ConsumetApi.fetchTrending}' with following response: `, response.hasNextPage ? response.results.length : response);
+    console.info(`invoked '${ConsumetApi.fetchTrending}' with following response: `, response.hasNextPage ? response.results.length : response);
     return response.results;
 }
 
@@ -50,6 +52,19 @@ export async function getRecentEpisodes(): Promise<Anime[]> {
             return anime
         }
     });
-    console.log(`INFO: invoked '${ConsumetApi.fetchRecentEpisodesGogoAnime}' with following response: `, recentEpisodesPage.hasNextPage ? recentEpisodesPage.results.length : recentEpisodesPage);
+    console.info(`invoked '${ConsumetApi.fetchRecentEpisodesGogoAnime}' with following response: `, recentEpisodesPage.hasNextPage ? recentEpisodesPage.results.length : recentEpisodesPage);
     return (await Promise.all(response)).filter((anime: Anime|GoEpisode) => anime.hasOwnProperty("recentEpisode")) as Anime[];
+}
+
+export async function getEpisodeInformation(id: string, episodeId: string): Promise<Episode | undefined> {
+    const anime: Anime = await fetch(ConsumetApi.fetchAnimeDetails.replace("{id}", id)).then((res) => res.json());
+    const episode: Episode | undefined = anime.episodes.find((episode: Episode) => episode.id === episodeId);
+    console.info(`invoked '${ConsumetApi.fetchAnimeDetails.replace("{id}", id)}' with following response: `, anime);
+    return episode;
+}
+
+export async function getEpisodeLinks(episodeId: string): Promise<MediaSources | undefined> {
+    const response: MediaSources | undefined = await fetch(ConsumetApi.fetchEpisodeLinks.replace("{episodeId}", episodeId)).then((res) => res.json());
+    console.info(`invoked '${ConsumetApi.fetchEpisodeLinks.replace("{episodeId}", episodeId)}' with following response: `, response);
+    return response;
 }

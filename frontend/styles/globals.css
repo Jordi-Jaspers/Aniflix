@@ -35,4 +35,8 @@
     .metaInfoTitle {
         @apply text-white text-sm py-2 font-poppins font-light;
     }
+
+    .videoPlayerControls {
+        @apply flex items-center text-white h-8 w-8 cursor-pointer hover:scale-150 transition;
+    }
 }
