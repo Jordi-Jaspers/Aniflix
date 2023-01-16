@@ -1,3 +1,4 @@
+import {GoEpisode} from "@interfaces/GoEpisode";
 import {Title} from "./Title";
 import {Trailer} from "./Trailer";
 import {Date} from "./Date";
@@ -18,11 +19,11 @@ export interface Anime {
     popularity: number,
     description: string,
     status: string,
+    recentEpisode: GoEpisode,
     totalEpisodes: number,
-    episodeId: string,
-    episodes: Episode[]
+    episodes: Episode[],
     episodeTitle?: string,
-    episodeNumber?: 2,
+    episodeNumber?: number,
     rating: number,
     duration: number,
     genres: string[],

@@ -1,13 +1,16 @@
+import CustomControls from "@components/watch/CustomControls";
 import {MediaSources} from "@interfaces/MediaSources";
 import {MediaSource} from "@interfaces/MediaSource";
 import Hls from 'hls.js';
 import React, {useEffect, useRef} from 'react';
 
 interface Props {
+    className?: string;
     media: MediaSources;
+    controls: boolean;
 }
 
-export default function VideoPlayer({media}: Props) {
+export default function VideoPlayer({className, media, controls}: Props) {
     const videoSource = useRef<HTMLVideoElement>(null);
     const mediaSources: MediaSource[] = media?.sources || [];
     const referer: string = media?.headers?.referer || '';
@@ -51,8 +54,9 @@ export default function VideoPlayer({media}: Props) {
     }, [mediaSources]);
 
     return (
-        <video ref={videoSource} controls={true}>
-            Your browser does not support the video tag.
-        </video>
+        <div className={`${className} w-full h-full`}>
+            {/*<video ref={videoSource} controls={false}/>*/}
+            {/*{controls && (<CustomControls ref={videoSource}/>)}*/}
+        </div>
     );
 }

@@ -7,4 +7,3 @@ export interface Episode {
     image: string,
     airDate: string
 }
-

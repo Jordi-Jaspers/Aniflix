@@ -31,17 +31,9 @@ export default function Thumbnail({anime}: Props) {
     }
 
     const handleClickedAnime = async () => {
-        if (anime.hasOwnProperty('episodeNumber')) {
-            //remove any special characters from the title
-            // dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv-fuka-shou-yakusai-hen-episode-2
-            // dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv-shin-shou-yakusaihen-episode-2
-            //     dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv:-shin-shou-yakusai-hen-episode-2
-
-            const title = anime.title.romaji.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, '-').toLowerCase();
-            console.log("no special character" + title);
-            let episodeId = title + "-" + "episode-" + anime.episodeNumber;
-            console.log("new id" + episodeId);
-            await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime.id}/${episodeId}`)
+        console.log("Clicked anime: ", anime);
+        if (anime.hasOwnProperty('recentEpisode')) {
+            await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime.id}/${anime.recentEpisode.episodeId}`)
         } else if (anime.hasOwnProperty('id')) {
             const id: string = anime.id.toString();
             if (hasAllAnimeProperties(anime)) {

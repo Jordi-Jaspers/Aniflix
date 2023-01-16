@@ -4,6 +4,7 @@
       "@components/*": ["./components/*"],
       "@icons/*": ["./components/icons/*"],
       "@interfaces/*": ["./interfaces/*"],
+      "@enum/*": ["./enum/*"],
       "@atoms/*": ["./atoms/*"],
       "@hooks/*": ["./hooks/*"],
       "@utils/*": ["./utils/*"]

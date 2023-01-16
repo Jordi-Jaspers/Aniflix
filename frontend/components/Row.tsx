@@ -6,12 +6,11 @@ import {useRef} from 'react'
 
 interface Props {
     title: string
-    page: Page<Anime>
+    animes: Anime[]
 }
 
-export default function Row({title, page}: Props) {
+export default function Row({title, animes}: Props) {
     const rowRef = useRef<HTMLDivElement>(null)
-    const animes: Anime[] = page.results
 
     const handleClick = (direction: string) => {
         if (rowRef.current) {

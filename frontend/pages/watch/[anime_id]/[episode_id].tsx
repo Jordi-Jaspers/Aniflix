@@ -12,7 +12,9 @@ export default function WatchAnime({streamingSources}: Props) {
 
     return (
         <>
-            <VideoPlayer media={streamingSources}/>
+            <div className={"bg-[#141414] w-screen h-screen"}>
+                <VideoPlayer controls={true} media={streamingSources}/>
+            </div>
         </>
     )
 }
