@@ -58,11 +58,51 @@ Still need to share a link to the deployment
 
 add information here please.
 
+The ranges of Unicode characters which are routinely used for Chinese and Japanese text are:
 
+U+3040 - U+30FF: hiragana and katakana (Japanese only)
+U+3400 - U+4DBF: CJK unified ideographs extension A (Chinese, Japanese, and Korean)
+U+4E00 - U+9FFF: CJK unified ideographs (Chinese, Japanese, and Korean)
+U+F900 - U+FAFF: CJK compatibility ideographs (Chinese, Japanese, and Korean)
+U+FF66 - U+FF9F: half-width katakana (Japanese only)
+
+to check if a character contains a japanese/roman character you can use the following regex:
+`/[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[a-zA-Z0-9]+|[ａ-ｚＡ-Ｚ０-９]+|[々〆〤ヶ]+/u`
+
+```tsx
+const hls = new Hls({
+    xhrSetup: xhr => {
+        xhr.setRequestHeader("Referer", referer);
+    }
+})
+```
 
 ```bash
-docker pull riimuru/consumet-api
-docker run -p {port}:3000 riimuru/consumet-api
+docker pull redis:latest
+docker run -v /myredis/conf:/usr/local/etc/redis -p 6379:6379 --name aniflix-redis redis:latest redis-server /usr/local/etc/redis/redis.conf
+
+docker pull riimuru/consumet-api:latest
+docker run -p 3001:3000 --name aniflix-consumet-api -d riimuru/consumet-api:latest
+
+```
+
+```dotenv
+#frontend
+NEXT_PUBLIC_CONSUMET_BASE_URL=
+
+# Consumet Api
+REDIS_HOST=
+REDIS_PORT=
+
+# postgresql
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+# Redis
+REDIS_USERNAME=
+REDIS_PASSWORD=
+
 ```
 
 Configure the following env variables

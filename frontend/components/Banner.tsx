@@ -2,7 +2,7 @@ import {animeState, infoScreenState} from "@atoms/AnimeAtom";
 import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import ConsumetApi from "@utils/ConsumetApi";
+import AnimeService from "@util/consumet/AnimeService";
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
@@ -77,7 +77,7 @@ export default function Banner({randomAnime}: Props) {
                 setShowInfoScreen(true)
                 setClickedAnime(randomAnime)
             } else {
-                const details: Anime = await fetch(ConsumetApi.fetchAnimeDetails.replace('{id}', id)).then((res) => res.json());
+                const details: Anime = await AnimeService.getAnimeDetails(id)
                 setShowInfoScreen(true)
                 setClickedAnime(details)
             }

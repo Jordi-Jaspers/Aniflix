@@ -1,10 +1,10 @@
-import {GoEpisode} from "@interfaces/GoEpisode";
-import {Title} from "./Title";
-import {Trailer} from "./Trailer";
+import {MediaType} from "@enum/MediaType";
+import {Character} from "./Character";
 import {Date} from "./Date";
 import {Episode} from "./Episode";
 import {Recommendation} from "./Recommendation";
-import {Character} from "./Character";
+import {Title} from "./Title";
+import {Trailer} from "./Trailer";
 
 export interface Anime {
     interfaceType: "Anime";
@@ -19,7 +19,6 @@ export interface Anime {
     popularity: number,
     description: string,
     status: string,
-    recentEpisode: GoEpisode,
     totalEpisodes: number,
     episodes: Episode[],
     episodeTitle?: string,
@@ -29,14 +28,14 @@ export interface Anime {
     genres: string[],
     season: string,
     subOrDub: string,
-    type: string,
+    type: MediaType,
     studios: string[],
     characters: Character[],
     countryOfOrigin: string,
     recommendations: Recommendation[],
 }
 
-export function hasAllAnimeProperties(object:any): object is Anime {
+export function hasAllAnimeProperties(object: any): object is Anime {
     return "id" in object
         && "title" in object
         && "startDate" in object

@@ -1,11 +1,7 @@
-import '../styles/globals.css'
-import Loading from "@components/Loading";
 import {useRouter} from "next/router";
 import React from "react";
-import {RecoilRoot} from 'recoil'
-import type {AppProps} from 'next/app'
 
-export default function App({Component, pageProps}: AppProps) {
+export default function Loading() {
     const router = useRouter();
     const [loading, setLoading] = React.useState<boolean>(false);
     React.useEffect(() => {
@@ -23,8 +19,7 @@ export default function App({Component, pageProps}: AppProps) {
     
     return (
         <>
-            {loading && <div className={"text-9xl"}>Loading....{/*I have an animation here*/}</div>}
-            {!loading && <RecoilRoot><Component {...pageProps} /></RecoilRoot>}
+            {loading && <div>Loading....{/*I have an animation here*/}</div>}
         </>
     )
 }

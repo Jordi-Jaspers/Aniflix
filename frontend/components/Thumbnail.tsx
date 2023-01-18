@@ -1,19 +1,18 @@
+import {RecentEpisode} from "@interfaces/RecentEpisode";
+import AnimeService from "@util/consumet/AnimeService";
 import Image from 'next/image'
 import {Router, useRouter} from "next/router";
 import {useRecoilState} from 'recoil'
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import {animeState, infoScreenState} from "@atoms/AnimeAtom";
 import {useState} from 'react';
-import ConsumetApi from "@utils/ConsumetApi";
 
 interface Props {
-    anime: Anime
+    anime: Anime | RecentEpisode;
 }
 
 export default function Thumbnail({anime}: Props) {
-    // Atoms which can be accessed by any component.
     const router = useRouter()
-
     const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
     const [currentAnime, setCurrentAnime] = useRecoilState(animeState)
     const [isShown, setIsShown] = useState(false);
@@ -31,16 +30,16 @@ export default function Thumbnail({anime}: Props) {
     }
 
     const handleClickedAnime = async () => {
-        console.log("Clicked anime: ", anime);
-        if (anime.hasOwnProperty('recentEpisode')) {
-            await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime.id}/${anime.recentEpisode.episodeId}`)
-        } else if (anime.hasOwnProperty('id')) {
+        if (anime.hasOwnProperty('episodeId') && anime.hasOwnProperty('id')) {
+            const episode: RecentEpisode = anime as RecentEpisode;
+            await router.push('/watch/[anime_id]/[episode_id]', `/watch/${episode.id}/${episode.episodeNumber}`)
+        } else {
             const id: string = anime.id.toString();
             if (hasAllAnimeProperties(anime)) {
                 setCurrentAnime(anime);
                 setShowInfoScreen(true);
             } else {
-                const details: Anime = await fetch(ConsumetApi.fetchAnimeDetails.replace('{id}', id)).then((res) => res.json());
+                const details: Anime = await AnimeService.getAnimeDetails(id);
                 setCurrentAnime(details);
                 setShowInfoScreen(true);
             }

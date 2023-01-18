@@ -5,7 +5,7 @@ import RecommendationCards from "@components/RecommendationCards";
 import {SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline';
 import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
-import LikeButton from "@icons/LikeButton";
+import LikeButtonIcon from "@icons/LikeButtonIcon";
 import MuiModal from '@mui/material/Modal'
 import Image from "next/image";
 import React, {useState} from "react";
@@ -104,7 +104,7 @@ export default function InfoScreen() {
                                             <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
                                         </button>
                                         <AddToLibraryIcon/>
-                                        <LikeButton/>
+                                        <LikeButtonIcon/>
                                     </div>
                                     {anime?.trailer &&
                                         <button

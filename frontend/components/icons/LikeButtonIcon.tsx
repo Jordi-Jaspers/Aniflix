@@ -6,7 +6,7 @@ interface Props {
     iconClassName?: string;
 }
 
-export default function LikeButton({buttonClassName, iconClassName}: Props) {
+export default function LikeButtonIcon({buttonClassName, iconClassName}: Props) {
     return (
         <button className={`"${buttonClassName ? buttonClassName : ""} defaultButtonRound h-11 w-11"`}>
             <HandThumbUpIcon className={`"${iconClassName ? iconClassName : ""} text-white h-6 w-6"`}/>

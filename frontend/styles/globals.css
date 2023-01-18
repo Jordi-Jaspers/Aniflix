@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #f00;
+    box-shadow: 0 0 4px #333;
+    cursor: pointer;
+}
+
 @layer components {
 
     .headerIcon {
@@ -37,6 +48,6 @@
     }
 
     .videoPlayerControls {
-        @apply flex items-center text-white h-8 w-8 cursor-pointer hover:scale-150 transition;
+        @apply flex items-center text-white h-10 w-10 cursor-pointer hover:scale-125 transition;
     }
 }
