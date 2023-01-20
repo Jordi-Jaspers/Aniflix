@@ -1,11 +1,12 @@
+import {infoScreenState} from "@atoms/InfoScreenAtom";
+import {animeState} from "@atoms/VideoPlayerAtom";
+import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
 import AnimeService from "@util/consumet/AnimeService";
 import Image from 'next/image'
-import {Router, useRouter} from "next/router";
-import {useRecoilState} from 'recoil'
-import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import {animeState, infoScreenState} from "@atoms/AnimeAtom";
+import {useRouter} from "next/router";
 import {useState} from 'react';
+import {useRecoilState} from 'recoil'
 
 interface Props {
     anime: Anime | RecentEpisode;
@@ -16,19 +17,19 @@ export default function Thumbnail({anime}: Props) {
     const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
     const [currentAnime, setCurrentAnime] = useRecoilState(animeState)
     const [isShown, setIsShown] = useState(false);
-
+    
     const videoTitle = (): string => {
         let title: string = anime.title.romaji ? anime.title.romaji : anime.title.english;
         return anime.hasOwnProperty('episodeNumber') ? title + " (Episode " + anime.episodeNumber + ")" : title;
     };
-
+    
     const rating = (): string => {
         if (anime.hasOwnProperty('rating') && "rating" in anime && anime.rating !== null) {
             return anime.rating + '%';
         }
         return '0%';
     }
-
+    
     const handleClickedAnime = async () => {
         if (anime.hasOwnProperty('episodeId') && anime.hasOwnProperty('id')) {
             const episode: RecentEpisode = anime as RecentEpisode;
@@ -45,11 +46,13 @@ export default function Thumbnail({anime}: Props) {
             }
         }
     }
-
+    
     return (
         <div
             className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
-            onClick={() => {handleClickedAnime()}}
+            onClick={() => {
+                handleClickedAnime()
+            }}
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >

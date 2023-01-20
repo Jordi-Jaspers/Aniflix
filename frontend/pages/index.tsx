@@ -1,4 +1,4 @@
-import {animeState} from "@atoms/AnimeAtom";
+import {animeState} from "@atoms/VideoPlayerAtom";
 import Banner from "@components/Banner";
 import Header from "@components/Header";
 import InfoScreen from "@components/InfoScreen";

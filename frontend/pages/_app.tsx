@@ -1,9 +1,9 @@
-import '../styles/globals.css'
-import Loading from "@components/Loading";
+import Loader from "@components/Loader";
+import type {AppProps} from 'next/app'
 import {useRouter} from "next/router";
 import React from "react";
 import {RecoilRoot} from 'recoil'
-import type {AppProps} from 'next/app'
+import '../styles/globals.css'
 
 export default function App({Component, pageProps}: AppProps) {
     const router = useRouter();
@@ -23,7 +23,7 @@ export default function App({Component, pageProps}: AppProps) {
     
     return (
         <>
-            {loading && <div className={"text-9xl"}>Loading....{/*I have an animation here*/}</div>}
+            {loading && (<Loader/>)}
             {!loading && <RecoilRoot><Component {...pageProps} /></RecoilRoot>}
         </>
     )

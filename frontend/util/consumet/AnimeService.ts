@@ -115,18 +115,18 @@ export default class AnimeService {
      * @param id        The id of the anime.
      * @param episode   The number of the episode.
      */
-    static async getEpisodeLinks(id: string, episode: number): Promise<[Episode, MediaSources] | [null, null]> {
+    static async getEpisodeLinks(id: string, episode: number): Promise<[Anime, Episode, MediaSources] | [null, null, null]> {
         const anime: Anime = await AnimeService.getAnimeDetails(id)
         const requestedEpisode: Episode | undefined = anime.episodes.find((result: Episode) => result.number === episode);
         if (!requestedEpisode) {
             console.error(`Could not find episode number '%d' for the following anime:\n%o`, episode, anime);
-            return [null, null];
+            return [null, null, null];
         }
         
         const request = ConsumetEndpoints.EPISODE_LINKS.replace("{episodeId}", requestedEpisode.id);
         const mediaSources: MediaSources = await fetch(request).then((res) => res.json()).catch((err) => console.error(err));
         console.info(`invoked '${request}' to retrieve episode links.`);
-        return [requestedEpisode, mediaSources];
+        return [anime, requestedEpisode, mediaSources];
     }
 }
 

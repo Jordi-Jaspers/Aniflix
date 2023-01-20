@@ -1,4 +1,5 @@
-import {animeState, infoScreenState} from "@atoms/AnimeAtom";
+import {infoScreenState} from "@atoms/InfoScreenAtom";
+import {animeState} from "@atoms/VideoPlayerAtom";
 import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";

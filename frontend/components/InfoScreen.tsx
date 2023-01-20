@@ -1,4 +1,5 @@
-import {animeState, infoScreenState} from "@atoms/AnimeAtom";
+import {infoScreenState} from "@atoms/InfoScreenAtom";
+import {animeState} from "@atoms/VideoPlayerAtom";
 import EpisodeCards from "@components/EpisodeCards";
 import MetaInformation from "@components/MetaInformation";
 import RecommendationCards from "@components/RecommendationCards";

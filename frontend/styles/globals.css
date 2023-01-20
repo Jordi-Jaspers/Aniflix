@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: #f00;
-    box-shadow: 0 0 4px #333;
-    cursor: pointer;
-}
-
 @layer components {
 
     .headerIcon {

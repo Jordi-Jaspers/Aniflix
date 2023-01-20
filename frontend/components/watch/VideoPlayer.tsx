@@ -12,7 +12,6 @@ interface Props {
 
 const NATIVE_HLS: string = 'application/vnd.apple.mpegurl';
 const DEFAULT_VIDEO: string = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-
 export default function VideoPlayer({className, media, controls, innerRef}: Props) {
     const referer: string = media?.headers?.referer || '';
     const mediaSources: Map<string, string[]> = new Map();
@@ -43,7 +42,7 @@ export default function VideoPlayer({className, media, controls, innerRef}: Prop
             console.info('Using native HLS in browser');
             videoPlayer.src = url;
         } else if (Hls.isSupported()) {
-            console.log('Using HLS supported browser')
+            console.debug('Using HLS supported browser')
             const hls = new Hls();
             hls.loadSource(url);
             hls.attachMedia(videoPlayer);
@@ -53,12 +52,12 @@ export default function VideoPlayer({className, media, controls, innerRef}: Prop
         } else {
             console.error('HLS is not supported in this browser. Please use a supported browser.')
         }
-    }, [mediaSources, innerRef])
+    }, [videoPlayer]);
     
     return (
         <div className={`${className} w-full h-full`}>
             <div className={`absolute top-0 bottom-0 my-auto w-screen`}>
-                <video className={"w-screen h-full max-h-screen"} ref={innerRef} muted={false}/>
+                <video className={"w-screen h-full max-h-screen"} ref={innerRef}/>
             </div>
         </div>
     );

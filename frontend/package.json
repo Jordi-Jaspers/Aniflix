@@ -3,6 +3,10 @@
   "description": "A Netflix UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device.",
   "version": "0.0.0-SNAPSHOT",
   "author": "Jordi Jaspers <jordijaspers@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/Jordi-Jaspers/aniflix/issues"
+  },
+  "homepage": "https://github.com/Jordi-Jaspers/aniflix#readme",
   "keywords": [
     "Next.js",
     "Nextjs",
@@ -12,6 +16,9 @@
     "Frontend Developer",
     "Jordi Jaspers"
   ],
+  "engines": {
+    "node": ">=12.5.0"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "npm install && next dev",
@@ -41,6 +48,7 @@
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-input-slider": "^6.0.1",
     "react-player": "^2.11.0",
     "react-youtube": "^10.1.0",
     "recoil": "^0.7.6",
