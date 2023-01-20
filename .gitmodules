@@ -1,0 +1,3 @@
+[submodule "consumet"]
+	path = consumet
+	url = https://github.com/Jordi-Jaspers/consumet
