@@ -1,8 +1,8 @@
-import {resolutionState} from "@atoms/VideoPlayerAtom";
+import {resolutionState, sourceState} from "@atoms/VideoPlayerAtom";
 import {AdjustmentsHorizontalIcon} from "@heroicons/react/24/outline";
 import {MediaSource} from "@interfaces/MediaSource";
 import React, {useState} from 'react';
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     className?: string;
@@ -12,10 +12,16 @@ interface Props {
 export default function ResolutionMenu({className, mediaSources}: Props) {
     const [showList, setShowList] = useState(false);
     const [resolution, setResolution] = useRecoilState(resolutionState);
+    const setSource = useSetRecoilState(sourceState);
     
     function toggleResolution(quality: string) {
         const selectedResolution = mediaSources.find(source => source.quality === quality)?.url
-        if (selectedResolution) setResolution(selectedResolution);
+        console.log("[ResolutionMenu] Setting source to '%s' with quality '%s'", selectedResolution, quality);
+        if (selectedResolution) {
+            setResolution(quality);
+            setSource(selectedResolution);
+        }
+        setShowList(false);
     }
     
     return (
@@ -26,7 +32,11 @@ export default function ResolutionMenu({className, mediaSources}: Props) {
             {showList && (
                 <ul className="absolute bottom-12 z-10 rounded-md shadow-md transform origin-top-right bg-[#141414]">
                     {mediaSources.map((mediaSource: MediaSource, index) => (
-                        <li key={index} className={`${mediaSource.url === resolution ? "bg-[#f00]" : ""} px-4 py-2 rounded-md hover:bg-[#f00]`} onClick={() => toggleResolution(mediaSource.quality)}>
+                        <li key={index}
+                            className={`px-4 py-2 rounded-md hover:bg-[#f00]
+                            ${mediaSource.quality === resolution ? "bg-[#f00]" : ""}
+                            ${mediaSource.quality === "backup" ? "hidden" : ""}`}
+                            onClick={() => toggleResolution(mediaSource.quality)}>
                             <a className="block text-sm text-white font-poppins">{mediaSource.quality}</a>
                         </li>
                     ))}

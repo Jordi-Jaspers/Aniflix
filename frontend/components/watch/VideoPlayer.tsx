@@ -1,58 +1,51 @@
-import {MediaSource} from "@interfaces/MediaSource";
-import {MediaSources} from "@interfaces/MediaSources";
+import {currentTimeState, durationState, sourceState, videoPlayerState} from "@atoms/VideoPlayerAtom";
 import Hls from 'hls.js';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     className?: string;
-    media: MediaSources;
     controls: boolean;
     innerRef: React.RefObject<HTMLVideoElement>;
 }
 
 const NATIVE_HLS: string = 'application/vnd.apple.mpegurl';
-const DEFAULT_VIDEO: string = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-export default function VideoPlayer({className, media, controls, innerRef}: Props) {
-    const referer: string = media?.headers?.referer || '';
-    const mediaSources: Map<string, string[]> = new Map();
-    media?.sources?.forEach((source: MediaSource) => {
-        if (source?.url) {
-            if (mediaSources.has(source?.quality)) {
-                mediaSources.get(source?.quality)?.push(source?.url);
-            } else {
-                mediaSources.set(source?.quality, [source?.url]);
-            }
-        }
-    });
-    
-    const [currentResolution, setCurrentResolution] = useState(Array.from(mediaSources.keys())[0]);
+export default function VideoPlayer({className, controls, innerRef}: Props) {
     const [videoPlayer, setVideoPlayer] = useState<HTMLVideoElement | null>(null);
+    const {isPlaying, streamingLinks, resolution, source} = useRecoilValue(videoPlayerState);
+    const setCurrentTime = useSetRecoilState(currentTimeState);
+    const setSource = useSetRecoilState(sourceState);
     
     useEffect(() => {
+        console.debug('[VideoPlayer] Setting up video player');
         setVideoPlayer(innerRef.current);
         if (!videoPlayer) return;
+        
+        const url = streamingLinks?.sources.find(source => source.quality === resolution)?.url;
+        if (url && source !== url) {
+            console.debug(`[VideoPlayer] Setting source to ${url} with quality ${resolution}`);
+            setCurrentTime(videoPlayer.currentTime)
+            setSource(url);
+        }
+        
         videoPlayer.focus();
         videoPlayer.controls = controls;
-        videoPlayer.autoplay = true;
-        
-        const url = mediaSources.get(currentResolution)?.[0] || DEFAULT_VIDEO;
-        if (!url) return;
-        
+        videoPlayer.autoplay = isPlaying;
         if (videoPlayer.canPlayType(NATIVE_HLS)) {
-            console.info('Using native HLS in browser');
-            videoPlayer.src = url;
+            console.debug('[VideoPlayer] Using native HLS in browser');
+            videoPlayer.src = source;
         } else if (Hls.isSupported()) {
-            console.debug('Using HLS supported browser')
+            console.debug('[VideoPlayer] Using HLS supported browser')
             const hls = new Hls();
-            hls.loadSource(url);
+            hls.loadSource(source);
             hls.attachMedia(videoPlayer);
             hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                console.debug('video-tag and HLS.js are now bound.');
+                console.debug('[VideoPlayer] video-tag and HLS.js are now bound.');
             });
         } else {
-            console.error('HLS is not supported in this browser. Please use a supported browser.')
+            console.error('[VideoPlayer] HLS is not supported in this browser. Please use a supported browser.')
         }
-    }, [videoPlayer]);
+    }, [videoPlayer, resolution, source]);
     
     return (
         <div className={`${className} w-full h-full`}>
