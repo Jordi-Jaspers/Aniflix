@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-v2",
+  "name": "aniflix",
   "description": "A Netflix UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device.",
   "version": "0.0.0-SNAPSHOT",
   "author": "Jordi Jaspers <jordijaspers@gmail.com>",
@@ -17,7 +17,7 @@
     "Jordi Jaspers"
   ],
   "engines": {
-    "node": ">=12.5.0"
+    "node": ">=18.0.0"
   },
   "license": "MIT",
   "scripts": {
@@ -27,7 +27,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -Rf dist node_modules .next/cache",
-    "clean-start": "npm run clean && npm i && npm run dev",
+    "clean-install": "npm run clean && npm install",
+    "clean-start": "npm run clean && npm install && npm run dev",
     "prettier": "prettier --config .prettierrc \"./**/*.+(js|json|jsx)\" --write",
     "clean:example": "rnb --c"
   },

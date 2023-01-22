@@ -9,6 +9,7 @@ import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import ChromeCastIcon from "@svg/ChromeCastIcon.svg";
 import Forward from "@svg/Forward.svg";
 import Rewind from "@svg/Rewind.svg";
+import {LOGGER} from "@util/Logger";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from 'react';
@@ -31,10 +32,10 @@ export default function VideoControls({className}: Props) {
     
     const nextEpisode = () => {
         if (anime.episodes.length > episode.number) {
-            console.info(`[VideoControls] Going to episode ${episode.number + 1} of ${anime.episodes.length}`);
+            LOGGER.info(`[VideoControls] Going to episode ${episode.number + 1} of ${anime.episodes.length}`);
             setEpisode(anime.episodes[episode.number]);
             router.push(`/watch/${anime.id}/${episode.number + 1}`).catch((error) => {
-                console.error('[VideoControls] Failed to push to next episode', error);
+                LOGGER.error('[VideoControls] Failed to push to next episode', error);
             });
         }
     }
@@ -43,7 +44,7 @@ export default function VideoControls({className}: Props) {
         const videoPlayer = videoRef.current;
         if (!videoPlayer) return;
         videoPlayer.requestFullscreen({navigationUI: "hide"}).catch((error) => {
-            console.error('[VideoControls] Error while trying to fullscreen video', error);
+            LOGGER.error('[VideoControls] Error while trying to fullscreen video', error);
         });
     }
     
@@ -67,7 +68,7 @@ export default function VideoControls({className}: Props) {
             videoPlayer.play().then(() => {
                 setIsPlaying(true);
             }).catch((error) => {
-                console.error('[VideoControls] Error while trying to play video', error);
+                LOGGER.error('[VideoControls] Error while trying to play video', error);
                 setIsPlaying(false);
             });
         } else {

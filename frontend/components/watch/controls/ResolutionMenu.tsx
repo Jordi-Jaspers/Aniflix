@@ -1,6 +1,7 @@
 import {resolutionState, sourceState} from "@atoms/VideoPlayerAtom";
 import {AdjustmentsHorizontalIcon} from "@heroicons/react/24/outline";
 import {MediaSource} from "@interfaces/MediaSource";
+import {LOGGER} from "@util/Logger";
 import React, {useState} from 'react';
 import {useRecoilState, useSetRecoilState} from "recoil";
 
@@ -16,7 +17,7 @@ export default function ResolutionMenu({className, mediaSources}: Props) {
     
     function toggleResolution(quality: string) {
         const selectedResolution = mediaSources.find(source => source.quality === quality)?.url
-        console.log("[ResolutionMenu] Setting source to '%s' with quality '%s'", selectedResolution, quality);
+        LOGGER.info("[ResolutionMenu] Setting source to '%s' with quality '%s'", selectedResolution, quality);
         if (selectedResolution) {
             setResolution(quality);
             setSource(selectedResolution);
