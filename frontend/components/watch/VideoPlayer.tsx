@@ -1,4 +1,4 @@
-import {currentTimeState, durationState, sourceState, videoPlayerState} from "@atoms/VideoPlayerAtom";
+import {currentTimeState, sourceState, videoPlayerState} from "@atoms/VideoPlayerAtom";
 import Hls from 'hls.js';
 import React, {useEffect, useState} from 'react';
 import {useRecoilValue, useSetRecoilState} from "recoil";
@@ -21,7 +21,7 @@ export default function VideoPlayer({className, controls, loop, innerRef}: Props
         console.debug('[VideoPlayer] Setting up video player');
         setVideoPlayer(innerRef.current);
         if (!videoPlayer) return;
-    
+        
         const url = streamingLinks?.sources.find(source => source.quality === resolution)?.url;
         if (url && source !== url) {
             console.debug(`[VideoPlayer] Setting source to ${url} with quality ${resolution}`);

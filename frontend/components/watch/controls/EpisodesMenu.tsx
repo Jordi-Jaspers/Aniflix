@@ -28,7 +28,7 @@ export default function EpisodesMenu({className, episodes}: Props) {
             </button>
             {showList && (
                 <ul className="fixed bottom-[7.5%] right-2 w-[45%] rounded-md shadow-md bg-[#262626] max-h-[65vh] overflow-hidden overflow-y-scroll scrollbar-hidden"
-                onMouseLeave={() => setShowList(false)}>
+                    onMouseLeave={() => setShowList(false)}>
                     {episodes.map((episode: Episode, index) => (
                         <li key={index}
                             className={`z-50 px-4 flex flex-col w-full h-auto items-center
@@ -38,9 +38,10 @@ export default function EpisodesMenu({className, episodes}: Props) {
                                 <a className="block text-lg text-white font-poppins">{episode.number}</a>
                                 <a className="block text-lg text-white font-poppins">{episode.title}</a>
                             </div>
-                            <div className={`${selectedEpisode?.number === episode.number ? "items-center flex flex-row justify-between space-x-5 w-full" : "hidden"}`}>
-                                    <Image src={episode.image} width={2000} height={2000} alt={episode.title}
-                                           className={"rounded-md w-[35%]"}/>
+                            <div
+                                className={`${selectedEpisode?.number === episode.number ? "items-center flex flex-row justify-between space-x-5 w-full" : "hidden"}`}>
+                                <Image src={episode.image} width={2000} height={2000} alt={episode.title}
+                                       className={"rounded-md w-[35%]"}/>
                                 <a className={"block text-lg text-white font-poppins text-start"}>{episode.description}</a>
                             </div>
                         </li>

@@ -11,7 +11,7 @@ import MuiModal from '@mui/material/Modal'
 import Image from "next/image";
 import React, {useState} from "react";
 import YouTube from "react-youtube";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 
 const opts = {
     height: '100%',
@@ -29,34 +29,34 @@ const opts = {
 export default function InfoScreen() {
     // Atoms which can be accessed by any component.
     const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
-    const [anime, setAnime] = useRecoilState(animeState)
-
+    const anime = useRecoilValue(animeState)
+    
     // Some hooks to handle the state of the banner with the video.
     const [player, setPlayer] = useState<any>(null)
     const [isMuted, setIsMuted] = useState(true)
     const [isError, setIsError] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
-
+    
     const onReady = (event: any) => {
         setPlayer(event.target)
     }
-
+    
     const onPlay = () => {
         setIsPlaying(true)
     }
-
+    
     const onError = () => {
         setIsError(true)
     }
-
+    
     const onEnd = () => {
         setIsPlaying(false)
     }
-
+    
     const handleClose = () => {
         setShowInfoScreen(false)
     }
-
+    
     const toggleMute = () => {
         if (isMuted) {
             player?.unMute()
@@ -66,7 +66,7 @@ export default function InfoScreen() {
             setIsMuted(true)
         }
     }
-
+    
     return (
         <>
             {anime && (
@@ -87,7 +87,7 @@ export default function InfoScreen() {
                                     width={3840}
                                     className={`${!isPlaying || isError ? "brightness-85 absolute top-0 left-0 w-full aspect-video object-cover -z-10" : "hidden"}`}
                                 />
-
+                                
                                 {anime.trailer?.id && (
                                     <YouTube
                                         videoId={anime.trailer.id}
@@ -146,22 +146,22 @@ export default function InfoScreen() {
                                                 <span className="text-[gray]">Genres:</span>{' '}
                                                 {anime?.genres.map((genre) => genre).join(', ')}
                                             </div>
-
+                                            
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Season:</span>{' '}
                                                 {anime.season}
                                             </div>
-
+                                            
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Status:</span>{' '}
                                                 {anime?.status}
                                             </div>
-
+                                            
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Type:</span>{' '}
                                                 {anime?.type}
                                             </div>
-
+                                            
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Average Duration:</span>{' '}
                                                 {anime?.duration} min
@@ -174,10 +174,10 @@ export default function InfoScreen() {
                         <div className={"flex flex-col space-y-8 px-10 pt-4"}>
                             {/* The List with all the available episodes of the selected anime */}
                             {anime?.episodes && (<EpisodeCards episodes={anime.episodes}/>)}
-
+                            
                             {/* The List with all the recommended series of the selected anime */}
                             {anime?.recommendations && (<RecommendationCards recommendations={anime?.recommendations}/>)}
-
+                            
                             {/* Some Meta information about the clicked anime */}
                             <MetaInformation anime={anime}/>
                         </div>

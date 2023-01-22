@@ -4,7 +4,7 @@ import ResolutionMenu from "@components/watch/controls/ResolutionMenu";
 import TimelineControls from "@components/watch/controls/TimelineControls";
 import VolumeControls from "@components/watch/controls/VolumeControls";
 import VideoPlayer from "@components/watch/VideoPlayer";
-import {ArrowsPointingOutIcon, ForwardIcon, QueueListIcon} from "@heroicons/react/24/outline";
+import {ArrowsPointingOutIcon, ForwardIcon} from "@heroicons/react/24/outline";
 import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import ChromeCastIcon from "@svg/ChromeCastIcon.svg";
 import Forward from "@svg/Forward.svg";
@@ -116,7 +116,7 @@ export default function VideoControls({className}: Props) {
                             <p className="text-gray-400 font-light"> Episode {episode.number}{episode.title ? (": " + episode.title) : ""}</p>
                         </div>
                         <div className="flex items-center justify-evenly space-x-6">
-                            <button className="videoPlayerControls"  onClick={() => nextEpisode()}>
+                            <button className="videoPlayerControls" onClick={() => nextEpisode()}>
                                 <ForwardIcon className={"h-full w-full"}/>
                             </button>
                             <EpisodesMenu episodes={anime.episodes}/>

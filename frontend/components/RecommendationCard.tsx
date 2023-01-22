@@ -1,12 +1,11 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
-import {animeState} from "@atoms/VideoPlayerAtom";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
 import {Recommendation} from "@interfaces/Recommendation";
 import Image from "next/image";
 import router from "next/router";
 import React from "react";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useSetRecoilState} from "recoil";
 
 interface Props {
     anime: Recommendation
