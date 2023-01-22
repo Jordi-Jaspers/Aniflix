@@ -18,7 +18,10 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 interface Props {
     className?: string;
 }
-
+// TODO: Keyboard shortcuts
+// TODO: Workaround for autoplay
+// TODO: Fix video player not playing on first click
+// TODO: remove full screen controls and add custom controls
 export default function VideoControls({className}: Props) {
     const router = useRouter();
     const videoRef = React.createRef<HTMLVideoElement>();
