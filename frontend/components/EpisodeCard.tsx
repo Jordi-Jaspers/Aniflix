@@ -2,8 +2,8 @@ import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
 import {Episode} from "@interfaces/Episode";
-import {router} from "next/client";
 import Image from "next/image";
+import router from "next/router";
 import React from "react";
 import {useRecoilValue, useSetRecoilState} from "recoil";
 
@@ -29,11 +29,11 @@ export default function EpisodeCard({episode}: Props) {
                 <div className={"text-[#d2d2d2] text-2xl min-w-fit h-fit font-poppins text-center self-center pr-6"}>
                     {episode?.number}
                 </div>
-                <div className={"relative overflow-hidden max-w-[20%] aspect-video rounded-xl"}>
+                <div className={"relative flex justify-center items-center overflow-hidden max-w-[20%] aspect-video rounded-xl "}>
                     <Image
                         src={episode.image}
                         alt={episode.title}
-                        className={"object-cover self-center"}
+                        className={"object-cover rounded-xl"}
                         width={2000}
                         height={2000}
                     />

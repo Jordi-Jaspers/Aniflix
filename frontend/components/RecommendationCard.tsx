@@ -1,8 +1,12 @@
+import {infoScreenState} from "@atoms/InfoScreenAtom";
+import {animeState} from "@atoms/VideoPlayerAtom";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
 import {Recommendation} from "@interfaces/Recommendation";
 import Image from "next/image";
+import router from "next/router";
 import React from "react";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     anime: Recommendation
@@ -10,9 +14,16 @@ interface Props {
 
 export default function RecommendationCard({anime}: Props) {
     const title: string = anime.title.romaji ? anime.title.romaji : anime.title.english;
+    
+    const setShowInfoScreen = useSetRecoilState(infoScreenState)
+    const handleClickedRecommendation = async () => {
+        setShowInfoScreen(false);
+        await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime?.id}/1`)
+    }
+    
     return (
         <div className={"m-[0.1em] min-h-[18em] h-[100%] cursor-pointer rounded bg-[#2f2f2f] overflow-hidden"}>
-            <div className={"relative overflow-hidden"}>
+            <div className={"relative overflow-hidden"} onClick={() => handleClickedRecommendation()}>
                 <Image
                     src={anime.image}
                     alt={title}

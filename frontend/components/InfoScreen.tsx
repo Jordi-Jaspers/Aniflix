@@ -140,7 +140,7 @@ export default function InfoScreen() {
                                         {anime?.subOrDub ? ` (${anime.subOrDub})` : ""}
                                     </h1>
                                     <div className="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row">
-                                        <p className="text-white w-[85%] text-base leading-7 font-poppins">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
+                                        <p className="text-white w-[70%] text-base leading-7 font-poppins">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
                                         <div className="flex flex-col text-sm">
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Genres:</span>{' '}

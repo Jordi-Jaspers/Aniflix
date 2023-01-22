@@ -1,9 +1,10 @@
-import {currentTimeState, durationState, isPlayingState, videoPlayerState} from "@atoms/VideoPlayerAtom";
+import {currentTimeState, durationState, episodeState, isPlayingState, videoPlayerState} from "@atoms/VideoPlayerAtom";
+import EpisodesMenu from "@components/watch/controls/EpisodesMenu";
 import ResolutionMenu from "@components/watch/controls/ResolutionMenu";
 import TimelineControls from "@components/watch/controls/TimelineControls";
 import VolumeControls from "@components/watch/controls/VolumeControls";
 import VideoPlayer from "@components/watch/VideoPlayer";
-import {ArrowsPointingOutIcon, ForwardIcon} from "@heroicons/react/24/outline";
+import {ArrowsPointingOutIcon, ForwardIcon, QueueListIcon} from "@heroicons/react/24/outline";
 import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import ChromeCastIcon from "@svg/ChromeCastIcon.svg";
 import Forward from "@svg/Forward.svg";
@@ -15,18 +16,43 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     className?: string;
-    controls: boolean;
 }
 
-export default function VideoControls({className, controls}: Props) {
+export default function VideoControls({className}: Props) {
     const router = useRouter();
     const videoRef = React.createRef<HTMLVideoElement>();
     
     const setCurrentTime = useSetRecoilState(currentTimeState);
     const setIsPlaying = useSetRecoilState(isPlayingState);
     const setDuration = useSetRecoilState(durationState);
+    const setEpisode = useSetRecoilState(episodeState);
     const [isHoveringVolume, setIsHoveringVolume] = useState<boolean>(false);
     const {anime, episode, streamingLinks, volume, isMuted, isPlaying, duration} = useRecoilValue(videoPlayerState);
+    
+    const nextEpisode = () => {
+        if (anime.episodes.length > episode.number) {
+            console.info(`[VideoControls] Going to episode ${episode.number + 1} of ${anime.episodes.length}`);
+            setEpisode(anime.episodes[episode.number]);
+            router.push(`/watch/${anime.id}/${episode.number + 1}`).catch((error) => {
+                console.error('[VideoControls] Failed to push to next episode', error);
+            });
+        }
+    }
+    
+    const toggleFullScreen = () => {
+        const videoPlayer = videoRef.current;
+        if (!videoPlayer) return;
+        videoPlayer.requestFullscreen({navigationUI: "hide"}).catch((error) => {
+            console.error('[VideoControls] Error while trying to fullscreen video', error);
+        });
+    }
+    
+    const handlePlayback = (seconds: number) => {
+        const videoPlayer = videoRef.current;
+        if (!videoPlayer) return;
+        videoPlayer.currentTime += seconds;
+        setCurrentTime(videoPlayer.currentTime);
+    }
     
     useEffect(() => {
         const videoPlayer = videoRef.current;
@@ -41,7 +67,8 @@ export default function VideoControls({className, controls}: Props) {
             videoPlayer.play().then(() => {
                 setIsPlaying(true);
             }).catch((error) => {
-                console.error('Error while trying to play video', error);
+                console.error('[VideoControls] Error while trying to play video', error);
+                setIsPlaying(false);
             });
         } else {
             videoPlayer.pause();
@@ -49,22 +76,15 @@ export default function VideoControls({className, controls}: Props) {
         }
     }, [videoRef, volume, isMuted, isPlaying, setCurrentTime]);
     
-    function handlePlayback(seconds: number) {
-        const videoPlayer = videoRef.current;
-        if (!videoPlayer) return;
-        videoPlayer.currentTime += seconds;
-        setCurrentTime(videoPlayer.currentTime);
-    }
-    
     return (
-        <div>
-            <VideoPlayer controls={controls} innerRef={videoRef}/>
+        <>
+            <VideoPlayer innerRef={videoRef}/>
             <div className={`${className ? className : ''} fixed top-0 bottom-0 h-screen w-screen bg-black/20 pt-4 z-10`}>
                 {/* Top part of video controls */}
                 <div className={"absolute w-screen top-0 h-16"}>
                     <div className="flex h-full items-center px-4 py-2">
                         {/* go back to home page after click on button */}
-                        <button className="flex items-center text-white h-10 w-10 cursor-pointer" onClick={() => router.back()}>
+                        <button className="flex items-center text-white h-10 w-10 cursor-pointer" onClick={() => router.push("/")}>
                             <ArrowLeftIcon className={"h-full w-full"}/>
                         </button>
                     </div>
@@ -96,20 +116,21 @@ export default function VideoControls({className, controls}: Props) {
                             <p className="text-gray-400 font-light"> Episode {episode.number}{episode.title ? (": " + episode.title) : ""}</p>
                         </div>
                         <div className="flex items-center justify-evenly space-x-6">
-                            <button className="videoPlayerControls">
+                            <button className="videoPlayerControls"  onClick={() => nextEpisode()}>
                                 <ForwardIcon className={"h-full w-full"}/>
                             </button>
+                            <EpisodesMenu episodes={anime.episodes}/>
                             <ResolutionMenu mediaSources={streamingLinks.sources}/>
-                            <button className="videoPlayerControls">
+                            <button className="videoPlayerControls" disabled={true}>
                                 <Image width={64} height={64} src={ChromeCastIcon} alt={"Chromecast"}/>
                             </button>
-                            <button className="videoPlayerControls">
+                            <button className="videoPlayerControls" onClick={() => toggleFullScreen()}>
                                 <ArrowsPointingOutIcon className={"h-full w-full"}/>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

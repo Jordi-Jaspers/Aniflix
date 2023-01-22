@@ -46,7 +46,6 @@ export default function WatchAnime({anime, episodeInfo, streamingSources}: Props
     return (
         <div className={"bg-black w-screen h-screen"}>
             {renderControls && <VideoControls
-                controls={false}
                 className={`transition-opacity duration-500 ease-in-out ${isIdle ? 'opacity-0 cursor-none' : 'opacity-100'}`}/>
             }
         </div>

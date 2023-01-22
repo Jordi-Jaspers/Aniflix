@@ -1,7 +1,7 @@
-import {currentTimeState, durationState} from "@atoms/VideoPlayerAtom";
+import {currentTimeState} from "@atoms/VideoPlayerAtom";
 import React from 'react';
 import Slider from "react-input-slider";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState} from "recoil";
 
 interface Props {
     className?: string;
@@ -13,7 +13,7 @@ export default function TimelineControls({className, duration}: Props) {
     const remainingTime = duration - currentTime;
     const minutes: string = Math.floor(remainingTime / 60).toString().padStart(2, '0');
     const seconds: string = Math.floor(remainingTime % 60).toString().padStart(2, '0');
-
+    
     return (
         <div className={`${className ? className : ""} w-full h-full flex flex-row justify-center items-center space-x-4`}>
             <Slider

@@ -5,12 +5,13 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     className?: string;
-    controls: boolean;
+    controls?: boolean;
+    loop?: boolean;
     innerRef: React.RefObject<HTMLVideoElement>;
 }
 
 const NATIVE_HLS: string = 'application/vnd.apple.mpegurl';
-export default function VideoPlayer({className, controls, innerRef}: Props) {
+export default function VideoPlayer({className, controls, loop, innerRef}: Props) {
     const [videoPlayer, setVideoPlayer] = useState<HTMLVideoElement | null>(null);
     const {isPlaying, streamingLinks, resolution, source} = useRecoilValue(videoPlayerState);
     const setCurrentTime = useSetRecoilState(currentTimeState);
@@ -20,7 +21,7 @@ export default function VideoPlayer({className, controls, innerRef}: Props) {
         console.debug('[VideoPlayer] Setting up video player');
         setVideoPlayer(innerRef.current);
         if (!videoPlayer) return;
-        
+    
         const url = streamingLinks?.sources.find(source => source.quality === resolution)?.url;
         if (url && source !== url) {
             console.debug(`[VideoPlayer] Setting source to ${url} with quality ${resolution}`);
@@ -29,8 +30,9 @@ export default function VideoPlayer({className, controls, innerRef}: Props) {
         }
         
         videoPlayer.focus();
-        videoPlayer.controls = controls;
         videoPlayer.autoplay = isPlaying;
+        videoPlayer.controls = controls ?? false;
+        videoPlayer.loop = loop ?? false;
         if (videoPlayer.canPlayType(NATIVE_HLS)) {
             console.debug('[VideoPlayer] Using native HLS in browser');
             videoPlayer.src = source;
@@ -42,6 +44,7 @@ export default function VideoPlayer({className, controls, innerRef}: Props) {
             hls.on(Hls.Events.MEDIA_ATTACHED, function () {
                 console.debug('[VideoPlayer] video-tag and HLS.js are now bound.');
             });
+            return () => hls.destroy();
         } else {
             console.error('[VideoPlayer] HLS is not supported in this browser. Please use a supported browser.')
         }
