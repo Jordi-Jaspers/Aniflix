@@ -3,9 +3,9 @@ import {Episode} from "@interfaces/Episode";
 import {MediaSources} from "@interfaces/MediaSources";
 import {Page} from "@interfaces/Page";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import ConsumetEndpoints from "@api/consumet/ConsumetEndpoints";
-import {LOGGER} from "@api/util/Logger";
-import RequestLogger from "@api/util/RequestLogger";
+import ConsumetEndpoints from "@consumet/ConsumetEndpoints";
+import {LOGGER} from "@util/Logger";
+import RequestLogger from "@util/RequestLogger";
 
 export default class AnimeService {
     

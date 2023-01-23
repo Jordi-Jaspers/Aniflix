@@ -1,9 +1,9 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
+import AnimeService from "@consumet/AnimeService";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import AnimeService from "@api/consumet/AnimeService";
-import {LOGGER} from "@api/util/Logger";
+import {LOGGER} from "@util/Logger";
 import Image from 'next/image'
 import {useRouter} from "next/router";
 import {useState} from 'react';
@@ -51,7 +51,9 @@ export default function Thumbnail({anime}: Props) {
     return (
         <div
             className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
-            onClick={() => handleClickedAnime().catch(() => {LOGGER.error("Error occurred when trying to handle clicked anime")})}
+            onClick={() => handleClickedAnime().catch(() => {
+                LOGGER.error("Error occurred when trying to handle clicked anime")
+            })}
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >

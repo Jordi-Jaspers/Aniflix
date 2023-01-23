@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
+      "@styles/*": ["./styles/*"],
       "@components/*": ["./components/*"],
       "@icons/*": ["./components/icons/*"],
       "@svg/*": ["./public/icons/*"],
@@ -8,7 +9,9 @@
       "@enum/*": ["./enum/*"],
       "@atoms/*": ["./atoms/*"],
       "@hooks/*": ["./hooks/*"],
-      "@api/*": ["./api/*"]
+      "@util/*": ["./lib/util/*"],
+      "@pocketbase/*": ["./lib/pocketbase/*"],
+      "@consumet/*": ["./lib/consumet/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

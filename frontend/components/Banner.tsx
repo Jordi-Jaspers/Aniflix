@@ -3,7 +3,7 @@ import {animeState} from "@atoms/VideoPlayerAtom";
 import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import AnimeService from "@api/consumet/AnimeService";
+import AnimeService from "@consumet/AnimeService";
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';

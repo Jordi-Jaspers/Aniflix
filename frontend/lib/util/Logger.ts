@@ -1,3 +1,6 @@
+/**
+ * Utility class for logging.
+ */
 export class LOGGER {
     private static STYLE = {
         BASE: [
