@@ -2,8 +2,8 @@ import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import AnimeService from "@util/consumet/AnimeService";
-import {LOGGER} from "@util/Logger";
+import AnimeService from "@api/consumet/AnimeService";
+import {LOGGER} from "@api/util/Logger";
 import Image from 'next/image'
 import {useRouter} from "next/router";
 import {useState} from 'react';

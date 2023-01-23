@@ -6,7 +6,7 @@ import Row from "@components/Row";
 import {Genres, getRandomGenres} from "@enum/Genre";
 import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import AnimeService from "@util/consumet/AnimeService";
+import AnimeService from "@api/consumet/AnimeService";
 import Head from 'next/head'
 import {useRecoilValue} from "recoil";
 

@@ -1,7 +1,7 @@
 import {episodeState} from "@atoms/VideoPlayerAtom";
 import {QueueListIcon} from "@heroicons/react/24/outline";
 import {Episode} from "@interfaces/Episode";
-import {LOGGER} from "@util/Logger";
+import {LOGGER} from "@api/util/Logger";
 import Image from "next/image";
 import router from "next/router";
 import React, {useState} from 'react';

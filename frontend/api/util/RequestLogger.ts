@@ -1,5 +1,5 @@
-import {LOGGER} from "@util/Logger";
-import {StringBuilder} from "@util/StringBuilder";
+import {LOGGER} from "@api/util/Logger";
+import {StringBuilder} from "@api/util/StringBuilder";
 
 export default class RequestLogger {
     

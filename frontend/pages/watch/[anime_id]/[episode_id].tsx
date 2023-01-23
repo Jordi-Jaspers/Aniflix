@@ -3,7 +3,7 @@ import VideoControls from "@components/watch/controls/VideoControls";
 import {Anime} from "@interfaces/Anime";
 import {Episode} from "@interfaces/Episode";
 import {MediaSources} from "@interfaces/MediaSources";
-import AnimeService from "@util/consumet/AnimeService";
+import AnimeService from "@api/consumet/AnimeService";
 import React, {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
 

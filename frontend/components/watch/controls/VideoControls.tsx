@@ -9,7 +9,7 @@ import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import ChromeCastIcon from "@svg/ChromeCastIcon.svg";
 import Forward from "@svg/Forward.svg";
 import Rewind from "@svg/Rewind.svg";
-import {LOGGER} from "@util/Logger";
+import {LOGGER} from "@api/util/Logger";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from 'react';

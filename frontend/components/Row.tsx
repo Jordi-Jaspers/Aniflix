@@ -1,5 +1,5 @@
-import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
 import Thumbnail from "@components/Thumbnail";
+import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
 import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from '@interfaces/RecentEpisode';
 import {useRef} from 'react'
@@ -35,9 +35,9 @@ export default function Row({title, animes}: Props) {
                 </div>
                 <div className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-2.5 px-4 md:px-6 lg:px-12"
                      ref={rowRef}>
-                    {animes?.map((anime) => (
-                        <Thumbnail key={anime.id} anime={anime}/>
-                    ))}
+                    {animes.map((anime, index) => {
+                        if (index < 25) return (<Thumbnail key={anime.id} anime={anime}/>)
+                    })}
                 </div>
                 <div className={"arrowIcon right-0 bg-gradient-to-l"}>
                     <ChevronRightIcon className={"opacity-0 transition hover:scale-125 group-hover:opacity-100"}

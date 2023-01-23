@@ -1,7 +1,7 @@
 import {resolutionState, sourceState} from "@atoms/VideoPlayerAtom";
 import {AdjustmentsHorizontalIcon} from "@heroicons/react/24/outline";
 import {MediaSource} from "@interfaces/MediaSource";
-import {LOGGER} from "@util/Logger";
+import {LOGGER} from "@api/util/Logger";
 import React, {useState} from 'react';
 import {useRecoilState, useSetRecoilState} from "recoil";
 

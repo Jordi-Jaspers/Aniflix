@@ -8,7 +8,11 @@ services:
     networks:
       - aniflix
     ports:
-      - "3001:3000"
+      - 3001:3000
+    expose:
+      - 3000
+    volumes:
+      - ./data/consumet:/data
     environment:
       - REDIS_HOST=${CONSUMET_REDIS_HOST}
       - REDIS_PORT=${CONSUMET_REDIS_PORT}
@@ -19,12 +23,23 @@ services:
     networks:
       - aniflix
     ports:
-      - '6379:6379'
+      - 6379:6379
     expose:
-      - '6379'
+      - 6379
+    volumes:
+      - ./data/redis:/data
 
-volumes:
-  redis:
+  pocketbase:
+    image: augustodelg/pocketbase:latest
+    restart: unless-stopped
+    networks:
+      - aniflix
+    ports:
+      - 8090:8090
+    expose:
+      - 8090
+    volumes:
+      - ./data/pocketbase:/pb_data
 
 networks:
   aniflix:

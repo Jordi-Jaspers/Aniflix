@@ -8,7 +8,7 @@
       "@enum/*": ["./enum/*"],
       "@atoms/*": ["./atoms/*"],
       "@hooks/*": ["./hooks/*"],
-      "@util/*": ["./util/*"]
+      "@api/*": ["./api/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
