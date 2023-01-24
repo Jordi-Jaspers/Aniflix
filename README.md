@@ -51,12 +51,26 @@ Still need to share a link to the deployment
 - [x] Learn how to use the GoGoAnime API
 - [x] Learn how to use the GoGoAnime API V2
 - [x] Learn how to deploy a Next.js application to Vercel
-- [x] (Optional) Learn how to authentication.
 - [x] ...
 
 ## 🏁 Getting Started <a name = "getting-started"></a>
 
 add information here please.
+
+pocketbase stuff 
+
+Another great PocketBase feature is how easy and simple it is to backup and restore.
+
+To backup your application, it is usually enough to just copy the pb_data directory (for transactional safety make sure that the application is not running). Or alternatively, you could also use the sqlite3 .backup command on the database file.
+
+To restore, as you may have already guessed, you just have to do the opposite - upload the pb_data backup directory to your server and restart the application.
+
+email shit 
+
+By default, PocketBase uses the internal Unix sendmail command for sending emails.
+While it's OK for development, it's not very useful for production, because your emails most likely will get marked as spam or even fail to deliver.
+
+To avoid deliverability issues, consider using a local SMTP server or an external mail service like MailerSend, Sendinblue, SendGrid, Mailgun, AWS SES, etc.
 
 The ranges of Unicode characters which are routinely used for Chinese and Japanese text are:
 

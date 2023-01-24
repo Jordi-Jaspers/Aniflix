@@ -2,6 +2,7 @@ import BasicMenu from "@components/BasicMenu";
 import {BellIcon} from '@heroicons/react/24/outline';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/solid';
 import AniFlixLogo from "@icons/AniFlixLogo";
+import {pb} from "@pocketbase/PocketBase";
 import Image from "next/image";
 import Link from 'next/link'
 import {useEffect, useState} from 'react'

@@ -50,6 +50,7 @@
     "pocketbase": "^0.10.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.42.1",
     "react-input-slider": "^6.0.1",
     "react-player": "^2.11.0",
     "react-youtube": "^10.1.0",
