@@ -1,12 +1,13 @@
+import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import Banner from "@components/Banner";
 import Header from "@components/Header";
 import InfoScreen from "@components/InfoScreen";
 import Row from "@components/Row";
+import AnimeService from "@consumet/AnimeService";
 import {Genres, getRandomGenres} from "@enum/Genre";
 import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import AnimeService from "@consumet/AnimeService";
 import Head from 'next/head'
 import {useRecoilValue} from "recoil";
 
@@ -23,72 +24,68 @@ interface Props {
 }
 
 export default function Home({
-	 randomAnime,
-	 recentEpisodes,
-	 trendingAnime,
-	 popularAnime,
-	 genre1Anime,
-	 genre2Anime,
-	 genre3Anime,
-	 genre4Anime,
-	 randomGenres
- }: Props) {
+                                 randomAnime,
+                                 recentEpisodes,
+                                 trendingAnime,
+                                 popularAnime,
+                                 genre1Anime,
+                                 genre2Anime,
+                                 genre3Anime,
+                                 genre4Anime,
+                                 randomGenres
+                             }: Props) {
     const anime = useRecoilValue(animeState);
+    const showInfoScreen = useRecoilValue(infoScreenState)
+    const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
+    
     return (
-        <div className={"bg-[#141414] -z-100"}>
-            <div className={"h-screen relative bg-gradient overflow-scroll lg:h-[140vh] z-0"}>
-                {/*  TAB TITLE  */}
-                <Head>
-                    <title>Home | Aniflix</title>
-                </Head>
+        <div className={`relative h-[100%] bg-[#141414] z-0 ${showInfoScreen && '!h-screen overflow-hidden'}`}>
+            {/*  TAB TITLE  */}
+            <Head>
+                <title>{anime ? videoTitle : 'Home'} | Aniflix</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
+            
+            {/*  HEADER  */}
+            <Header/>
+            
+            <main className="lg:space-t-24 h-fit">
+                {/*  RANDOM ANIME BANNER */}
+                <Banner randomAnime={randomAnime}/>
                 
-                {/*  HEADER  */}
-                <Header/>
-                
-                <main className="lg:space-t-24 h-fit">
-                    {/*  RANDOM ANIME BANNER */}
-                    <Banner randomAnime={randomAnime}/>
+                <section className={"h-fit z-10"}>
+                    {/*  RECENTLY ADDED ANIME CAROUSEL */}
+                    <Row title="Recently Added" animes={recentEpisodes}/>
                     
-                    <section>
-                        <div className={"bg-gradient-to-b from-transparent via-black to-[#141414]"}>
-                            <div className={"pt-[7.5%]"}>
-                                {/*  RECENTLY ADDED ANIME CAROUSEL */}
-                                <Row title="Recently Added" animes={recentEpisodes}/>
-                            </div>
-                        </div>
-                        
-                        <div className={"h-fit"}>
-                            {/*  TRENDING ANIME CAROUSEL */}
-                            <Row title="Trending" animes={trendingAnime}/>
-                            
-                            {/*  POPULAR ANIME CAROUSEL */}
-                            <Row title="Popular" animes={popularAnime}/>
-                            
-                            {/*  GENRE 1 ANIME CAROUSEL */}
-                            <Row title={randomGenres[0]} animes={genre1Anime}/>
-                            
-                            {/*  GENRE 2 ANIME CAROUSEL */}
-                            <Row title={randomGenres[1]} animes={genre2Anime}/>
-                            
-                            {/*  GENRE 3 ANIME CAROUSEL */}
-                            <Row title={randomGenres[2]} animes={genre3Anime}/>
-                            
-                            {/*  GENRE 4 ANIME CAROUSEL */}
-                            <Row title={randomGenres[3]} animes={genre4Anime}/>
-                        </div>
-                    </section>
-                </main>
-                
-                {/*  ANIME INFO SCREEN */}
-                {anime && <InfoScreen/>}
-                
-                {/* FOOTER */}
-                <footer className={"flex flex-row items-center justify-center p-8 w-full"}>
-                    <a className={"font-poppins text-[#d1d1d1]"} href={"https://github.com/Jordi-Jaspers"}>
-                        © Designed and built by Jordi Jaspers
-                    </a>
-                </footer>
-            </div>
+                    {/*  TRENDING ANIME CAROUSEL */}
+                    <Row title="Trending" animes={trendingAnime}/>
+                    
+                    {/*  POPULAR ANIME CAROUSEL */}
+                    <Row title="Popular" animes={popularAnime}/>
+                    
+                    {/*  GENRE 1 ANIME CAROUSEL */}
+                    <Row title={randomGenres[0]} animes={genre1Anime}/>
+                    
+                    {/*  GENRE 2 ANIME CAROUSEL */}
+                    <Row title={randomGenres[1]} animes={genre2Anime}/>
+                    
+                    {/*  GENRE 3 ANIME CAROUSEL */}
+                    <Row title={randomGenres[2]} animes={genre3Anime}/>
+                    
+                    {/*  GENRE 4 ANIME CAROUSEL */}
+                    <Row title={randomGenres[3]} animes={genre4Anime}/>
+                </section>
+            </main>
+            
+            {/*  ANIME INFO SCREEN */}
+            {showInfoScreen && <InfoScreen/>}
+            
+            {/* FOOTER */}
+            <footer className={"flex flex-row items-center justify-center p-8 w-full"}>
+                <a className={"font-poppins text-[#d1d1d1]"} href={"https://github.com/Jordi-Jaspers"}>
+                    © Designed and built by Jordi Jaspers
+                </a>
+            </footer>
         </div>
     )
 }

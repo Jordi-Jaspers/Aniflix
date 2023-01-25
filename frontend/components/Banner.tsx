@@ -1,9 +1,9 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
+import AnimeService from "@consumet/AnimeService";
 import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import AnimeService from "@consumet/AnimeService";
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
@@ -86,21 +86,21 @@ export default function Banner({randomAnime}: Props) {
     }
     
     return (
-        <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
-            <div className={"absolute h-[65vw] sm:h-[60vw] lg:h-[45vw] w-full top-0 left-0"}>
+        <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] h-[40vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
+            <div className={"absolute aspect-video h-[100vw] max-h-[70%] w-full top-0 left-0"}>
                 <Image
                     src={randomAnime.cover}
                     alt={randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english}
                     height={2160}
                     width={3840}
-                    className={`${!isPlaying || isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
+                    className={`${!isPlaying || isError ? "brightness-75 absolute max-h-[56.25%] h-full w-full object-cover !-z-20" : "hidden"}`}
                     priority
                 />
                 
                 {randomAnime?.trailer?.id && (
                     <YouTube
                         videoId={randomAnime.trailer.id}
-                        className={`${isPlaying && !isError ? "brightness-75 absolute h-[90%] w-full object-cover -z-10" : "hidden"}`}
+                        className={`${isPlaying && !isError ? "brightness-75 absolute max-h-[56.25%] h-full w-full object-cover !-z-20" : "hidden"}`}
                         opts={opts}
                         onReady={onReady}
                         onError={onError}
@@ -108,43 +108,46 @@ export default function Banner({randomAnime}: Props) {
                         onPlay={onPlay}
                     />
                 )}
+                <div className={"-z-10 w-full mt-[30%] h-[30%] bg-gradient-to-b from-transparent via-black to-[#141414]"}/>
             </div>
             
-            <div className={"pt-[7.5vh] md:pt-[12.5vh] xl:pt-[15vh] 2xl:pt-[20vh] flex flex-col space-y-2 justify-between"}>
-                {videoTitle.length > 40
-                    ?
-                    <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.0vw]">{videoTitle}</h1>
-                    :
-                    <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.5vw]">{videoTitle}</h1>
-                }
-                <p className="font-poppins text-[#fefefe] text-shadow-md max-w-xs text-[1.75vw] md:text-[1.2vw] md:max-w-lg lg:max-w-xl">
-                    {(randomAnime.description.length > 350)
-                        ? randomAnime.description.replace(/<[^>]*>?/gm, '').substring(0, 350) + "..."
-                        : randomAnime.description.replace(/<[^>]*>?/gm, '')
+            <div className={"z-10 h-full space-y-4 flex flex-col justify-end pb-[5%]"}>
+                <div className={"flex flex-col space-y-2 justify-between"}>
+                    {videoTitle.length > 40
+                        ?
+                        <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.0vw]">{videoTitle}</h1>
+                        :
+                        <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.5vw]">{videoTitle}</h1>
                     }
-                </p>
-            </div>
-            
-            <div className="flex flex-row justify-between w-full">
-                <div className="flex space-x-3">
-                    <button className="bannerButton rounded bg-white text-black">
-                        <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
-                    </button>
-                    
-                    <button className="bannerButton bg-[#4f4f50] opacity-75 text-white"
-                            onClick={handleInfoScreen}>
-                        <InformationCircleIcon className="h-4 w-4 md:h-6 md:w-6"/> More Information
-                    </button>
-                </div>
-                <div className="flex space-x-3">
-                    <button
-                        className={`${isPlaying ? "items-center rounded-full p-2 bg-[#4f4f50] text-white opacity-50 hover:opacity-100 z-20" : "hidden"}`}
-                        onClick={toggleMute}>
-                        {isMuted
-                            ? <SpeakerXMarkIcon className="h-4 w-4 md:h-6 md:w-6"/>
-                            : <SpeakerWaveIcon className="h-4 w-4 md:h-6 md:w-6"/>
+                    <p className="font-poppins text-[#fefefe] text-shadow-md max-w-xs text-[1.75vw] md:text-[1.2vw] md:max-w-lg lg:max-w-xl">
+                        {(randomAnime.description.length > 350)
+                            ? randomAnime.description.replace(/<[^>]*>?/gm, '').substring(0, 350) + "..."
+                            : randomAnime.description.replace(/<[^>]*>?/gm, '')
                         }
-                    </button>
+                    </p>
+                </div>
+                
+                <div className="z-10 flex flex-row justify-between w-full">
+                    <div className="flex space-x-3">
+                        <button className="bannerButton rounded bg-white text-black">
+                            <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
+                        </button>
+                        
+                        <button className="bannerButton bg-[#4f4f50] opacity-75 text-white"
+                                onClick={handleInfoScreen}>
+                            <InformationCircleIcon className="h-4 w-4 md:h-6 md:w-6"/> More Information
+                        </button>
+                    </div>
+                    <div className="flex space-x-3">
+                        <button
+                            className={`${isPlaying ? "items-center rounded-full p-2 bg-[#4f4f50] text-white opacity-50 hover:opacity-100 z-20" : "hidden"}`}
+                            onClick={toggleMute}>
+                            {isMuted
+                                ? <SpeakerXMarkIcon className="h-4 w-4 md:h-6 md:w-6"/>
+                                : <SpeakerWaveIcon className="h-4 w-4 md:h-6 md:w-6"/>
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
