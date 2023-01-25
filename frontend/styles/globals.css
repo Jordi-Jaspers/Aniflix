@@ -39,4 +39,44 @@
     .videoPlayerControls {
         @apply flex items-center text-white h-10 w-10 cursor-pointer hover:scale-125 transition;
     }
+
+    .link-underline {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#64ffda, #64ffda);
+        background-size: 0 1px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .5s ease-in-out;
+    }
+
+    .link-underline-black {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#64ffda, #64ffda)
+    }
+
+    .link-underline:hover {
+        background-size: 100% 1px;
+        background-position: 0 100%
+    }
+
+    .link-underline-dark {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fca311, #fca311);
+        background-size: 0 1px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .5s ease-in-out;
+    }
+
+    .link-underline-dark:hover {
+        background-size: 100% 1px;
+        background-position: 0 100%
+    }
+
+    .link-underline-black-dark {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fca311, #fca311)
+    }
+
+    .interactive-underline {
+        @apply link-underline-dark link-underline-black-dark
+    }
 }

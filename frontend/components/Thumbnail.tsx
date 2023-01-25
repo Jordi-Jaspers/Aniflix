@@ -69,8 +69,9 @@ export default function Thumbnail({anime}: Props) {
             <Image
                 src={anime.image}
                 alt={videoTitle()}
-                className="relative rounded-sm object-cover md:rounded"
+                className="absolute rounded-sm object-cover md:rounded"
                 fill={true}
+                style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
                 sizes="(max-width: 768px) 100vw, 50vw"
             />
         </div>

@@ -1,5 +1,4 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
-import {animeState} from "@atoms/VideoPlayerAtom";
 import Banner from "@components/Banner";
 import Header from "@components/Header";
 import InfoScreen from "@components/InfoScreen";
@@ -24,25 +23,22 @@ interface Props {
 }
 
 export default function Home({
-                                 randomAnime,
-                                 recentEpisodes,
-                                 trendingAnime,
-                                 popularAnime,
-                                 genre1Anime,
-                                 genre2Anime,
-                                 genre3Anime,
-                                 genre4Anime,
-                                 randomGenres
-                             }: Props) {
-    const anime = useRecoilValue(animeState);
+    randomAnime,
+    recentEpisodes,
+    trendingAnime,
+    popularAnime,
+    genre1Anime,
+    genre2Anime,
+    genre3Anime,
+    genre4Anime,
+    randomGenres
+}: Props) {
     const showInfoScreen = useRecoilValue(infoScreenState)
-    const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
-    
     return (
         <div className={`relative h-[100%] bg-[#141414] z-0 ${showInfoScreen && '!h-screen overflow-hidden'}`}>
             {/*  TAB TITLE  */}
             <Head>
-                <title>{anime ? videoTitle : 'Home'} | Aniflix</title>
+                <title> Home | Aniflix</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             
