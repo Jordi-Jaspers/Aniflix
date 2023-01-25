@@ -1,8 +1,7 @@
 import AniFlixLogo from "@icons/AniFlixLogo";
 import {pb} from "@pocketbase/PocketBase";
 import {LOGGER} from "@util/Logger";
-import router from "next/router";
-import React, {useEffect} from "react";
+import React from "react";
 import {useForm} from "react-hook-form";
 
 export default function Login() {
@@ -17,7 +16,7 @@ export default function Login() {
             LOGGER.error("[LOGIN PAGE] Failed to login user '" + data.email + "'", e);
         }
         setIsLoading(false);
-        LOGGER.debug("[LOGIN PAGE] Login successful: " + pb.authStore.isValid);
+        LOGGER.info("[LOGIN PAGE] Login successful for user: " + data.email);
     }
     
     return (
