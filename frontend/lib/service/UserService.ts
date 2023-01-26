@@ -3,7 +3,6 @@ import {pb} from "@pocketbase/PocketBase";
 import {LOGGER} from "@util/Logger";
 import router from "next/router";
 
-
 export default class UserService {
     
     static isAuthenticated(): boolean {
@@ -13,7 +12,9 @@ export default class UserService {
     static isAuthorized(path: string): boolean {
         LOGGER.debug("[UserService] Verifying if the user is authorized to access: '%s'", path)
         const rootPath = path.split('?')[0];
-        return this.isAuthenticated() || publicPaths.includes(rootPath)
+        const isValid: boolean = this.isAuthenticated() || publicPaths.includes(rootPath)
+        LOGGER.debug("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email , isValid)
+        return isValid
     }
     
     static async signIn(email: string, password: string): Promise<boolean> {

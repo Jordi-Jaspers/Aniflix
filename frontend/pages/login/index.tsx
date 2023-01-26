@@ -2,10 +2,9 @@ import ErrorAlert from "@components/alerts/ErrorAlert";
 import AniFlixLogo from "@icons/AniFlixLogo";
 import GithubSignIn from "@icons/GithubSignIn";
 import GoogleSignIn from "@icons/GoogleSignIn";
+import LoginBackground from "@images/aniflix-login.png";
 import UserService from "@service/UserService";
 import Image from "next/image";
-import LoginBackground from "@images/aniflix-login.png";
-import router from "next/router";
 import React from "react";
 import {useForm} from "react-hook-form";
 
@@ -22,12 +21,11 @@ export default function Login() {
     
     return (
         <div className={"h-full w-full max-w-[550px] mx-auto flex justify-center items-center"}>
-            <div className={"absolute object-fill top-0 left-0 h-full w-full brightness-75 -z-10"}>
+            <div className={"absolute object-contain top-0 left-0 h-full w-full brightness-75 -z-10"}>
                 <Image
                     src={LoginBackground}
                     alt={"Login Background"}
-                    height={20000}
-                    width={20000}
+                    fill={true}
                 />
             </div>
             
@@ -49,7 +47,7 @@ export default function Login() {
                                            autoComplete={"password"} spellCheck={false}
                                            {...register("password", {required: true})}/>
                                 </div>
-                                { isError && <ErrorAlert message={"Incorrect email address or password."}/>}
+                                <ErrorAlert message={"Incorrect email address or password."} show={isError}/>
                                 <button
                                     className={"py-4 px-4 max-w-md flex justify-center items-center bg-red-600 hover:bg-red-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"}
                                     type={"submit"} disabled={isLoading}>
@@ -75,7 +73,8 @@ export default function Login() {
                                 <GoogleSignIn/>
                                 <GithubSignIn/>
                                 <div className={"flex flex-row items-center space-x-4 pt-10"}>
-                                    <a className={"text-[#717171] font-poppins text-xs interactive-underline"} href={"https://github.com/Jordi-Jaspers"}>
+                                    <a className={"text-[#717171] font-poppins text-xs interactive-underline"}
+                                       href={"https://github.com/Jordi-Jaspers"}>
                                         © Designed and built by Jordi Jaspers
                                     </a>
                                 </div>
