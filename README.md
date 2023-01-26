@@ -100,23 +100,23 @@ docker run -p 3001:3000 --name aniflix-consumet-api -d riimuru/consumet-api:late
 
 ```
 
+docker shite 
+
 ```dotenv
 #frontend
-NEXT_PUBLIC_CONSUMET_BASE_URL=
+NEXT_PUBLIC_CONSUMET_BASE_URL=...
 
 # Consumet Api
-REDIS_HOST=
-REDIS_PORT=
+CONSUMET_REDIS_HOST=...
+CONSUMET_REDIS_PORT=...
+```
 
-# postgresql
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
+frontend shite 
 
-# Redis
-REDIS_USERNAME=
-REDIS_PASSWORD=
-
+```dotenv
+#frontend
+NEXT_PUBLIC_CONSUMET_BASE_URL=...
+NEXT_PUBLIC_POCKETBASE_URL=...
 ```
 
 Configure the following env variables
