@@ -44,7 +44,7 @@
     "@types/react-dom": "18.0.10",
     "@typescript-eslint/parser": "^5.48.1",
     "eslint": "8.32.0",
-    "eslint-config-next": "13.1.5",
+    "eslint-config-next": "13.1.6",
     "hls.js": "^1.3.0",
     "next": "13.1.5",
     "pocketbase": "^0.10.1",
