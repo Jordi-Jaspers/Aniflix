@@ -9,10 +9,6 @@ import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
 import {useRecoilState, useSetRecoilState} from "recoil";
 
-interface Props {
-    randomAnime: Anime
-}
-
 const opts = {
     height: '100%',
     width: '100%',
@@ -25,7 +21,11 @@ const opts = {
     },
 };
 
-export default function Banner({randomAnime}: Props) {
+interface Props {
+    anime: Anime
+}
+
+export default function Banner({anime}: Props) {
     // Atoms which can be accessed by any component.
     const [showInfoScreen, setShowInfoScreen] = useRecoilState(infoScreenState)
     const setClickedAnime = useSetRecoilState(animeState)
@@ -36,7 +36,7 @@ export default function Banner({randomAnime}: Props) {
     const [isError, setIsError] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     
-    const videoTitle: string = randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english
+    const videoTitle: string = anime.title.romaji ? anime.title.romaji : anime.title.english
     
     useEffect(() => {
         if (showInfoScreen && isPlaying) {
@@ -72,11 +72,11 @@ export default function Banner({randomAnime}: Props) {
     }
     
     const handleInfoScreen = async () => {
-        if (randomAnime.hasOwnProperty('id')) {
-            const id: string = randomAnime.id.toString();
-            if (hasAllAnimeProperties(randomAnime)) {
+        if (anime.hasOwnProperty('id')) {
+            const id: string = anime.id.toString();
+            if (hasAllAnimeProperties(anime)) {
                 setShowInfoScreen(true)
-                setClickedAnime(randomAnime)
+                setClickedAnime(anime)
             } else {
                 const details: Anime = await AnimeService.getAnimeDetails(id)
                 setShowInfoScreen(true)
@@ -87,20 +87,20 @@ export default function Banner({randomAnime}: Props) {
     
     return (
         <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] h-[40vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
-            <div className={"absolute aspect-video h-[100vw] max-h-[70%] w-full top-0 left-0"}>
+            <div className={"absolute aspect-video min-h-[112.25vw] w-full top-0 left-0"}>
                 <Image
-                    src={randomAnime.cover}
-                    alt={randomAnime.title.romaji ? randomAnime.title.romaji : randomAnime.title.english}
+                    src={anime.cover}
+                    alt={videoTitle}
                     height={2160}
                     width={3840}
-                    className={`${!isPlaying || isError ? "brightness-75 absolute max-h-[56.25%] h-full w-full object-cover !-z-20" : "hidden"}`}
+                    className={`${!isPlaying || isError ? "brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
                     priority
                 />
                 
-                {randomAnime?.trailer?.id && (
+                {anime?.trailer?.id && (
                     <YouTube
-                        videoId={randomAnime.trailer.id}
-                        className={`${isPlaying && !isError ? "brightness-75 absolute max-h-[56.25%] h-full w-full object-cover !-z-20" : "hidden"}`}
+                        videoId={anime.trailer.id}
+                        className={`${isPlaying && !isError ? "brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
                         opts={opts}
                         onReady={onReady}
                         onError={onError}
@@ -108,7 +108,7 @@ export default function Banner({randomAnime}: Props) {
                         onPlay={onPlay}
                     />
                 )}
-                <div className={"-z-10 w-full mt-[30%] h-[30%] bg-gradient-to-b from-transparent via-black to-[#141414]"}/>
+                <div className={"relative z-[-10] w-full mt-[30%] h-[30%] bg-gradient-to-b from-transparent via-black to-[#141414]"}/>
             </div>
             
             <div className={"z-10 h-full space-y-4 flex flex-col justify-end pb-[5%]"}>
@@ -119,12 +119,12 @@ export default function Banner({randomAnime}: Props) {
                         :
                         <h1 className="font-poppins font-bold text-[#fefefe] max-w-[50%] leading-none text-[3.5vw]">{videoTitle}</h1>
                     }
-                    <p className="font-poppins text-[#fefefe] text-shadow-md max-w-xs text-[1.75vw] md:text-[1.2vw] md:max-w-lg lg:max-w-xl">
-                        {(randomAnime.description.length > 350)
-                            ? randomAnime.description.replace(/<[^>]*>?/gm, '').substring(0, 350) + "..."
-                            : randomAnime.description.replace(/<[^>]*>?/gm, '')
+                    <div className="font-poppins text-[#fefefe] md:text-[1.2vw] text-shadow-md max-w-xs md:max-w-lg lg:max-w-xl">
+                        {(anime.description.length > 350)
+                            ? (<p className={"text-[1.2vw]"}>{anime.description.replace(/<[^>]*>?/gm, '')}</p>)
+                            : (<p className={"text-[1.75vw]"}>{anime.description.replace(/<[^>]*>?/gm, '')}</p>)
                         }
-                    </p>
+                    </div>
                 </div>
                 
                 <div className="z-10 flex flex-row justify-between w-full">
@@ -133,14 +133,14 @@ export default function Banner({randomAnime}: Props) {
                             <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
                         </button>
                         
-                        <button className="bannerButton bg-[#4f4f50] opacity-75 text-white"
+                        <button className="bannerButton bg-[#4f4f50] opacity-75 text-white hover:opacity-100"
                                 onClick={handleInfoScreen}>
                             <InformationCircleIcon className="h-4 w-4 md:h-6 md:w-6"/> More Information
                         </button>
                     </div>
                     <div className="flex space-x-3">
                         <button
-                            className={`${isPlaying ? "items-center rounded-full p-2 bg-[#4f4f50] text-white opacity-50 hover:opacity-100 z-20" : "hidden"}`}
+                            className={`${isPlaying ? "items-center border-2 border-[gray] hover:border-white rounded-full p-2 bg-[#4f4f50] text-white opacity-50 hover:opacity-100 z-20" : "hidden"}`}
                             onClick={toggleMute}>
                             {isMuted
                                 ? <SpeakerXMarkIcon className="h-4 w-4 md:h-6 md:w-6"/>

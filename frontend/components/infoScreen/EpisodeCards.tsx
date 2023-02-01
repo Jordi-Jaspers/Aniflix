@@ -1,4 +1,4 @@
-import EpisodeCard from "@components/EpisodeCard";
+import EpisodeCard from "@components/infoScreen/EpisodeCard";
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
 import {Episode} from "@interfaces/Episode";
 import React, {useState} from "react";

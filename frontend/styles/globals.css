@@ -9,7 +9,11 @@
     }
 
     .headerLink {
-        @apply cursor-pointer w-max text-sm font-poppins text-[#d1d1d1] transition duration-[.4s] hover:text-[#b3b3b3] self-center items-center;
+        @apply cursor-pointer w-max text-xs lg:text-sm font-poppins text-[#d1d1d1] transition duration-[.4s] hover:text-[#b3b3b3] self-center items-center hidden md:block;
+    }
+
+    .headerLinkActive {
+        @apply cursor-default font-semibold text-white hover:text-white block;
     }
 
     .bannerButton {

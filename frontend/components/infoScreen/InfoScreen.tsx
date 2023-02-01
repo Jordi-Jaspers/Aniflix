@@ -1,8 +1,8 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
-import EpisodeCards from "@components/EpisodeCards";
-import MetaInformation from "@components/MetaInformation";
-import RecommendationCards from "@components/RecommendationCards";
+import EpisodeCards from "@components/infoScreen/EpisodeCards";
+import MetaInformation from "@components/infoScreen/MetaInformation";
+import RecommendationCards from "@components/infoScreen/RecommendationCards";
 import {SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline';
 import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";

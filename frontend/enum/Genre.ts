@@ -17,6 +17,11 @@ export enum Genres {
     Thriller = "Thriller"
 }
 
+export const getRandomGenre = () => {
+    const genres = Object.values(Genres)
+    return genres[Math.floor(Math.random() * genres.length)]
+}
+
 // create a function which will select 4 random genres from the enum Genres without duplicates and return them as an array.
 export const getRandomGenres = (amount: number) => {
     const genres = Object.values(Genres)

@@ -1,3 +1,4 @@
+import {Genres, getRandomGenre} from "@enum/Genre";
 import {Anime} from "@interfaces/Anime";
 import {Episode} from "@interfaces/Episode";
 import {MediaSources} from "@interfaces/MediaSources";
@@ -25,9 +26,10 @@ export default class AnimeService {
      * @param results   The number of results to return.
      * @param page      The page to return.
      */
-    static async getAnimeByGenre(genre: string, results: number = 25, page: number = 1): Promise<Anime[]> {
+    static async getAnimeByGenre(genre?: string, results: number = 25, page: number = 1): Promise<Anime[]> {
+        const requestedGenre = genre ? genre : getRandomGenre();
         const request = ConsumetEndpoints.ANIME_BY_GENRE
-            .replace("{genre}", genre)
+            .replace("{genre}", requestedGenre)
             .replace("{page}", page.toString())
             .replace("{results}", results.toString());
     
@@ -127,6 +129,24 @@ export default class AnimeService {
         RequestLogger.log(request, {});
         const mediaSources: MediaSources = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
         return [anime, requestedEpisode, mediaSources];
+    }
+    
+    /**
+     * Searches for an anime by its name and apply any filters.
+     *
+     * @param name      The name of the anime.
+     * @param filters   The filters to apply.
+     */
+    static async searchAnime(name: string, filters?: Map<string, string>): Promise<Anime[]> {
+        const request = ConsumetEndpoints.ADVANCED_SEARCH.concat(`?query=${name}&perPage=100`);
+        if (filters) {
+            filters.forEach((value: string, key: string) => {
+                request.concat(`&${key}=${value}`);
+            });
+        }
+        RequestLogger.log(request, {});
+        const response: Page<Anime> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        return response.results;
     }
 }
 

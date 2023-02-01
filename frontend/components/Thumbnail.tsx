@@ -11,9 +11,10 @@ import {useSetRecoilState} from 'recoil'
 
 interface Props {
     anime: Anime | RecentEpisode;
+    priority?: boolean;
 }
 
-export default function Thumbnail({anime}: Props) {
+export default function Thumbnail({anime, priority}: Props) {
     const router = useRouter()
     const setShowInfoScreen = useSetRecoilState(infoScreenState)
     const setCurrentAnime = useSetRecoilState(animeState)
@@ -61,10 +62,10 @@ export default function Thumbnail({anime}: Props) {
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent z-20"/>
             <div className="relative flex flex-col justify-between items-end p-2 w-full h-full justify-center z-20">
                 <div
-                    className={`${isShown ? "opacity-80" : "opacity-30"} transition duration-300 w-fit min-w-[2rem] min-h-[1rem] rounded py-0.5 px-1.5 border-[#ce111c] bg-[#ce111c]`}>
+                    className={`${isShown ? "opacity-80" : "opacity-0"} transition duration-300 w-fit min-w-[2rem] min-h-[1rem] rounded py-0.5 px-1.5 border-[#ce111c] bg-[#ce111c]`}>
                     <p className={`font-poppins leading-none justify-center text-sm text-[#e5e5e5] text-shadow font-bold text-center`}>{rating()}</p>
                 </div>
-                <p className="font-poppins w-full leading-none text-sm text-[#e5e5e5] font-bold">{videoTitle()}</p>
+                <p className="font-poppins w-full leading-none text-xs md:text-sm text-[#e5e5e5] font-bold">{videoTitle()}</p>
             </div>
             <Image
                 src={anime.image}
@@ -73,6 +74,7 @@ export default function Thumbnail({anime}: Props) {
                 fill={true}
                 style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority={priority}
             />
         </div>
     )

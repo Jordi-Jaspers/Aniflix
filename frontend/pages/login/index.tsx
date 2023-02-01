@@ -38,13 +38,13 @@ export default function Login() {
                                 <div className={"w-full h-fit bg-[#333333] rounded-md py-2 px-6 flex flex-col mb-4"}>
                                     <label className={"text-[#717171] font-poppins text-xs"}>Email Address</label>
                                     <input className={"text-white bg-transparent font-poppins pb-[0.25] h-6"} type={"email"}
-                                           autoComplete={"email"} spellCheck={false}
+                                           autoComplete={"email"} spellCheck={false} required
                                            {...register("email", {required: true})}/>
                                 </div>
                                 <div className={"w-full h-fit bg-[#333333] rounded-md py-2 px-6 flex flex-col mb-4"}>
                                     <label className={"text-[#717171] font-poppins text-xs"}>Password</label>
                                     <input className={"text-white font-poppins bg-transparent pb-[0.25] h-6"} type={"password"}
-                                           autoComplete={"password"} spellCheck={false}
+                                           autoComplete={"password"} spellCheck={false} required
                                            {...register("password", {required: true})}/>
                                 </div>
                                 <ErrorAlert message={"Incorrect email address or password."} show={isError}/>
