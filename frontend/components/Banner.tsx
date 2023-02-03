@@ -37,6 +37,7 @@ export default function Banner({anime}: Props) {
     const [isPlaying, setIsPlaying] = useState(false)
     
     const videoTitle: string = anime.title.romaji ? anime.title.romaji : anime.title.english
+    const description: string = (anime.description.length > 500) ? anime.description.substring(0, 500) + '...' : anime.description
     
     useEffect(() => {
         if (showInfoScreen && isPlaying) {
@@ -93,14 +94,14 @@ export default function Banner({anime}: Props) {
                     alt={videoTitle}
                     height={2160}
                     width={3840}
-                    className={`${!isPlaying || isError ? "brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
+                    className={`${!isPlaying || isError ? "banner-img-gradient brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
                     priority
                 />
                 
                 {anime?.trailer?.id && (
                     <YouTube
                         videoId={anime.trailer.id}
-                        className={`${isPlaying && !isError ? "brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
+                        className={`${isPlaying && !isError ? "banner-img-gradient brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
                         opts={opts}
                         onReady={onReady}
                         onError={onError}
@@ -108,7 +109,7 @@ export default function Banner({anime}: Props) {
                         onPlay={onPlay}
                     />
                 )}
-                <div className={"relative z-[-10] w-full mt-[30%] h-[30%] bg-gradient-to-b from-transparent via-black to-[#141414]"}/>
+                {/*<div className={"relative z-[-10] w-full mt-[30%] h-[30%] img"}/>*/}
             </div>
             
             <div className={"z-10 h-full space-y-4 flex flex-col justify-end pb-[5%]"}>
@@ -121,8 +122,8 @@ export default function Banner({anime}: Props) {
                     }
                     <div className="font-poppins text-[#fefefe] md:text-[1.2vw] text-shadow-md max-w-xs md:max-w-lg lg:max-w-xl">
                         {(anime.description.length > 350)
-                            ? (<p className={"text-[1.2vw]"}>{anime.description.replace(/<[^>]*>?/gm, '')}</p>)
-                            : (<p className={"text-[1.75vw]"}>{anime.description.replace(/<[^>]*>?/gm, '')}</p>)
+                            ? (<p className={"text-[1.2vw]"}>{description.replace(/<[^>]*>?/gm, '')}</p>)
+                            : (<p className={"text-[1.75vw]"}>{description.replace(/<[^>]*>?/gm, '')}</p>)
                         }
                     </div>
                 </div>

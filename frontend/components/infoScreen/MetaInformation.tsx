@@ -10,7 +10,7 @@ export default function MetaInformation({className, anime}: Props) {
     return (
         <>
             {anime && (
-                <div className={className ? className : ""}>
+                <div className={`${className} pb-8`}>
                     <h4 className={"infoScreenTitle"}>About {anime.title.romaji ? anime.title.romaji : anime.title.english}</h4>
                     
                     {/* Characters: */}

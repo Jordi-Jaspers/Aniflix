@@ -29,7 +29,8 @@ export default function Row({title, request, genre, priority}: Props) {
     
     return (
         <div className="h-fit pt-[2.5%] space-y-0.5 md:space-y-2">
-            <h2 suppressHydrationWarning className="pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 font-poppins w-fit cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
+            <h2 suppressHydrationWarning
+                className="pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 font-poppins w-fit cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
                 {title}
             </h2>
             <div className="group relative md:-ml-2">

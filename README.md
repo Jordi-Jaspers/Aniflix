@@ -57,6 +57,9 @@ Still need to share a link to the deployment
 
 add information here please.
 
+collors:     // #1a1920
+// #1E1E25
+
 pocketbase stuff 
 
 Another great PocketBase feature is how easy and simple it is to backup and restore.

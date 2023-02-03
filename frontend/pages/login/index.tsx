@@ -21,11 +21,14 @@ export default function Login() {
     
     return (
         <div className={"h-full w-full max-w-[550px] mx-auto flex justify-center items-center"}>
-            <div className={"absolute object-contain top-0 left-0 h-full w-full brightness-75 -z-10"}>
+            <div className={"absolute top-0 left-0 w-full h-full brightness-75 -z-10"}>
                 <Image
                     src={LoginBackground}
                     alt={"Login Background"}
-                    fill={true}
+                    width={7680}
+                    height={4320}
+                    className={"min-h-screen h-full object-cover overflow-hidden"}
+                    priority
                 />
             </div>
             
@@ -41,7 +44,7 @@ export default function Login() {
                                            autoComplete={"email"} spellCheck={false} required
                                            {...register("email", {required: true})}/>
                                 </div>
-                                <div className={"w-full h-fit bg-[#333333] rounded-md py-2 px-6 flex flex-col mb-4"}>
+                                <div className={"w-full h-fit bg-[#333333] rounded-md py-2 px-6 flex flex-col mb-2 "}>
                                     <label className={"text-[#717171] font-poppins text-xs"}>Password</label>
                                     <input className={"text-white font-poppins bg-transparent pb-[0.25] h-6"} type={"password"}
                                            autoComplete={"password"} spellCheck={false} required
@@ -49,7 +52,7 @@ export default function Login() {
                                 </div>
                                 <ErrorAlert message={"Incorrect email address or password."} show={isError}/>
                                 <button
-                                    className={"py-4 px-4 max-w-md flex justify-center items-center bg-red-600 hover:bg-red-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"}
+                                    className={"py-4 px-4 mt-2 max-w-md flex justify-center items-center bg-red-600 hover:bg-red-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"}
                                     type={"submit"} disabled={isLoading}>
                                     {isLoading ? (
                                         <div className={"py-2 px-4 flex space-x-1 justify-center items-center"}>

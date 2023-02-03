@@ -25,7 +25,7 @@ export default function EpisodeCard({episode}: Props) {
     
     return (
         <div className={"flex justify-center"} onClick={() => handleClickedEpisode()}>
-            <div className={"border-y-[1px] border-[#404040] min-h-[6em] rounded w-full flex px-6 py-8 cursor-pointer hover:bg-[#333]"}>
+            <div className={"border-y-[1px] border-[#404040] min-h-[6em] rounded w-full flex px-6 py-8 cursor-pointer hover:bg-[#1E1E25]"}>
                 <div className={"text-[#d2d2d2] text-2xl min-w-fit h-fit font-poppins text-center self-center pr-6"}>
                     {episode?.number}
                 </div>

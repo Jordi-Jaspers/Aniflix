@@ -26,7 +26,7 @@ const SearchBar = () => {
     }
     
     useEffect(() => {
-        if (isExpanded) {
+        if (!isExpanded) {
             setSearchTerm("");
         }
     }, [isExpanded]);

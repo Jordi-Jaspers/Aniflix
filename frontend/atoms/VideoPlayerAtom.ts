@@ -69,7 +69,7 @@ export const isPlayingState = atom<boolean>({
  */
 export const resolutionState = atom<string>({
     key: 'resolutionState',
-    default: 'default'
+    default: '1080p'
 })
 
 /**

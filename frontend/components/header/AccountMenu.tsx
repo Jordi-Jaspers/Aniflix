@@ -1,11 +1,9 @@
 import {ArrowLeftOnRectangleIcon, CogIcon, QuestionMarkCircleIcon, UserIcon} from "@heroicons/react/24/outline";
 import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useUserInformation} from "@hooks/useUserInformation";
-import AniFlixLogo from "@icons/AniFlixLogo";
 import UserService from "@service/UserService";
 import Image from "next/image";
 import Link from "next/link";
-import {useRouter} from "next/router";
 import React, {useState} from 'react'
 
 export default function AccountMenu() {

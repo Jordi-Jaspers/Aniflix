@@ -5,14 +5,13 @@ import React, {useEffect, useState} from 'react';
 import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
-    className?: string;
     controls?: boolean;
     loop?: boolean;
     innerRef: React.RefObject<HTMLVideoElement>;
 }
 
 const NATIVE_HLS: string = 'application/vnd.apple.mpegurl';
-export default function VideoPlayer({className, controls, loop, innerRef}: Props) {
+export default function VideoPlayer({controls, loop, innerRef}: Props) {
     const [videoPlayer, setVideoPlayer] = useState<HTMLVideoElement | null>(null);
     const {isPlaying, streamingLinks, resolution, source} = useRecoilValue(videoPlayerState);
     const setCurrentTime = useSetRecoilState(currentTimeState);
@@ -52,8 +51,8 @@ export default function VideoPlayer({className, controls, loop, innerRef}: Props
     }, [videoPlayer, resolution, source]);
     
     return (
-        <div className={`${className} w-full h-full`}>
-            <div className={`absolute top-0 bottom-0 my-auto w-screen`}>
+        <div className={`w-full h-full`}>
+            <div className={`absolute top-0 bottom-0 my-auto w-screen`} >
                 <video className={"w-screen h-full max-h-screen"} ref={innerRef}/>
             </div>
         </div>

@@ -21,11 +21,11 @@
     }
 
     .arrowIcon {
-        @apply text-white h-full w-16 absolute top-0 bottom-0 z-40 m-auto cursor-pointer flex justify-center from-[#141414]/75 to-transparent hover:from-[#141414]/75 hover:via-[#141414]/75 transition-colors duration-300;
+        @apply text-white h-full w-16 absolute top-0 bottom-0 z-40 m-auto cursor-pointer flex justify-center from-[#1a1920]/75 to-transparent hover:from-[#1a1920]/75 hover:via-[#1a1920]/75 transition-colors duration-300;
     }
 
     .bg-gradient {
-        background: linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);
+        background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 0, rgba(20, 20, 20, .15) 15%, rgba(20, 20, 20, .35) 29%, rgba(20, 20, 20, .58) 44%, #141414 68%, #141414 100%);
     }
 
     .infoScreenTitle {
@@ -33,7 +33,7 @@
     }
 
     .defaultButtonRound {
-        @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white;
+        @apply flex items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white;
     }
 
     .metaInfoTitle {
@@ -82,5 +82,47 @@
 
     .interactive-underline {
         @apply link-underline-dark link-underline-black-dark
+    }
+
+    .alert-container {
+        @apply font-poppins shadow-lg px-2 py-2.5 my-2 rounded space-x-3;
+    }
+
+    .anime-card-gradient {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+39,1e1b26+53&0+38,1+55 */
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, rgba(30, 27, 38, 1) 55%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, rgba(30, 27, 38, 1) 55%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, rgba(30, 27, 38, 1) 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#1e1b26', GradientType=0); /* IE6-9 */
+    }
+
+    .anime-img-gradient {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0.00,  rgba(0,0,0,1)),
+        color-stop(0.35,  rgba(0,0,0,1)),
+        color-stop(0.50,  rgba(0,0,0,1)),
+        color-stop(0.65,  rgba(0,0,0,1)),
+        color-stop(0.85,  rgba(0,0,0,06)),
+        color-stop(1.00,  rgba(0,0,0,0)));
+    }
+
+    .info-banner-gradient {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0.00,  rgba(0,0,0,1)),
+        color-stop(0.35,  rgba(0,0,0,1)),
+        color-stop(0.50,  rgba(0,0,0,1)),
+        color-stop(0.65,  rgba(0,0,0,1)),
+        color-stop(0.85,  rgba(0,0,0,0.5)),
+        color-stop(1.00,  rgba(0,0,0,0)));
+    }
+
+    .banner-img-gradient {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0.00,  rgba(0,0,0,1)),
+        color-stop(0.35,  rgba(0,0,0,1)),
+        color-stop(0.50,  rgba(0,0,0,1)),
+        color-stop(0.65,  rgba(0,0,0,1)),
+        color-stop(0.85,  rgba(0,0,0,0)),
+        color-stop(1.00,  rgba(0,0,0,0)));
     }
 }

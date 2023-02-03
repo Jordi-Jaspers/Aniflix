@@ -7,12 +7,13 @@ import React from "react";
 
 interface Props {
     anime: Anime
+    className?: string
 }
 
-export default function HomeScreen({anime}: Props) {
+export default function HomeScreen({anime, className}: Props) {
     const randomGenres = getRandomGenres(4)
     return (
-        <>
+        <div className={className}>
             {/*  RANDOM ANIME BANNER */}
             <Banner anime={anime}/>
             
@@ -31,6 +32,6 @@ export default function HomeScreen({anime}: Props) {
                     <Row key={key} title={genre} request={AnimeService.getAnimeByGenre} genre={genre}/>
                 ))}
             </section>
-        </>
+        </div>
     )
 }

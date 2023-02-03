@@ -72,26 +72,26 @@ export default function InfoScreen() {
             {anime && (
                 <MuiModal open={showInfoScreen} onClose={handleClose} className={"flex justify-center py-4"}>
                     <div
-                        className={"bg-[#181818] fixed !top-7 !bottom-7 z-50 mx-auto h-auto w-full max-w-4xl overflow-hidden overflow-y-scroll scrollbar-hide rounded-md"}>
+                        className={"bg-[#1a1920] fixed !top-7 !bottom-7 z-50 mx-auto h-auto w-full max-w-4xl overflow-hidden overflow-y-scroll scrollbar-hide rounded-md"}>
                         <button
-                            className={"absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#181818] rounded-full text-white !z-40"}
+                            className={"absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40"}
                             onClick={handleClose}>
                             <XMarkIcon className={"h-6 w-6"}/>
                         </button>
-                        <div className={"bg-gradient-to-b from-black/10 via-black/95 to-[#181818] !z-40"}>
+                        <div className={"!z-40"}>
                             <div className="relative pt-[56.25%]">
                                 <Image
                                     src={anime.cover as string}
                                     alt={(anime.title.romaji ? anime.title.romaji : anime.title.english) as string}
                                     height={2160}
                                     width={3840}
-                                    className={`${!isPlaying || isError ? "brightness-85 absolute top-0 left-0 w-full aspect-video object-cover -z-10" : "hidden"}`}
+                                    className={`${!isPlaying || isError ? "info-banner-gradient brightness-85 absolute top-0 left-0 w-full aspect-video object-cover -z-10" : "hidden"}`}
                                 />
                                 
                                 {anime.trailer?.id && (
                                     <YouTube
                                         videoId={anime.trailer.id}
-                                        className={`${isPlaying && !isError ? "brightness-85 absolute top-0 left-0 w-full aspect-video object-cover -z-10" : "hidden"}`}
+                                        className={`${isPlaying && !isError ? "info-banner-gradient brightness-85 absolute top-0 left-0 w-full aspect-video object-cover -z-10" : "hidden"}`}
                                         opts={opts}
                                         onReady={onReady}
                                         onError={onError}
@@ -102,7 +102,7 @@ export default function InfoScreen() {
                                 <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
                                     <div className="flex items-center space-x-2">
                                         <button className="bannerButton rounded bg-white text-black">
-                                            <PlayIcon className="text-black h-4 w-4 md:h-6 md:w-6"/> Play
+                                            <PlayIcon className="text-black h-6 w-6"/> Play
                                         </button>
                                         <AddToLibraryIcon/>
                                         <LikeButtonIcon/>
@@ -125,10 +125,10 @@ export default function InfoScreen() {
                                             {anime?.rating ? anime.rating : "0"}% match
                                         </p>
                                         <p className="text-white text-lg font-light !z-40">
-                                            | {anime?.releaseDate ? anime?.releaseDate : anime?.startDate.year} |
+                                            - {anime?.releaseDate ? anime?.releaseDate : anime?.startDate.year}
                                         </p>
                                         <p className="text-white text-lg font-light !z-40">
-                                            {anime?.totalEpisodes} Episodes
+                                            - {anime?.totalEpisodes} Episodes
                                         </p>
                                         <div
                                             className="flex text-white h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs !z-40">
@@ -140,7 +140,7 @@ export default function InfoScreen() {
                                         {anime?.subOrDub ? ` (${anime.subOrDub})` : ""}
                                     </h1>
                                     <div className="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row">
-                                        <p className="text-white w-[70%] text-base leading-7 font-poppins">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
+                                        <p className="text-white w-[70%] text-base leading-7 font-poppins text-justify">{anime?.description.replace(/<[^>]*>?/gm, '')}</p>
                                         <div className="flex flex-col text-sm">
                                             <div className={"metaInfoTitle"}>
                                                 <span className="text-[gray]">Genres:</span>{' '}

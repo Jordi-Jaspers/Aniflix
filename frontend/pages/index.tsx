@@ -1,5 +1,6 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
+import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import HomeScreen from "@components/HomeScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
@@ -19,10 +20,10 @@ export default function Home({anime}: Props) {
     const showSearchResults = useRecoilValue(showSearchResultsState)
     
     return (
-        <div className={`relative h-[100%] bg-[#141414] z-0 ${showInfoScreen && '!h-screen overflow-hidden'}`}>
+        <div className={`relative h-[100%] bg-[#1a1920] z-0 ${showInfoScreen && '!h-screen overflow-hidden'}`}>
             {/*  TAB TITLE  */}
             <Head>
-                <title> Home | Aniflix</title>
+                <title>Aniflix</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             
@@ -30,21 +31,15 @@ export default function Home({anime}: Props) {
             <Header/>
             
             <main className="lg:space-t-24 h-fit">
-                {showSearchResults
-                    ? <SearchResultScreen/>
-                    : <HomeScreen anime={anime}/>
-                }
+                <HomeScreen anime={anime} className={showSearchResults ? "hidden" : "visible"}/>
+                {showSearchResults && <SearchResultScreen/>}
             </main>
             
             {/*  ANIME INFO SCREEN */}
             {showInfoScreen && <InfoScreen/>}
             
             {/* FOOTER */}
-            <footer className={"flex flex-row items-center justify-center p-8 w-full"}>
-                <a className={"font-poppins text-[#d1d1d1]"} href={"https://github.com/Jordi-Jaspers"}>
-                    © Designed and built by Jordi Jaspers
-                </a>
-            </footer>
+            <Footer/>
         </div>
     )
 }

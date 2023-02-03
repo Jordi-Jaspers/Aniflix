@@ -48,7 +48,7 @@ export default function NavigationMenu() {
                     <ChevronUpIcon className={`${showNavigationMenu && "rotate-180"} w-4 h-4 duration-300 md:hidden`}/>
                     {showNavigationMenu &&
                         <div className="absolute top-12 left-[8em] z-50 rounded-md shadow-md transform bg-black/70 border w-fit"
-                        onMouseLeave={() => setShowNavigationMenu(false)}>
+                             onMouseLeave={() => setShowNavigationMenu(false)}>
                             <ul className={`space-y-1 flex flex-col`}>
                                 <li className={"text-white text-sm flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
                                     <Link href="/">
