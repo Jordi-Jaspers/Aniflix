@@ -39,7 +39,7 @@
     "@mui/material": "^5.11.3",
     "@next/font": "13.1.6",
     "@tailwindcss/line-clamp": "^0.4.2",
-    "@types/node": "18.11.18",
+    "@types/node": "18.11.19",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "@typescript-eslint/parser": "^5.48.1",
