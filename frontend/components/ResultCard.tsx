@@ -4,7 +4,6 @@ import AnimeService from "@consumet/AnimeService";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import LikeButtonIcon from "@icons/LikeButtonIcon";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import {RecentEpisode} from "@interfaces/RecentEpisode";
 import {LOGGER} from "@util/Logger";
 import Image from "next/image";
 import React from "react";
@@ -14,7 +13,7 @@ interface Props {
     anime: Anime;
 }
 
-export default function SearchResult({anime}: Props) {
+export default function ResultCard({anime}: Props) {
     const setShowInfoScreen = useSetRecoilState(infoScreenState)
     const setCurrentAnime = useSetRecoilState(animeState)
     const title = anime.title.english ? anime.title.english : anime.title.romaji
@@ -37,7 +36,7 @@ export default function SearchResult({anime}: Props) {
         })}>
             <div className={"rounded-md cursor-pointer overflow-hidden bg-[#1a1920] flex flex-col h-full"}>
                 <Image
-                    className="relative bg-center bg-no-repeat anime-img-gradient h-[325px]"
+                    className="relative bg-center bg-no-repeat anime-img-gradient min-h-[325px]"
                     src={anime.image}
                     alt={title}
                     width={460}
@@ -60,7 +59,6 @@ export default function SearchResult({anime}: Props) {
                     </h1>
                     <p className={"font-light font-poppins text-sm"}> {anime.totalEpisodes} Episodes</p>
                 </div>
-            
             </div>
         </div>
     )

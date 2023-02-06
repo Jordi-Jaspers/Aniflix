@@ -34,7 +34,9 @@ const SearchBar = () => {
     useEffect(() => {
         if (searchTerm.length > 0) {
             setShowSearchResults(true);
-            AnimeService.searchAnime(searchTerm).then((res) => {
+            const params: Map<string, string> = new Map<string, string>();
+            params.set("sort", `["SCORE_DESC", "POPULARITY_DESC"]`)
+            AnimeService.searchAnime(searchTerm, params).then((res) => {
                 setSearchResults(res);
             });
         } else {

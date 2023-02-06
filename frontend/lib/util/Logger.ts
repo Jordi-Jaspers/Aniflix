@@ -27,6 +27,8 @@ export class LOGGER {
         ]
     };
     
+    private static LOG_LEVEL = process.env.NEXT_PUBLIC_LOGGING_LEVEL;
+    
     /**
      * Logs a warning message to the console.
      *
@@ -36,7 +38,9 @@ export class LOGGER {
     static warn(text: string, ...optionalParams: any[]): void {
         let style = this.STYLE.BASE.join(';') + ';';
         style += this.STYLE.WARNING.join(';');
-        console.warn(`%c${text}`, style, ...optionalParams);
+        if (this.LOG_LEVEL === "INFO" || this.LOG_LEVEL === "DEBUG" || this.LOG_LEVEL === "TRACE" || this.LOG_LEVEL === "ERROR") {
+            console.warn(`%c${text}`, style, ...optionalParams);
+        }
     }
     
     /**
@@ -48,7 +52,9 @@ export class LOGGER {
     static error(text: string, ...optionalParams: any[]): void {
         let style = this.STYLE.BASE.join(';') + ';';
         style += this.STYLE.ERROR.join(';');
-        console.error(`%c${text}`, style, ...optionalParams);
+        if (this.LOG_LEVEL === "INFO" || this.LOG_LEVEL === "DEBUG" || this.LOG_LEVEL === "TRACE" || this.LOG_LEVEL === "ERROR") {
+            console.error(`%c${text}`, style, ...optionalParams);
+        }
     }
     
     /**
@@ -60,7 +66,9 @@ export class LOGGER {
     static debug(text: string, ...optionalParams: any[]): void {
         let style = this.STYLE.BASE.join(';') + ';';
         style += this.STYLE.DEBUG.join(';');
-        console.debug(`%c${text}`, style, ...optionalParams);
+        if (this.LOG_LEVEL === "DEBUG" || this.LOG_LEVEL === "TRACE") {
+            console.debug(`%c${text}`, style, ...optionalParams);
+        }
     }
     
     /**
@@ -72,7 +80,9 @@ export class LOGGER {
     static info(text: string, ...optionalParams: any[]): void {
         let style = this.STYLE.BASE.join(';') + ';';
         style += this.STYLE.INFO.join(';');
-        console.info(`%c${text}`, style, ...optionalParams);
+        if (this.LOG_LEVEL === "INFO" || this.LOG_LEVEL === "DEBUG" || this.LOG_LEVEL === "TRACE") {
+            console.info(`%c${text}`, style, ...optionalParams);
+        }
     }
     
     /**

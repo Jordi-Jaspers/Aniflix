@@ -8,15 +8,36 @@ import {Admin, Record} from "pocketbase";
 export default class UserService {
     
     static isAuthenticated(): boolean {
-        return pocketBase.authStore.isValid
+        return pocketBase.authStore.isValid;
+    }
+    
+    static async isVerified(id: string | undefined): Promise<boolean> {
+        if (id === undefined) {
+            LOGGER.debug("[UserService] id must be provided to verify user.");
+            return false;
+        }
+        
+        let isVerified: boolean;
+        const user: Record = await this.getUserInformationById(id);
+        isVerified = user?.verified;
+        LOGGER.debug("[UserService] User with email '%s' is verified: '%s'", user?.email, isVerified);
+        return isVerified;
     }
     
     static isAuthorized(path: string): boolean {
         LOGGER.debug("[UserService] Verifying if the user is authorized to access: '%s'", path)
         const rootPath = path.split('?')[0];
-        const isValid: boolean = this.isAuthenticated() || PUBLIC_PATHS_LIST.includes(rootPath)
+        let isValid: boolean = false;
+        if (!PUBLIC_PATHS_LIST.includes(rootPath) || (this.isAuthenticated() && this.isVerified(this.getUserInformation()?.id))) {
+            isValid = true;
+        }
         LOGGER.debug("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email, isValid)
         return isValid
+    }
+    
+    static requestVerificationEmail(email: string): Promise<boolean> {
+        LOGGER.info("[UserService] Sending verification email to user: '%s'", email)
+        return pocketBase.collection("users").requestVerification(email);
     }
     
     static async signIn(email: string, password: string): Promise<boolean> {
@@ -32,6 +53,31 @@ export default class UserService {
             isError = true;
         }
         return isError;
+    }
+    
+    static async register(email: string, password: string, confirmPassword: string): Promise<{ isError: boolean, error: string }> {
+        LOGGER.info("[UserService] Trying to register user.")
+        const data = {
+            "email": email,
+            "emailVisibility": true,
+            "password": password,
+            "passwordConfirm": confirmPassword,
+            "last_login": new Date(),
+            "locale": "N/A",
+        };
+        
+        if (password !== confirmPassword) {
+            LOGGER.error("[UserService] Failed to register user '" + email + "'", "Passwords do not match");
+            return {isError: true, error: "Passwords do not match"};
+        }
+        return pocketBase.collection("users").create(data).then(async (response) => {
+            await UserService.requestVerificationEmail(response?.email);
+            LOGGER.info("[UserService] Registration successful for user: " + email);
+            return {isError: false, error: "Registration successful, Check your email for verification"};
+        }).catch((e: any) => {
+            LOGGER.error("[UserService] Failed to register user '" + email + "'", e);
+            return {isError: true, error: "Registration failed"};
+        })
     }
     
     static async signOut(): Promise<void> {
@@ -76,7 +122,7 @@ export default class UserService {
             email: user.email,
             given_name: user.given_name,
             family_name: user.family_name,
-            locale: user.locale,
+            locale: (user.locale).toUpperCase(),
             verified: user.verified_email,
         }).then(() => {
             LOGGER.info("[UserService] Successfully updated account details for user: " + id);
@@ -88,6 +134,11 @@ export default class UserService {
     static getUserInformation(): Record | Admin | null {
         LOGGER.debug("[UserService] Retrieving user information.")
         return pocketBase.authStore.model;
+    }
+    
+    static getUserInformationById(id: string): Promise<Record> {
+        LOGGER.debug("[UserService] Retrieving user information for user: " + id)
+        return pocketBase.collection("users").getOne(id);
     }
     
     static getFileUrl(record: Record | Admin | null, file: string): string {

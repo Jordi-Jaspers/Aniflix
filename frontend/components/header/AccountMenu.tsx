@@ -4,6 +4,7 @@ import {useUserInformation} from "@hooks/useUserInformation";
 import UserService from "@service/UserService";
 import Image from "next/image";
 import Link from "next/link";
+import CoffeeIcon from "@svg/Coffee.png";
 import React, {useState} from 'react'
 
 export default function AccountMenu() {
@@ -22,7 +23,7 @@ export default function AccountMenu() {
             />
             {showAccountMenu && (
                 <div
-                    className="absolute z-100 top-16 right-4 md:right-6 lg:right-12 rounded-md shadow-md transform bg-black/70 border w-[60px] md:w-[200px]"
+                    className="absolute z-100 top-[5em] right-4 md:right-6 lg:right-12 rounded-md shadow-md transform bg-black/70 border w-[60px] md:w-[200px]"
                     onMouseLeave={() => setShowAccountMenu(false)}>
                     <ul className="flex flex-col w-full">
                         <Link href="/account"
@@ -35,10 +36,15 @@ export default function AccountMenu() {
                             <CogIcon className={"h-6 w-6"}/>
                             <p className={"font-poppins p-4 hover:underline hidden md:block"}>Settings</p>
                         </Link>
-                        <Link href="/release-notes"
+                        <Link href="/changelog"
                               className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
                             <QuestionMarkCircleIcon className={"h-6 w-6"}/>
-                            <p className={"font-poppins p-4 hover:underline hidden md:block"}>Release Notes</p>
+                            <p className={"font-poppins p-4 hover:underline hidden md:block"}>Changelog</p>
+                        </Link>
+                        <Link href="/donate"
+                              className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
+                            <Image src={CoffeeIcon} alt={"Coffee Icon"} width={24} height={24} className={"h-6 w-6 text-white"}/>
+                            <p className={"font-poppins p-4 hover:underline hidden md:block"}>Buy Me A Coffee</p>
                         </Link>
                     </ul>
                     <div className={"w-full h-[1px] bg-white"}/>

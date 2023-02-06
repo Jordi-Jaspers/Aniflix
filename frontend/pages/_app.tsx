@@ -8,14 +8,12 @@ import {RecoilRoot} from 'recoil'
 export default function App({Component, pageProps}: AppProps) {
     
     return (
-        <>
-            <Loader>
-                <RouteGuard>
-                    <RecoilRoot>
-                        <Component {...pageProps} />
-                    </RecoilRoot>
-                </RouteGuard>
-            </Loader>
-        </>
+        <Loader>
+            <RouteGuard>
+                <RecoilRoot>
+                    <Component {...pageProps} />
+                </RecoilRoot>
+            </RouteGuard>
+        </Loader>
     )
 }

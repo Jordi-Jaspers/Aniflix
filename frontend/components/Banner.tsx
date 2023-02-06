@@ -94,7 +94,7 @@ export default function Banner({anime}: Props) {
                     alt={videoTitle}
                     height={2160}
                     width={3840}
-                    className={`${!isPlaying || isError ? "banner-img-gradient brightness-75 absolute max-h-[50%] h-full w-full object-cover !-z-20" : "hidden"}`}
+                    className={`${!isPlaying || isError ? "banner-img-gradient brightness-75 absolute max-h-[50%] w-full h-full object-cover !-z-20" : "hidden"}`}
                     priority
                 />
                 
@@ -109,7 +109,6 @@ export default function Banner({anime}: Props) {
                         onPlay={onPlay}
                     />
                 )}
-                {/*<div className={"relative z-[-10] w-full mt-[30%] h-[30%] img"}/>*/}
             </div>
             
             <div className={"z-10 h-full space-y-4 flex flex-col justify-end pb-[5%]"}>

@@ -17,7 +17,7 @@ export default function ResolutionMenu({className, mediaSources}: Props) {
     
     function toggleResolution(quality: string) {
         const selectedResolution = mediaSources.find(source => source.quality === quality)?.url
-        LOGGER.info("[ResolutionMenu] Setting source to '%s' with quality '%s'", selectedResolution, quality);
+        LOGGER.debug("[ResolutionMenu] Setting source to '%s' with quality '%s'", selectedResolution, quality);
         if (selectedResolution) {
             setResolution(quality);
             setSource(selectedResolution);

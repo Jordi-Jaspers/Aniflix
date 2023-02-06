@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function HomeScreen({anime, className}: Props) {
-    const randomGenres = getRandomGenres(4)
+    const randomGenres = getRandomGenres(6)
     return (
         <div className={className}>
             {/*  RANDOM ANIME BANNER */}

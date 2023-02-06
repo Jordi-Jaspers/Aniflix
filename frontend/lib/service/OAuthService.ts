@@ -9,7 +9,6 @@ export default class OAuthService {
     
     static async getOAuthMethods(): Promise<AuthProviderInfo[]> {
         const methods = await pocketBase.collection("users").listAuthMethods()
-        LOGGER.debug("[OAuthService] Available OAuth providers: " + JSON.stringify(methods));
         return methods.authProviders;
     };
     

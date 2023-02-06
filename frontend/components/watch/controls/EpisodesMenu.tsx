@@ -18,7 +18,7 @@ export default function EpisodesMenu({className, episodes}: Props) {
     
     const handleClickedEpisode = async (episode_id: number) => {
         const {anime_id} = router.query;
-        LOGGER.info(`[EpisodesMenu] Going to episode ${episode_id} of ${episodes.length}`);
+        LOGGER.debug(`[EpisodesMenu] Going to episode ${episode_id} of ${episodes.length}`);
         await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime_id}/${episode_id}`);
     }
     

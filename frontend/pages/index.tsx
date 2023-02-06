@@ -1,10 +1,9 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
-import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
+import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import HomeScreen from "@components/HomeScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
-import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import AnimeService from "@consumet/AnimeService";
 import {Anime} from "@interfaces/Anime";
 import Head from 'next/head'
@@ -26,7 +25,7 @@ export default function Home({anime}: Props) {
                 <title>Aniflix</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            
+    
             {/*  HEADER  */}
             <Header/>
             
@@ -37,17 +36,13 @@ export default function Home({anime}: Props) {
             
             {/*  ANIME INFO SCREEN */}
             {showInfoScreen && <InfoScreen/>}
-            
-            {/* FOOTER */}
-            <Footer/>
         </div>
     )
 }
 
 export async function getServerSideProps() {
-    const animes: Anime[] = await AnimeService.getPopularAnime(50, 1)
+    const animes: Anime[] = await AnimeService.getTrendingAnime(50, 1)
     const anime: Anime = animes[Math.floor(Math.random() * animes.length)]
-    console.log(anime)
     return {
         props: {
             anime: anime

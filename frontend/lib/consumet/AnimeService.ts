@@ -16,7 +16,10 @@ export default class AnimeService {
     static async getAnimeDetails(id: string): Promise<Anime> {
         const request = ConsumetEndpoints.ANIME_DETAILS.replace("{id}", id);
         RequestLogger.log(request, {});
-        return await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        return await fetch(request).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
     }
     
     /**
@@ -34,7 +37,14 @@ export default class AnimeService {
             .replace("{results}", results.toString());
     
         RequestLogger.log(request, {});
-        const response: Page<Anime> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const response: Page<Anime> = await fetch(request, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=900'
+            }
+        }).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
         return response.results;
     }
     
@@ -50,7 +60,15 @@ export default class AnimeService {
             .replace("{results}", results.toString());
     
         RequestLogger.log(request, {});
-        const response: Page<Anime> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const response: Page<Anime> = await fetch(request, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=900'
+            }
+        }).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
+        
         return response.results;
     }
     
@@ -66,7 +84,14 @@ export default class AnimeService {
             .replace("{results}", results.toString());
     
         RequestLogger.log(request, {});
-        const response: Page<Anime> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const response: Page<Anime> = await fetch(request,{
+            headers: {
+                'Cache-Control': 'public, s-maxage=900'
+            }
+        }).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
         return response.results;
     }
     
@@ -82,8 +107,15 @@ export default class AnimeService {
             .replace("{page}", page.toString())
             .replace("{results}", results.toString());
         
-        const regex = new RegExp(/[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[a-zA-Z0-9]+|[ａ-ｚＡ-Ｚ０-９]+|[々〆〤ヶ]+/u);
-        const response: Page<RecentEpisode> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const regex = new RegExp(/[ぁ-ゔ]+|[ァ-ヴー]+|[a-zA-Z0-9]+|[ａ-ｚＡ-Ｚ０-９]+|[々〆〤ヶ]+/u);
+        const response: Page<RecentEpisode> = await fetch(request, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=59'
+            }
+        }).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
         const recentAnime: RecentEpisode[] = response.results;
         for (let i = 0; i < recentAnime.length; i++) {
             const isValid: boolean = regex.test(recentAnime[i].title.native);
@@ -102,7 +134,10 @@ export default class AnimeService {
     static async getEpisodeInformation(id: string, episode: number): Promise<Episode | null> {
         const request = ConsumetEndpoints.ANIME_DETAILS.replace("{id}", id);
         RequestLogger.log(request, {});
-        const response: Anime = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const response: Anime = await fetch(request).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
         const requestedEpisode: Episode | undefined = response.episodes.find((result: Episode) => result.number === episode);
         if (!requestedEpisode) {
             LOGGER.error(`Could not find episode number '%d' for the following anime:\n%o`, episode, response);
@@ -127,7 +162,10 @@ export default class AnimeService {
         
         const request = ConsumetEndpoints.EPISODE_LINKS.replace("{episodeId}", requestedEpisode.id);
         RequestLogger.log(request, {});
-        const mediaSources: MediaSources = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const mediaSources: MediaSources = await fetch(request).then((res) => {
+            if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+            return res.json()
+        }).catch((err) => LOGGER.error(err));
         return [anime, requestedEpisode, mediaSources];
     }
     
@@ -138,14 +176,19 @@ export default class AnimeService {
      * @param filters   The filters to apply.
      */
     static async searchAnime(name: string, filters?: Map<string, string>): Promise<Anime[]> {
-        const request = ConsumetEndpoints.ADVANCED_SEARCH.concat(`?query=${name}&perPage=100`);
+        let request = ConsumetEndpoints.ADVANCED_SEARCH.concat(`?query=${name}&perPage=50`);
         if (filters) {
             filters.forEach((value: string, key: string) => {
-                request.concat(`&${key}=${value}`);
+                request += `&${key}=${value}`;
             });
         }
         RequestLogger.log(request, {});
-        const response: Page<Anime> = await fetch(request).then((res) => res.json()).catch((err) => LOGGER.error(err));
+        const response: Page<Anime> = await fetch(request)
+            .then((res) => {
+                if (!res.ok) LOGGER.error(`[AnimeService] Error ${res.status}: ${res.statusText}`);
+                return res.json()
+            })
+            .catch((err) => LOGGER.error(err));
         return response.results;
     }
 }

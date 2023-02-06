@@ -50,8 +50,11 @@ export default function EpisodeCards({className, episodes}: Props) {
                 )}
             </div>
             {episodes?.map((episode) => {
-                if (episode.number >= lowerBound(page) && episode.number <= upperBound(page)) return (
-                    <EpisodeCard key={episode.number} episode={episode}/>)
+                if (episode.number >= lowerBound(page) && episode.number <= upperBound(page)) {
+                    if (episode.description && episode.title) {
+                        return (<EpisodeCard key={episode.number} episode={episode}/>)
+                    }
+                }
             })}
         </div>
     )

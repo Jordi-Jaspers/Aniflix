@@ -84,7 +84,7 @@ export default function VideoControls({className}: Props) {
     
     const nextEpisode = () => {
         if (anime.episodes.length > episode.number) {
-            LOGGER.info(`[VideoControls] Going to episode ${episode.number + 1} of ${anime.episodes.length}`);
+            LOGGER.debug(`[VideoControls] Going to episode ${episode.number + 1} of ${anime.episodes.length}`);
             setEpisode(anime.episodes[episode.number]);
             router.push(`/watch/${anime.id}/${episode.number + 1}`).catch((error) => {
                 LOGGER.error('[VideoControls] Failed to push to next episode', error);
