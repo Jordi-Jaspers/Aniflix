@@ -10,7 +10,7 @@ export const useUserInformation = () => {
         if (user) {
             setUser(user);
         }
-    }, [pocketBase.authStore.isValid]);
+    }, []);
     
     return user;
 };

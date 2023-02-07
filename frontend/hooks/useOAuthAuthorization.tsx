@@ -9,7 +9,6 @@ import {useEffect, useState} from "react";
 
 export const useOAuthAuthorization = () => {
     const router = useRouter();
-    const [authData, setAuthData] = useState<any>()
     const {state, code} = router.query;
     
     useEffect(() => {

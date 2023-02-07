@@ -1,4 +1,3 @@
-import ErrorAlert from "@components/alerts/ErrorAlert";
 import LoginForm from "@components/login/LoginForm";
 import RegisterForm from "@components/login/RegisterForm";
 import VerificationButton from "@components/login/VerificationButton";
@@ -7,22 +6,12 @@ import AniFlixLogo from "@icons/AniFlixLogo";
 import GithubSignIn from "@icons/GithubSignIn";
 import GoogleSignIn from "@icons/GoogleSignIn";
 import LoginBackground from "@images/aniflix-login.png";
-import UserService from "@service/UserService";
 import Image from "next/image";
-import React from "react";
+import React, {useState} from "react";
 
 export default function Login() {
     const {isSignedIn, isVerified} = useIsAuthenticated();
-    const [isError, setIsError] = React.useState<boolean>(false);
-    const [message, setMessage] = React.useState<string>("");
-    const [register, setRegister] = React.useState<boolean>(false);
-    
-    async function requestVerification() {
-        const user = UserService.getUserInformation()
-        const response = await UserService.requestVerificationEmail(user?.email);
-        setIsError(response.isError);
-        setMessage(response.error);
-    }
+    const [register, setRegister] = useState<boolean>(false);
     
     return (
         <div className={"h-full w-full max-w-[550px] mx-auto flex justify-center items-center"}>
@@ -42,22 +31,23 @@ export default function Login() {
                     <div className={"flex flex-col items-center space-y-6 mb-6"}>
                         <AniFlixLogo className={"w-[50%] h-[50%}"}/>
                         
-                        {
-                            register
-                                ? <h4 className={"font-poppins text-xl text-white"}> Register Account </h4>
-                                : <h4 className={"font-poppins text-xl text-white"}> Sign-In </h4>
+                        {!isSignedIn && (register
+                            ? <h4 className={"font-poppins text-xl text-white"}> Register Account </h4>
+                            : <h4 className={"font-poppins text-xl text-white"}> Sign-In </h4>)
                         }
                         
                         {(isSignedIn && !isVerified)
-                            ? <VerificationButton onClick={requestVerification}/>
-                            : register ? <RegisterForm/> : <LoginForm/>}
-                        <ErrorAlert message={message} show={isError}/>
+                            ? <VerificationButton/>
+                            : register ? <RegisterForm/> : <LoginForm/>
+                        }
                         
-                        <div className={"font-poppins text-white flex space-x-2"}>
-                            <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(false)}>Sign-in</a>
-                            <a> - </a>
-                            <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(true)}>Register</a>
-                        </div>
+                        {!isSignedIn &&
+                            <div className={"font-poppins text-white flex space-x-2"}>
+                                <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(false)}>Sign-in</a>
+                                <a> - </a>
+                                <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(true)}>Register</a>
+                            </div>
+                        }
                         
                         <div className={"flex flex-col items-center space-y-4 w-full"}>
                             <div className={"w-[80%] h-[1px] bg-[#717171]"}/>

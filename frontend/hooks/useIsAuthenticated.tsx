@@ -1,4 +1,5 @@
-import {PRIVATE_PATHS, PUBLIC_PATHS} from "@enum/Paths";
+import {PRIVATE_PATHS, PUBLIC_PATHS, PUBLIC_PATHS_LIST} from "@enum/Paths";
+import useIsVerified from "@hooks/useIsVerified";
 import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
 import {useRouter} from "next/router";
@@ -6,14 +7,16 @@ import {useEffect, useState} from "react";
 
 export const useIsAuthenticated = () => {
     const router = useRouter();
-    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-    const [isVerified, setIsVerified] = useState<boolean>(false);
-    const [isAuthorized, setIsAuthorized] = useState(true);
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const isSignedIn = UserService.isAuthenticated();
+    const {data: isVerified} = useIsVerified();
     
     function authCheck(url: string) {
-        if (UserService.isAuthorized(url)) {
+        const rootPath = url.split('?')[0];
+        LOGGER.info("[RouteGuard] isSignedIn: '%s', isVerified: '%s'", isSignedIn, isVerified);
+        if (PUBLIC_PATHS_LIST.includes(rootPath) || (isSignedIn && isVerified)) {
             setIsAuthorized(true);
-            if (url.split("?")[0] === PUBLIC_PATHS.LOGIN) {
+            if (url.split("?")[0] === PUBLIC_PATHS.LOGIN && isSignedIn && isVerified) {
                 LOGGER.info("[RouteGuard] Authorized: Redirected user to home page");
                 router.push(PRIVATE_PATHS.HOME).catch((reason) => LOGGER.error("[RouteGuard] Failed to redirect to home page:\n" + reason));
             }
@@ -28,21 +31,10 @@ export const useIsAuthenticated = () => {
     }
     
     useEffect(() => {
-        if (UserService.isAuthenticated()) {
-            setIsSignedIn(true);
-            LOGGER.debug("[useIsAuthenticated] User is signed-in '%s'", isSignedIn);
-    
-            const user = UserService.getUserInformation();
-            UserService.isVerified(user?.id).then((response) => {
-                setIsVerified(response);
-                LOGGER.debug("[useIsAuthenticated] User is verified '%s'", isVerified);
-            });
+        if (typeof isVerified !== "undefined") {
+            authCheck(router.asPath);
         }
-    }, [isSignedIn, isVerified]);
-    
-    useEffect(() => {
-        authCheck(router.asPath);
-    }, [router.asPath]);
+    }, [router.asPath, isSignedIn, isVerified]);
     
     return {isSignedIn, isVerified, isAuthorized};
 };

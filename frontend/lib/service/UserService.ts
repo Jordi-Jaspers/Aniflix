@@ -18,29 +18,29 @@ export default class UserService {
         }
         
         let isVerified: boolean;
-        const user: Record = await this.getUserInformationById(id);
+        const user: Record | null = await this.getUserInformationById(id);
         isVerified = user?.verified;
         LOGGER.debug("[UserService] User with email '%s' is verified: '%s'", user?.email, isVerified);
         return isVerified;
     }
     
     static isAuthorized(path: string): boolean {
-        LOGGER.debug("[UserService] Verifying if the user is authorized to access: '%s'", path)
+        LOGGER.info("[UserService] Verifying if the user is authorized to access: '%s'", path)
         const rootPath = path.split('?')[0];
         let isValid: boolean = false;
         if (PUBLIC_PATHS_LIST.includes(rootPath) || (this.isAuthenticated() && this.isVerified(this.getUserInformation()?.id))) {
             isValid = true;
         }
-        LOGGER.debug("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email, isValid)
+        LOGGER.info("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email, isValid)
         return isValid
     }
     
-    static requestVerificationEmail(email: string): Promise<{ isError: boolean, error: string }> {
+    static requestVerificationEmail(email: string): Promise<{isSuccess: boolean, isError: boolean, error: string }> {
         LOGGER.info("[UserService] Sending verification email to user: '%s'", email)
         return pocketBase.collection("users").requestVerification(email).then(() => {
-            return {isError: false, error: "Email sent successfully, Check your email for verification"};
+            return {isSuccess: true, isError: false, error: "Email sent successfully, Check your email for verification"};
         }).catch((e: any) => {
-            return {isError: true, error: "Failed to send verification email: " + e.message};
+            return {isSuccess: false, isError: true, error: "Failed to send verification email: " + e.message};
         });
     }
     
@@ -136,13 +136,19 @@ export default class UserService {
     }
     
     static getUserInformation(): Record | Admin | null {
-        LOGGER.debug("[UserService] Retrieving user information.")
+        LOGGER.debug("[UserService] Retrieving basic user information.")
         return pocketBase.authStore.model;
     }
     
-    static getUserInformationById(id: string): Promise<Record> {
+    static async getUserInformationById(id: string): Promise<Record | null> {
         LOGGER.debug("[UserService] Retrieving user information for user: " + id)
-        return pocketBase.collection("users").getOne(id);
+        return await pocketBase.collection("users").getOne(id).then((response) => {
+            LOGGER.info("[UserService] Successfully retrieved user information for user: " + response.id)
+            return response;
+        }).catch((e: any) => {
+            LOGGER.error("[UserService] Failed to retrieve user information for user: " + id, e)
+            return null;
+        });
     }
     
     static getFileUrl(record: Record | Admin | null, file: string): string {
