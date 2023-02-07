@@ -41,7 +41,7 @@ export default function EpisodeCard({episode}: Props) {
                 </div>
                 <div>
                     <div className={"pl-6"}>
-                        <div className={"flex flex-row justify-between pb-2"}>
+                        <div className={"flex flex-row justify-between pb-2 space-x-4"}>
                             <div className={"text-white font-bold font-poppins"}>
                                 {episode.title}
                             </div>
