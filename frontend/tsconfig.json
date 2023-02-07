@@ -1,23 +1,55 @@
 {
   "compilerOptions": {
     "paths": {
-      "@styles/*": ["./styles/*"],
-      "@components/*": ["./components/*"],
-      "@icons/*": ["./components/icons/*"],
-      "@svg/*": ["./public/icons/*"],
-      "@images/*": ["./public/images/*"],
-      "@interfaces/*": ["./interfaces/*"],
-      "@enum/*": ["./enum/*"],
-      "@atoms/*": ["./atoms/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@util/*": ["./lib/util/*"],
-      "@service/*": ["./lib/service/*"],
-      "@pocketbase/*": ["./lib/pocketbase/*"],
-      "@consumet/*": ["./lib/consumet/*"],
-      "@lib/*": ["./lib/*"],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@icons/*": [
+        "./components/icons/*"
+      ],
+      "@svg/*": [
+        "./public/icons/*"
+      ],
+      "@images/*": [
+        "./public/images/*"
+      ],
+      "@interfaces/*": [
+        "./interfaces/*"
+      ],
+      "@enum/*": [
+        "./enum/*"
+      ],
+      "@atoms/*": [
+        "./atoms/*"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@util/*": [
+        "./lib/util/*"
+      ],
+      "@service/*": [
+        "./lib/service/*"
+      ],
+      "@pocketbase/*": [
+        "./lib/pocketbase/*"
+      ],
+      "@consumet/*": [
+        "./lib/consumet/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ]
     },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -31,6 +63,13 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.jsx", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.jsx",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

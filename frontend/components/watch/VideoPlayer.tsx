@@ -52,7 +52,7 @@ export default function VideoPlayer({controls, loop, innerRef}: Props) {
     
     return (
         <div className={`w-full h-full`}>
-            <div className={`absolute top-0 bottom-0 my-auto w-screen`} >
+            <div className={`absolute top-0 bottom-0 my-auto w-screen`}>
                 <video className={"w-screen h-full max-h-screen"} ref={innerRef}/>
             </div>
         </div>

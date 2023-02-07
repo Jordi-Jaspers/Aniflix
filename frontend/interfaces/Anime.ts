@@ -1,5 +1,4 @@
 import {MediaType} from "@enum/MediaType";
-import {Status} from "@enum/Status";
 import {Character} from "./Character";
 import {Date} from "./Date";
 import {Episode} from "./Episode";

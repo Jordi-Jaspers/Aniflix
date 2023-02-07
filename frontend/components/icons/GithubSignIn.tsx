@@ -1,5 +1,4 @@
 import {useOAuthProvider} from "@hooks/useOAuthProvider";
-import router from "next/router";
 import React from "react";
 
 const GITHUB_PROVIDER: string = 'github';

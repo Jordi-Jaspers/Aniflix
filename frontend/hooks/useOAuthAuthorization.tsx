@@ -1,11 +1,9 @@
-import {PRIVATE_PATHS, PUBLIC_PATHS} from "@enum/Paths";
-import {pocketBase} from "@pocketbase/PocketBase";
+import {PUBLIC_PATHS} from "@enum/Paths";
 import OAuthService from "@service/OAuthService";
-import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
-import router, {useRouter} from "next/router";
+import {useRouter} from "next/router";
 import {AuthProviderInfo} from "pocketbase";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 export const useOAuthAuthorization = () => {
     const router = useRouter();

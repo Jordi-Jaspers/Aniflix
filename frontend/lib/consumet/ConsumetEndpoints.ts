@@ -7,7 +7,7 @@ export default class ConsumetEndpoints {
     public static ANIME_BY_GENRE: string = `${BASE_URL}/meta/anilist/advanced-search?sort=["TRENDING_DESC", "SCORE_DESC"]&type=ANIME&genres=["{genre}"]&page={page}&perPage={results}`;
     public static ANIME_DETAILS: string = `${BASE_URL}/meta/anilist/info/{id}?provider=gogoanime`;
     public static EPISODE_LINKS: string = `${BASE_URL}/meta/anilist/watch/{episodeId}?provider=gogoanime`;
-
+    
     public static SEARCH: string = `${BASE_URL}/meta/anilist/{query}`;
     public static ADVANCED_SEARCH: string = `${BASE_URL}/meta/anilist/advanced-search`;
 }

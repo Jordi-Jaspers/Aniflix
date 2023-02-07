@@ -11,6 +11,7 @@ export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | P
                 setAnimes(response)
             }
         }
+        
         fetchAnime().then(r => r)
     }, [request, genre])
     

@@ -25,7 +25,7 @@ export default function Home({anime}: Props) {
                 <title>Aniflix</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-    
+            
             {/*  HEADER  */}
             <Header/>
             

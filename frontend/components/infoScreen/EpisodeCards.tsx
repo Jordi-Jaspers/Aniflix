@@ -30,7 +30,7 @@ export default function EpisodeCards({className, episodes}: Props) {
             </li>
         );
     }
-
+    
     return (
         <div className={className ? className : ""}>
             <div className="relative flex flex-row justify-between rounded-b-md py-4">

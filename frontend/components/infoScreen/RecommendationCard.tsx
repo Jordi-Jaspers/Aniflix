@@ -24,7 +24,8 @@ export default function RecommendationCard({recommendation}: Props) {
     // #1a1920
 // #1E1E25
     return (
-        <div className={"m-[0.1em] min-h-[18em] h-[100%] cursor-pointer rounded bg-[#1E1E25] shadow-lg border border-[#1E1E25] overflow-hidden"}>
+        <div
+            className={"m-[0.1em] min-h-[18em] h-[100%] cursor-pointer rounded bg-[#1E1E25] shadow-lg border border-[#1E1E25] overflow-hidden"}>
             <div className={"relative overflow-hidden"} onClick={() => handleClickedRecommendation()}>
                 <Image
                     src={recommendation.image}

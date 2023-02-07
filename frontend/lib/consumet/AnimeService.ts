@@ -1,10 +1,10 @@
-import {Genres, getRandomGenre} from "@enum/Genre";
+import ConsumetEndpoints from "@consumet/ConsumetEndpoints";
+import {getRandomGenre} from "@enum/Genre";
 import {Anime} from "@interfaces/Anime";
 import {Episode} from "@interfaces/Episode";
 import {MediaSources} from "@interfaces/MediaSources";
 import {Page} from "@interfaces/Page";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
-import ConsumetEndpoints from "@consumet/ConsumetEndpoints";
 import {LOGGER} from "@util/Logger";
 import RequestLogger from "@util/RequestLogger";
 
@@ -35,7 +35,7 @@ export default class AnimeService {
             .replace("{genre}", requestedGenre)
             .replace("{page}", page.toString())
             .replace("{results}", results.toString());
-    
+        
         RequestLogger.log(request, {});
         const response: Page<Anime> = await fetch(request, {
             headers: {
@@ -58,7 +58,7 @@ export default class AnimeService {
         const request = ConsumetEndpoints.POPULAR_ANIME
             .replace("{page}", page.toString())
             .replace("{results}", results.toString());
-    
+        
         RequestLogger.log(request, {});
         const response: Page<Anime> = await fetch(request, {
             headers: {
@@ -82,9 +82,9 @@ export default class AnimeService {
         const request = ConsumetEndpoints.TRENDING_ANIME
             .replace("{page}", page.toString())
             .replace("{results}", results.toString());
-    
+        
         RequestLogger.log(request, {});
-        const response: Page<Anime> = await fetch(request,{
+        const response: Page<Anime> = await fetch(request, {
             headers: {
                 'Cache-Control': 'public, s-maxage=900'
             }

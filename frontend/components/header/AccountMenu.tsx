@@ -2,9 +2,9 @@ import {ArrowLeftOnRectangleIcon, CogIcon, QuestionMarkCircleIcon, UserIcon} fro
 import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useUserInformation} from "@hooks/useUserInformation";
 import UserService from "@service/UserService";
+import CoffeeIcon from "@svg/Coffee.png";
 import Image from "next/image";
 import Link from "next/link";
-import CoffeeIcon from "@svg/Coffee.png";
 import React, {useState} from 'react'
 
 export default function AccountMenu() {

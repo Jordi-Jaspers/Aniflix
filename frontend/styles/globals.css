@@ -98,31 +98,31 @@
 
     .anime-img-gradient {
         -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
-        color-stop(0.00,  rgba(0,0,0,1)),
-        color-stop(0.35,  rgba(0,0,0,1)),
-        color-stop(0.50,  rgba(0,0,0,1)),
-        color-stop(0.65,  rgba(0,0,0,1)),
-        color-stop(0.85,  rgba(0,0,0,06)),
-        color-stop(1.00,  rgba(0,0,0,0)));
+        color-stop(0.00, rgba(0, 0, 0, 1)),
+        color-stop(0.35, rgba(0, 0, 0, 1)),
+        color-stop(0.50, rgba(0, 0, 0, 1)),
+        color-stop(0.65, rgba(0, 0, 0, 1)),
+        color-stop(0.85, rgba(0, 0, 0, 06)),
+        color-stop(1.00, rgba(0, 0, 0, 0)));
     }
 
     .info-banner-gradient {
         -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
-        color-stop(0.00,  rgba(0,0,0,1)),
-        color-stop(0.35,  rgba(0,0,0,1)),
-        color-stop(0.50,  rgba(0,0,0,1)),
-        color-stop(0.65,  rgba(0,0,0,1)),
-        color-stop(0.85,  rgba(0,0,0,0.5)),
-        color-stop(1.00,  rgba(0,0,0,0)));
+        color-stop(0.00, rgba(0, 0, 0, 1)),
+        color-stop(0.35, rgba(0, 0, 0, 1)),
+        color-stop(0.50, rgba(0, 0, 0, 1)),
+        color-stop(0.65, rgba(0, 0, 0, 1)),
+        color-stop(0.85, rgba(0, 0, 0, 0.5)),
+        color-stop(1.00, rgba(0, 0, 0, 0)));
     }
 
     .banner-img-gradient {
         -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,
-        color-stop(0.00,  rgba(0,0,0,1)),
-        color-stop(0.35,  rgba(0,0,0,1)),
-        color-stop(0.50,  rgba(0,0,0,1)),
-        color-stop(0.65,  rgba(0,0,0,1)),
-        color-stop(0.85,  rgba(0,0,0,0)),
-        color-stop(1.00,  rgba(0,0,0,0)));
+        color-stop(0.00, rgba(0, 0, 0, 1)),
+        color-stop(0.35, rgba(0, 0, 0, 1)),
+        color-stop(0.50, rgba(0, 0, 0, 1)),
+        color-stop(0.65, rgba(0, 0, 0, 1)),
+        color-stop(0.85, rgba(0, 0, 0, 0)),
+        color-stop(1.00, rgba(0, 0, 0, 0)));
     }
 }

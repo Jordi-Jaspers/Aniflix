@@ -1,5 +1,5 @@
 import {currentTimeState} from "@atoms/VideoPlayerAtom";
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Slider from "react-input-slider";
 import {useRecoilState} from "recoil";
 
