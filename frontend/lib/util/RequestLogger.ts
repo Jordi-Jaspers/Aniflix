@@ -20,7 +20,7 @@ export default class RequestLogger {
         this.appendRedirects(request, sb);
         this.appendReferrer(request, sb);
         this.appendReferrerPolicy(request, sb);
-        LOGGER.info(sb.build());
+        LOGGER.debug(sb.build());
     }
     
     private static appendReferrerPolicy(request: RequestInit, sb: StringBuilder) {

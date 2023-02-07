@@ -1,10 +1,10 @@
 import OAuthService from "@service/OAuthService";
 import {LOGGER} from "@util/Logger";
-import router, {useRouter} from "next/router";
+import {useRouter} from "next/router";
 import {AuthProviderInfo} from "pocketbase";
 import {useEffect, useState} from "react";
 
-export const useOAuthProvider = (providerName: string):  () => void => {
+export const useOAuthProvider = (providerName: string): () => void => {
     const router = useRouter();
     const [provider, setProvider] = useState<AuthProviderInfo | undefined>();
     const [redirectUrl, setRedirectUrl] = useState<string>("");

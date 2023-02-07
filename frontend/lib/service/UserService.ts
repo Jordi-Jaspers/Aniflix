@@ -28,16 +28,20 @@ export default class UserService {
         LOGGER.debug("[UserService] Verifying if the user is authorized to access: '%s'", path)
         const rootPath = path.split('?')[0];
         let isValid: boolean = false;
-        if (!PUBLIC_PATHS_LIST.includes(rootPath) || (this.isAuthenticated() && this.isVerified(this.getUserInformation()?.id))) {
+        if (PUBLIC_PATHS_LIST.includes(rootPath) || (this.isAuthenticated() && this.isVerified(this.getUserInformation()?.id))) {
             isValid = true;
         }
         LOGGER.debug("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email, isValid)
         return isValid
     }
     
-    static requestVerificationEmail(email: string): Promise<boolean> {
+    static requestVerificationEmail(email: string): Promise<{ isError: boolean, error: string }> {
         LOGGER.info("[UserService] Sending verification email to user: '%s'", email)
-        return pocketBase.collection("users").requestVerification(email);
+        return pocketBase.collection("users").requestVerification(email).then(() => {
+            return {isError: false, error: "Email sent successfully, Check your email for verification"};
+        }).catch((e: any) => {
+            return {isError: true, error: "Failed to send verification email: " + e.message};
+        });
     }
     
     static async signIn(email: string, password: string): Promise<boolean> {
