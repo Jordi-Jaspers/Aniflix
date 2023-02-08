@@ -6,11 +6,8 @@ import InfoScreen from "@components/infoScreen/InfoScreen";
 import ResultCard from "@components/ResultCard";
 import {WATCH_STATUS_LIST} from "@enum/WatchStatus";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";
-import AddToLibraryIcon from "@icons/AddToLibraryIcon";
-import LikeButtonIcon from "@icons/LikeButtonIcon";
 import LibraryService from "@service/LibraryService";
 import Head from "next/head";
-import Image from "next/image";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 

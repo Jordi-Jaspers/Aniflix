@@ -49,7 +49,7 @@ export default function RecommendationCard({recommendation}: Props) {
                             {recommendation?.status ? recommendation.status : Status.UNKNOWN}
                         </p>
                     </div>
-                    <AddToLibraryIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
+                    <AddToLibraryIcon anime_id={recommendation.id} buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                 </div>
                 <p className={"text-[#d2d2d2] font-poppins font-light text-sm"}>
                     {title}

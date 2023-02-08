@@ -32,16 +32,17 @@ export default function ResultCard({id, title, image, status, rating, totalEpiso
     }
     
     return (
-        <div className="min-w-[165px] max-w-[190px] h-full overflow-hidden" onClick={() => handleClickedAnime().catch(() => {
-            LOGGER.error("Error occurred when trying to handle clicked anime")
-        })}>
-            <div className={"rounded-md cursor-pointer overflow-hidden bg-[#1a1920] flex flex-col h-full"}>
+        <div className="min-w-[165px] max-w-[190px] h-full overflow-hidden">
+            <div className={"rounded-md overflow-hidden bg-[#1a1920] flex flex-col h-full"}>
                 <Image
-                    className="relative bg-center bg-no-repeat anime-img-gradient h-[260px] mb-2"
+                    className="relative bg-center bg-no-repeat anime-img-gradient h-[260px] mb-2 cursor-pointer"
                     src={image}
                     alt={title}
                     width={460}
                     height={650}
+                    onClick={() => handleClickedAnime().catch(() => {
+                        LOGGER.error("Error occurred when trying to handle clicked anime")
+                    })}
                 />
                 
                 <div className="font-poppins text-[#d2d2d2] px-3 space-y-2 h-fit flex flex-col">
@@ -56,7 +57,7 @@ export default function ResultCard({id, title, image, status, rating, totalEpiso
                     </h1>
                     <p className={"font-light font-poppins text-xs"}> {totalEpisodes} Episodes</p>
                     <div className={"flex justify-evenly space-x-2 px-2 py-2 pb-4"}>
-                        <AddToLibraryIcon iconClassName={"h-4 w-4"} buttonClassName={"h-8 w-8"}/>
+                        <AddToLibraryIcon anime_id={id} iconClassName={"h-4 w-4"} buttonClassName={"h-8 w-8"}/>
                         <LikeButtonIcon iconClassName={"h-4 w-4"} buttonClassName={"h-8 w-8"}/>
                     </div>
                 </div>

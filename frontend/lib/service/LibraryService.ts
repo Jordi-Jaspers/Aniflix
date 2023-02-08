@@ -1,6 +1,7 @@
+import AnimeService from "@consumet/AnimeService";
 import {WatchStatus} from "@enum/WatchStatus";
-import {Anime} from "@interfaces/Anime";
 import {pocketBase} from "@pocketbase/PocketBase";
+import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
 import {Record} from "pocketbase";
 
@@ -19,17 +20,36 @@ export default class LibraryService {
             );
     }
     
-    static async addAnimeToLibrary(userId: string, anime: Anime): Promise<void> {
-        LOGGER.debug("[LibraryService] Adding anime to library.");
+    static async getAnimeFromLibrary(animeId: string): Promise<Record | null> {
+        LOGGER.debug("[LibraryService] Trying to find anime with id '%s' in library.", animeId);
+        return await pocketBase.collection('library')
+            .getFirstListItem(`anime_id = '${animeId}'`)
+            .then((response) => {
+                LOGGER.debug("[LibraryService] Successfully found anime with id '%s' in library.", animeId);
+                return response;
+            }).catch((e: any) => {
+                LOGGER.debug("[LibraryService] Failed to find anime with id '%s' in library: %s", animeId);
+                return null;
+            });
+    }
+    
+    static async addAnimeToLibrary(anime_id: string): Promise<void> {
+        LOGGER.debug("[LibraryService] Trying to add anime with id '%s' to library.", anime_id);
+        const userId = UserService.getUserInformation()?.id;
+        if (!userId) throw ("[LibraryService] Failed to add anime to library: \n" + "User is not logged in.");
+        
+        const anime = await AnimeService.getAnimeDetails(anime_id);
+        if (!anime) throw ("[LibraryService] Failed to add anime to library: \n" + "Anime with id '" + anime_id + "' does not exist.");
+        
         const data = {
             "user_id": userId,
             "anime_id": anime.id,
-            "title": anime.title,
+            "title": anime.title.romaji,
             "total_episodes": anime.totalEpisodes,
             "lasts_seen_episode": 0,
             "watch_status": WatchStatus.NOT_STARTED,
             "rating": anime.rating,
-            "status": anime.status,
+            "status": anime.status.toUpperCase(),
             "image": anime.cover,
             "cover": anime.image
         };
@@ -44,16 +64,21 @@ export default class LibraryService {
             );
     }
     
-    static async removeAnimeFromLibrary(record: Record): Promise<void> {
-        LOGGER.debug("[LibraryService] Removing anime from library.");
+    static async removeAnimeFromLibrary(anime_id: string): Promise<void> {
+        LOGGER.debug("[LibraryService] Trying to remove anime with id '%s' to library.", anime_id);
+        const userId = UserService.getUserInformation()?.id;
+        if (!userId) throw ("[LibraryService] Failed to remove anime to library: \n" + "User is not logged in.");
+        
+        const record = await this.getAnimeFromLibrary(anime_id);
+        if (!record) throw ("[LibraryService] Failed to remove anime to library: \n" + "Anime with id '" + anime_id + "' does not exist.");
+        
         return await pocketBase.collection('library')
             .delete(record.id)
             .then(() => {
                 LOGGER.debug("[LibraryService] Successfully removed anime from the library.");
             }).catch((e: any) => {
-                    throw ("[LibraryService] Failed to remove anime from library: \n" + e.message);
-                }
-            );
+                throw ("[LibraryService] Failed to remove anime from library: \n" + e.message);
+            });
     }
     
 }

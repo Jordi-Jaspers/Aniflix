@@ -14,6 +14,7 @@ export default class AnimeService {
      * Returns the details of an Anime specified by its id.
      */
     static async getAnimeDetails(id: string): Promise<Anime> {
+        LOGGER.debug("[AnimeService] Trying to get details of anime with id '%s'.", id);
         const request = ConsumetEndpoints.ANIME_DETAILS.replace("{id}", id);
         RequestLogger.log(request, {});
         return await fetch(request).then((res) => {

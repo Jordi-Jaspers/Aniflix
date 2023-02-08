@@ -1,25 +1,13 @@
 import {useUserInformation} from "@hooks/useUserInformation";
-import {pocketBase} from "@pocketbase/PocketBase";
-import {LOGGER} from "@util/Logger";
+import LibraryService from "@service/LibraryService";
 import {useQuery} from "react-query";
 
-export default function useIsVerified(isSignedIn: boolean) {
+export default function useIsSavedToLibrary(animeId: string) {
     const id = useUserInformation()?.id;
-    
-    async function isVerified() {
-        let verified = false;
-        if (isSignedIn && id != null) {
-            verified = await pocketBase.collection("users").getOne(id).then((response) => {
-                LOGGER.debug("[UserService] Successfully retrieved user information for user: " + response.id)
-                return response.verified;
-            }).catch((e: any) => {
-                LOGGER.error("[UserService] Failed to retrieve user information for user: " + id, e)
-                return false;
-            });
-        }
-        return verified;
+    const isSavedInLibrary = async () => {
+        const record = await LibraryService.getAnimeFromLibrary(animeId);
+        return !!record;
     }
-    
-    return useQuery({queryFn: isVerified, queryKey: ["isVerified", id]})
-};
+    return useQuery(["isSavedToLibrary", animeId, id], isSavedInLibrary)
+}
 

@@ -28,6 +28,11 @@ export default function AccountMenu() {
                     <div
                         className="relative md:right-[9.5em] top-[5em] rounded-md shadow-md transform bg-black/70 border w-[65px] md:w-[200px]">
                         <ul className="flex flex-col w-full">
+                            <Link href="/donate"
+                                  className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
+                                <Image src={CoffeeIcon} alt={"Coffee Icon"} width={640} height={640} className={"h-6 w-6 text-white"} priority/>
+                                <p className={"font-poppins p-4 hover:underline hidden md:block"}>Donate Coffee</p>
+                            </Link>
                             <Link href="/account"
                                   className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
                                 <UserIcon className={"h-6 w-6"}/>
@@ -42,11 +47,6 @@ export default function AccountMenu() {
                                   className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
                                 <QuestionMarkCircleIcon className={"h-6 w-6"}/>
                                 <p className={"font-poppins p-4 hover:underline hidden md:block"}>Changelog</p>
-                            </Link>
-                            <Link href="/donate"
-                                  className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
-                                <Image src={CoffeeIcon} alt={"Coffee Icon"} width={640} height={640} className={"h-6 w-6 text-white"}/>
-                                <p className={"font-poppins p-4 hover:underline hidden md:block"}>Buy Me A Coffee</p>
                             </Link>
                         </ul>
                         <div className={"w-full h-[1px] bg-white"}/>

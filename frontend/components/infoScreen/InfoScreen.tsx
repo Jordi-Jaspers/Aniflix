@@ -104,7 +104,7 @@ export default function InfoScreen() {
                                         <button className="bannerButton rounded bg-white text-black">
                                             <PlayIcon className="text-black h-8 w-8"/> Play
                                         </button>
-                                        <AddToLibraryIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
+                                        <AddToLibraryIcon anime_id={anime.id.toString()} buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                                         <LikeButtonIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                                     </div>
                                     {anime?.trailer &&
