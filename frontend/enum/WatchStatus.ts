@@ -3,3 +3,5 @@ export enum WatchStatus {
     WATCHING = "WATCHING",
     COMPLETED = "COMPLETED",
 }
+
+export const WATCH_STATUS_LIST: string[] = Object.values(WatchStatus);

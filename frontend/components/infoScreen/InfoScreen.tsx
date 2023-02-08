@@ -102,18 +102,18 @@ export default function InfoScreen() {
                                 <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
                                     <div className="flex items-center space-x-2">
                                         <button className="bannerButton rounded bg-white text-black">
-                                            <PlayIcon className="text-black h-6 w-6"/> Play
+                                            <PlayIcon className="text-black h-8 w-8"/> Play
                                         </button>
-                                        <AddToLibraryIcon/>
-                                        <LikeButtonIcon/>
+                                        <AddToLibraryIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
+                                        <LikeButtonIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                                     </div>
                                     {anime?.trailer &&
                                         <button
                                             className={`${isPlaying ? "flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white" : "hidden"}`}
                                             onClick={toggleMute}>
                                             {isMuted
-                                                ? <SpeakerXMarkIcon className="h-6 w-6 text-white"/>
-                                                : <SpeakerWaveIcon className="h-6 w-6 text-white"/>}
+                                                ? <SpeakerXMarkIcon className="h-8 w-8 text-white"/>
+                                                : <SpeakerWaveIcon className="h-8 w-8 text-white"/>}
                                         </button>
                                     }
                                 </div>

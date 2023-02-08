@@ -8,8 +8,8 @@ interface Props {
 
 export default function AddToLibraryIcon({buttonClassName, iconClassName}: Props) {
     return (
-        <button className={`h-11 w-11 ${buttonClassName ? buttonClassName : ""} defaultButtonRound`}>
-            <PlusIcon className={`${iconClassName ? iconClassName : ""} text-white h-6 w-6`}/>
+        <button className={`${buttonClassName ? buttonClassName : ""} defaultButtonRound`}>
+            <PlusIcon className={`${iconClassName ? iconClassName : ""} text-white`}/>
         </button>
     )
 };

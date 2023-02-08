@@ -2,6 +2,7 @@ import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {Status} from "@enum/Status";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
+import LikeButtonIcon from "@icons/LikeButtonIcon";
 import {Recommendation} from "@interfaces/Recommendation";
 import Image from "next/image";
 import router from "next/router";
@@ -41,14 +42,14 @@ export default function RecommendationCard({recommendation}: Props) {
             <div className={"min-h-[100%] px-[1em]"}>
                 <div className={"flex flex-row justify-between py-[1em]"}>
                     <div>
-                        <p className="text-[#46d369]  font-poppins">
+                        <p className="text-[#46d369] font-poppins">
                             {recommendation?.rating ? recommendation.rating : "0"}% match
                         </p>
-                        <p className="text-white font-light font-poppins">
+                        <p className="text-[#666666] font-light font-poppins">
                             {recommendation?.status ? recommendation.status : Status.UNKNOWN}
                         </p>
                     </div>
-                    <AddToLibraryIcon/>
+                    <AddToLibraryIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                 </div>
                 <p className={"text-[#d2d2d2] font-poppins font-light text-sm"}>
                     {title}

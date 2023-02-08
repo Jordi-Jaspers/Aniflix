@@ -32,10 +32,8 @@ export default function Home({anime}: Props) {
             <main className="lg:space-t-24 h-fit">
                 <HomeScreen anime={anime} className={showSearchResults ? "hidden" : "visible"}/>
                 {showSearchResults && <SearchResultScreen/>}
+                {showInfoScreen && <InfoScreen/>}
             </main>
-            
-            {/*  ANIME INFO SCREEN */}
-            {showInfoScreen && <InfoScreen/>}
         </div>
     )
 }
