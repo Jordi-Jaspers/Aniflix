@@ -1,4 +1,5 @@
 import {MediaType} from "@enum/MediaType";
+import {Status} from "@enum/Status";
 import {Character} from "./Character";
 import {Date} from "./Date";
 import {Episode} from "./Episode";
@@ -18,7 +19,7 @@ export interface Anime {
     trailer: Trailer
     popularity: number,
     description: string,
-    status: string,
+    status: Status,
     totalEpisodes: number,
     episodes: Episode[],
     episodeTitle?: string,

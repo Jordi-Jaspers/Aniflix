@@ -11,30 +11,6 @@ export default class UserService {
         return pocketBase.authStore.isValid;
     }
     
-    static async isVerified(id: string | undefined): Promise<boolean> {
-        if (id === undefined) {
-            LOGGER.debug("[UserService] id must be provided to verify user.");
-            return false;
-        }
-        
-        let isVerified: boolean;
-        const user: Record | null = await this.getUserInformationById(id);
-        isVerified = user?.verified;
-        LOGGER.debug("[UserService] User with email '%s' is verified: '%s'", user?.email, isVerified);
-        return isVerified;
-    }
-    
-    static isAuthorized(path: string): boolean {
-        LOGGER.debug("[UserService] Verifying if the user is authorized to access: '%s'", path)
-        const rootPath = path.split('?')[0];
-        let isValid: boolean = false;
-        if (PUBLIC_PATHS_LIST.includes(rootPath) || (this.isAuthenticated() && this.isVerified(this.getUserInformation()?.id))) {
-            isValid = true;
-        }
-        LOGGER.debug("[UserService] User with email '%s' is authorized: '%s'", this.getUserInformation()?.email, isValid)
-        return isValid
-    }
-    
     static requestVerificationEmail(email: string): Promise<{ isSuccess: boolean, isError: boolean, error: string }> {
         LOGGER.debug("[UserService] Sending verification email to user: '%s'", email)
         return pocketBase.collection("users").requestVerification(email).then(() => {
@@ -140,14 +116,13 @@ export default class UserService {
         return pocketBase.authStore.model;
     }
     
-    static async getUserInformationById(id: string): Promise<Record | null> {
+    static async getUserInformationById(id: string): Promise<Record> {
         LOGGER.debug("[UserService] Retrieving user information for user: " + id)
         return await pocketBase.collection("users").getOne(id).then((response) => {
             LOGGER.debug("[UserService] Successfully retrieved user information for user: " + response.id)
             return response;
         }).catch((e: any) => {
-            LOGGER.error("[UserService] Failed to retrieve user information for user: " + id, e)
-            return null;
+            throw ("[UserService] Failed to retrieve user information for user with id '" + id + "':\n" + e.message);
         });
     }
     

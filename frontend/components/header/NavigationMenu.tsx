@@ -8,7 +8,7 @@ const pages = [
     {name: "Home", path: "/"},
     {name: "Trending", path: "/trending"},
     {name: "Popular", path: "/popular"},
-    {name: "Favorites", path: "/favorites"},
+    {name: "My Library", path: "/library"},
 ];
 
 export default function NavigationMenu() {
