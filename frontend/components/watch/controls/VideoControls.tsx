@@ -9,7 +9,6 @@ import {
 } from "@atoms/VideoPlayerAtom";
 import EpisodesMenu from "@components/watch/controls/EpisodesMenu";
 import ResolutionMenu from "@components/watch/controls/ResolutionMenu";
-import TimelineControls from "@components/watch/controls/TimelineControls";
 import VolumeControls from "@components/watch/controls/VolumeControls";
 import VideoPlayer from "@components/watch/VideoPlayer";
 import {PRIVATE_PATHS} from "@enum/Paths";
@@ -22,14 +21,13 @@ import {LOGGER} from "@util/Logger";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import React, {createRef, useEffect, useRef, useState} from 'react';
+import Slider from "react-input-slider";
 import {useRecoilValue, useSetRecoilState} from "recoil";
 
 interface Props {
     className?: string;
 }
 
-// TODO: Fix video player not playing on first click
-// TODO: remove full screen controls and add custom controls
 export default function VideoControls({className}: Props) {
     const router = useRouter();
     const videoRef = createRef<HTMLVideoElement>();
@@ -43,6 +41,17 @@ export default function VideoControls({className}: Props) {
     const setMuted = useSetRecoilState(isMuteState);
     const [isHoveringVolume, setIsHoveringVolume] = useState<boolean>(false);
     const {anime, episode, streamingLinks, volume, isMuted, isPlaying, duration, currentTime} = useRecoilValue(videoPlayerState);
+    
+    const remainingTime = duration - currentTime;
+    const minutes: string = Math.floor(remainingTime / 60).toString().padStart(2, '0');
+    const seconds: string = Math.floor(remainingTime % 60).toString().padStart(2, '0');
+    
+    const handleTimeChange = (time: number) => {
+        const videoPlayer = videoRef.current;
+        if (!videoPlayer) return;
+        videoPlayer.currentTime = time
+        setCurrentTime(time);
+    }
     
     const handleFocus = () => {
         if (!buttonRef.current) return;
@@ -137,7 +146,7 @@ export default function VideoControls({className}: Props) {
             videoPlayer.pause();
             setIsPlaying(false);
         }
-    }, [videoRef, volume, isMuted, isPlaying, currentTime]);
+    }, [videoRef, volume, isMuted, isPlaying]);
     
     return (
         <>
@@ -157,7 +166,36 @@ export default function VideoControls({className}: Props) {
                 
                 {/* Bottom part of the video controls */}
                 <div className="absolute w-screen bottom-0 pb-4 px-4 h-auto">
-                    <TimelineControls className={`${isHoveringVolume ? "hidden" : "block"}`} duration={duration}/>
+                    <div
+                        className={`${isHoveringVolume ? "hidden" : "block"} w-full h-full flex flex-row justify-center items-center space-x-4`}>
+                        <Slider
+                            axis="x"
+                            x={currentTime}
+                            xmin={0}
+                            xmax={duration}
+                            onChange={({x}) => handleTimeChange(x)}
+                            styles={{
+                                track: {
+                                    width: '100%',
+                                    height: 3,
+                                    backgroundColor: '#374151',
+                                    borderRadius: 2,
+                                    cursor: 'pointer',
+                                },
+                                active: {
+                                    backgroundColor: '#f00',
+                                },
+                                thumb: {
+                                    width: 10,
+                                    height: 10,
+                                    backgroundColor: '#f00',
+                                    borderRadius: 10,
+                                    cursor: 'pointer',
+                                }
+                            }}
+                        />
+                        <div className={"font-poppins text-white px-2"}>{minutes}:{seconds}</div>
+                    </div>
                     <div className="flex justify-between items-end px-4 py-2 h-full">
                         <div className="flex items-end justify-evenly space-x-6">
                             <button className="videoPlayerControls" onClick={() => setIsPlaying(!isPlaying)} ref={buttonRef}>

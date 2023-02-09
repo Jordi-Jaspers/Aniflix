@@ -50,8 +50,8 @@ export default class LibraryService {
             "watch_status": WatchStatus.NOT_STARTED,
             "rating": anime.rating,
             "status": anime.status.toUpperCase(),
-            "image": anime.cover,
-            "cover": anime.image
+            "image": anime.image,
+            "cover": anime.cover
         };
         
         return await pocketBase.collection('library')

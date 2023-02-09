@@ -41,8 +41,8 @@ export default function Trending() {
             {!showSearchResults &&
                 <section className={"pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 flex flex-col"}>
                     <div className="h-fit pt-[2.5%] space-y-4">
-                        <h1 className="font-poppins font-semibold text-[#e5e5e5] text-2xl">
-                            Popular Anime
+                        <h1 className="font-poppins font-semibold text-[#e5e5e5] text-4xl">
+                            Trending Anime
                         </h1>
                     </div>
                     <div className={"min-h-screen h-fit z-10 flex justify-evenly"}>

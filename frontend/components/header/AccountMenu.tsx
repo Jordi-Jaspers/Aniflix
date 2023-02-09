@@ -9,16 +9,18 @@ import React, {useState} from 'react'
 
 export default function AccountMenu() {
     const [showAccountMenu, setShowAccountMenu] = useState(false);
-    const user = useUserInformation();
+    const {avatar} = useUserInformation();
+    
     return (
-        <div className={"flex flex-row w-[64px] h-[32px] items-center"} onMouseEnter={() => setShowAccountMenu(true)}>
+        <div className={"flex flex-row justify-center w-[64px] h-[32px] items-center"} onMouseEnter={() => setShowAccountMenu(true)}>
             <div className="flex flex-row items-center space-x-2">
                 <Image
-                    src={UserService.getFileUrl(user, user?.avatar)}
+                    src={avatar}
                     alt="Profile Picture"
-                    className="cursor-pointer rounded w-[32px] h-[32px] ml-2"
+                    className="cursor-pointer rounded w-[36px] h-[36px] ml-2"
                     width={640}
                     height={640}
+                    priority
                 />
                 <ChevronUpIcon className={`${showAccountMenu && "rotate-180"} w-7 h-7 duration-300`}/>
             </div>
@@ -30,7 +32,8 @@ export default function AccountMenu() {
                         <ul className="flex flex-col w-full">
                             <Link href="/donate"
                                   className={"text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded"}>
-                                <Image src={CoffeeIcon} alt={"Coffee Icon"} width={640} height={640} className={"h-6 w-6 text-white"} priority/>
+                                <Image src={CoffeeIcon} alt={"Coffee Icon"} width={640} height={640} className={"h-6 w-6 text-white"}
+                                       priority/>
                                 <p className={"font-poppins p-4 hover:underline hidden md:block"}>Donate Coffee</p>
                             </Link>
                             <Link href="/account"

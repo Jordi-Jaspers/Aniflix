@@ -1,19 +1,16 @@
 import {useUserInformation} from "@hooks/useUserInformation";
-import {pocketBase} from "@pocketbase/PocketBase";
-import {LOGGER} from "@util/Logger";
+import UserService from "@service/UserService";
 import {useQuery} from "react-query";
 
 export default function useIsVerified(isSignedIn: boolean) {
-    const id = useUserInformation()?.id;
+    const {id} = useUserInformation();
     
     async function isVerified() {
         let verified = false;
         if (isSignedIn && id != null) {
-            verified = await pocketBase.collection("users").getOne(id).then((response) => {
-                LOGGER.debug("[UserService] Successfully retrieved user information for user: " + response.id)
-                return response.verified;
+            verified = await UserService.getUserInformationById(id).then((response) => {
+                return response ? response.verified : false;
             }).catch((e: any) => {
-                LOGGER.error("[UserService] Failed to retrieve user information for user: " + id, e)
                 return false;
             });
         }

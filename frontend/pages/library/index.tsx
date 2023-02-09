@@ -5,6 +5,7 @@ import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
 import ResultCard from "@components/ResultCard";
 import {WATCH_STATUS_LIST} from "@enum/WatchStatus";
+import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";
 import LibraryService from "@service/LibraryService";
 import Head from "next/head";
@@ -15,6 +16,7 @@ export default function Library() {
     const cols = useDynamicColumns(205);
     const [records, setRecords] = useState<Record<any, any>[]>([]);
     const [watchStatuses, setWatchStatuses] = useState<string[]>([]);
+    const [showFilters, setShowFilters] = useState<boolean>(false);
     const showInfoScreen = useRecoilValue(infoScreenState)
     const showSearchResults = useRecoilValue(showSearchResultsState)
     
@@ -45,19 +47,28 @@ export default function Library() {
             
             {!showSearchResults &&
                 <section className={"pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 flex flex-col"}>
-                    <div className="h-fit pt-[2.5%] space-y-4">
-                        <h1 className="font-poppins font-semibold text-[#e5e5e5] text-2xl">
+                    <div className="h-fit pt-[2.5%] flex flex-row items-end space-x-2">
+                        <h1 className="font-poppins font-semibold text-[#e5e5e5] text-4xl">
                             My Library
                         </h1>
-                        <div className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide w-full justify-center">
-                            {watchStatuses.map((status) => (
-                                <div className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
-                                <span className={"font-poppins text-sm"}>
-                                    {getUniformTitle(status)}
-                                </span>
-                                </div>
-                            ))}
-                        </div>
+                        <button className="btn btn-sm border-white hover:border-white bg-[#1a1920] space-x-2"
+                                onClick={() => setShowFilters(!showFilters)}>
+                            <span className={"font-poppins text-md text-[#e5e5e5]"}>Filters</span>
+                            <ChevronUpIcon className={`${showFilters && "rotate-180"} w-4 h-4 duration-300`}/>
+                        </button>
+                    </div>
+
+                    <div className={`${
+                        showFilters
+                            ? "ease-in duration-500 h-fit w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"
+                            : "ease-out duration-500 h-0 w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"}`}>
+                        {watchStatuses.map((status) => (
+                            <div className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
+                            <span className={"font-poppins text-sm"}>
+                                {getUniformTitle(status)}
+                            </span>
+                            </div>
+                        ))}
                     </div>
 
                     <div className={"min-h-screen h-fit z-10 flex justify-evenly"}>

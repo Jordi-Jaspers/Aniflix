@@ -8,7 +8,7 @@ export default function VerificationButton() {
     const [isError, setIsError] = useState<boolean>(false);
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
-    const user = useUserInformation();
+    const {user} = useUserInformation();
     
     async function requestVerification() {
         const response = await UserService.requestVerificationEmail(user?.email);

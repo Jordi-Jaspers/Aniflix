@@ -18,7 +18,12 @@ export default function NavigationMenu() {
     return (
         <div className="flex flex-row items-center w-fit">
             <AniFlixLogo className="cursor-pointer object-contain w-fit h-[2em]"/>
-            <div className="flex space-x-2 items-center cursor-pointer pl-4">
+            {/*only set the onmouseenter property if the screen is below medium size*/}
+            <div className="flex space-x-2 items-center cursor-pointer pl-4" onMouseEnter={() => {
+                if (window.innerWidth < 768) {
+                    setShowNavigationMenu(true);
+                }
+            }}>
                 <ul className="space-x-4 flex">
                     {pages.map(({name, path}) => (
                         <li key={path} className={`headerLink ${router.pathname === path ? "headerLinkActive" : ""}`}>
@@ -26,9 +31,7 @@ export default function NavigationMenu() {
                         </li>
                     ))}
                 </ul>
-                <ChevronUpIcon className={`${showNavigationMenu && "rotate-180"} w-4 h-4 duration-300 md:hidden`}
-                               onMouseEnter={() => setShowNavigationMenu(true)}
-                />
+                <ChevronUpIcon className={`${showNavigationMenu && "rotate-180"} w-4 h-4 duration-300 md:hidden`}/>
                 {showNavigationMenu && (
                     <div className={"absolute left-0 z-100 bg-transparent h-full w-fit h-full"}
                          onMouseLeave={() => setShowNavigationMenu(false)}>

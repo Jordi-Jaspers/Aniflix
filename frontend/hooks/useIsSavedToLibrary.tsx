@@ -3,11 +3,13 @@ import LibraryService from "@service/LibraryService";
 import {useQuery} from "react-query";
 
 export default function useIsSavedToLibrary(animeId: string) {
-    const id = useUserInformation()?.id;
+    const {id} = useUserInformation();
+    
     const isSavedInLibrary = async () => {
         const record = await LibraryService.getAnimeFromLibrary(animeId);
         return !!record;
     }
+    
     return useQuery(["isSavedToLibrary", animeId, id], isSavedInLibrary)
 }
 

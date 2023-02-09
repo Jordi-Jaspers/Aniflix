@@ -74,7 +74,7 @@ export default function InfoScreen() {
                     <div
                         className={"bg-[#1a1920] fixed !top-7 !bottom-7 z-50 mx-auto h-auto w-full max-w-4xl overflow-hidden overflow-y-scroll scrollbar-hide rounded-md"}>
                         <button
-                            className={"absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40"}
+                            className={"absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"}
                             onClick={handleClose}>
                             <XMarkIcon className={"h-6 w-6"}/>
                         </button>
