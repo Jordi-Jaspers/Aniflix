@@ -1,5 +1,22 @@
 name: "Aniflix"
 services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    restart: always
+    networks:
+      - aniflix
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    environment:
+      - NEXT_PUBLIC_CONSUMET_BASE_URL=${NEXT_PUBLIC_CONSUMET_BASE_URL}
+      - NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
+      - NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
+      - NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
+
   consumet:
     build:
       dockerfile: Dockerfile
@@ -8,14 +25,14 @@ services:
     networks:
       - aniflix
     ports:
-      - 3001:3000
+      - 3001:3001
     expose:
-      - 3000
-    volumes:
-      - ./data/consumet:/data
+      - 3001
     environment:
       - REDIS_HOST=${CONSUMET_REDIS_HOST}
       - REDIS_PORT=${CONSUMET_REDIS_PORT}
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
 
   redis:
     image: redis:latest

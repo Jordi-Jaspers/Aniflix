@@ -1,6 +1,6 @@
 {
   "name": "aniflix",
-  "description": "A Netflix UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device.",
+  "description": "A beautiful UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device.",
   "version": "0.0.0-SNAPSHOT",
   "author": "Jordi Jaspers <jordijaspers@gmail.com>",
   "bugs": {
@@ -22,14 +22,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm install && next dev",
-    "dev-turbo": "next dev --turbo",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint",
     "clean": "rm -Rf dist node_modules .next/cache",
-    "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean && npm install && npm run dev",
-    "clean:example": "rnb --c"
+    "dev-turbo": "next dev --turbo",
+    "start-turbo": "next start --turbo"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -59,6 +59,7 @@
     "react-spring": "^9.6.1",
     "react-youtube": "^10.1.0",
     "recoil": "^0.7.6",
+    "sharp": "^0.31.3",
     "tailwind-scrollbar": "^2.1.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-textshadow": "^2.1.3",
