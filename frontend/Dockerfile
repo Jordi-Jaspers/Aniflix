@@ -1,8 +1,5 @@
 FROM node:19 as builder
 
-LABEL version="0.0.0-SNAPSHOT"
-LABEL description="A beautiful UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device."
-
 # update packages, to reduce risk of vulnerabilities
 RUN apt-get update && apt-get upgrade -y && apt-get autoclean -y && apt-get autoremove -y
 

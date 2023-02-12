@@ -1,7 +1,7 @@
 {
   "name": "aniflix",
   "description": "A beautiful UI for your favorite anime shows, movies, and tv series. Watch anime for free without ads on any device.",
-  "version": "0.0.0-SNAPSHOT",
+  "version": "0.0.2-SNAPSHOT",
   "author": "Jordi Jaspers <jordijaspers@gmail.com>",
   "bugs": {
     "url": "https://github.com/Jordi-Jaspers/aniflix/issues"
