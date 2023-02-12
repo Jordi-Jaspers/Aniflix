@@ -1,28 +1,32 @@
 {
-  "extends": "next/core-web-vitals",
-  "import/order": [
-    "error",
-    {
-      "groups": [
-        "builtin",
-        "external",
-        "internal"
-      ],
-      "pathGroups": [
-        {
-          "pattern": "react",
-          "group": "external",
-          "position": "before"
+  "extends": ["next", "prettier"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "internal",
+          "builtin",
+          "external"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "react"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
         }
-      ],
-      "pathGroupsExcludedImportTypes": [
-        "react"
-      ],
-      "newlines-between": "always",
-      "alphabetize": {
-        "order": "asc",
-        "caseInsensitive": true
       }
-    }
-  ]
+    ]
+  }
 }

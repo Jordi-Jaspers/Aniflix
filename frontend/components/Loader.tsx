@@ -1,6 +1,9 @@
 import AniFlixLogo from "@icons/AniFlixLogo";
-import {useRouter} from "next/router";
+
 import React, {ReactNode, useEffect, useState} from 'react'
+
+import {useRouter} from "next/router";
+
 
 export default function Loader({children}: { children: ReactNode }) {
     const [loading, setLoading] = useState<boolean>(false);

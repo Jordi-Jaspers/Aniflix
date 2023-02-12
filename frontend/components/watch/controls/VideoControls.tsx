@@ -1,3 +1,5 @@
+
+
 import {
     currentTimeState,
     durationState,
@@ -12,18 +14,21 @@ import ResolutionMenu from "@components/watch/controls/ResolutionMenu";
 import VolumeControls from "@components/watch/controls/VolumeControls";
 import VideoPlayer from "@components/watch/VideoPlayer";
 import {PRIVATE_PATHS} from "@enum/Paths";
-import {ArrowsPointingOutIcon} from "@heroicons/react/24/outline";
-import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import Forward from "@svg/Forward.svg";
 import Forward120 from "@svg/Forward120.svg";
 import NextEpisode from "@svg/NextEpisode.svg";
 import Rewind from "@svg/Rewind.svg";
 import {LOGGER} from "@util/Logger";
+
+import React, {createRef, useEffect, useRef, useState} from 'react';
+
+import {ArrowsPointingOutIcon} from "@heroicons/react/24/outline";
+import {ArrowLeftIcon, PauseIcon, PlayIcon} from "@heroicons/react/24/solid";
 import Image from "next/image";
 import {useRouter} from "next/router";
-import React, {createRef, useEffect, useRef, useState} from 'react';
 import Slider from "react-input-slider";
 import {useRecoilValue, useSetRecoilState} from "recoil";
+
 
 interface Props {
     className?: string;

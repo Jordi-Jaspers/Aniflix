@@ -1,9 +1,14 @@
 import {resolutionState, sourceState} from "@atoms/VideoPlayerAtom";
-import {AdjustmentsHorizontalIcon} from "@heroicons/react/24/outline";
 import {MediaSource} from "@interfaces/MediaSource";
 import {LOGGER} from "@util/Logger";
+
 import React, {useState} from 'react';
+
+import {AdjustmentsHorizontalIcon} from "@heroicons/react/24/outline";
 import {useRecoilState, useSetRecoilState} from "recoil";
+
+
+
 
 interface Props {
     className?: string;

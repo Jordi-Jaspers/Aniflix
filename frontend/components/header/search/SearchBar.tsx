@@ -1,8 +1,12 @@
 import {searchResultsState, showSearchResultsState} from "@atoms/SearchResultScreen";
 import AnimeService from "@consumet/AnimeService";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+
 import React, {useEffect, useRef, useState} from "react";
+
+import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {useSetRecoilState} from "recoil";
+
+
 
 const SearchBar = () => {
     const [isExpanded, setExpanded] = useState(false);

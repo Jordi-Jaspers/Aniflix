@@ -1,8 +1,10 @@
+
 import AnimeService from "@consumet/AnimeService";
 import {WatchStatus} from "@enum/WatchStatus";
 import {pocketBase} from "@pocketbase/PocketBase";
 import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
+
 import {Record} from "pocketbase";
 
 export default class LibraryService {

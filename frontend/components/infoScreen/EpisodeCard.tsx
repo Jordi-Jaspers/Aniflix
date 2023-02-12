@@ -2,10 +2,15 @@ import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
 import {Episode} from "@interfaces/Episode";
+
+import React from "react";
+
 import Image from "next/image";
 import router from "next/router";
-import React from "react";
 import {useRecoilValue, useSetRecoilState} from "recoil";
+
+
+
 
 interface Props {
     episode: Episode

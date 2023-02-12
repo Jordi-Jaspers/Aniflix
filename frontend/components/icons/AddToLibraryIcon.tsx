@@ -1,9 +1,12 @@
-import {CheckIcon, PlusIcon} from "@heroicons/react/24/solid";
 import useIsSavedToLibrary from "@hooks/useIsSavedToLibrary";
 import LibraryService from "@service/LibraryService";
 import {LOGGER} from "@util/Logger";
+
 import React from "react";
+
+import {CheckIcon, PlusIcon} from "@heroicons/react/24/solid";
 import {animated, useSpring} from "react-spring";
+
 
 interface Props {
     anime_id: string;

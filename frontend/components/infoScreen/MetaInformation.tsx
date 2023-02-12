@@ -1,5 +1,7 @@
 import {Anime} from "@interfaces/Anime";
+
 import React from "react";
+
 
 interface Props {
     className?: string;

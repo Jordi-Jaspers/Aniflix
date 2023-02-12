@@ -1,7 +1,11 @@
+
+
 import {searchResultsState} from "@atoms/SearchResultScreen";
 import ResultCard from "@components/ResultCard";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";
+
 import React from "react";
+
 import {useRecoilValue} from "recoil";
 
 export default function SearchResultScreen() {
@@ -14,6 +18,7 @@ export default function SearchResultScreen() {
                      style={{gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`}}>
                     {results.map((result) => (
                         <ResultCard
+                            key={result.id.toString()}
                             id={result.id.toString()}
                             title={result.title.english ? result.title.english : result.title.romaji}
                             image={result.image}

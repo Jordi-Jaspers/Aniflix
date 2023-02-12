@@ -1,13 +1,19 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {Status} from "@enum/Status";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import HoveringPlayIcon from "@icons/HoveringPlayIcon";
 import LikeButtonIcon from "@icons/LikeButtonIcon";
 import {Recommendation} from "@interfaces/Recommendation";
+
+import React from "react";
+
 import Image from "next/image";
 import router from "next/router";
-import React from "react";
 import {useSetRecoilState} from "recoil";
+
+
 
 interface Props {
     recommendation: Recommendation

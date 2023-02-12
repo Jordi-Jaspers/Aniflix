@@ -2,10 +2,14 @@ import {isMuteState, volumeState} from "@atoms/VideoPlayerAtom";
 import SpeakerHigh from "@svg/SpeakerHigh.svg";
 import SpeakerLow from "@svg/SpeakerLow.svg";
 import SpeakerOff from "@svg/SpeakerOff.svg";
-import Image from "next/image";
+
 import React, {useEffect} from 'react';
+
+import Image from "next/image";
 import Slider from "react-input-slider";
 import {useRecoilState} from "recoil";
+
+
 
 interface Props {
     className?: string;

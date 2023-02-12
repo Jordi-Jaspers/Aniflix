@@ -1,14 +1,18 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
-import {InformationCircleIcon} from '@heroicons/react/24/outline'
-import {PlayIcon} from '@heroicons/react/24/solid'
 import SpeakerButton from "@icons/SpeakerButton";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import Image from 'next/image'
+
 import React, {useEffect, useState} from 'react';
+
+import {InformationCircleIcon} from '@heroicons/react/24/outline'
+import {PlayIcon} from '@heroicons/react/24/solid'
+import Image from 'next/image'
 import YouTube from 'react-youtube';
 import {useRecoilState, useSetRecoilState} from "recoil";
+
+
 
 const opts = {
     height: '100%',

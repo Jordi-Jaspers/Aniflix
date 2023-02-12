@@ -7,9 +7,12 @@ import ResultCard from "@components/ResultCard";
 import AnimeService from "@consumet/AnimeService";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";
 import {Anime} from "@interfaces/Anime";
-import Head from "next/head";
+
 import React, {useEffect, useState} from "react";
+
+import Head from "next/head";
 import {useRecoilValue} from "recoil";
+
 
 export default function Popular() {
     const {cols, width} = useDynamicColumns()
@@ -24,7 +27,7 @@ export default function Popular() {
                 setAnime([...anime, ...fetchedAnime]);
             })
         }
-    }, [currentPage]);
+    }, [currentPage, anime]);
     
     return (
         <div className={"relative h-full w-full bg-[#1E1E25] z-0"}>
@@ -53,6 +56,7 @@ export default function Popular() {
                                  style={{gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`}}>
                                 {anime.map((result) => (
                                     <ResultCard
+                                        key={result.id}
                                         id={result.id.toString()}
                                         title={result.title.english ? result.title.english : result.title.romaji}
                                         image={result.image}

@@ -1,3 +1,5 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
@@ -5,9 +7,12 @@ import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import LikeButtonIcon from "@icons/LikeButtonIcon";
 import {Anime} from "@interfaces/Anime";
 import {LOGGER} from "@util/Logger";
-import Image from "next/image";
+
 import React from "react";
+
+import Image from "next/image";
 import {useSetRecoilState} from "recoil";
+
 
 interface Props {
     id: string;

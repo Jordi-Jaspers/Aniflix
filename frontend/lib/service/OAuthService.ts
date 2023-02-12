@@ -1,7 +1,9 @@
+
 import {PRIVATE_PATHS, PUBLIC_PATHS} from "@enum/Paths";
 import {pocketBase} from "@pocketbase/PocketBase";
 import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
+
 import router from "next/router";
 import {AuthProviderInfo, RecordAuthResponse} from "pocketbase";
 

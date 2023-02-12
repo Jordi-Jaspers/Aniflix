@@ -1,8 +1,10 @@
+
 import Banner from "@components/Banner";
 import Row from "@components/Row";
 import AnimeService from "@consumet/AnimeService";
 import {Genres, getRandomGenres} from "@enum/Genre";
 import {Anime} from "@interfaces/Anime";
+
 import React from "react";
 
 interface Props {

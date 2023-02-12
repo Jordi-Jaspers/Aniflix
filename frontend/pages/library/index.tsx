@@ -1,3 +1,5 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
 import Header from "@components/header/Header";
@@ -5,12 +7,17 @@ import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
 import ResultCard from "@components/ResultCard";
 import {WATCH_STATUS_LIST} from "@enum/WatchStatus";
-import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";
 import LibraryService from "@service/LibraryService";
-import Head from "next/head";
+
 import React, {useEffect, useState} from "react";
+
+import {ChevronUpIcon} from "@heroicons/react/24/solid";
+import Head from "next/head";
 import {useRecoilValue} from "recoil";
+
+
+
 
 export default function Library() {
     const {cols, width} = useDynamicColumns()
@@ -63,7 +70,7 @@ export default function Library() {
                             ? "ease-in duration-500 h-fit w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"
                             : "ease-out duration-500 h-0 w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"}`}>
                         {watchStatuses.map((status) => (
-                            <div className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
+                            <div key={status} className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
                             <span className={"font-poppins text-sm"}>
                                 {getUniformTitle(status)}
                             </span>
@@ -75,6 +82,7 @@ export default function Library() {
                         <div className={`grid gap-4 py-4 h-fit`} style={{gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`}}>
                             {records.map((record) => (
                                 <ResultCard
+                                    key={record.anime_id}
                                     id={record.anime_id}
                                     title={record.title}
                                     image={record.image}

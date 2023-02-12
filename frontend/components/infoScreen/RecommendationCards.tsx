@@ -1,5 +1,7 @@
+
 import RecommendationCard from "@components/infoScreen/RecommendationCard";
 import {Recommendation} from "@interfaces/Recommendation";
+
 import React from "react";
 
 interface Props {

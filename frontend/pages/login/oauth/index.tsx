@@ -1,7 +1,10 @@
 import {useOAuthAuthorization} from "@hooks/useOAuthAuthorization";
 import AniFlixLogo from "@icons/AniFlixLogo";
-import Head from "next/head";
+
 import React from "react";
+
+import Head from "next/head";
+
 
 export default function OAuthRedirect() {
     useOAuthAuthorization();

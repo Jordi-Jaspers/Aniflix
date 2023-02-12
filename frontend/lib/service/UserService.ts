@@ -1,7 +1,9 @@
+
 import {PUBLIC_PATHS} from "@enum/Paths";
 import {OAuthUser} from "@interfaces/OAuthUser";
 import {pocketBase} from "@pocketbase/PocketBase";
 import {LOGGER} from "@util/Logger";
+
 import router from "next/router";
 import {Admin, Record} from "pocketbase";
 

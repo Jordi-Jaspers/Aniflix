@@ -1,11 +1,14 @@
-import {ArrowLeftOnRectangleIcon, CogIcon, QuestionMarkCircleIcon, UserIcon} from "@heroicons/react/24/outline";
-import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useUserInformation} from "@hooks/useUserInformation";
 import UserService from "@service/UserService";
 import CoffeeIcon from "@svg/Coffee.svg";
+
+import React, {useState} from 'react'
+
+import {ArrowLeftOnRectangleIcon, CogIcon, QuestionMarkCircleIcon, UserIcon} from "@heroicons/react/24/outline";
+import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
-import React, {useState} from 'react'
+
 
 const DONATION_URL: string = process.env.NEXT_PUBLIC_STRIPE_LINK ? process.env.NEXT_PUBLIC_STRIPE_LINK : ""
 export default function AccountMenu() {

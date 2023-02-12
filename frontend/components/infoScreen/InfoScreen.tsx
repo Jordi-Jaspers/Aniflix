@@ -1,18 +1,23 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import EpisodeCards from "@components/infoScreen/EpisodeCards";
 import MetaInformation from "@components/infoScreen/MetaInformation";
 import RecommendationCards from "@components/infoScreen/RecommendationCards";
-import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import LikeButtonIcon from "@icons/LikeButtonIcon";
 import SpeakerButton from "@icons/SpeakerButton";
+
+import React, {useState} from "react";
+
+import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import MuiModal from '@mui/material/Modal'
 import Image from "next/image";
 import router from "next/router";
-import React, {useState} from "react";
 import YouTube from "react-youtube";
 import {useRecoilState, useRecoilValue} from "recoil";
+
 
 const opts = {
     height: '100%',

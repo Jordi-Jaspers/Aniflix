@@ -1,3 +1,5 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
 import Header from "@components/header/Header";
@@ -6,9 +8,12 @@ import HomeScreen from "@components/HomeScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
 import AnimeService from "@consumet/AnimeService";
 import {Anime} from "@interfaces/Anime";
-import Head from 'next/head'
+
 import React from "react";
+
+import Head from 'next/head'
 import {useRecoilValue} from "recoil";
+
 
 interface Props {
     anime: Anime

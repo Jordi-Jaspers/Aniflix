@@ -1,13 +1,19 @@
+
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
 import {LOGGER} from "@util/Logger";
+
+import {useState} from 'react';
+
 import Image from 'next/image'
 import {useRouter} from "next/router";
-import {useState} from 'react';
 import {useSetRecoilState} from 'recoil'
+
+
 
 interface Props {
     anime: Anime | RecentEpisode;

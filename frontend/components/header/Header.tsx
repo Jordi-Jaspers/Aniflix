@@ -1,9 +1,14 @@
+
+
 import AccountMenu from "@components/header/AccountMenu";
 import NavigationMenu from "@components/header/NavigationMenu";
 import SearchBar from "@components/header/search/SearchBar";
-import {BellIcon} from '@heroicons/react/24/outline';
 import {useIsScrolled} from "@hooks/useIsScrolled";
+
 import React from 'react'
+
+import {BellIcon} from '@heroicons/react/24/outline';
+
 
 export default function Header() {
     const isScrolled = useIsScrolled();

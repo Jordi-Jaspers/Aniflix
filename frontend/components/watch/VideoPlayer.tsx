@@ -1,8 +1,12 @@
 import {currentTimeState, sourceState, videoPlayerState} from "@atoms/VideoPlayerAtom";
 import {LOGGER} from "@util/Logger";
-import Hls from 'hls.js';
+
 import React, {useEffect, useState} from 'react';
+
+import Hls from 'hls.js';
 import {useRecoilValue, useSetRecoilState} from "recoil";
+
+
 
 interface Props {
     controls?: boolean;

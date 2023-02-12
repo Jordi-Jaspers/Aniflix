@@ -27,7 +27,7 @@ COPY --chown=aniflix:aniflix package*.json /home/aniflix/app
 COPY --chown=aniflix:aniflix . /home/aniflix/app
 
 # install dependencies here, for better reuse of layers
-RUN npm install
+RUN npm install && npm update && npm cache clean --force
 
 # Build the application
 RUN npm run build

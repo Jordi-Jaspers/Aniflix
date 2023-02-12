@@ -1,7 +1,9 @@
+
 import ErrorAlert from "@components/alerts/ErrorAlert";
 import SuccessAlert from "@components/alerts/SuccessAlert";
 import {useUserInformation} from "@hooks/useUserInformation";
 import UserService from "@service/UserService";
+
 import React, {useState} from "react";
 
 export default function VerificationButton() {

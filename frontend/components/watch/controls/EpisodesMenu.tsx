@@ -1,11 +1,15 @@
 import {episodeState} from "@atoms/VideoPlayerAtom";
-import {QueueListIcon} from "@heroicons/react/24/outline";
 import {Episode} from "@interfaces/Episode";
 import {LOGGER} from "@util/Logger";
+
+import React, {useState} from 'react';
+
+import {QueueListIcon} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import router from "next/router";
-import React, {useState} from 'react';
 import {useRecoilValue} from "recoil";
+
+
 
 interface Props {
     className?: string;

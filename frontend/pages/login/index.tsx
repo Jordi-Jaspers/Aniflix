@@ -1,3 +1,5 @@
+
+
 import LoginForm from "@components/login/LoginForm";
 import RegisterForm from "@components/login/RegisterForm";
 import VerificationButton from "@components/login/VerificationButton";
@@ -6,8 +8,10 @@ import AniFlixLogo from "@icons/AniFlixLogo";
 import GithubSignIn from "@icons/GithubSignIn";
 import GoogleSignIn from "@icons/GoogleSignIn";
 import LoginBackground from "@images/aniflix-login.png";
-import Image from "next/image";
+
 import React, {useState} from "react";
+
+import Image from "next/image";
 
 export default function Login() {
     const {isSignedIn, isVerified} = useIsAuthenticated();

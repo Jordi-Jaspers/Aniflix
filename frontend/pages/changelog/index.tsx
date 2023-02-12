@@ -3,11 +3,18 @@ import ChangelogContent from "@components/changelog/ChangelogContent";
 import Header from "@components/header/Header";
 import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import {ChangeLogFile} from "@interfaces/ChangelogFile";
+
 import {promises as fs} from "fs";
-import Head from "next/head";
 import path from "path";
+
 import React from "react";
+
+import Head from "next/head";
 import {useRecoilValue} from "recoil";
+
+
+
+
 
 interface Props {
     changelogs: ChangeLogFile[]
@@ -37,7 +44,7 @@ export default function Changelog({changelogs}: Props) {
                 <div className={"h-fit flex flex-row border-t border-b"}>
                     <div className={"w-full flex flex-col"}>
                         {changelogs.map(changelog => {
-                            return <ChangelogContent version={changelog.version} content={changelog.content}/>;
+                            return <ChangelogContent key={changelog.version} version={changelog.version} content={changelog.content}/>;
                         })}
                     </div>
                 </div>

@@ -1,8 +1,11 @@
-import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import AniFlixLogo from "@icons/AniFlixLogo";
+
+import React, {useState} from "react";
+
+import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import React, {useState} from "react";
+
 
 const pages = [
     {name: "Home", path: "/"},
