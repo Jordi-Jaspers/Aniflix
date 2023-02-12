@@ -19,11 +19,17 @@ export default function NavigationMenu() {
         <div className="flex flex-row items-center w-fit">
             <AniFlixLogo className="cursor-pointer object-contain w-fit h-[2em]"/>
             {/*only set the onmouseenter property if the screen is below medium size*/}
-            <div className="flex space-x-2 items-center cursor-pointer pl-4" onMouseEnter={() => {
-                if (window.innerWidth < 768) {
-                    setShowNavigationMenu(true);
-                }
-            }}>
+            <div className="flex sm:space-x-2 items-center cursor-pointer pl-2 sm:pl-4"
+                 onMouseEnter={() => {
+                     if (window.innerWidth <= 768) {
+                         setShowNavigationMenu(true);
+                     }
+                 }}
+                    onClick={() => {
+                        if (window.innerWidth <= 768) {
+                            setShowNavigationMenu(!showNavigationMenu);
+                        }
+                    }}>
                 <ul className="space-x-4 flex">
                     {pages.map(({name, path}) => (
                         <li key={path} className={`headerLink ${router.pathname === path ? "headerLinkActive" : ""}`}>
@@ -31,16 +37,17 @@ export default function NavigationMenu() {
                         </li>
                     ))}
                 </ul>
-                <ChevronUpIcon className={`${showNavigationMenu && "rotate-180"} w-4 h-4 duration-300 md:hidden`}/>
+                <ChevronUpIcon className={`${showNavigationMenu && "rotate-180"} w-4 h-4 duration-300 ml-2 md:hidden`}
+                />
                 {showNavigationMenu && (
                     <div className={"absolute left-0 z-100 bg-transparent h-full w-fit h-full"}
                          onMouseLeave={() => setShowNavigationMenu(false)}>
                         <div className="relative top-[4.4em] rounded-md shadow-md transform bg-black/70 border w-[225px]">
                             <ul className="flex flex-col w-full text-white text-sm">
                                 {pages.map(({name, path}) => (
-                                    <li key={path}
-                                        className="text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded">
-                                        <Link href={path}>{name}</Link>
+                                    <li key={path}>
+                                        <Link href={path}
+                                              className="text-white flex flex-row justify-center md:justify-start items-center py-2 px-4 hover:bg-gray-600 rounded">{name}</Link>
                                     </li>
                                 ))}
                             </ul>

@@ -12,9 +12,8 @@ export default function Header() {
             bg-gradient-to-b from-[#141414] to-transparent transition-colors duration-300
             ${isScrolled ? 'bg-[#141414]/80' : 'bg-transparent'}`}>
             <NavigationMenu/>
-            <div className="flex flex-row items-center space-x-6 w-fit text-sm font-poppins">
+            <div className="flex flex-row items-center space-x-0.5 sm:space-x-4 sm:space-x-6 w-fit text-sm font-poppins">
                 <SearchBar/>
-                <BellIcon className="headerIcon"/>
                 <AccountMenu/>
             </div>
         </header>

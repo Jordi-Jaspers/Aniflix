@@ -13,7 +13,7 @@ import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 
 export default function Library() {
-    const cols = useDynamicColumns(205);
+    const {cols, width} = useDynamicColumns()
     const [records, setRecords] = useState<Record<any, any>[]>([]);
     const [watchStatuses, setWatchStatuses] = useState<string[]>([]);
     const [showFilters, setShowFilters] = useState<boolean>(false);
@@ -81,6 +81,7 @@ export default function Library() {
                                     rating={record.rating}
                                     status={record.status}
                                     totalEpisodes={record.total_episodes}
+                                    width={width}
                                 />
                             ))}
                         </div>

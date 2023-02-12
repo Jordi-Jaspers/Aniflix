@@ -4,6 +4,8 @@ import {useEffect, useState} from "react";
 
 export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | Promise<RecentEpisode[]>), genre?: string) => {
     const [animes, setAnimes] = useState<Anime[] | RecentEpisode[]>([])
+    const [loading, setLoading] = useState(true)
+    
     useEffect(() => {
         async function fetchAnime() {
             if (request) {
@@ -12,8 +14,10 @@ export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | P
             }
         }
         
-        fetchAnime().then(r => r)
+        fetchAnime().then(r => {
+            setLoading(false)
+        })
     }, [request, genre])
     
-    return animes;
+    return {animes, loading};
 };

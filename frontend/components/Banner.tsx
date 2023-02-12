@@ -1,8 +1,9 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
-import {InformationCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline'
+import {InformationCircleIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
+import SpeakerButton from "@icons/SpeakerButton";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
@@ -139,14 +140,8 @@ export default function Banner({anime}: Props) {
                         </button>
                     </div>
                     <div className="flex space-x-3">
-                        <button
-                            className={`${isPlaying ? "items-center border-2 border-[gray] hover:border-white rounded-full p-2 bg-[#4f4f50] text-white opacity-50 hover:opacity-100 z-20" : "hidden"}`}
-                            onClick={toggleMute}>
-                            {isMuted
-                                ? <SpeakerXMarkIcon className="h-4 w-4 md:h-6 md:w-6"/>
-                                : <SpeakerWaveIcon className="h-4 w-4 md:h-6 md:w-6"/>
-                            }
-                        </button>
+                        <SpeakerButton iconClassName={"h-4 w-4 md:h-6 md:w-6"} buttonClassName={"h-8 w-8 md:h-10 md:w-10"} isMuted={isMuted}
+                                       isPlaying={isPlaying} onClick={toggleMute}/>
                     </div>
                 </div>
             </div>

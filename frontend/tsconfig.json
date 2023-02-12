@@ -11,7 +11,7 @@
         "./components/icons/*"
       ],
       "@svg/*": [
-        "./public/icons/*"
+        "./public/svg/*"
       ],
       "@images/*": [
         "./public/images/*"

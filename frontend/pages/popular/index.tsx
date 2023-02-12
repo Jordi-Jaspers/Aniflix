@@ -12,16 +12,18 @@ import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 
 export default function Popular() {
-    const cols = useDynamicColumns(205)
+    const {cols, width} = useDynamicColumns()
     const showInfoScreen = useRecoilValue(infoScreenState)
     const showSearchResults = useRecoilValue(showSearchResultsState)
     const [currentPage, setCurrentPage] = useState(1);
     const [anime, setAnime] = useState<Anime[]>([]);
     
     useEffect(() => {
-        AnimeService.getPopularAnime(50, currentPage + 1).then((fetchedAnime) => {
-            setAnime([...anime, ...fetchedAnime]);
-        })
+        if (anime.length / 50 < currentPage) {
+            AnimeService.getPopularAnime(50, currentPage + 1).then((fetchedAnime) => {
+                setAnime([...anime, ...fetchedAnime]);
+            })
+        }
     }, [currentPage]);
     
     return (
@@ -42,32 +44,31 @@ export default function Popular() {
                 <section className={"pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 flex flex-col"}>
                     <div className="h-fit pt-[2.5%] space-y-4">
                         <h1 className="font-poppins font-semibold text-[#e5e5e5] text-4xl">
-                        Popular Anime
+                            Popular Anime
                         </h1>
                     </div>
-                    <div className={"min-h-screen h-fit z-10 flex justify-evenly"}>
-                        <div className={`grid gap-4 py-4`}
-                             style={{gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`}}>
-                            {anime.map((result) => (
-                                <ResultCard
-                                    id={result.id.toString()}
-                                    title={result.title.english ? result.title.english : result.title.romaji}
-                                    image={result.image}
-                                    rating={result.rating}
-                                    status={result.status}
-                                    totalEpisodes={result.totalEpisodes}
-                                />
-                            ))}
-                            <div className="min-w-[165px] max-w-[190px] h-full min-h-[260px] overflow-hidden">
-                                <div
-                                    className={"rounded-md cursor-pointer overflow-hidden bg-[#1a1920] flex flex-col h-full justify-center items-center"}
-                                    onClick={() => setCurrentPage(currentPage + 1)}>
-                                    <div className={"rounded-full bg-[#1E1E25]/80 aspect-square w-48 flex items-center justify-center"}>
-                                        <p className={"font-poppins text-[#666666] hover:text-white"}> Show more...</p>
-                                    </div>
-                                </div>
+                    <div className={"flex flex-col justify-center items-center"}>
+                        <div className={"min-h-screen h-fit z-10 flex justify-evenly"}>
+                            <div className={`grid gap-4 py-4`}
+                                 style={{gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`}}>
+                                {anime.map((result) => (
+                                    <ResultCard
+                                        id={result.id.toString()}
+                                        title={result.title.english ? result.title.english : result.title.romaji}
+                                        image={result.image}
+                                        rating={result.rating}
+                                        status={result.status}
+                                        totalEpisodes={result.totalEpisodes}
+                                        width={width}
+                                    />
+                                ))}
                             </div>
                         </div>
+                        <button
+                            className="btn btn-sm border-gray-500 hover:border-white bg-[#1a1920] text-gray-500 hover:text-[#e5e5e5] w-fit m-6"
+                            onClick={() => setCurrentPage(currentPage + 1)}>
+                            <span className={"font-poppins text-md "}>Load More</span>
+                        </button>
                     </div>
                 </section>
             }

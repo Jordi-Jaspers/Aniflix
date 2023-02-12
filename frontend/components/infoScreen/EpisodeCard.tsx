@@ -25,31 +25,31 @@ export default function EpisodeCard({episode}: Props) {
     
     return (
         <div className={"flex justify-center"} onClick={() => handleClickedEpisode()}>
-            <div className={"border-y-[1px] border-[#404040] min-h-[6em] rounded w-full flex px-6 py-8 cursor-pointer hover:bg-[#1E1E25]"}>
-                <div className={"text-[#d2d2d2] text-2xl min-w-fit h-fit font-poppins text-center self-center pr-6"}>
+            <div className={"border-y-[1px] border-[#404040] min-h-[6em] px-6 rounded w-full flex py-8 cursor-pointer hover:bg-[#1E1E25]"}>
+                <div className={"hidden sm:block w-[5%] pr-6 text-[#d2d2d2] text-2xl min-w-fit h-fit font-poppins text-center self-center"}>
                     {episode?.number}
                 </div>
-                <div className={"relative flex justify-center items-center overflow-hidden max-w-[20%] aspect-video rounded-xl "}>
+                <div className={"relative flex justify-center items-center overflow-hidden w-[40%] sm:w-[20%] rounded-xl"}>
                     <Image
                         src={episode.image}
                         alt={episode.title}
-                        className={"object-cover rounded-xl"}
+                        className={"object-cover rounded-xl w-full aspect-video"}
                         width={2000}
                         height={2000}
                     />
                     <HoveringPlayIcon/>
                 </div>
-                <div>
-                    <div className={"pl-6"}>
-                        <div className={"flex flex-row justify-between pb-2 space-x-4"}>
-                            <div className={"text-white font-bold font-poppins"}>
+                <div className={"w-[60%] sm:w-[75%]"}>
+                    <div className={"pl-6 h-full"}>
+                        <div className={"relative flex h-full flex-col justify-center sm:h-fit sm:flex-row sm:justify-between pb-2 space-x-4"}>
+                            <p className={"text-xs font-semibold text-white sm:text-lg sm:font-bold font-poppins"}>
                                 {episode.title}
-                            </div>
-                            <div className={"text-white font-bold font-poppins"}>
+                            </p>
+                            <div className={"hidden sm:block text-white font-bold font-poppins"}>
                                 {airDate}
                             </div>
                         </div>
-                        <p className={"text-[#d2d2d2] font-poppins font-light text-sm"}>
+                        <p className={"hidden sm:block text-[#d2d2d2] font-poppins font-light text-sm text-justify"}>
                             {episode.description}
                         </p>
                     </div>

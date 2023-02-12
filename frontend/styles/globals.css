@@ -41,7 +41,7 @@
     }
 
     .videoPlayerControls {
-        @apply flex items-center text-white h-10 w-10 cursor-pointer hover:scale-125 transition;
+        @apply flex items-center text-white h-6 w-6 sm:h-9 sm:w-9 cursor-pointer hover:scale-125 transition;
     }
 
     .link-underline {

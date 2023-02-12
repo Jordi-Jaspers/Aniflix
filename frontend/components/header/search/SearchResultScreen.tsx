@@ -6,7 +6,7 @@ import {useRecoilValue} from "recoil";
 
 export default function SearchResultScreen() {
     const results = useRecoilValue(searchResultsState)
-    const cols = useDynamicColumns(205)
+    const {cols, width} = useDynamicColumns()
     return (
         <section className={"pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 flex flex-col"}>
             <div className={"min-h-screen h-fit z-10 flex justify-evenly"}>
@@ -20,6 +20,7 @@ export default function SearchResultScreen() {
                             rating={result.rating}
                             status={result.status}
                             totalEpisodes={result.totalEpisodes}
+                            width={width}
                         />
                     ))}
                 </div>

@@ -42,7 +42,7 @@ export default function EpisodeCards({className, episodes}: Props) {
                     <p>Total: {episodes?.length}</p>
                 </button>
                 {showList && (
-                    <ul className={"absolute right-0 top-[4em] p-2 min-w-[15%] w-fit rounded-md shadow-md bg-[#1E1E25] max-h-[65vh] overflow-hidden overflow-y-scroll scrollbar-hidden border-[#4d4d4d] border"}
+                    <ul className={"absolute z-40 right-0 top-[4em] p-2 min-w-[15%] w-fit rounded-md shadow-md bg-[#1E1E25] max-h-[65vh] overflow-hidden overflow-y-scroll scrollbar-hidden border-[#4d4d4d] border"}
                         onClick={() => setShowList(!showList)}
                         onMouseLeave={() => setShowList(!showList)}>
                         {list}

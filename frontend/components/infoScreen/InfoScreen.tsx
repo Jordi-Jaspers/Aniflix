@@ -3,12 +3,13 @@ import {animeState} from "@atoms/VideoPlayerAtom";
 import EpisodeCards from "@components/infoScreen/EpisodeCards";
 import MetaInformation from "@components/infoScreen/MetaInformation";
 import RecommendationCards from "@components/infoScreen/RecommendationCards";
-import {SpeakerWaveIcon, SpeakerXMarkIcon} from '@heroicons/react/24/outline';
 import {PlayIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import AddToLibraryIcon from "@icons/AddToLibraryIcon";
 import LikeButtonIcon from "@icons/LikeButtonIcon";
+import SpeakerButton from "@icons/SpeakerButton";
 import MuiModal from '@mui/material/Modal'
 import Image from "next/image";
+import router from "next/router";
 import React, {useState} from "react";
 import YouTube from "react-youtube";
 import {useRecoilState, useRecoilValue} from "recoil";
@@ -67,12 +68,16 @@ export default function InfoScreen() {
         }
     }
     
+    const handleClickedAnime = async () => {
+        await router.push('/watch/[anime_id]/[episode_id]', `/watch/${anime?.id}/1`)
+    }
+    
     return (
         <>
             {anime && (
                 <MuiModal open={showInfoScreen} onClose={handleClose} className={"flex justify-center py-4"}>
                     <div
-                        className={"bg-[#1a1920] fixed !top-7 !bottom-7 z-50 mx-auto h-auto w-full max-w-4xl overflow-hidden overflow-y-scroll scrollbar-hide rounded-md"}>
+                        className={"bg-[#1a1920] fixed !top-0 !bottom-0 sm:!top-7 sm:!bottom-7 z-50 mx-auto h-auto w-full max-w-4xl overflow-hidden overflow-y-scroll scrollbar-hide rounded-md"}>
                         <button
                             className={"absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"}
                             onClick={handleClose}>
@@ -101,20 +106,16 @@ export default function InfoScreen() {
                                 )}
                                 <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
                                     <div className="flex items-center space-x-2">
-                                        <button className="bannerButton rounded bg-white text-black">
+                                        <button className="bannerButton rounded bg-white text-black" onClick={handleClickedAnime}>
                                             <PlayIcon className="text-black h-8 w-8"/> Play
                                         </button>
-                                        <AddToLibraryIcon anime_id={anime.id.toString()} buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
+                                        <AddToLibraryIcon anime_id={anime.id.toString()} buttonClassName={"h-10 w-10"}
+                                                          iconClassName={"h-6 w-6"}/>
                                         <LikeButtonIcon buttonClassName={"h-10 w-10"} iconClassName={"h-6 w-6"}/>
                                     </div>
                                     {anime?.trailer &&
-                                        <button
-                                            className={`${isPlaying ? "flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white" : "hidden"}`}
-                                            onClick={toggleMute}>
-                                            {isMuted
-                                                ? <SpeakerXMarkIcon className="h-8 w-8 text-white"/>
-                                                : <SpeakerWaveIcon className="h-8 w-8 text-white"/>}
-                                        </button>
+                                        <SpeakerButton iconClassName={"h-6 w-6"} buttonClassName={"h-10 w-10"} isMuted={isMuted}
+                                                       isPlaying={isPlaying} onClick={toggleMute}/>
                                     }
                                 </div>
                             </div>

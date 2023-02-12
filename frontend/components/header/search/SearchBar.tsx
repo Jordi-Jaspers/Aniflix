@@ -46,13 +46,13 @@ const SearchBar = () => {
     }, [searchTerm]);
     
     return (
-        <div className="relative flex flex-row items-center space-x-4">
+        <div className="relative flex flex-row items-center">
             <input
                 className={`${
                     isExpanded
-                        ? "ease-out duration-500 w-48 mt-1 p-2 rounded border border-gray-400 transition-all"
+                        ? "ease-out duration-500 w-36 sm:w-48 mt-1 py-0.5 px-2 sm:py-2 rounded border border-gray-400 transition-all"
                         : "w-0 ease-in duration-500"
-                } bg-[#181818]/80 font-poppins text-sm`}
+                } bg-[#181818]/80 font-poppins text-sm mr-1 sm:mr-4`}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 value={searchTerm}
                 type="text"

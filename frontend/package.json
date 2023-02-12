@@ -29,15 +29,11 @@
     "clean": "rm -Rf dist node_modules .next/cache",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean && npm install && npm run dev",
-    "prettier": "prettier --config .prettierrc \"./**/*.+(js|json|jsx)\" --write",
     "clean:example": "rnb --c"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@heroicons/react": "^2.0.13",
     "@mui/material": "^5.11.3",
     "@next/font": "13.1.6",
