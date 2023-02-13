@@ -29,8 +29,8 @@ export default function EpisodeCards({className, episodes}: Props) {
         list.push(
             <li key={i} className={"px-4 flex justify-start space-x-8 w-full h-auto items-start hover:bg-[#1a1920] rounded"}
                 onClick={() => setPage(i)}>
-                <a className={"block text-white font-poppins min-w-[75px] w-[30%]"}>Page {i}</a>
-                <a className={"block text-white font-poppins font-light text-sm min-w-fit w-[70%]"}>(Episodes {lowerBound(i)} - {upperBound(i)})</a>
+                <span className={"block text-white font-poppins min-w-[75px] w-[30%]"}>Page {i}</span>
+                <span className={"block text-white font-poppins font-light text-sm min-w-fit w-[70%]"}>(Episodes {lowerBound(i)} - {upperBound(i)})</span>
             </li>
         );
     }

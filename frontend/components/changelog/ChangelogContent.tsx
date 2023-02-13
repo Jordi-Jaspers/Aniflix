@@ -14,7 +14,7 @@ export default function ChangelogContent({version, content}: Props) {
             <div className={"flex flex-col w-[10%] border-r p-4"}>
                 <div className={"flex flex-row justify-end"}>
                     <TagIcon className="h-4 w-4 mt-1 mx-2"/>
-                    <a className={"font-poppins text-thin"}>{version}</a>
+                    <span className={"font-poppins text-thin"}>{version}</span>
                 </div>
             </div>
             <ReactMarkdown

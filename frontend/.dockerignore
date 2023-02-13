@@ -1,9 +1,5 @@
-README.md
 Dockerfile
 .dockerignore
-.git
 .gitignore
-/.vscode
-.env
-.envrc
+.env.local
 node_modules

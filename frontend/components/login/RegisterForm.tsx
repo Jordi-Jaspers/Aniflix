@@ -53,7 +53,7 @@ export default function RegisterForm() {
                             <div className={`h-2 w-2 bg-white rounded-full animate-bounce400`}/>
                         </div>
                     ) : (
-                        <a className={"text-white font-poppins text-center"}>Register</a>
+                        <span className={"text-white font-poppins text-center"}>Register</span>
                     )}
                 </button>
             </div>

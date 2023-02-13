@@ -8,6 +8,7 @@ import AniFlixLogo from "@icons/AniFlixLogo";
 import GithubSignIn from "@icons/GithubSignIn";
 import GoogleSignIn from "@icons/GoogleSignIn";
 import LoginBackground from "@images/aniflix-login.png";
+import Link from "next/link";
 
 import React, {useState} from "react";
 
@@ -47,9 +48,9 @@ export default function Login() {
                         
                         {!isSignedIn &&
                             <div className={"font-poppins text-white flex space-x-2"}>
-                                <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(false)}>Sign-in</a>
-                                <a> - </a>
-                                <a className={"interactive-underline cursor-pointer"} onClick={() => setRegister(true)}>Register</a>
+                                <span className={"interactive-underline cursor-pointer"} onClick={() => setRegister(false)}>Sign-in</span>
+                                <span> - </span>
+                                <span className={"interactive-underline cursor-pointer"} onClick={() => setRegister(true)}>Register</span>
                             </div>
                         }
                         
@@ -58,16 +59,16 @@ export default function Login() {
                             <div className={"flex flex-col space-y-4 w-full px-14 items-center"}>
                                 <div className={"flex flex-row items-center space-x-4 pb-2"}>
                                     <p className={"text-[#717171] font-poppins text-xs cursor-default"}>
-                                        <a> or sign in with </a>
+                                        <span> or sign in with </span>
                                     </p>
                                 </div>
                                 <GoogleSignIn/>
                                 <GithubSignIn/>
                                 <div className={"flex flex-row items-center space-x-4 pt-10"}>
-                                    <a className={"text-[#717171] font-poppins text-xs interactive-underline"}
+                                    <Link className={"text-[#717171] font-poppins text-xs interactive-underline"}
                                        href={"https://github.com/Jordi-Jaspers"}>
                                         © Designed and built by Jordi Jaspers
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -44,7 +44,7 @@ export default function ResolutionMenu({className, mediaSources}: Props) {
                             ${mediaSource.quality === resolution ? "bg-[#131313]" : "hover:bg-[#3c3c3c]"}
                             ${mediaSource.quality === "backup" ? "hidden" : ""}`}
                             onClick={() => toggleResolution(mediaSource.quality)}>
-                            <a className="block text-sm text-white font-poppins">{mediaSource.quality}</a>
+                            <span className="block text-sm text-white font-poppins">{mediaSource.quality}</span>
                         </li>
                     ))}
                 </ul>

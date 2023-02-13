@@ -4,6 +4,13 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
+      args:
+        - NEXT_PUBLIC_CONSUMET_BASE_URL=${NEXT_PUBLIC_CONSUMET_BASE_URL}
+        - NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
+        - NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
+        - NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
+        - NEXT_NODE_ENV=${NEXT_NODE_ENV}
+        - NEXT_PORT=${NEXT_PORT}
     restart: always
     networks:
       - aniflix
@@ -16,6 +23,8 @@ services:
       - NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
       - NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
       - NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
+      - NEXT_NODE_ENV=${NEXT_NODE_ENV}
+      - NEXT_PORT=${NEXT_PORT}
 
   consumet:
     build:
@@ -31,8 +40,8 @@ services:
     environment:
       - REDIS_HOST=${CONSUMET_REDIS_HOST}
       - REDIS_PORT=${CONSUMET_REDIS_PORT}
-      - NODE_ENV=${NODE_ENV}
-      - PORT=${PORT}
+      - NODE_ENV=${CONSUMET_NODE_ENV}
+      - PORT=${CONSUMET_PORT}
 
   redis:
     image: redis:latest

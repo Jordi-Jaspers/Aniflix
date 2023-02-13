@@ -12,10 +12,20 @@ RUN mkdir -p /home/aniflix/app/node_modules && chown -R aniflix:aniflix /home/an
 WORKDIR /home/aniflix/app
 
 # Setup environment variables which are used in the next application
+ARG NEXT_PUBLIC_CONSUMET_BASE_URL
+ARG NEXT_PUBLIC_POCKETBASE_URL
+ARG NEXT_PUBLIC_STRIPE_LINK
+ARG NEXT_PUBLIC_LOGGING_LEVEL
+ARG NEXT_NODE_ENV
+ARG NEXT_PORT
+
+# Setup environment variables which are used in the next application
 ENV NEXT_PUBLIC_CONSUMET_BASE_URL=${NEXT_PUBLIC_CONSUMET_BASE_URL}
 ENV NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
 ENV NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
 ENV NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
+ENV NODE_ENV=${NEXT_NODE_ENV}
+ENV PORT=${NEXT_PORT}
 
 # Copy project definition/dependencies files, for better reuse of layers
 COPY --chown=aniflix:aniflix package*.json /home/aniflix/app

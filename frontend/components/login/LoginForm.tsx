@@ -43,7 +43,7 @@ export default function LoginForm() {
                             <div className={`h-2 w-2 bg-white rounded-full animate-bounce400`}/>
                         </div>
                     ) : (
-                        <a className={"text-white font-poppins text-center"}>Sign in</a>
+                        <span className={"text-white font-poppins text-center"}>Sign in</span>
                     )}
                 </button>
             </div>

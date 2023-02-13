@@ -26,7 +26,7 @@ export default function VerificationButton() {
             <button
                 className={"py-4 px-4 mt-2 w-full flex justify-center items-center bg-red-600 hover:bg-red-700 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"}
                 onClick={requestVerification} type={"button"} disabled={false}>
-                <a className={"text-white font-poppins text-center"}>Resend Verification Email</a>
+                <span className={"text-white font-poppins text-center"}>Resend Verification Email</span>
             </button>
             {isError && <ErrorAlert message={message} show={isError}/>}
             {isSuccess && <SuccessAlert message={message} show={isSuccess}/>}

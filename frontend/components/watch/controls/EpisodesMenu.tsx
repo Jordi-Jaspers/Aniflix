@@ -40,14 +40,14 @@ export default function EpisodesMenu({className, episodes}: Props) {
                             ${selectedEpisode?.number === episode.number ? "bg-[#131313] py-8" : "hover:bg-[#3c3c3c]"}`}
                             onClick={() => handleClickedEpisode(episode.number)}>
                             <div className={"flex flex-row justify-start space-x-5 w-full py-4"}>
-                                <a className="block text-lg text-white font-poppins">{episode.number}</a>
-                                <a className="block text-lg text-white font-poppins">{episode.title}</a>
+                                <span className="block text-lg text-white font-poppins">{episode.number}</span>
+                                <span className="block text-lg text-white font-poppins">{episode.title}</span>
                             </div>
                             <div
                                 className={`${selectedEpisode?.number === episode.number ? "items-center flex flex-row justify-between space-x-5 w-full" : "hidden"}`}>
                                 <Image src={episode.image} width={2000} height={2000} alt={episode.title}
                                        className={"rounded-md w-[35%]"}/>
-                                <a className={"block text-lg text-white font-poppins text-start"}>{episode.description}</a>
+                                <span className={"block text-lg text-white font-poppins text-start"}>{episode.description}</span>
                             </div>
                         </li>
                     ))}
