@@ -1,8 +1,11 @@
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
+import {useFetchAnime} from "@hooks/useFetchAnime";
 import SpeakerButton from "@icons/SpeakerButton";
 import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
+import {RecentEpisode} from "@interfaces/RecentEpisode";
+
 
 import React, {useEffect, useState} from 'react';
 
@@ -11,8 +14,6 @@ import {PlayIcon} from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import YouTube from 'react-youtube';
 import {useRecoilState, useSetRecoilState} from "recoil";
-
-
 
 const opts = {
     height: '100%',
@@ -43,7 +44,7 @@ export default function Banner({anime}: Props) {
     
     const videoTitle: string = anime.title.romaji ? anime.title.romaji : anime.title.english
     const description: string = (anime.description.length > 500) ? anime.description.substring(0, 500) + '...' : anime.description
-    
+
     useEffect(() => {
         if (showInfoScreen && isPlaying) {
             player?.pauseVideo()
@@ -92,7 +93,8 @@ export default function Banner({anime}: Props) {
     }
     
     return (
-        <div className="w-screen flex flex-col space-y-2 ht-[56.25vw] h-[40vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
+        <div
+            className="w-screen flex flex-col space-y-2 ht-[56.25vw] h-[40vw] md:space-y-4 pl-4 pr-4 md:pl-6 md:pr-6 lg:pl-12 lg:pr-12">
             <div className={"absolute aspect-video min-h-[112.25vw] w-full top-0 left-0"}>
                 <Image
                     src={anime.cover}
@@ -144,7 +146,8 @@ export default function Banner({anime}: Props) {
                         </button>
                     </div>
                     <div className="flex space-x-3">
-                        <SpeakerButton iconClassName={"h-4 w-4 md:h-6 md:w-6"} buttonClassName={"h-8 w-8 md:h-10 md:w-10"} isMuted={isMuted}
+                        <SpeakerButton iconClassName={"h-4 w-4 md:h-6 md:w-6"} buttonClassName={"h-8 w-8 md:h-10 md:w-10"}
+                                       isMuted={isMuted}
                                        isPlaying={isPlaying} onClick={toggleMute}/>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+import Footer from "@components/footer/Footer";
 import Loader from "@components/Loader";
 import RouteGuard from "@components/RouteGuard";
 

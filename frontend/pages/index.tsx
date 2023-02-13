@@ -2,6 +2,7 @@
 
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
+import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import HomeScreen from "@components/HomeScreen";
@@ -34,21 +35,15 @@ export default function Home({anime}: Props) {
             {/*  HEADER  */}
             <Header/>
             
+            {/*  MAIN  */}
             <main className="lg:space-t-24 h-fit">
-                <HomeScreen anime={anime} className={showSearchResults ? "hidden" : "visible"}/>
+                <HomeScreen request={AnimeService.getTrendingAnime} className={showSearchResults ? "hidden" : "visible"}/>
                 {showSearchResults && <SearchResultScreen/>}
                 {showInfoScreen && <InfoScreen/>}
             </main>
+    
+            {/*  FOOTER  */}
+            <Footer/>
         </div>
     )
-}
-
-export async function getServerSideProps() {
-    const animes: Anime[] = await AnimeService.getTrendingAnime(50, 1)
-    const anime: Anime = animes[Math.floor(Math.random() * animes.length)]
-    return {
-        props: {
-            anime: anime
-        }
-    }
 }

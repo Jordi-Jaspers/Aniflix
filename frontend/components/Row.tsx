@@ -1,5 +1,3 @@
-
-
 import Thumbnail from "@components/Thumbnail";
 import {useFetchAnime} from "@hooks/useFetchAnime";
 import {Anime} from "@interfaces/Anime";
@@ -8,7 +6,6 @@ import {RecentEpisode} from '@interfaces/RecentEpisode';
 import {useRef} from 'react'
 
 import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
-
 
 interface Props {
     title: string

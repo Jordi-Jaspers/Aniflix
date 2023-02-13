@@ -1,35 +1,32 @@
-
-
 import {animeState, episodeState, streamingLinksState} from "@atoms/VideoPlayerAtom";
 import VideoControls from "@components/watch/controls/VideoControls";
-import AnimeService from "@consumet/AnimeService";
-import {Anime} from "@interfaces/Anime";
-import {Episode} from "@interfaces/Episode";
-import {MediaSources} from "@interfaces/MediaSources";
+import {useFetchEpisode} from "@hooks/useFetchEpisode";
 
 import React, {useEffect, useState} from "react";
 
 import {useSetRecoilState} from "recoil";
 
 interface Props {
-    anime: Anime;
-    episodeInfo: Episode;
-    streamingSources: MediaSources;
+    anime_id: string;
+    episode_id: string;
 }
 
-export default function WatchAnime({anime, episodeInfo, streamingSources}: Props) {
+export default function WatchAnime({anime_id, episode_id}: Props) {
+    const {anime, episode, streamingSources, loading} = useFetchEpisode(anime_id, episode_id);
     const [renderControls, setRenderControls] = useState<boolean>(false);
     const setEpisodeState = useSetRecoilState(episodeState);
     const setStreamingLinksState = useSetRecoilState(streamingLinksState);
     const setAnimeState = useSetRecoilState(animeState);
     const [isIdle, setIsIdle] = useState<boolean>(false);
     
+    
     useEffect(() => {
-        setEpisodeState(episodeInfo);
+        if (!episode || !streamingSources || !anime) return;
+        setEpisodeState(episode);
         setStreamingLinksState(streamingSources);
         setAnimeState(anime);
-        if (anime && episodeInfo && streamingSources) setRenderControls(true);
-    }, [episodeInfo, streamingSources, anime]);
+        setRenderControls(true);
+    }, [episode, streamingSources, anime]);
     
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
@@ -58,6 +55,5 @@ export default function WatchAnime({anime, episodeInfo, streamingSources}: Props
 
 export async function getServerSideProps(context: { res: any, params: { anime_id: string; episode_id: string; }; }) {
     const {anime_id, episode_id} = context.params
-    const [anime, episode, streamingSources] = await AnimeService.getEpisodeLinks(anime_id, parseInt(episode_id));
-    return {props: {anime: anime, episodeInfo: episode, streamingSources: streamingSources}}
+    return {props: {anime_id: anime_id, episode_id: episode_id}}
 }

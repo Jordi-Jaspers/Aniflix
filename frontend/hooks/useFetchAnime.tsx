@@ -2,8 +2,9 @@ import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
 import {useEffect, useState} from "react";
 
-export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | Promise<RecentEpisode[]>), genre?: string) => {
+export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[] | RecentEpisode[]>), genre?: string) => {
     const [animes, setAnimes] = useState<Anime[] | RecentEpisode[]>([])
+    const [anime, setAnime] = useState<Anime | RecentEpisode>()
     const [loading, setLoading] = useState(true)
     
     useEffect(() => {
@@ -11,6 +12,7 @@ export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | P
             if (request) {
                 const response = genre ? await request(genre) : await request()
                 setAnimes(response)
+                setAnime(response[Math.floor(Math.random() * response.length)])
             }
         }
         
@@ -19,5 +21,5 @@ export const useFetchAnime = (request: ((genre?: string) => Promise<Anime[]> | P
         })
     }, [request, genre])
     
-    return {animes, loading};
+    return {animes, anime, loading};
 };

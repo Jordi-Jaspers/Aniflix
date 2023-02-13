@@ -1,5 +1,6 @@
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
 import ChangelogContent from "@components/changelog/ChangelogContent";
+import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import {ChangeLogFile} from "@interfaces/ChangelogFile";
@@ -11,10 +12,6 @@ import React from "react";
 
 import Head from "next/head";
 import {useRecoilValue} from "recoil";
-
-
-
-
 
 interface Props {
     changelogs: ChangeLogFile[]
@@ -49,6 +46,8 @@ export default function Changelog({changelogs}: Props) {
                     </div>
                 </div>
             </section>
+            {/*  FOOTER  */}
+            <Footer/>
         </div>
     )
 }

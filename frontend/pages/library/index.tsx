@@ -2,6 +2,7 @@
 
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
+import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import SearchResultScreen from "@components/header/search/SearchResultScreen";
 import InfoScreen from "@components/infoScreen/InfoScreen";
@@ -96,6 +97,8 @@ export default function Library() {
                     </div>
                 </section>
             }
+            {/*  FOOTER  */}
+            <Footer/>
         </main>
     )
 }

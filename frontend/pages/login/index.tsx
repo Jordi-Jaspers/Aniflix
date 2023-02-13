@@ -8,11 +8,12 @@ import AniFlixLogo from "@icons/AniFlixLogo";
 import GithubSignIn from "@icons/GithubSignIn";
 import GoogleSignIn from "@icons/GoogleSignIn";
 import LoginBackground from "@images/aniflix-login.png";
-import Link from "next/link";
+
 
 import React, {useState} from "react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
     const {isSignedIn, isVerified} = useIsAuthenticated();
