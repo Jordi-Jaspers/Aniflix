@@ -129,6 +129,8 @@ Configure the following env variables
 | NEXT_PUBLIC_CONSUMET_BASE_URL | The base url for the consumet Anime API. |
 | NEXT_PUBLIC_CONSUMET_API_KEY  | The API key for the consumet Anime API.  |
 
+https://www.admfactory.com/how-to-automatically-backup-files-and-directories-in-linux/
+
 
 to use env variable at runtime or at client side instead of just server side you can use next.config.js or prefix env variable with NEXT_PUBLIC_*. more details....
 
