@@ -1,5 +1,3 @@
-
-
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {showSearchResultsState} from "@atoms/SearchResultScreen";
 import Footer from "@components/footer/Footer";
@@ -16,9 +14,6 @@ import React, {useEffect, useState} from "react";
 import {ChevronUpIcon} from "@heroicons/react/24/solid";
 import Head from "next/head";
 import {useRecoilValue} from "recoil";
-
-
-
 
 export default function Library() {
     const {cols, width} = useDynamicColumns()
@@ -71,7 +66,8 @@ export default function Library() {
                             ? "ease-in duration-500 h-fit w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"
                             : "ease-out duration-500 h-0 w-full transition-all flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide justify-center"}`}>
                         {watchStatuses.map((status) => (
-                            <div key={status} className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
+                            <div key={status}
+                                 className={"bg-[#1a1920]/80 px-4 py-2 rounded-full text-[#d2d2d2] hover:text-white cursor-pointer"}>
                             <span className={"font-poppins text-sm"}>
                                 {getUniformTitle(status)}
                             </span>

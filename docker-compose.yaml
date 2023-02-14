@@ -1,16 +1,10 @@
 name: "Aniflix"
+version: "3.7"
 services:
-  frontend:
+  aniflix:
     build:
       dockerfile: Dockerfile
       context: ./frontend
-      args:
-        - NEXT_PUBLIC_CONSUMET_BASE_URL=${NEXT_PUBLIC_CONSUMET_BASE_URL}
-        - NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
-        - NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
-        - NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
-        - NEXT_NODE_ENV=${NEXT_NODE_ENV}
-        - NEXT_PORT=${NEXT_PORT}
     restart: always
     networks:
       - aniflix
@@ -19,12 +13,9 @@ services:
     expose:
       - 3000
     environment:
-      - NEXT_PUBLIC_CONSUMET_BASE_URL=${NEXT_PUBLIC_CONSUMET_BASE_URL}
-      - NEXT_PUBLIC_POCKETBASE_URL=${NEXT_PUBLIC_POCKETBASE_URL}
-      - NEXT_PUBLIC_STRIPE_LINK=${NEXT_PUBLIC_STRIPE_LINK}
-      - NEXT_PUBLIC_LOGGING_LEVEL=${NEXT_PUBLIC_LOGGING_LEVEL}
-      - NEXT_NODE_ENV=${NEXT_NODE_ENV}
-      - NEXT_PORT=${NEXT_PORT}
+      - RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=${NEXT_RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED}
+      - NODE_ENV=${NEXT_NODE_ENV}
+      - PORT=${NEXT_PORT}
 
   consumet:
     build:
