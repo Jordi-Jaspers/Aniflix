@@ -4,3 +4,4 @@ updates:
     directory: "/frontend" # Location of package manifests
     schedule:
       interval: "daily"
+    target-branch: "develop"
