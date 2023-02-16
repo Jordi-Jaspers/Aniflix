@@ -122,6 +122,8 @@ NEXT_PUBLIC_CONSUMET_BASE_URL=...
 NEXT_PUBLIC_POCKETBASE_URL=...
 ```
 
+https://dev.to/thakkaryash94/build-nextjs-application-using-github-workflow-and-docker-3foj
+
 Configure the following env variables
 
 | ENV VARIABLE                  | DESCRIPTION                              |
