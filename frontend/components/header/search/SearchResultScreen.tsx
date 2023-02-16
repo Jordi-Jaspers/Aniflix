@@ -1,5 +1,3 @@
-
-
 import {searchResultsState} from "@atoms/SearchResultScreen";
 import ResultCard from "@components/ResultCard";
 import {useDynamicColumns} from "@hooks/useDynamicColumns";

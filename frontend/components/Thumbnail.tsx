@@ -1,4 +1,4 @@
-
+"use client"
 
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
@@ -13,14 +13,13 @@ import Image from 'next/image'
 import {useRouter} from "next/router";
 import {useSetRecoilState} from 'recoil'
 
-
-
 interface Props {
     anime: Anime | RecentEpisode;
     priority?: boolean;
+    loading?: boolean;
 }
 
-export default function Thumbnail({anime, priority}: Props) {
+export default function Thumbnail({anime, priority, loading}: Props) {
     const router = useRouter()
     const setShowInfoScreen = useSetRecoilState(infoScreenState)
     const setCurrentAnime = useSetRecoilState(animeState)
@@ -57,7 +56,7 @@ export default function Thumbnail({anime, priority}: Props) {
     
     return (
         <div
-            className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
+            className={`${loading && "animate-pulse"} relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105`}
             onClick={() => handleClickedAnime().catch(() => {
                 LOGGER.error("Error occurred when trying to handle clicked anime")
             })}

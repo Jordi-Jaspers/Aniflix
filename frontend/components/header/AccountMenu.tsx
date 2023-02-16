@@ -1,3 +1,5 @@
+"use client"
+
 import {useUserInformation} from "@hooks/useUserInformation";
 import UserService from "@service/UserService";
 import CoffeeIcon from "@svg/Coffee.svg";

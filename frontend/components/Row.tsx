@@ -1,11 +1,13 @@
-import Thumbnail from "@components/Thumbnail";
+"use client"
+
+import Thumbnails from "@components/Thumbnails";
+
+import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
 import {useFetchAnime} from "@hooks/useFetchAnime";
 import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from '@interfaces/RecentEpisode';
 
 import {useRef} from 'react'
-
-import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
 
 interface Props {
     title: string
@@ -45,9 +47,7 @@ export default function Row({title, request, genre, priority}: Props) {
                         </div>
                         <div className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-3 px-4 md:px-6 lg:px-12"
                              ref={rowRef}>
-                            {animes?.map((anime, index) => {
-                                if (index < 25) return (<Thumbnail key={anime.id} anime={anime} priority={priority}/>)
-                            })}
+                            <Thumbnails request={request} genre={genre} priority={priority}/>
                         </div>
                         <div className={"arrowIcon right-0 bg-gradient-to-l items-center"}>
                             <ChevronRightIcon

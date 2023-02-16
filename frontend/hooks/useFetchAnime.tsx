@@ -1,3 +1,5 @@
+"use client"
+
 import {Anime} from "@interfaces/Anime";
 import {RecentEpisode} from "@interfaces/RecentEpisode";
 import {useEffect, useState} from "react";

@@ -1,3 +1,5 @@
+"use client"
+
 import AnimeService from "@consumet/AnimeService";
 import {Anime} from "@interfaces/Anime";
 import {Episode} from "@interfaces/Episode";

@@ -4,10 +4,12 @@ import {pocketBase} from "@pocketbase/PocketBase";
 import UserService from "@service/UserService";
 import {LOGGER} from "@util/Logger";
 
-import router from "next/router";
+import {useRouter} from "next/navigation";
 import {AuthProviderInfo, RecordAuthResponse} from "pocketbase";
 
 export default class OAuthService {
+    
+    static router = useRouter();
     
     static async getOAuthMethods(): Promise<AuthProviderInfo[]> {
         const methods = await pocketBase.collection("users").listAuthMethods()
@@ -35,10 +37,10 @@ export default class OAuthService {
             UserService.updateLoginDate(authData.record.id);
             UserService.updateLoginDetails(authData.record.id, authData.meta?.rawUser);
             LOGGER.debug("[OAuthService] Successfully updated login date for user: " + JSON.stringify(authData));
-            router.push(PRIVATE_PATHS.HOME)
+            this.router.push(PRIVATE_PATHS.HOME)
         }).catch((exception: any) => {
             LOGGER.error("[OAuthService] Failed to sign in user with OAuth provider: " + provider.name, exception);
-            router.push(PUBLIC_PATHS.LOGIN);
+            this.router.push(PUBLIC_PATHS.LOGIN);
             throw exception;
         });
         window.localStorage.removeItem("provider");

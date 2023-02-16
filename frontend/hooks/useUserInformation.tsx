@@ -1,3 +1,5 @@
+"use client"
+
 import UserService from "@service/UserService";
 import {Admin, Record} from "pocketbase";
 import {useEffect, useState} from "react";

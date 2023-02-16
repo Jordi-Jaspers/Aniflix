@@ -1,10 +1,10 @@
-import AniFlixLogo from "@icons/AniFlixLogo";
-
-import React, {useState} from "react";
-
+"use client"
 import {ChevronUpIcon} from "@heroicons/react/24/solid";
+import AniFlixLogo from "@icons/AniFlixLogo";
 import Link from "next/link";
 import {useRouter} from "next/router";
+
+import React, {useState} from "react";
 
 
 const pages = [
@@ -28,11 +28,11 @@ export default function NavigationMenu() {
                          setShowNavigationMenu(true);
                      }
                  }}
-                    onClick={() => {
-                        if (window.innerWidth <= 768) {
-                            setShowNavigationMenu(!showNavigationMenu);
-                        }
-                    }}>
+                 onClick={() => {
+                     if (window.innerWidth <= 768) {
+                         setShowNavigationMenu(!showNavigationMenu);
+                     }
+                 }}>
                 <ul className="space-x-4 flex">
                     {pages.map(({name, path}) => (
                         <li key={path} className={`headerLink ${router.pathname === path ? "headerLinkActive" : ""}`}>

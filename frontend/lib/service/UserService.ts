@@ -1,4 +1,4 @@
-
+"use client"
 import {PUBLIC_PATHS} from "@enum/Paths";
 import {OAuthUser} from "@interfaces/OAuthUser";
 import {pocketBase} from "@pocketbase/PocketBase";

@@ -1,3 +1,5 @@
+"use client"
+
 import {PRIVATE_PATHS, PUBLIC_PATHS, PUBLIC_PATHS_LIST} from "@enum/Paths";
 import useIsVerified from "@hooks/useIsVerified";
 import UserService from "@service/UserService";

@@ -1,3 +1,5 @@
+"use client"
+
 import OAuthService from "@service/OAuthService";
 import {LOGGER} from "@util/Logger";
 import {useRouter} from "next/router";

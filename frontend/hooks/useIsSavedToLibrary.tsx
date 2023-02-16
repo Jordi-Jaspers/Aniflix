@@ -1,3 +1,5 @@
+"use client"
+
 import {useUserInformation} from "@hooks/useUserInformation";
 import LibraryService from "@service/LibraryService";
 import {useQuery} from "react-query";

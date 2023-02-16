@@ -1,17 +1,16 @@
+"use client"
+
 import {infoScreenState} from "@atoms/InfoScreenAtom";
 import {animeState} from "@atoms/VideoPlayerAtom";
 import AnimeService from "@consumet/AnimeService";
-import {useFetchAnime} from "@hooks/useFetchAnime";
-import SpeakerButton from "@icons/SpeakerButton";
-import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
-import {RecentEpisode} from "@interfaces/RecentEpisode";
-
-
-import React, {useEffect, useState} from 'react';
 
 import {InformationCircleIcon} from '@heroicons/react/24/outline'
 import {PlayIcon} from '@heroicons/react/24/solid'
+import SpeakerButton from "@icons/SpeakerButton";
+import {Anime, hasAllAnimeProperties} from "@interfaces/Anime";
 import Image from 'next/image'
+
+import React, {useEffect, useState} from 'react';
 import YouTube from 'react-youtube';
 import {useRecoilState, useSetRecoilState} from "recoil";
 
@@ -44,7 +43,7 @@ export default function Banner({anime}: Props) {
     
     const videoTitle: string = anime.title.romaji ? anime.title.romaji : anime.title.english
     const description: string = (anime.description.length > 500) ? anime.description.substring(0, 500) + '...' : anime.description
-
+    
     useEffect(() => {
         if (showInfoScreen && isPlaying) {
             player?.pauseVideo()

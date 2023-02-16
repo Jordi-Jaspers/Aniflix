@@ -1,3 +1,5 @@
+"use client"
+
 import {PUBLIC_PATHS} from "@enum/Paths";
 import OAuthService from "@service/OAuthService";
 import {LOGGER} from "@util/Logger";
