@@ -34,7 +34,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@heroicons/react": "^2.0.13",
-    "@mui/material": "^5.11.3",
+    "@mui/material": "^5.11.13",
     "@next/font": "13.1.6",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/marked": "^4.0.8",
