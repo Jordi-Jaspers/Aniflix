@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="PDMPlugin">
+    <option name="customRuleSets">
+      <list>
+        <option value="$PROJECT_DIR$/../../hawaii/workspace/top/backend/src/quality/config/pmd/pmd.xml" />
+        <option value="$PROJECT_DIR$/../../hawaii/workspace/http-requester-x/backend/quality/config/pmd/pmd.xml" />
+        <option value="$PROJECT_DIR$/../../hawaii/workspace/query-dashboard/backend/src/quality/config/pmd/pmd.xml" />
+        <option value="$PROJECT_DIR$/../../hawaii/workspace/statehistory-x/backend/src/quality/config/pmd/pmd.xml" />
+      </list>
+    </option>
     <option name="skipTestSources" value="false" />
   </component>
   <component name="ProjectRootManager">
