@@ -4,10 +4,11 @@ import AnimeService from "@consumet/AnimeService";
 import type {Anime} from "@interfaces/Anime";
 import {hasAllAnimeProperties} from "@interfaces/Anime";
 import type {RecentEpisode} from "@interfaces/RecentEpisode";
-import Image from "next/image";
-import {useRouter} from "next/router";
 
 import React from 'react';
+
+import Image from "next/image";
+import {useRouter} from "next/router";
 import {useSetRecoilState} from 'recoil'
 
 interface Props {
