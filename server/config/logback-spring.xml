@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false"> <!-- disable logback config file scanning, we always require a reboot to change logs -->
+    <!-- Human-readable encoder with some nice management-proof colours, default in local development mode -->
+    <appender name="HUMANREADABLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TX:%X{tx_id})/%yellow(REQ:%X{req_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                \n%msg%n\n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logstash encoder outputting in JSON, default in container mode -->
+    <appender name="LOGSTASHENCODER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+
+    <appender name="KIBANA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./log/aniflix.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TX:%X{tx_id})/%yellow(REQ:%X{req_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] %msg%n</pattern>
+        </encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>./log/aniflix.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <totalSizeCap>7GB</totalSizeCap>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>1GB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Logging levels -->
+    <logger name="io.kahu" level="${APPLICATION_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.jordijaspers" level="${APPLICATION_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hibernate.sql" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
+
+    <logger name="javax.net.ssl" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
+    <logger name="org.hibernate" level="${APPLICATION_LOG_LEVEL:-ERROR}"/>
+    <logger name="com.zaxxer" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
+    <logger name="org.apache" level="${APPLICATION_LOG_LEVEL:-ERROR}"/>
+
+    <logger name="org.springframework" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.web" level="${SPRING_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.springframework.jpa" level="${SPRING_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.springframework.security" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.security.access.intercept" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.beans" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.web.socket" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.web.socket.handler" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.security.web.FilterChainProxy" level="${SPRING_LOG_LEVEL:-INFO}"/>
+
+    <logger name="org.hawaiiframework" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.async" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.security" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.logging" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.logging.config.RequestVoter" level="${HAWAII_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.hawaiiframework.logging.sql" level="${HAWAII_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.hawaiiframework.web.filter" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.logging.web.filter" level="${HAWAII_LOG_LEVEL:-INFO}"/>
+    <logger name="org.hawaiiframework.logging.web.filter.TransactionTypeFilter" level="${HAWAII_LOG_LEVEL:-INFO}"/>
+    <logger name="org.hawaiiframework.logging.LoggingClientHttpRequestInterceptor" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+
+    <!-- Root level and appender selection, defaults to HUMANREADABLE, overridable with env var $LOG_APPENDER -->
+    <root level="${ROOT_LOG_LEVEL:-INFO}">
+        <!-- In the logback config file, the separator between variable and default value is ":-". Deal with it. -->
+        <appender-ref ref="${LOG_APPENDER:-HUMANREADABLE}"/>
+    </root>
+</configuration>

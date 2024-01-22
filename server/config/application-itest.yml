@@ -1,0 +1,9 @@
+tomcat:
+  ajp:
+    enabled: true
+    port: 9009
+
+server:
+  port: 9081
+  servlet:
+    contextPath: /

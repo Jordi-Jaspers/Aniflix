@@ -1,0 +1,91 @@
+# ======= APPLICATION CONFIGURATION =======
+application:
+  properties:
+    name: aniflix
+    version: 0.0.1-SNAPSHOT
+    url: https://aniflix.stream
+
+  email:
+    host: ${EMAIL_HOST:localhost}
+    port: ${EMAIL_PORT:2500}
+    address: ${EMAIL_ADDRESS:no-reply@localhost}
+    protocol: smtp
+    encoding: UTF-8
+
+  security:
+    jwt:
+      lifetime: ${JWT_LIFETIME_SECONDS:900}
+    cors:
+      allowedOrigins: ${CORS_ALLOWED_ORIGINS:*}
+
+# ======= CONSUMET CONFIGURATION =======
+consumet:
+  url: ${CONSUMET_URL:https://consumet.aniflix.stream}
+
+# ======= MANAGEMENT ENDPOINTS =======
+management:
+  endpoint:
+    health:
+      show-details: "always"
+
+# ====== SERVER CONFIG ======
+server:
+  port: 8080
+
+tomcat:
+  ajp:
+    enabled: ${TOMCAT_AJP_ENABLED:true}
+    port: ${TOMCAT_AJP_PORT:8009}
+    secretRequired: ${TOMCAT_AJP_SECRET_REQUIRED:false}
+    secret: ${TOMCAT_AJP_SECRET:6qyuET3rNuzYRBtrBQjh8zCe}
+
+# ======= LOGGING CONFIG =======
+logging:
+  config: ${LOGGING_CONFIG:./config/logback-spring.xml}
+
+# ======= SPRINGDOC CONFIGURATION <https://springdoc.org/> =======
+springdoc:
+  show-actuator: true
+  pre-loading-enabled: true
+  show-login-endpoint: true
+  enable-spring-security: true
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /api/public/docs/openapi.html
+  api-docs:
+    path: /api/public/docs
+
+# ======= SPRING CONFIGURATION =======
+spring:
+  profiles.include: ${SPRING_PROFILES_INCLUDE:development}
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://100.72.31.107:3306/tst_aniflix}
+    username: ${SPRING_DATASOURCE_USERNAME:tst_aniflix}
+    password: ${SPRING_DATASOURCE_PASSWORD:tst_aniflix}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  config:
+    use-legacy-processing: true
+
+  jpa:
+    show-sql: ${SHOW_SQL:false}
+    open-in-view: false
+
+# ======= HAWAII AUTOCONFIGURATION OVERRIDE =======
+hawaii:
+  crypto:
+    enabled: false
+  logging:
+    filters:
+      transaction-id:
+        enabled: true
+      request-id:
+        enabled: true
+      open-telemetry-tracing-response:
+        enabled: false

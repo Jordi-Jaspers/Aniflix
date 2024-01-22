@@ -1,0 +1,69 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd"
+                   logicalFilePath="202309281612-initial-tables-provision.xml">
+    <changeSet id="202309281612-initial-tables-provision-1" author="jordi.jaspers">
+        <ext:documentation>
+            Creating the initial ANIFLIX tables.
+        </ext:documentation>
+        <sql>
+
+
+            -- Create the "user" table
+            CREATE TABLE IF NOT EXISTS user
+            (
+                id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+                first_name VARCHAR(256) NOT NULL,
+                last_name  VARCHAR(256) NOT NULL,
+                email      VARCHAR(256) NOT NULL,
+                password   VARCHAR(512) NOT NULL,
+                created    TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP(),
+                last_login TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
+                enabled    BOOLEAN      NOT NULL DEFAULT TRUE,
+                validated  BOOLEAN      NOT NULL DEFAULT FALSE,
+                UNIQUE (email)
+            );
+
+            -- Create the "role" table
+            CREATE TABLE IF NOT EXISTS role
+            (
+                id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+                authority   VARCHAR(255) NOT NULL,
+                description VARCHAR(255) NOT NULL,
+                UNIQUE (authority)
+            );
+
+            -- Create the "user_role" lookup table
+            CREATE TABLE IF NOT EXISTS user_role
+            (
+                user_id INT NOT NULL,
+                role_id INT NOT NULL,
+                PRIMARY KEY (user_id, role_id),
+                FOREIGN KEY (user_id) REFERENCES user (id),
+                FOREIGN KEY (role_id) REFERENCES role (id)
+            );
+
+            -- Create the "Token" table
+            CREATE TABLE IF NOT EXISTS token
+            (
+                id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+                value      TEXT         NOT NULL,
+                type       VARCHAR(256) NOT NULL,
+                expires_at TIMESTAMP    NOT NULL,
+                user_id    INT          NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
+                UNIQUE (value)
+            );
+
+            -- Create the "rsa_key" table
+            CREATE TABLE IF NOT EXISTS rsa_key
+            (
+                id serial PRIMARY KEY,
+                public_key BLOB NOT NULL,
+                private_key BLOB NOT NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

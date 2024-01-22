@@ -1,0 +1,94 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd"
+                   logicalFilePath="202309281615-user-anime-library-provision.xml">
+    <changeSet id="202309281615-user-anime-library-provision-1" author="jordi.jaspers">
+        <ext:documentation>
+            Creating the media table to save the user's anime liked movies or library.
+        </ext:documentation>
+        <sql>
+            CREATE TABLE IF NOT EXISTS genre
+            (
+                id   INTEGER AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                UNIQUE (name)
+            );
+
+            CREATE TABLE IF NOT EXISTS anime
+            (
+                anilist_id     INTEGER AUTO_INCREMENT PRIMARY KEY,
+                title          VARCHAR(255) NOT NULL,
+                description    TEXT,
+                total_episodes INTEGER      NOT NULL,
+                rating         INTEGER      NOT NULL,
+                status         VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
+                cover_url      TEXT         NOT NULL,
+                image_url      TEXT         NOT NULL,
+                release_year   INTEGER      NOT NULL,
+                subbed         BOOLEAN      NOT NULL DEFAULT FALSE,
+                media_type     VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
+                updated        TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                UNIQUE (anilist_id, title)
+            );
+
+            CREATE TABLE IF NOT EXISTS episode
+            (
+                id                  INTEGER AUTO_INCREMENT PRIMARY KEY,
+                anime_anilist_id    INTEGER      NOT NULL,
+                url_id              TEXT         NOT NULL,
+                number              INTEGER      NOT NULL,
+                title               VARCHAR(255) NOT NULL,
+                description         TEXT,
+                image               TEXT         NOT NULL,
+                UNIQUE (url_id),
+                FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS streaming_link
+            (
+                id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+                episode_id INTEGER      NOT NULL,
+                link       TEXT         NOT NULL,
+                resolution VARCHAR(255) NOT NULL,
+                FOREIGN KEY (episode_id) REFERENCES episode (id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS anime_genre
+            (
+                id                  INTEGER AUTO_INCREMENT PRIMARY KEY,
+                anime_id            INTEGER NOT NULL,
+                genre_id            INTEGER NOT NULL,
+                UNIQUE (anime_id, genre_id),
+                FOREIGN KEY (genre_id) REFERENCES genre (id) ON DELETE CASCADE,
+                FOREIGN KEY (anime_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS interaction
+            (
+                id                INTEGER AUTO_INCREMENT PRIMARY KEY,
+                user_id           INTEGER      NOT NULL,
+                anime_anilist_id  INTEGER      NOT NULL,
+                watch_status      VARCHAR(255) NOT NULL DEFAULT 'NOT_STARTED',
+                liked             BOOLEAN      NOT NULL DEFAULT FALSE,
+                in_library        BOOLEAN      NOT NULL DEFAULT FALSE,
+                last_seen_episode INTEGER      NOT NULL DEFAULT 0,
+                last_interaction  TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                UNIQUE (user_id, anime_anilist_id),
+                FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
+                FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="202309281615-user-anime-library-provision-2" author="jordi.jaspers">
+        <ext:documentation>
+            Adding some indexes to the tables.
+        </ext:documentation>
+        <sql>
+            CREATE INDEX idx_genre_name ON genre (name);
+            CREATE INDEX idx_user_id_anime_anilist_id ON interaction (user_id, anime_anilist_id);
+            CREATE INDEX idx_anime_title ON anime (title);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

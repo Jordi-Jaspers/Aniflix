@@ -1,0 +1,26 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd"
+                   logicalFilePath="202309281613-initial-index-provision.xml">
+    <changeSet id="202309281613-initial-index-provision-1" author="jordi.jaspers">
+        <ext:documentation>
+            Creating the initial indexes for the ANIFLIX tables.
+        </ext:documentation>
+        <sql>
+            CREATE INDEX idx_user_email ON `user` (email);
+            CREATE TRIGGER lowercase_insert_user_email
+                BEFORE INSERT
+                ON `user`
+                FOR EACH ROW
+            BEGIN
+                SET NEW.email = LOWER(NEW.email);
+            END;
+
+            CREATE INDEX idx_role_authority ON `role` (authority);
+
+            CREATE INDEX idx_token_user_id ON `token` (user_id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

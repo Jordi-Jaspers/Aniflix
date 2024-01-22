@@ -1,0 +1,5 @@
+gradle
+src
+log
+.gradle
+.idea

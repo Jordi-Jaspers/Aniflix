@@ -152,3 +152,9 @@ https://developer.chrome.com/blog/autoplay/ ==> chrome autoplay policy
 * Troubleshooting: <https://stackoverflow.com/>
 * Next.js: <https://nextjs.org/docs/getting-started>
 * TailwindCSS: <https://tailwindcss.com/docs>
+
+https://www.youtube.com/watch?v=ABbww4CFQSo&ab_channel=developedbyed
+
+https://docs.consumet.org/rest-api/Meta/anilist-anime/get-anime-info
+
+https://consumet.aniflix.stream/meta/anilist/info/162803?provider=gogoanime
