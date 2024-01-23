@@ -1,8 +1,0 @@
-.gitignore
-.env.local
-Dockerfile
-.dockerignore
-node_modules
-.next
-.github
-.husky
