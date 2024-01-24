@@ -2,6 +2,7 @@ package org.jordijaspers.aniflix.api.authentication.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.service.TokenService;
 import org.jordijaspers.aniflix.common.exception.AuthorizationException;
 import org.jordijaspers.aniflix.common.exception.InvalidJwtException;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.nonNull;
@@ -43,7 +43,7 @@ public class AuthenticationService {
 
     public User validate(final String token) {
         LOGGER.info("Attempting to validate user with token '{}'", token);
-        User user = tokenService.findByValue(token).getUser();
+        User user = tokenService.findValidationTokenByValue(token).getUser();
         tokenService.invalidateTokensForUser(user, USER_VALIDATION_TOKEN);
 
         user.setValidated(true);
@@ -57,8 +57,10 @@ public class AuthenticationService {
         userService.resendValidationEmail(email);
     }
 
-    public User refresh(final User user, final Jwt token) {
-        if (tokenService.isValidToken(token.getTokenValue(), user)) {
+    public User refresh(final String refreshToken) {
+        final Token token = tokenService.findByValue(refreshToken);
+        if (nonNull(token)) {
+            final User user = token.getUser();
             LOGGER.info("Refreshing tokens for user '{}'", user.getUsername());
             return tokenService.generateAuthorizationTokens(user);
         } else {

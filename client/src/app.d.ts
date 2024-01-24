@@ -73,3 +73,13 @@ interface AuthorizeResponse {
 	enabled: boolean;
 	validated: boolean;
 }
+
+// ======================== JWT ========================
+
+interface JwtPayload {
+	authorities: string[];
+	exp: number;
+	iat: number;
+	iss: string;
+	sub: string;
+}

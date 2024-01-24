@@ -14,8 +14,10 @@
 	let errorMessage: string;
 	const onSubmit = () => {
 		authorize(formData)
-			.then((res) => {
-				console.log(res);
+			.then((response: AuthorizeResponse) => {
+				localStorage.setItem('ANIFLIX_ACCESS_TOKEN', response.accessToken);
+				localStorage.setItem('ANIFLIX_REFRESH_TOKEN', response.refreshToken);
+				window.location.href = '/browse';
 			})
 			.catch((message) => {
 				errorMessage = message;

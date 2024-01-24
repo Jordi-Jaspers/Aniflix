@@ -105,9 +105,20 @@ public class TokenService {
     /**
      * Returns token details for the given token value if it exists.
      */
-    public Token findByValue(final String token) {
-        LOGGER.info("Searching token with value '{}'", token);
+    public Token findValidationTokenByValue(final String token) {
+        LOGGER.info("Searching validation token with value '{}'", token);
         return tokenRepository.findByValue(token)
+                .filter(entry -> entry.getType().equals(TokenType.USER_VALIDATION_TOKEN))
                 .orElseThrow(() -> new DataNotFoundException(TOKEN_NOT_FOUND_ERROR));
+    }
+
+    /**
+     * Returns token details for the given token value if it exists.
+     */
+    public Token findByValue(final String token) {
+        LOGGER.info("Searching jwt token with value '{}'", token);
+        return tokenRepository.findByValue(token)
+                .filter(entry -> entry.getType().isAccessToken() || entry.getType().isRefreshToken())
+                .orElse(null);
     }
 }

@@ -72,7 +72,7 @@ plugins {
  */
 dependencies {
     // Dependency versions
-    val hawaiiVersion = "6.0.0.M11"
+    val hawaiiVersion = "6.0.0.M10"
     val mapStructVersion = "1.5.3.Final"
 
     // ======= ANNOTATION PROCESSORS =======

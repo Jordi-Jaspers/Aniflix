@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.authentication.model.mapper.UserMapper;
 import org.jordijaspers.aniflix.api.authentication.model.request.LoginRequest;
+import org.jordijaspers.aniflix.api.authentication.model.request.RefreshTokenRequest;
 import org.jordijaspers.aniflix.api.authentication.model.request.RegisterUserRequest;
 import org.jordijaspers.aniflix.api.authentication.model.response.RegisterResponse;
 import org.jordijaspers.aniflix.api.authentication.model.response.UserResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.Paths.*;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -49,18 +51,21 @@ public class AuthenticationController {
         return ResponseEntity.status(OK).body(userMapper.toUserResponse(user));
     }
 
+    @ResponseStatus(OK)
+    @PostMapping(path = TOKEN_PATH)
+    // TODO: re-use of refresh token detection.
+    public ResponseEntity<UserResponse> refreshTokens(@RequestBody final RefreshTokenRequest request) {
+        final User user = authenticationService.refresh(request.getRefreshToken());
+        return ResponseEntity.status(OK).body(userMapper.toUserResponse(user));
+    }
+
     @ResponseStatus(NO_CONTENT)
     @GetMapping(path = LOGOUT_PATH)
     public ResponseEntity<Void> logout(@AuthenticationPrincipal final UserTokenPrincipal principal) {
-        authenticationService.logout(principal.getUser());
+        if (nonNull(principal)) {
+            authenticationService.logout(principal.getUser());
+        }
         return ResponseEntity.status(NO_CONTENT).build();
-    }
-
-    @ResponseStatus(OK)
-    @GetMapping(path = TOKEN_PATH)
-    public ResponseEntity<UserResponse> refreshTokens(@AuthenticationPrincipal final UserTokenPrincipal principal) {
-        final User user = authenticationService.refresh(principal.getUser(), principal.getJwt());
-        return ResponseEntity.status(OK).body(userMapper.toUserResponse(user));
     }
 
     @ResponseStatus(OK)
