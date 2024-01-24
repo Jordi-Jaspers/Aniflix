@@ -16,7 +16,7 @@ public enum ApiErrorCode implements ApiError {
             "The provided timestamp has an incorrect format."),
     USER_NOT_FOUND_ERROR(
             "ANI-0003",
-            "Could not find user. You have been redirected to the overview page."),
+            "Invalid Credentials: username or password are incorrect."),
     INVALID_ID_ERROR(
             "ANI-0004",
             "The id supplied in the path is not equal to the one in the given domain object."),

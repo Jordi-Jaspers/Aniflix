@@ -46,7 +46,7 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.1"
+    id("org.springframework.boot") version "3.2.2"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.4"
@@ -61,7 +61,10 @@ plugins {
     id("io.freefair.lombok") version "8.4"
 
     // SBOM generation for vulnerabilities
-    id("org.cyclonedx.bom") version "1.8.1"
+    id("org.cyclonedx.bom") version "1.8.2"
+
+    // Automatically generates a list of updatable dependencies.
+    id("com.github.ben-manes.versions") version "0.51.0"
 }
 
 /**
@@ -69,7 +72,7 @@ plugins {
  */
 dependencies {
     // Dependency versions
-    val hawaiiVersion = "6.0.0.M6"
+    val hawaiiVersion = "6.0.0.M11"
     val mapStructVersion = "1.5.3.Final"
 
     // ======= ANNOTATION PROCESSORS =======
@@ -110,15 +113,15 @@ dependencies {
     implementation(group = "org.passay", name = "passay", version = "1.6.4")
 
     // Used to validate entities and beans
-    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.0.2")
-    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.0.0")
+    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0-M1")
+    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M1")
 
     // Mail service provider that supports thymeleaf templating.
     implementation(group = "jakarta.mail", name = "jakarta.mail-api", version = "2.1.2")
 
     // Hibernate's core ORM functionality
     implementation(group = "org.hibernate", name = "hibernate-validator", version = "8.0.1.Final")
-    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.4.0.Final")
+    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.4.2.Final")
 
     // Java utility classes for the classes that are in java.lang's hierarchy
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
@@ -133,28 +136,11 @@ dependencies {
     implementation(group = "commons-io", name = "commons-io", version = "2.15.1")
 
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
-    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.37.3")
+    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.38-rc3")
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.0")
-}
-
-/**
- * Removing vulnerability by persisting to a specified version.
- * Note: Remove once they are patched in the parent dependency.
- */
-configurations.all {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "org.yaml" && requested.name == "snakeyaml") {
-            useVersion("2.2")
-            because("Vulnerability in SnakeYAML 1.33: CVE-2022-1471")
-        }
-        if (requested.group == "com.jayway.jsonpath" && requested.name == "json-path") {
-            useVersion("2.8.0")
-            because("Vulnerability in jsonpath 2.7.0: CVE-2023-51074")
-        }
-    }
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.1")
 }
 
 // ============== PLUGIN CONFIGURATION ================
