@@ -1,19 +1,30 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { authorize } from '$lib/components/api/authorization';
 	import { Button } from '$lib/components/ui/button';
 	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import { AlertCircle } from 'lucide-svelte';
+
+	let formData: LoginInput = {
+		email: '',
+		password: ''
+	};
+
+	let errorMessage: string;
+	const onSubmit = () => {
+		authorize(formData)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((message) => {
+				errorMessage = message;
+			});
+	};
 </script>
 
-<Card>
-	<form
-		method="POST"
-		action="{import.meta.env.VITE_SERVER_BASE_URL}/api/login"
-		use:enhance={({ formElement, formData: LoginInput }) => {
-			console.log(FormData.email);
-		}}
-	>
+<form id="login" on:submit|preventDefault={onSubmit}>
+	<Card>
 		<CardHeader class="space-y-1">
 			<CardTitle class="text-2xl">Sign In</CardTitle>
 			<CardDescription>Enter your email below and start watching</CardDescription>
@@ -21,18 +32,26 @@
 		<CardContent class="grid gap-4">
 			<div class="grid gap-2">
 				<Label>Email</Label>
-				<Input id="email" type="email" placeholder="johndoe@example.com" required />
+				<Input id="email" type="email" placeholder="johndoe@example.com" required bind:value={formData.email} />
 			</div>
 			<div class="grid gap-2">
 				<Label>Password</Label>
-				<Input id="password" type="password" required />
+				<Input id="password" type="password" placeholder="Password" required bind:value={formData.password} />
 			</div>
+
+			{#if errorMessage}
+				<div class="mx-1 flex flex-row content-center justify-center space-x-2 text-red-500">
+					<AlertCircle />
+					<span class="text-sm">{errorMessage}</span>
+				</div>
+			{/if}
+
 			<div class="relative">
 				<div class="absolute inset-0 flex items-center">
 					<span class="w-full border-t" />
 				</div>
 				<div class="relative flex justify-center text-xs uppercase">
-					<span class="bg-background text-muted-foreground px-2">Or continue with</span>
+					<span class="bg-background px-2 text-muted-foreground">Or continue with</span>
 				</div>
 			</div>
 			<div class="grid grid-cols-2 gap-6">
@@ -41,7 +60,7 @@
 			</div>
 		</CardContent>
 		<CardFooter>
-			<Button type="submit" class="w-full">Create account</Button>
+			<Button form="login" type="submit" class="w-full">Create account</Button>
 		</CardFooter>
-	</form>
-</Card>
+	</Card>
+</form>
