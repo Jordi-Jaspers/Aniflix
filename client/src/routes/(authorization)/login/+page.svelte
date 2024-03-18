@@ -2,12 +2,12 @@
 	import Logo from '$lib/assets/icons/aniflix-logo-large.png';
 	import LoginBackground from '$lib/assets/images/aniflix-login.png';
 	import LoginCard from '$lib/components/login/login-card.svelte';
-	import RegisterCard from '$lib/components/register/register-card.svelte';
-	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+	import RegisterCard from '$lib/components/login/register-card.svelte';
+	import {Tabs, TabsContent, TabsList, TabsTrigger} from '$lib/components/ui/tabs';
 </script>
 
-<div class="container relative grid h-full flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-	<div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+<div class="container relative grid h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
+	<div class="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
 		<div class="absolute inset-0 min-h-screen min-w-full">
 			<img
 				src={LoginBackground}
@@ -25,9 +25,9 @@
 				viewBox="0 0 24 24"
 				fill="none"
 				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinecap="round"
-				strokeLinejoin="round"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
 				class="mr-2 h-6 w-6"
 			>
 				<path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
@@ -42,7 +42,7 @@
 			</blockquote>
 		</div>
 	</div>
-	<div class="lg:p-8">
+	<div class="lg:p-8 ">
 		<div class="mx-auto flex w-[350px] flex-col justify-center space-y-6">
 			<div class="px-16">
 				<img src={Logo} alt="AniFlix Logo" width={941} height={313} priority />
@@ -59,11 +59,11 @@
 					<RegisterCard />
 				</TabsContent>
 			</Tabs>
-			<p class="px-8 text-center text-sm text-muted-foreground">
+			<p class="text-muted-foreground px-8 text-center text-sm">
 				By clicking continue, you agree to our{' '}
-				<a href="/terms" class="underline underline-offset-4 hover:text-primary"> Terms of Service </a>{' '}
+				<a href="/terms" class="hover:text-primary underline underline-offset-4"> Terms of Service </a>{' '}
 				and{' '}
-				<a href="/privacy" class="underline underline-offset-4 hover:text-primary"> Privacy Policy </a>
+				<a href="/privacy" class="hover:text-primary underline underline-offset-4"> Privacy Policy </a>
 				.
 			</p>
 		</div>

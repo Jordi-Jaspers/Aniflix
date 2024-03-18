@@ -3,7 +3,6 @@ package org.jordijaspers.aniflix.api.anime.model.constant;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -32,8 +31,11 @@ public enum MediaTypes {
     /**
      * @return A list of all configured MediaTypes.
      */
-    public static List<MediaTypes> getAll() {
-        return Arrays.asList(MediaTypes.values());
+    public static List<String> getAll() {
+        return stream()
+                .filter(value -> !value.equals(UNKNOWN))
+                .map(Enum::name)
+                .toList();
     }
 
     /**

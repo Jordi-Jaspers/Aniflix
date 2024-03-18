@@ -55,11 +55,23 @@ public final class Paths {
 
     public static final String LOGOUT_PATH = AUTH_PATH + "/logout";
 
+    /* ------------------------------- USER ENDPOINTS ------------------------------- */
+
+    public static final String USER_PATH = BASE_PATH + "/user";
+
+    public static final String USER_DETAILS = USER_PATH + "/details";
+
     /* ------------------------------- ANIME ENDPOINTS ------------------------------- */
 
     public static final String ANIME_PATH = BASE_PATH + ANIME_PART;
 
-    public static final String ANIME_OVERVIEW = ANIME_PATH + "/overview";
+    public static final String ANIME_CONSTANT = BASE_PATH + "/constant";
+
+    public static final String ANIME_SEARCH = ANIME_PATH + SEARCH_PART;
+
+    public static final String ANIME_DETAILS = ANIME_PATH + ID_PART;
+
+    public static final String ANIME_GENRE = ANIME_PATH + "/genre";
 
     public static final String ANIME_RECENT = ANIME_PATH + "/recent";
 
@@ -67,9 +79,7 @@ public final class Paths {
 
     public static final String ANIME_TRENDING = ANIME_PATH + "/trending";
 
-    public static final String ANIME_SEARCH = ANIME_PATH + SEARCH_PART;
-
-    public static final String ANIME_DETAILS = ANIME_PATH + ID_PART;
+    public static final String ANIME_BANNER = ANIME_PATH + "/banner";
 
     /* ------------------------------- INTERACTION ENDPOINTS ------------------------------- */
 

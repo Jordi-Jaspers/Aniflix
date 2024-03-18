@@ -14,9 +14,9 @@ public enum ApiErrorCode implements ApiError {
     INVALID_TIMESTAMP(
             "ANI-0002",
             "The provided timestamp has an incorrect format."),
-    USER_NOT_FOUND_ERROR(
+    INVALID_CREDENTIALS(
             "ANI-0003",
-            "Invalid Credentials: Incorrect username or password."),
+            "Invalid Credentials: Username or password is incorrect."),
     INVALID_ID_ERROR(
             "ANI-0004",
             "The id supplied in the path is not equal to the one in the given domain object."),
@@ -38,26 +38,23 @@ public enum ApiErrorCode implements ApiError {
     INVALID_TOKEN_ERROR(
             "ANI-0010",
             "The provided JWT token is invalid."),
-    INVALID_CREDENTIALS_ERROR(
-            "ANI-0011",
-            "Authorization failed: The provided credentials are invalid."),
     USER_DISABLED_ERROR(
-            "ANI-0012",
-            "Authorization failed: The user account is not enabled."),
+            "ANI-0011",
+            "Authorization failed: your account has been disabled."),
     USER_UNVALIDATED_ERROR(
-            "ANI-0013",
-            "Authorization failed: The user must validate their account first."),
+            "ANI-0012",
+            "Authorization failed: The user must validate their email address first."),
     AUTHORIZATION_ERROR(
-            "ANI-0014",
-            "Authorization failed: Something went wrong while trying to authorize the user."),
+            "ANI-0013",
+            "Username or password is incorrect. Please try again."),
     USER_ALREADY_EXISTS_ERROR(
-            "ANI-0015",
+            "ANI-0014",
             "User cannot be created: The provided email address is already in use."),
     CONSUMET_API_ERROR(
-            "ANI-0016",
+            "ANI-0015",
             "Something went wrong while trying to communicate with the Consumet API."),
     ANIME_NOT_FOUND_ERROR(
-            "ANI-0017",
+            "ANI-0016",
             "Could not find anime in the database, nor in the Consumet API.");
 
     /**

@@ -1,10 +1,13 @@
 package org.jordijaspers.aniflix.api.consumet.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jordijaspers.aniflix.api.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistOverview;
+import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistSearchResult;
-import org.jordijaspers.aniflix.api.consumet.model.gogoanime.GogoAnimeEpisode;
+import org.jordijaspers.aniflix.api.consumet.model.exception.ConsumetError;
 import org.jordijaspers.aniflix.common.exception.ConsumetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.Endpoints.*;
 import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.QueryParams.*;
 
@@ -29,9 +33,12 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumetRepository.class);
 
+    private final ObjectMapper objectMapper;
+
     private final WebClient client;
 
-    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client) {
+    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client, final ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
         this.client = client;
     }
 
@@ -151,7 +158,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param page    The page to return.
      */
     @Override
-    public ResultPage<GogoAnimeEpisode> getRecentEpisodes(final int results, final int page) {
+    public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> {
                     final URI uri = uriBuilder
@@ -164,7 +171,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
                 })
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
-                .bodyToMono(new ParameterizedTypeReference<ResultPage<GogoAnimeEpisode>>() {
+                .bodyToMono(new ParameterizedTypeReference<ResultPage<AnilistRecentEpisode>>() {
 
                 })
                 .doOnError(onObjectMappingErrorLog())
@@ -227,10 +234,20 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     // ======================== PRIVATE METHODS ========================
 
     private Mono<Throwable> handleConsumetError(final ClientResponse clientResponse) {
+        LOGGER.error("[Consumet API] Received an error response from the server with status code '{}'", clientResponse.statusCode());
         return clientResponse.bodyToMono(String.class)
                 .flatMap(response -> {
-                    LOGGER.error("[Consumet API] Consumet API returned an error: '{}'", response);
-                    return Mono.error(new ConsumetException(response));
+                    final Mono<Throwable> error = Mono.error(new ConsumetException(response));
+                    try {
+                        final ConsumetError errorResponse = objectMapper.readValue(response, ConsumetError.class);
+                        if (nonNull(errorResponse)) {
+                            LOGGER.error("[Consumet API] Consumet API returned an error: '{}'", errorResponse.getMessage());
+                            return Mono.error(new ConsumetException(errorResponse.getMessage()));
+                        }
+                    } catch (final JsonProcessingException noConsumetError) {
+                        LOGGER.error("[Consumet API] Unknown error response from Consumet API: '{}'", response);
+                    }
+                    return error;
                 });
     }
 

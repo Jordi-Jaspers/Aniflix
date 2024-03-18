@@ -2,12 +2,14 @@ package org.jordijaspers.aniflix.api.anime.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
-import org.jordijaspers.aniflix.api.anime.model.Overview;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.anime.model.request.AnimeRequest;
+import org.jordijaspers.aniflix.api.anime.model.request.GenreRequest;
+import org.jordijaspers.aniflix.api.anime.model.request.PageRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
-import org.jordijaspers.aniflix.api.anime.model.response.OverviewResponse;
+import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
+import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
 import org.jordijaspers.aniflix.api.interaction.model.response.InteractionResponse;
@@ -60,28 +62,28 @@ public class AnimeController {
         return ResponseEntity.status(OK).body(interactionMapper.toDetailedResponse(interaction));
     }
 
-    // ========================================  ANIME OVERVIEW ========================================
+    // ======================================== ANIME OVERVIEW ========================================
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = ANIME_OVERVIEW, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<OverviewResponse> getOverview() {
-        final Overview overview = animeService.getOverviewPage();
-        return ResponseEntity.status(OK).body(animeMapper.toOverviewResponse(overview));
+    @GetMapping(path = ANIME_BANNER, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<AnimeResponse> getAnimeBanner() {
+        final Anime anime = animeService.getAnimeBanner();
+        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(anime));
     }
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_RECENT, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getRecentAnime(@RequestBody final AnimeRequest request) {
-        final List<Anime> recentEpisodes = animeService.getAnimeOfRecentEpisodes(request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(recentEpisodes));
+    public ResponseEntity<List<EpisodeResponse>> getRecentAnime(@RequestBody final PageRequest request) {
+        final List<AnilistRecentEpisode> recentEpisodes = animeService.getAnimeOfRecentEpisodes(request.getPerPage(), request.getPage());
+        return ResponseEntity.status(OK).body(animeMapper.toRecentEpisodesResponse(recentEpisodes));
     }
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_POPULAR, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getPopularAnime(@RequestBody final AnimeRequest request) {
+    public ResponseEntity<List<AnimeResponse>> getPopularAnime(@RequestBody final PageRequest request) {
         final List<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
         return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(popularAnime));
     }
@@ -89,8 +91,16 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_TRENDING, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getTrendingAnime(@RequestBody final AnimeRequest request) {
+    public ResponseEntity<List<AnimeResponse>> getTrendingAnime(@RequestBody final PageRequest request) {
         final List<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
         return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(trendingAnime));
+    }
+
+    @ResponseStatus(OK)
+    @PreAuthorize("hasAuthority('USER')")
+    @PostMapping(path = ANIME_GENRE, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<AnimeResponse>> getAnimeByGenre(@RequestBody final GenreRequest request) {
+        final List<Anime> animeByGenre = animeService.getAnimeByGenre(request.getGenre(), request.getPerPage(), request.getPage());
+        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(animeByGenre));
     }
 }

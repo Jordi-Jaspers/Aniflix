@@ -53,8 +53,7 @@ public class InteractionService {
     }
 
     public Interaction updateInteraction(final Interaction interaction) {
-        final Anime anime = animeService.updateAnimeInfo(interaction.getAnime());
-        interaction.setAnime(anime);
+        animeService.updateAnimeInfo(interaction.getAnime());
         return interactionRepository.save(interaction);
     }
 
@@ -72,18 +71,6 @@ public class InteractionService {
         interaction.setLiked(true);
         interactionRepository.save(interaction);
         LOGGER.info("User '{}' liked anime '{}'", user.getUsername(), anime.getTitle());
-    }
-
-    public List<Interaction> getLikesOfUser(final User user) {
-        LOGGER.debug("Getting likes for user '{}'", user.getUsername());
-        return interactionRepository.findAllLikesForUser(user);
-    }
-
-    public List<Interaction> searchInLikesOfUser(final String title, final User user) {
-        LOGGER.debug("Searching likes for user '{}' with title '{}'", user.getUsername(), title);
-        return isBlank(title)
-                ? interactionRepository.findAllLikesForUser(user)
-                : interactionRepository.searchLikesByTitleForUser(title, user);
     }
 
     // ==================== LIBRARY ====================

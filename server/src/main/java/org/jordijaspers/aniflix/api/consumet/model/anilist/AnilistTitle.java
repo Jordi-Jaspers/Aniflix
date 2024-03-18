@@ -17,4 +17,5 @@ public class AnilistTitle {
 
     @JsonProperty("userPreferred")
     private String userPreferred;
+
 }

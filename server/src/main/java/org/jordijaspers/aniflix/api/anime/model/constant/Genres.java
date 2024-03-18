@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -41,10 +40,13 @@ public enum Genres {
     }
 
     /**
-     * @return A list of all configured Genres.
+     * @return A list of all configured Genres, excluding UNKNOWN.
      */
-    public static List<Genres> getAll() {
-        return Arrays.asList(Genres.values());
+    public static List<String> getAll() {
+        return stream()
+                .filter(value -> !value.equals(UNKNOWN))
+                .map(Genres::getName)
+                .toList();
     }
 
     /**

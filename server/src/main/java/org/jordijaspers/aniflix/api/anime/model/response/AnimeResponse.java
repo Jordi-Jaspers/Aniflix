@@ -24,6 +24,8 @@ public class AnimeResponse {
 
     private String cover;
 
+    private String trailer;
+
     private int releaseYear;
 
     private List<String> genres = new ArrayList<>();

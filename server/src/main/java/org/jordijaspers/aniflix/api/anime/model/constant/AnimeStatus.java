@@ -3,7 +3,6 @@ package org.jordijaspers.aniflix.api.anime.model.constant;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -11,10 +10,10 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public enum AnimeStatus {
 
+    UNKNOWN("Unknown"),
     ONGOING("Ongoing"),
     COMPLETED("Completed"),
-    NOT_YET_AIRED("Not yet aired"),
-    UNKNOWN("Unknown");
+    NOT_YET_AIRED("Not yet aired");
 
     private final String name;
 
@@ -28,8 +27,11 @@ public enum AnimeStatus {
     /**
      * @return A list of all configured AnimeStatus.
      */
-    public static List<AnimeStatus> getAll() {
-        return Arrays.asList(AnimeStatus.values());
+    public static List<String> getAll() {
+        return stream()
+                .filter(value -> !value.equals(UNKNOWN))
+                .map(Enum::name)
+                .toList();
     }
 
     /**

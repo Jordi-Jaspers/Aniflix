@@ -26,7 +26,7 @@ public final class ConsumetConstants {
 
         public static final String RANDOM_ANIME = "/meta/anilist/random-anime";
 
-        public static final String RECENT_EPISODES = "/anime/gogoanime/recent-episodes";
+        public static final String RECENT_EPISODES = "/meta/anilist/recent-episodes";
 
         public static final String POPULAR_ANIME = "/meta/anilist/popular";
 

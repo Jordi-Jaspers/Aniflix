@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.repository.DataNotFoundException;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
-import org.jordijaspers.aniflix.api.anime.model.Overview;
+import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
-import org.jordijaspers.aniflix.api.consumet.model.gogoanime.GogoAnimeEpisode;
+import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.service.ConsumetService;
-import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,17 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.hawaiiframework.async.AsyncUtil.invoke;
-import static org.jordijaspers.aniflix.api.anime.model.constant.Genres.getRandomGenres;
-import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.QueryParams.*;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Service
 @RequiredArgsConstructor
@@ -38,38 +32,21 @@ public class AnimeService {
 
     private final AnimeRepository animeRepository;
 
-    public Overview getOverviewPage() {
-        final CompletableFuture<List<Anime>> popularFuture = fetchPopularAnimeAsync();
-        final CompletableFuture<List<Anime>> trendingFuture = fetchTrendingAnimeAsync();
-        final CompletableFuture<List<Anime>> recentFuture = fetchRecentAnimeAsync();
-        final Map<Genre, CompletableFuture<List<Anime>>> genreFutures = fetchGenreAnimeAsync();
-
-        final CompletableFuture<Void> allOf = CompletableFuture.allOf(popularFuture, trendingFuture, recentFuture);
-        allOf.join();
-
-        return Overview.builder()
-                .popular(popularFuture.join())
-                .trending(trendingFuture.join())
-                .recentlyAdded(recentFuture.join())
-                .genre(genreFutures.entrySet().stream()
-                        .collect(Collectors.toMap(
-                                Map.Entry::getKey,
-                                entry -> entry.getValue().join()
-                        )))
-                .build();
-    }
-
     public List<Anime> searchAnime(final Map<String, String> filters) {
         return consumetService.searchAnime(filters);
     }
 
-    public List<Anime> getAnimeOfRecentEpisodes(final int perPage, final int page) {
-        return consumetService.getRecentEpisodes(perPage, page).stream()
-                .map(GogoAnimeEpisode::getTitle)
-                .map(this::findAnimeByTitle)
-                .filter(Objects::nonNull)
-                .distinct()
+    public List<AnilistRecentEpisode> getAnimeOfRecentEpisodes(final int perPage, final int page) {
+        return consumetService.getRecentEpisodes(perPage, page);
+    }
+
+    public Anime getAnimeBanner() {
+        final List<Anime> animeTrailers = getPopularAnime(50, 1)
+                .stream()
+                .filter(anime -> isNotBlank(anime.getTrailerUrl()))
                 .toList();
+
+        return animeTrailers.get((int) (Math.random() * animeTrailers.size()));
     }
 
     public List<Anime> getPopularAnime(final int perPage, final int page) {
@@ -80,7 +57,7 @@ public class AnimeService {
         return consumetService.getTrending(perPage, page);
     }
 
-    public List<Anime> getAnimeByGenre(final String genre, final int perPage, final int page) {
+    public List<Anime> getAnimeByGenre(final Genres genre, final int perPage, final int page) {
         return consumetService.getByGenre(genre, perPage, page);
     }
 
@@ -147,11 +124,11 @@ public class AnimeService {
 
         // Assuming that episodes are uniquely identified by some identifier, for example, an episode number
         final Map<String, Episode> episodeMap = new ConcurrentHashMap<>();
-        oldEpisodes.forEach(episode -> episodeMap.put(episode.getUrlId(), episode));
+        oldEpisodes.forEach(episode -> episodeMap.put(episode.getUrl(), episode));
 
         // Update the IDs in the updated episodes
         updatedEpisodes.forEach(updatedEpisode -> {
-            final Episode oldEpisode = episodeMap.get(updatedEpisode.getUrlId());
+            final Episode oldEpisode = episodeMap.get(updatedEpisode.getUrl());
             updatedEpisode.setAnime(updatedAnime);
             if (nonNull(oldEpisode)) {
                 updatedEpisode.setId(oldEpisode.getId());
@@ -160,25 +137,5 @@ public class AnimeService {
 
         // Save the updated anime with episode IDs transferred
         return animeRepository.save(updatedAnime);
-    }
-
-    private CompletableFuture<List<Anime>> fetchPopularAnimeAsync() {
-        return invoke(() -> getPopularAnime(PER_PAGE_VALUE, PAGE_VALUE));
-    }
-
-    private CompletableFuture<List<Anime>> fetchTrendingAnimeAsync() {
-        return invoke(() -> getTrendingAnime(PER_PAGE_VALUE, PAGE_VALUE));
-    }
-
-    private CompletableFuture<List<Anime>> fetchRecentAnimeAsync() {
-        return invoke(() -> getAnimeOfRecentEpisodes(PER_PAGE_VALUE_RECENT, PAGE_VALUE));
-    }
-
-    private Map<Genre, CompletableFuture<List<Anime>>> fetchGenreAnimeAsync() {
-        return getRandomGenres(4).stream()
-                .collect(Collectors.toMap(
-                        genre -> genre,
-                        genre -> invoke(() -> getAnimeByGenre(genre.getNameAsString(), PER_PAGE_VALUE, PAGE_VALUE))
-                ));
     }
 }

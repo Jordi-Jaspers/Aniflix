@@ -30,7 +30,7 @@ public class Episode {
     private Integer id;
 
     @Column(name = "url_id")
-    private String urlId;
+    private String url;
 
     @Column(name = "title")
     private String title;

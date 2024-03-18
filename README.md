@@ -158,3 +158,5 @@ https://www.youtube.com/watch?v=ABbww4CFQSo&ab_channel=developedbyed
 https://docs.consumet.org/rest-api/Meta/anilist-anime/get-anime-info
 
 https://consumet.aniflix.stream/meta/anilist/info/162803?provider=gogoanime
+
+    // https://www.npmjs.com/package/svelte-player

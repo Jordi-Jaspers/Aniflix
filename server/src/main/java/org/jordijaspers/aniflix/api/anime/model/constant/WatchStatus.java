@@ -3,7 +3,6 @@ package org.jordijaspers.aniflix.api.anime.model.constant;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -25,8 +24,8 @@ public enum WatchStatus {
     /**
      * @return A list of all configured WatchStatus.
      */
-    public static List<WatchStatus> getAll() {
-        return Arrays.asList(WatchStatus.values());
+    public static List<String> getAll() {
+        return stream().map(Enum::name).toList();
     }
 
     /**

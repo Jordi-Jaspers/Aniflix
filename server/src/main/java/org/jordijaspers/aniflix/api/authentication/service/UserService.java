@@ -9,7 +9,6 @@ import org.jordijaspers.aniflix.common.exception.UserAlreadyExistsException;
 import org.jordijaspers.aniflix.email.service.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.authentication.model.Authority.USER;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.*;
 
@@ -47,27 +47,11 @@ public class UserService implements UserDetailsService {
                     user.setLastLogin(LocalDateTime.now());
                     return userRepository.save(user);
                 })
-                .orElseThrow(() -> new AuthorizationException(USER_NOT_FOUND_ERROR));
+                .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
     }
 
     public User updateUserDetails(final User user) {
         return userRepository.save(user);
-    }
-
-    public User registerUser(final User user, final String password) {
-        try {
-            user.setPassword(passwordEncoder.encode(password));
-            user.setRoles(List.of(roleRepository.findByAuthority(USER).orElseThrow()));
-            user.setEnabled(true);
-            user.setValidated(false);
-            final User persistedUser = userRepository.save(user);
-
-            LOGGER.info("User has been registered, sending email to validate account.");
-            emailService.sendUserValidationEmail(persistedUser);
-            return persistedUser;
-        } catch (final DataIntegrityViolationException exception) {
-            throw new UserAlreadyExistsException(exception);
-        }
     }
 
     public void resendValidationEmail(final String email) {
@@ -78,5 +62,31 @@ public class UserService implements UserDetailsService {
         } else {
             emailService.sendUserValidationEmail(user);
         }
+    }
+
+    public User registerAndNotify(final User newUser, final String password) {
+        LOGGER.info("Attempting to register new user '{}'", newUser.getEmail());
+        final User existingUser = userRepository.findByEmail(newUser.getEmail()).orElse(null);
+        if (nonNull(existingUser)) {
+            if (existingUser.isValidated()) {
+                resendValidationEmail(existingUser.getEmail());
+                return existingUser;
+            }
+            LOGGER.error("User '{}' already exists", newUser.getEmail());
+            throw new UserAlreadyExistsException();
+        }
+
+        final User user = register(newUser, password);
+        LOGGER.info("User has been registered, sending email to validate account.");
+        emailService.sendUserValidationEmail(user);
+        return user;
+    }
+
+    private User register(final User newUser, final String password) {
+        newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setRoles(List.of(roleRepository.findByAuthority(USER).orElseThrow()));
+        newUser.setEnabled(true);
+        newUser.setValidated(false);
+        return userRepository.save(newUser);
     }
 }

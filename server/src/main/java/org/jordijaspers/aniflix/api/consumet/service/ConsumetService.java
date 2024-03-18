@@ -3,9 +3,10 @@ package org.jordijaspers.aniflix.api.consumet.service;
 import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.repository.DataNotFoundException;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
+import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistSearchResult;
-import org.jordijaspers.aniflix.api.consumet.model.gogoanime.GogoAnimeEpisode;
 import org.jordijaspers.aniflix.api.consumet.repository.ConsumetRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class ConsumetService {
 
     private final AnimeMapper animeMapper;
 
-    public List<GogoAnimeEpisode> getRecentEpisodes(final int perPage, final int page) {
+    public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
         return consumetRepository.getRecentEpisodes(perPage, page).getResults();
     }
 
@@ -45,8 +46,8 @@ public class ConsumetService {
                 .toList();
     }
 
-    public List<Anime> getByGenre(final String genre, final int perPage, final int page) {
-        return consumetRepository.getAnimeByGenre(genre, perPage, page).getResults().stream()
+    public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
+        return consumetRepository.getAnimeByGenre(genre.getName(), perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)
                 .toList();
     }

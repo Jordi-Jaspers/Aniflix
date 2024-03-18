@@ -3,8 +3,8 @@ package org.jordijaspers.aniflix.api.consumet.repository;
 import org.jordijaspers.aniflix.api.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistOverview;
+import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistSearchResult;
-import org.jordijaspers.aniflix.api.consumet.model.gogoanime.GogoAnimeEpisode;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public interface ConsumetRepository {
     /**
      * Searches for an anime by its name.
      *
-     * @param query   The name of the anime.
+     * @param query The name of the anime.
      */
     ResultPage<AnilistSearchResult> searchAnime(String query);
 
@@ -48,11 +48,13 @@ public interface ConsumetRepository {
     /**
      * Returns a list of recently released episodes of currently airing Anime TV series
      * by retrieving all the recent episodes and filtering out the ones that are chinese.
+     * <p>
+     * TODO: Should be changed to '/meta/anilist/recent-episodes' when the API is updated.
      *
      * @param results The number of results to return.
      * @param page    The page to return.
      */
-    ResultPage<GogoAnimeEpisode> getRecentEpisodes(int results, int page);
+    ResultPage<AnilistRecentEpisode> getRecentEpisodes(int results, int page);
 
     /**
      * Returns a list of Anime TV series that match the given genre.

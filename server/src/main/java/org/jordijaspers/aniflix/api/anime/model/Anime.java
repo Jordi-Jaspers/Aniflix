@@ -66,6 +66,9 @@ public class Anime {
     @Column(name = "cover_url")
     private String coverUrl;
 
+    @Column(name = "trailer_url")
+    private String trailerUrl;
+
     @Column(name = "release_year")
     private int releaseYear;
 

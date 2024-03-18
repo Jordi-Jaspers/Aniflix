@@ -26,6 +26,7 @@
                 status         VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
                 cover_url      TEXT         NOT NULL,
                 image_url      TEXT         NOT NULL,
+                trailer_url    TEXT,
                 release_year   INTEGER      NOT NULL,
                 subbed         BOOLEAN      NOT NULL DEFAULT FALSE,
                 media_type     VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',

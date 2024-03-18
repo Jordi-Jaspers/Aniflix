@@ -79,6 +79,8 @@ spring:
 
 # ======= HAWAII AUTOCONFIGURATION OVERRIDE =======
 hawaii:
+  async:
+    configuration: ${ASYNC_CONFIG:./config/async-config.yml}
   crypto:
     enabled: false
   logging:

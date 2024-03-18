@@ -4,6 +4,7 @@ import org.jordijaspers.aniflix.api.authentication.model.Role;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.authentication.model.request.RegisterUserRequest;
 import org.jordijaspers.aniflix.api.authentication.model.response.RegisterResponse;
+import org.jordijaspers.aniflix.api.authentication.model.response.UserDetailsResponse;
 import org.jordijaspers.aniflix.api.authentication.model.response.UserResponse;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.Mapper;
@@ -25,6 +26,9 @@ public abstract class UserMapper {
     @Mapping(target = "accessToken", source = "accessToken.value")
     @Mapping(target = "expiresAt", source = "accessToken.expiresAt")
     public abstract UserResponse toUserResponse(User user);
+
+    @Mapping(target = "authorities", expression = "java(mapRolesToAuthorities(user.getRoles()))")
+    public abstract UserDetailsResponse toUserDetailsResponse(User user);
 
     public List<String> mapRolesToAuthorities(final List<Role> roles) {
         return roles.stream().map(Role::getAuthority).collect(Collectors.toList());

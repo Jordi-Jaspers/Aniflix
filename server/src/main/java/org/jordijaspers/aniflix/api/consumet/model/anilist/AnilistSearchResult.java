@@ -59,4 +59,11 @@ public class AnilistSearchResult {
     public String getStatus() {
         return status.toUpperCase();
     }
+
+    /**
+     * Returns the title of the anime in the language you prefer.
+     */
+    public String getPreferredTitle() {
+        return title.getEnglish().toLowerCase();
+    }
 }

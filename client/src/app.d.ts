@@ -41,12 +41,16 @@ interface ValidationField {
 
 // ======================== REQUESTS ========================
 
-interface LoginInput {
+interface LoginRequest {
 	email: string;
 	password: string;
 }
 
-interface RegisterInput {
+interface RefreshTokenRequest {
+	refreshToken: string;
+}
+
+interface RegisterRequest {
 	email: string;
 	firstName: string;
 	lastName: string;
@@ -54,11 +58,29 @@ interface RegisterInput {
 	passwordConfirmation: string;
 }
 
+interface AnimeRequest {
+	page: number;
+	perPage: number;
+	title: string;
+	genre: string;
+	season: string;
+}
+
 // ======================== RESPONSE ========================
 
 interface RegisterResponse {
 	email: string;
 	authorities: string[];
+	enabled: boolean;
+	validated: boolean;
+}
+
+interface UserDetailsResponse {
+	firstName: string;
+	lastName: string;
+	email: string;
+	authorities: string[];
+	lastLogin: Date;
 	enabled: boolean;
 	validated: boolean;
 }
@@ -72,6 +94,41 @@ interface AuthorizeResponse {
 	expiresAt: Date;
 	enabled: boolean;
 	validated: boolean;
+}
+
+interface AnimeResponse {
+	id: number;
+	title: string;
+	description: string;
+	totalEpisodes: number;
+	rating: number;
+	status: string;
+	image: string;
+	cover: string;
+	trailer: string;
+	releaseYear: number;
+	genres: string[];
+	mediaType: string;
+	subbed: boolean;
+	likes: number;
+}
+
+interface EpisodeResponse {
+	anilistId: string;
+	title: string;
+	episodeTitle: string;
+	episodeNumber: number;
+	episodeUrl: string;
+	description: string;
+	image: string;
+}
+
+interface ConstantResponse {
+	genres: string[];
+	seasons: string[];
+	status: string[];
+	mediaTypes: string[];
+	watchStatus: string[];
 }
 
 // ======================== JWT ========================

@@ -31,7 +31,7 @@ public class AuthenticationService {
 
     public User register(final User user, final String password) {
         LOGGER.info("Registering new user '{}'.", user.getUsername());
-        return userService.registerUser(user, password);
+        return userService.registerAndNotify(user, password);
     }
 
     public User authorize(final String username, final String password) {

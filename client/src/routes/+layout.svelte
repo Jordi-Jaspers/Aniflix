@@ -1,21 +1,32 @@
-<script>
-	import * as Alert from '$lib/components/ui/alert';
-	import { AlertCircle } from 'lucide-svelte';
+<script lang="ts">
+	import ErrorMessage from '$lib/components/general/error-message.svelte';
+	import {useAuthenticated, useHasError} from '$lib/store';
+	import {onMount} from 'svelte';
 	import '../app.pcss';
-	import { useIsAuthorized } from './../lib/store.ts';
 
-	const isAuthorized = useIsAuthorized();
+	let isAuthenticated: boolean;
+	let hasError: boolean;
+
+	onMount(() => {
+		useHasError.subscribe((value) => {
+			hasError = value;
+			if (hasError) {
+				setTimeout(() => {
+					hasError = false;
+				}, 5000);
+			}
+		});
+		useAuthenticated.subscribe((value) => {
+			isAuthenticated = value;
+		});
+	});
 </script>
 
-<main class="flex h-screen flex-col">
-	<slot />
-	{#if !isAuthorized}
-		<div class="absolute bottom-[5%] right-0 w-screen px-8 lg:w-[50%]">
-			<Alert.Root class="bg-gray-200/80" variant="destructive">
-				<AlertCircle class="h-4 w-4" />
-				<Alert.Title>Error</Alert.Title>
-				<Alert.Description>You are unauthorized or your session has expired.</Alert.Description>
-			</Alert.Root>
+<main>
+	<slot class="bg-[#1a1920]"/>
+	{#if !isAuthenticated && hasError}
+		<div class="fade absolute bottom-[5%] right-0 w-screen px-8 transition lg:w-[50%]">
+			<ErrorMessage isVisible={hasError} error="You are unauthorized or your session has expired."/>
 		</div>
 	{/if}
 </main>

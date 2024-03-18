@@ -3,7 +3,6 @@ package org.jordijaspers.aniflix.api.anime.model.constant;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -29,8 +28,11 @@ public enum AnimeSeason {
     /**
      * @return A list of all configured AnimeStatus.
      */
-    public static List<AnimeSeason> getAll() {
-        return Arrays.asList(AnimeSeason.values());
+    public static List<String> getAll() {
+        return stream()
+                .filter(value -> !value.equals(UNKNOWN))
+                .map(Enum::name)
+                .toList();
     }
 
     /**
