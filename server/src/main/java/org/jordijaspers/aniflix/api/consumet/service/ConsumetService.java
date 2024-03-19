@@ -8,6 +8,7 @@ import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumet.repository.ConsumetRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,16 +31,19 @@ public class ConsumetService {
 
     private final AnimeMapper animeMapper;
 
+    @Cacheable(value = "recentEpisodes", unless = "#result.size() == 0")
     public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
         return consumetRepository.getRecentEpisodes(perPage, page).getResults();
     }
 
+    @Cacheable(value = "popularAnime", unless = "#result.size() == 0")
     public List<Anime> getPopular(final int perPage, final int page) {
         return consumetRepository.getPopularAnime(perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)
                 .toList();
     }
 
+    @Cacheable(value = "trendingAnime", unless = "#result.size() == 0")
     public List<Anime> getTrending(final int perPage, final int page) {
         return consumetRepository.getTrendingAnime(perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)

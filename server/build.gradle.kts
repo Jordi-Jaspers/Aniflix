@@ -98,6 +98,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-security")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-validation")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.
     implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.3.0")

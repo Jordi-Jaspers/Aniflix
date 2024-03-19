@@ -25,12 +25,15 @@ import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import static io.micrometer.common.util.StringUtils.isNotBlank;
 import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
 @Entity
@@ -38,7 +41,10 @@ import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMP
 @NoArgsConstructor
 @Table(name = "anime")
 @EqualsAndHashCode(of = "anilistId")
-public class Anime {
+public class Anime implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
     @Column(name = "anilist_id")

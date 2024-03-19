@@ -14,13 +14,20 @@ import lombok.NoArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "genre")
-public class Genre {
+public class Genre implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

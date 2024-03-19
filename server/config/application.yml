@@ -58,6 +58,15 @@ springdoc:
 # ======= SPRING CONFIGURATION =======
 spring:
   profiles.include: ${SPRING_PROFILES_INCLUDE:development}
+  cache:
+    type: redis
+    redis:
+      time-to-live: 300000
+      enable-statistics: true
+  data:
+    redis:
+      host: 100.72.31.107
+      port: 6379
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://100.72.31.107:3306/tst_aniflix}
