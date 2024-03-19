@@ -1,10 +1,8 @@
 <script lang="ts">
-    import {curl} from "$lib/api/client";
-    import {SERVER_URLS} from "$lib/api/paths";
-    import {onMount} from "svelte";
     import {Button} from "$lib/components/ui/button";
     import {InfoIcon, PlayIcon, StarIcon} from "lucide-svelte";
     import {Badge} from "$lib/components/ui/badge";
+    import {useAnimeInfo, useShowInfoModal} from "$lib/store";
 
     export let anime: AnimeResponse;
     let genres: string[] = anime.genres
@@ -21,6 +19,11 @@
     let lastOpenTagIndex = description.lastIndexOf('<');
     if (lastOpenTagIndex > 0) {
         description = description.substring(0, lastOpenTagIndex);
+    }
+
+    function openModal() {
+        useAnimeInfo.set(anime);
+        $useShowInfoModal = true;
     }
 </script>
 
@@ -61,7 +64,7 @@
                             <PlayIcon class="p-1 fill-white/75 hover:fill-white"/>
                         </div>
                     </Button>
-                    <Button class="space-x-4 rounded-full border-secondary/75 text-white/75 transition bg-secondary/75 hover:bg-secondary hover:text-white">
+                    <Button on:click={openModal} class="space-x-4 rounded-full border-secondary/75 text-white/75 transition bg-secondary/75 hover:bg-secondary hover:text-white">
                         <p>More Info</p>
                         <InfoIcon />
                     </Button>

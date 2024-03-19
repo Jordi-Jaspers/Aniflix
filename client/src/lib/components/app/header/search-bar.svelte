@@ -45,6 +45,6 @@
 		on:keydown={handleEscape}
 	/>
 	<button on:click={toggleSearchBar} class="items-center flex justify-center">
-		<Search class="" />
+		<Search />
 	</button>
 </div>

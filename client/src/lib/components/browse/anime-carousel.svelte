@@ -5,8 +5,6 @@
     import {onMount} from "svelte";
     import {curl} from "$lib/api/client";
     import {Skeleton} from "$lib/components/ui/skeleton";
-    import {Button} from "$lib/components/ui/button";
-    import {useIsLoading} from "$lib/store";
 
     export let title: string;
     export let genre: string = '';
@@ -51,9 +49,9 @@
                         <Carousel.Item class="basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6">
                             <Card.Root>
                                 <Card.Content class="p-0 aspect-[9/14] h-full rounded-[0.75rem] overflow-hidden bg-[#1a1920] flex flex-col">
-                                    <div class="h-[85%] aspect-[9/12] w-full cursor-pointer" style="background-image: url({anime.image}); background-size: cover; background-position: center">
-                                        <div class="h-full w-full bg-gradient-to-b from-transparent to-black/60 flex flex-col justify-end"/>
-                                    </div>
+                                    <button class="h-[85%] aspect-[9/12] w-full cursor-pointer" style="background-image: url({anime.image}); background-size: cover; background-position: center">
+                                        <span class="h-full w-full bg-gradient-to-b from-transparent to-black/60 flex flex-col justify-end"/>
+                                    </button>
                                     <div class="flex justify-evenly items-center h-[7.5vw] md:h-[15%] py-4 md:justify-between md:px-4 ">
                                         <div class="rounded-full bg-primary/75 justify-between items-center px-2 hover:bg-primary hidden md:flex">
                                             <PlayIcon class="w-[20%] fill-white/75 hover:fill-white"/>

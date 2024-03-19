@@ -160,3 +160,5 @@ https://docs.consumet.org/rest-api/Meta/anilist-anime/get-anime-info
 https://consumet.aniflix.stream/meta/anilist/info/162803?provider=gogoanime
 
     // https://www.npmjs.com/package/svelte-player
+https://lucide.dev/
+https://www.shadcn-svelte.com/docs/components/dropdown-menu
