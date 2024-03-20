@@ -61,6 +61,7 @@ public abstract class AnimeMapper {
     @Mapping(target = "mediaType", source = "type")
     public abstract Anime toAnime(AnilistInfoResult result);
 
+    @Mapping(target = "url", source = "urlId")
     @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
     public abstract Episode toEpisode(AnilistEpisode source);
 
@@ -72,7 +73,6 @@ public abstract class AnimeMapper {
     public abstract List<EpisodeResponse> toRecentEpisodesResponse(List<AnilistRecentEpisode> source);
 
     @Named("toResponseWithoutEpisodes")
-    @Mapping(source = "anilistId", target = "id")
     @Mapping(source = "imageUrl", target = "image")
     @Mapping(source = "coverUrl", target = "cover")
     @Mapping(source = "trailerUrl", target = "trailer")
@@ -83,14 +83,31 @@ public abstract class AnimeMapper {
     public abstract List<AnimeResponse> toResponseWithoutEpisodes(List<Anime> anime);
 
     @Named("toResponseWithEpisodes")
-    @Mapping(source = "anilistId", target = "id")
     @Mapping(source = "imageUrl", target = "image")
     @Mapping(source = "coverUrl", target = "cover")
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
+    @Mapping(target = "episodes", expression = "java(toEpisodeResponse(anime))")
+    @Mapping(target = "trailer", source = "trailerUrl")
     public abstract DetailedAnimeResponse toResponseWithEpisodes(Anime anime);
 
     @IterableMapping(qualifiedByName = "toResponseWithEpisodes")
     public abstract List<DetailedAnimeResponse> toResponseWithEpisodes(List<Anime> anime);
+
+    public List<EpisodeResponse> toEpisodeResponse(final Anime anime) {
+        return anime.getEpisodes().stream()
+                .map(episode -> {
+                    final EpisodeResponse response = new EpisodeResponse();
+                    response.setAnilistId(anime.getAnilistId());
+                    response.setTitle(anime.getTitle());
+                    response.setEpisodeTitle(episode.getTitle());
+                    response.setEpisodeNumber(episode.getNumber());
+                    response.setEpisodeUrl(episode.getUrl());
+                    response.setDescription(episode.getDescription());
+                    response.setImage(anime.getImageUrl());
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
 
     public Map<String, String> toFilters(final AnimeRequest request) {
         return Stream.of(

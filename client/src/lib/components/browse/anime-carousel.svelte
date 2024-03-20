@@ -5,6 +5,8 @@
     import {onMount} from "svelte";
     import {curl} from "$lib/api/client";
     import {Skeleton} from "$lib/components/ui/skeleton";
+    import {useAnimeInfo, useShowInfoModal} from "$lib/store";
+    import {openModal} from "$lib/api/util";
 
     export let title: string;
     export let genre: string = '';
@@ -58,8 +60,14 @@
                                             <p class="w-[80%] text-xs font-light text-center">Watch</p>
                                         </div>
                                         <div class="flex justify-evenly md:justify-center w-full md:w-fit space-x-2">
+                                            <button on:click={() => openModal(anime.anilistId)}>
+
                                             <InfoIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
+                                            </button>
+                                            <button>
                                             <PlusCircleIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
+
+                                            </button>
                                         </div>
                                     </div>
                                 </Card.Content>

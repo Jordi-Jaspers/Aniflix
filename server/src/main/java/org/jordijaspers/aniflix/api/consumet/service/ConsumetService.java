@@ -50,16 +50,11 @@ public class ConsumetService {
                 .toList();
     }
 
-    public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
-        return consumetRepository.getAnimeByGenre(genre.getName(), perPage, page).getResults().stream()
+    @Cacheable(value = "animeDetails", key = "#anilistId")
+    public Anime getAnimeDetails(final Integer anilistId) {
+        return Optional.of(consumetRepository.getAnimeDetails(anilistId))
                 .map(animeMapper::toAnime)
-                .toList();
-    }
-
-    public List<Anime> searchAnime(final Map<String, String> filters) {
-        return consumetRepository.searchAnime(filters).getResults().stream()
-                .map(animeMapper::toAnime)
-                .toList();
+                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
     }
 
     public Anime getAnimeDetails(final String title) {
@@ -74,10 +69,16 @@ public class ConsumetService {
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
     }
 
-    public Anime getAnimeDetails(final Integer anilistId) {
-        return Optional.of(consumetRepository.getAnimeDetails(anilistId))
+    public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
+        return consumetRepository.getAnimeByGenre(genre.getName(), perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)
-                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+                .toList();
+    }
+
+    public List<Anime> searchAnime(final Map<String, String> filters) {
+        return consumetRepository.searchAnime(filters).getResults().stream()
+                .map(animeMapper::toAnime)
+                .toList();
     }
 
     public static Map<String, String> applyDefaultFilters(final String input, final Map<String, String> filters) {

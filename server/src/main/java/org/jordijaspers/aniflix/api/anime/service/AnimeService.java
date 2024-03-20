@@ -10,6 +10,7 @@ import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.service.ConsumetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -108,19 +109,23 @@ public class AnimeService {
     }
 
     public Anime updateAnimeInfo(final Anime anime) {
-        if (anime.isCompleted()) {
-            return anime;
+        if (!anime.isCompleted()) {
+            synchronizeData(anime);
         }
+        return anime;
+    }
 
-        LOGGER.info("Anime with title '{}' is incomplete, attempting to update it.", anime.getTitle());
-        final Anime updatedAnime = consumetService.getAnimeDetails(anime.getAnilistId());
-
+    //TODO: fix async
+    @Async("anime.synchronize")
+    protected void synchronizeData(final Anime anime) {
+        LOGGER.info("Synchronizing consumet data with the database for id '{}'", anime.getAnilistId());
+        final Anime updatedInfo = consumetService.getAnimeDetails(anime.getAnilistId());
         // Set the Genre from the old anime to the updated anime
-        updatedAnime.setGenres(anime.getGenres());
+        updatedInfo.setGenres(anime.getGenres());
 
         // Transfer episode IDs from the old anime to the updated one
         final Set<Episode> oldEpisodes = anime.getEpisodes();
-        final Set<Episode> updatedEpisodes = updatedAnime.getEpisodes();
+        final Set<Episode> updatedEpisodes = updatedInfo.getEpisodes();
 
         // Assuming that episodes are uniquely identified by some identifier, for example, an episode number
         final Map<String, Episode> episodeMap = new ConcurrentHashMap<>();
@@ -129,13 +134,14 @@ public class AnimeService {
         // Update the IDs in the updated episodes
         updatedEpisodes.forEach(updatedEpisode -> {
             final Episode oldEpisode = episodeMap.get(updatedEpisode.getUrl());
-            updatedEpisode.setAnime(updatedAnime);
+            updatedEpisode.setAnime(updatedInfo);
             if (nonNull(oldEpisode)) {
                 updatedEpisode.setId(oldEpisode.getId());
             }
         });
 
         // Save the updated anime with episode IDs transferred
-        return animeRepository.save(updatedAnime);
+        animeRepository.save(updatedInfo);
+        LOGGER.info("Synchronization completed for anime with id '{}'", anime.getAnilistId());
     }
 }

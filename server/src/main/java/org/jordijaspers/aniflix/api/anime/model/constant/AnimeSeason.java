@@ -40,7 +40,7 @@ public enum AnimeSeason {
      */
     public static AnimeSeason ofName(final String text) {
         return stream()
-                .filter(animeSeason -> animeSeason.name().equalsIgnoreCase(text))
+                .filter(animeSeason -> animeSeason.getName().equalsIgnoreCase(text))
                 .findFirst()
                 .orElse(AnimeSeason.UNKNOWN);
     }

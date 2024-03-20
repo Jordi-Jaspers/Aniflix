@@ -1,4 +1,4 @@
-import {useAuthenticated, useErrorMessage, useHasError} from '$lib/store';
+import {useAuthenticated, useErrorMessage, useHasAuthError, useHasError} from '$lib/store';
 import {goto} from "$app/navigation";
 import {CLIENT_URLS, SERVER_URLS} from "$lib/api/paths";
 
@@ -112,14 +112,14 @@ async function refreshTokens(): Promise<AuthorizeResponse | string> {
 
     if (!response.ok) {
         removeTokens();
-        useHasError.set(true);
+        useHasAuthError.set(true);
         return getErrorMessage(response);
     } else {
         const data: AuthorizeResponse = await response.json();
         localStorage.setItem('ANIFLIX_ACCESS_TOKEN', data.accessToken);
         localStorage.setItem('ANIFLIX_REFRESH_TOKEN', data.refreshToken);
         useAuthenticated.set(true);
-        useHasError.set(false);
+        useHasAuthError.set(false);
         return data;
     }
 }
@@ -179,7 +179,7 @@ function removeTokens() {
  */
 function updateTokens(response: AuthorizeResponse) {
     useAuthenticated.set(true);
-    useHasError.set(false);
+    useHasAuthError.set(false);
     localStorage.setItem('ANIFLIX_ACCESS_TOKEN', response.accessToken);
     localStorage.setItem('ANIFLIX_REFRESH_TOKEN', response.refreshToken);
 }

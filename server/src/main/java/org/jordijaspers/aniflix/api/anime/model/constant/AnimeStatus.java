@@ -39,7 +39,7 @@ public enum AnimeStatus {
      */
     public static AnimeStatus ofName(final String text) {
         return stream()
-                .filter(animeStatus -> animeStatus.name().equalsIgnoreCase(text))
+                .filter(animeStatus -> animeStatus.getName().equalsIgnoreCase(text))
                 .findFirst()
                 .orElse(AnimeStatus.UNKNOWN);
     }

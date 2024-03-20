@@ -45,14 +45,14 @@
 {#if $useShowInfoModal}
     <button on:click={() => closeModal()} class="!z-[100] fixed backdrop-brightness-50 w-full h-full inset-0"/>
     <div role="presentation" on:close={() => closeModal()} on:keypress={handleEscape}
-            class="!z-[1000] fixed bg-secondary inset-0 sm:top-8 sm:bottom-8 mx-auto h-auto w-full max-w-4xl rounded-md">
+            class="!z-[1000] fixed bg-secondary inset-0 rounded-md  overflow-hidden top-8 bottom-8 mx-auto h-auto w-full max-w-[90%] lg:max-w-4xl ">
         <button class="absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"
                 on:click={() => closeModal()}>
             <X class="h-6 w-6"/>
         </button>
-        <div class="relative aspect-video w-full">
+        <div class="relative aspect-video w-full !z-[-100]">
             <div class="absolute right-0 aspect-video h-full bg-gradient-to-b from-transparent to-secondary"/>
-            <img class="h-full object-cover object-center brightness-85 overflow-hidden {isPlaying && 'hidden'}"
+            <img class="w-full aspect-video object-cover object-center brightness-85 {isPlaying && 'hidden'}"
                  src={$useAnimeInfo.cover}
                  alt="thumbnail"/>
             <div class="h-full brightness-85  {isPlaying ? '' : 'hidden'}">
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="px-10 items-center space-y-6 text-lg w-full flex-col justify-center">
+        <div class="px-10 items-center space-y-6 text-lg w-full flex-col justify-center z-10">
             <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2] text-white text-sm">
                 {$useAnimeInfo.rating / 10}
                 <StarIcon class="ml-0.5 h-[1.2vw] w-fit text-amber-300 fill-amber-300"/>
@@ -106,7 +106,7 @@
                 </Badge>
             </h1>
             <div class="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row">
-                <article class="py-2 w-[85%] text-white/75 font-extralight leading-7 text-justify text-sm prose">
+                <article class="w-[85%] text-white/75 font-extralight leading-7 text-justify text-sm prose">
                     {@html $useAnimeInfo.description.replace(/\(Source:.*\)/, '')}
                 </article>
                 <div class="flex flex-col text-sm space-y-4">

@@ -76,7 +76,7 @@ public enum Genres {
      */
     public static Genres ofName(final String text) {
         return stream()
-                .filter(genres -> genres.name().equalsIgnoreCase(text))
+                .filter(genres -> genres.getName().equalsIgnoreCase(text))
                 .findFirst()
                 .orElse(Genres.UNKNOWN);
     }

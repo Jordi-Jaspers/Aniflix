@@ -18,16 +18,22 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.*;
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
 @Entity
 @NoArgsConstructor
 @ToString(exclude = {"user", "anime"})
 @Table(name = "interaction")
-public class Interaction {
+public class Interaction implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -59,7 +59,8 @@ public class AnimeController {
     public ResponseEntity<InteractionResponse> getAnimeDetails(@PathVariable("id") final int anilistId,
                                                                @AuthenticationPrincipal final UserTokenPrincipal principal) {
         final Interaction interaction = interactionService.getInteractedAnime(anilistId, principal.getUser());
-        return ResponseEntity.status(OK).body(interactionMapper.toDetailedResponse(interaction));
+        final InteractionResponse response = interactionMapper.toDetailedResponse(interaction);
+        return ResponseEntity.status(OK).body(response);
     }
 
     // ======================================== ANIME OVERVIEW ========================================

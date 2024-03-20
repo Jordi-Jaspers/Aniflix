@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 
@@ -24,6 +25,7 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 @Entity
 @NoArgsConstructor
 @Table(name = "genre")
+@ToString(exclude = "anime")
 public class Genre implements Serializable {
 
     @Serial

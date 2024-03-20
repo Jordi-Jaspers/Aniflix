@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 
 import java.io.Serial;
@@ -27,6 +28,7 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "user")
 @Table(name = "token")
 public class Token implements Serializable {
 

@@ -1,7 +1,6 @@
 defaultExecutor: default_executor
 defaultTimeout: 60
 asyncTimeoutExecutorPoolSize: 10
-
 #
 # Executors have a:
 # - name                The executor's name.
@@ -21,12 +20,11 @@ executors:
     maxPoolSize: 30
     keepAliveTime: 60
     maxPendingRequests: 60
-
 systems:
   - name: anime
     defaultExecutor: default_executor
     defaultTimeout: 60
     # Tasks in alphabetical order
     tasks:
-      - method: save
-      - method: update_info
+      - method: import
+      - method: synchronize

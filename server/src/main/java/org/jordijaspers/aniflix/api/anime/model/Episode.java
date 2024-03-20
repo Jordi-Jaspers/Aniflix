@@ -14,15 +14,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
 @Entity
 @Table(name = "episode")
 @ToString(exclude = "anime")
 @EqualsAndHashCode(exclude = "anime")
-public class Episode {
+public class Episode implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

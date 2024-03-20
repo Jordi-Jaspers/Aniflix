@@ -43,7 +43,7 @@ public enum MediaTypes {
      */
     public static MediaTypes ofName(final String text) {
         return stream()
-                .filter(mediaTypes -> mediaTypes.name().equalsIgnoreCase(text))
+                .filter(mediaTypes -> mediaTypes.getName().equalsIgnoreCase(text))
                 .findFirst()
                 .orElse(MediaTypes.UNKNOWN);
     }

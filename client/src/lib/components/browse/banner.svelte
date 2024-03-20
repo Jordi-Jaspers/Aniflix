@@ -3,6 +3,7 @@
     import {InfoIcon, PlayIcon, StarIcon} from "lucide-svelte";
     import {Badge} from "$lib/components/ui/badge";
     import {useAnimeInfo, useShowInfoModal} from "$lib/store";
+    import {openModal} from "$lib/api/util";
 
     export let anime: AnimeResponse;
     let genres: string[] = anime.genres
@@ -20,39 +21,32 @@
     if (lastOpenTagIndex > 0) {
         description = description.substring(0, lastOpenTagIndex);
     }
-
-    function openModal() {
-        useAnimeInfo.set(anime);
-        $useShowInfoModal = true;
-    }
 </script>
 
 {#if anime}
-        <div class="my-4 px-[8%] h-[48vw] hidden md:flex items-center">
-            <img class="h-full aspect-[460/650] rounded-[0.75rem] shadow-2xl"
+        <div class="my-4 px-[4%] h-[48vw] max-h-[650px] mx-[4%] w-80% hidden md:flex items-center">
+            <img class="h-full w-auto max-w-[390px] max-h-[550px] aspect-[460/650] rounded-[0.75rem] shadow-2xl"
                  height="650"
                  width="460"
                  src={anime.image}
                  alt="thumbnail"/>
             <div class="p-2 pl-8 flex flex-col h-fit">
                 <div class="space-y-4">
-                    <h1 class="uppercase font-bold leading-none text-[1.8vw]">{anime.title}</h1>
-                    <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2]">
-                        <Badge variant="outline" class='{anime.status === "COMPLETED" ? "bg-green-600" : "bg-primary"}'>{anime.status}</Badge>
-                        <span class="mx-2"> • </span>
-                        <Badge variant="outline" class="bg-blue-500">
+                    <h1 class="uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}</h1>
+                    <div class="flex space-x-2 items-center">
+                        <Badge variant="outline" class='text-[0.75rem] h-[1.1rem] px-1.5 {anime.status === "COMPLETED" ? "bg-green-600" : "bg-primary"}'>{anime.status}</Badge>
+                        <Badge variant="outline" class="text-[0.75rem] h-[1.1rem] px-1.5 bg-blue-500">
                             {#if anime.subbed} SUB {:else} SUB {/if}
                         </Badge>
-                        <span class="mx-2"> • </span>
-                        {anime.rating / 10} <StarIcon class="ml-0.5 h-[1.2vw] w-fit text-amber-300 fill-amber-300"/>
-                        <span class="mx-2"> • </span>
-                        {anime.releaseYear}
+                    </div>
+                    <div class="flex items-center text-xs xl:text-sm text-[gray]">
+                        {anime.rating / 10} <StarIcon class="ml-[0.5rem] h-4 w-fit text-amber-300 fill-amber-300"/>
                         <span class="mx-2"> • </span>
                         {anime.totalEpisodes} Episodes
                         <span class="mx-2"> • </span>
                         {genres.join(', ')}
                     </div>
-                    <article class="py-2 w-[85%] text-white/75 font-extralight text-justify text-[1.2vw] prose">
+                    <article class="py-2 text-white/75 font-extralight text-justify text-[1.2vw] w-[80%] xl:text-md prose">
                         {@html description}
                     </article>
                 </div>
@@ -64,7 +58,7 @@
                             <PlayIcon class="p-1 fill-white/75 hover:fill-white"/>
                         </div>
                     </Button>
-                    <Button on:click={openModal} class="space-x-4 rounded-full border-secondary/75 text-white/75 transition bg-secondary/75 hover:bg-secondary hover:text-white">
+                    <Button on:click={() => openModal(anime.anilistId)} class="space-x-4 rounded-full border-secondary/75 text-white/75 transition bg-secondary/75 hover:bg-secondary hover:text-white">
                         <p>More Info</p>
                         <InfoIcon />
                     </Button>
@@ -88,7 +82,7 @@
                             <PlayIcon/>
                             <p>Watch Now</p>
                         </Button>
-                        <Button class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80">
+                        <Button on:click={openModal} class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80">
                             <InfoIcon/>
                             <p>More Info</p>
                         </Button>

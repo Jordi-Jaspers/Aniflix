@@ -37,9 +37,9 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 
 @Data
 @Entity
-@ToString
 @NoArgsConstructor
 @Table(name = "anime")
+@ToString(exclude = "interactions")
 @EqualsAndHashCode(of = "anilistId")
 public class Anime implements Serializable {
 
@@ -121,10 +121,7 @@ public class Anime implements Serializable {
         final boolean hasDescriptions = episodes.stream().allMatch(episode -> isNotBlank(episode.getDescription()));
         return status.equals(COMPLETED)
                 && episodes.size() == totalEpisodes
-                && hasDescriptions
-                || updated.isAfter(LocalDateTime.now().minusMinutes(15));
-
-
+                && hasDescriptions;
     }
 
     /**

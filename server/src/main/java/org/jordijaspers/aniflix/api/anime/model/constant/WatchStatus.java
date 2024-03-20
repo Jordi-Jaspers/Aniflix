@@ -27,14 +27,4 @@ public enum WatchStatus {
     public static List<String> getAll() {
         return stream().map(Enum::name).toList();
     }
-
-    /**
-     * Retrieves the enum value based on the given name. Ignoring case.
-     */
-    public static WatchStatus ofName(final String text) {
-        return stream()
-                .filter(watchStatus -> watchStatus.name().equalsIgnoreCase(text))
-                .findFirst()
-                .orElse(WatchStatus.NOT_STARTED);
-    }
 }

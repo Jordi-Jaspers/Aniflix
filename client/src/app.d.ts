@@ -1,17 +1,17 @@
 // See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
+// for information about these classs
 declare global {
 	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+		// class Error {}
+		// class Locals {}
+		// class PageData {}
+		// class PageState {}
+		// class Platform {}
 	}
 }
 
 // ======================== EXCEPTION ========================
-interface Exception {
+class Exception {
 	method: string;
 	uri: string;
 	query: null;
@@ -23,7 +23,7 @@ interface Exception {
 	apiErrorReason: string;
 }
 
-interface ValidationException {
+class ValidationException {
 	method: string;
 	uri: string;
 	query: null;
@@ -34,23 +34,23 @@ interface ValidationException {
 	errors: ValidationField[];
 }
 
-interface ValidationField {
+class ValidationField {
 	code: string;
 	field: string;
 }
 
 // ======================== REQUESTS ========================
 
-interface LoginRequest {
+class LoginRequest {
 	email: string;
 	password: string;
 }
 
-interface RefreshTokenRequest {
+class RefreshTokenRequest {
 	refreshToken: string;
 }
 
-interface RegisterRequest {
+class RegisterRequest {
 	email: string;
 	firstName: string;
 	lastName: string;
@@ -58,7 +58,7 @@ interface RegisterRequest {
 	passwordConfirmation: string;
 }
 
-interface AnimeRequest {
+class AnimeRequest {
 	page: number;
 	perPage: number;
 	title: string;
@@ -68,14 +68,14 @@ interface AnimeRequest {
 
 // ======================== RESPONSE ========================
 
-interface RegisterResponse {
+class RegisterResponse {
 	email: string;
 	authorities: string[];
 	enabled: boolean;
 	validated: boolean;
 }
 
-interface UserDetailsResponse {
+class UserDetailsResponse {
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -85,7 +85,7 @@ interface UserDetailsResponse {
 	validated: boolean;
 }
 
-interface AuthorizeResponse {
+class AuthorizeResponse {
 	email: string;
 	authorities: string[];
 	lastLogin: Date;
@@ -96,8 +96,8 @@ interface AuthorizeResponse {
 	validated: boolean;
 }
 
-interface AnimeResponse {
-	id: number;
+class AnimeResponse {
+	anilistId: number;
 	title: string;
 	description: string;
 	totalEpisodes: number;
@@ -111,10 +111,11 @@ interface AnimeResponse {
 	mediaType: string;
 	subbed: boolean;
 	likes: number;
+	episodes: EpisodeResponse[];
 }
 
-interface EpisodeResponse {
-	anilistId: string;
+class EpisodeResponse {
+	anilistId: number;
 	title: string;
 	episodeTitle: string;
 	episodeNumber: number;
@@ -123,7 +124,7 @@ interface EpisodeResponse {
 	image: string;
 }
 
-interface ConstantResponse {
+class ConstantResponse {
 	genres: string[];
 	seasons: string[];
 	status: string[];
@@ -131,9 +132,16 @@ interface ConstantResponse {
 	watchStatus: string[];
 }
 
+class InteractionResponse {
+	anime: AnimeResponse;
+	watchStatus: string;
+	lastSeenEpisode: number;
+	lastInteraction: Date;
+}
+
 // ======================== JWT ========================
 
-interface JwtPayload {
+class JwtPayload {
 	authorities: string[];
 	exp: number;
 	iat: number;

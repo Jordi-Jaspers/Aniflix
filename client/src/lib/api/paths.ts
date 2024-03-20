@@ -11,6 +11,7 @@ export const SERVER_URLS = {
     USER_PATH: `${SERVER_BASE_URL}/user`,
     USER_DETAILS_PATH: `${SERVER_BASE_URL}/user/details`,
     ANIME_PATH: `${SERVER_BASE_URL}/anime`,
+    ANIME_DETAILS_PATH: `${SERVER_BASE_URL}/anime/{id}`,
     ANIME_CONSTANT_PATH: `${SERVER_BASE_URL}/constant`,
     ANIME_BANNER_PATH: `${SERVER_BASE_URL}/anime/banner`,
     ANIME_RECENT_PATH: `${SERVER_BASE_URL}/anime/recent`,

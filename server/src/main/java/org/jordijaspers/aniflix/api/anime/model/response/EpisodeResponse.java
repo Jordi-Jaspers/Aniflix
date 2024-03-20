@@ -10,7 +10,7 @@ import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.Constants.
 @Data
 public class EpisodeResponse {
 
-    private String anilistId;
+    private int anilistId;
 
     private String title;
 

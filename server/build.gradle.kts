@@ -46,19 +46,19 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.2"
+    id("org.springframework.boot") version "3.2.3"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.4"
 
     // Quality plugin for Checkstyle, PMD and Spotbugs.
-    id("ru.vyarus.quality") version "4.9.0"
+    id("ru.vyarus.quality") version "5.0.0"
 
     // The project-report plugin provides file reports on dependencies, tasks, etc.
     id("project-report")
 
     // Automatic lombok and delombok configuration.
-    id("io.freefair.lombok") version "8.4"
+    id("io.freefair.lombok") version "8.6"
 
     // SBOM generation for vulnerabilities
     id("org.cyclonedx.bom") version "1.8.2"
@@ -73,7 +73,7 @@ plugins {
 dependencies {
     // Dependency versions
     val hawaiiVersion = "6.0.0.M10"
-    val mapStructVersion = "1.5.3.Final"
+    val mapStructVersion = "1.6.0.Beta1"
 
     // ======= ANNOTATION PROCESSORS =======
     // annotation processor that generates metadata about classes in your application that are annotated with @ConfigurationProperties.
@@ -84,7 +84,7 @@ dependencies {
 
     // ======= RUNTIME DEPENDENCIES =======
     // Jdbc driver to connect with the MariaDB database.
-    runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.3.2")
+    runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.3.3")
 
     // ======= IMPLEMENTATION DEPENDENCIES ======= "
     // Spring Boot necessary dependencies.
@@ -101,7 +101,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.
-    implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.3.0")
+    implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.4.0")
 
     // Provides the core of hawaii framework such as the response entity exception handling.
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-async", version = hawaiiVersion)
@@ -115,14 +115,14 @@ dependencies {
 
     // Used to validate entities and beans
     implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0-M1")
-    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M1")
+    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M2")
 
     // Mail service provider that supports thymeleaf templating.
-    implementation(group = "jakarta.mail", name = "jakarta.mail-api", version = "2.1.2")
+    implementation(group = "jakarta.mail", name = "jakarta.mail-api", version = "2.1.3")
 
     // Hibernate's core ORM functionality
     implementation(group = "org.hibernate", name = "hibernate-validator", version = "8.0.1.Final")
-    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.4.2.Final")
+    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.4.4.Final")
 
     // Java utility classes for the classes that are in java.lang's hierarchy
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
@@ -141,7 +141,7 @@ dependencies {
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.1")
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.3")
 }
 
 // ============== PLUGIN CONFIGURATION ================
@@ -204,7 +204,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.named<DefaultTask>("build") {
-    finalizedBy("cyclonedxBom")
+    finalizedBy("cyclonedxBom", "dependencyUpdates")
 }
 
 tasks.withType<CycloneDxTask> {

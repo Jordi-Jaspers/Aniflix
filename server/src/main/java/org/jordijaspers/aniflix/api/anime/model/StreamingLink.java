@@ -12,11 +12,19 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
+
 @Data
 @Entity
 @ToString(exclude = "episode")
 @Table(name = "streaming_link")
-public class StreamingLink {
+public class StreamingLink implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

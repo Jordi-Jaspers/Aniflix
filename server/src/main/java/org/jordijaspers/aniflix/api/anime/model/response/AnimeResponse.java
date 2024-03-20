@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class AnimeResponse {
 
-    private int id;
+    private int anilistId;
 
     private String title;
 

@@ -1,0 +1,18 @@
+
+------------------------------------------------------------
+: Project Dependency Updates (report to plain text file)
+------------------------------------------------------------
+
+The following dependencies are using the latest milestone version:
+ - com.github.ben-manes.versions:com.github.ben-manes.versions.gradle.plugin:0.51.0
+ - info.picocli:picocli:4.7.5
+ - org.liquibase.gradle:org.liquibase.gradle.gradle.plugin:2.2.1
+ - org.mariadb.jdbc:mariadb-java-client:3.3.3
+ - org.yaml:snakeyaml:2.2
+
+The following dependencies have later milestone versions:
+ - org.liquibase:liquibase-core [4.25.0 -> 4.26.0]
+     http://www.liquibase.com
+
+Gradle release-candidate updates:
+ - Gradle: [8.5 -> 8.6 -> 8.7-rc-4]
