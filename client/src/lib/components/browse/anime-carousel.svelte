@@ -5,7 +5,6 @@
     import {onMount} from "svelte";
     import {curl} from "$lib/api/client";
     import {Skeleton} from "$lib/components/ui/skeleton";
-    import {useAnimeInfo, useShowInfoModal} from "$lib/store";
     import {openModal} from "$lib/api/util";
 
     export let title: string;
@@ -44,14 +43,15 @@
         </button>
     </div>
     <div class="w-full">
-        <Carousel.Root>
+        <Carousel.Root class="max-w-screen">
             <Carousel.Content>
                 {#if collection}
                     {#each collection as anime}
                         <Carousel.Item class="basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6">
                             <Card.Root>
                                 <Card.Content class="p-0 aspect-[9/14] h-full rounded-[0.75rem] overflow-hidden bg-[#1a1920] flex flex-col">
-                                    <button class="h-[85%] aspect-[9/12] w-full cursor-pointer" style="background-image: url({anime.image}); background-size: cover; background-position: center">
+                                    <button class="h-[85%] aspect-[9/12] w-full cursor-pointer"
+                                            style="background-image: url({anime.image}); background-size: cover; background-position: center">
                                         <span class="h-full w-full bg-gradient-to-b from-transparent to-black/60 flex flex-col justify-end"/>
                                     </button>
                                     <div class="flex justify-evenly items-center h-[7.5vw] md:h-[15%] py-4 md:justify-between md:px-4 ">
@@ -61,12 +61,10 @@
                                         </div>
                                         <div class="flex justify-evenly md:justify-center w-full md:w-fit space-x-2">
                                             <button on:click={() => openModal(anime.anilistId)}>
-
-                                            <InfoIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
+                                                <InfoIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
                                             </button>
                                             <button>
-                                            <PlusCircleIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
-
+                                                <PlusCircleIcon class="min-h-[24px] min-w-[24px] w-[4vw] h-[4vw] md:w-[24px] md:h-[24px] hover:opacity-75 cursor-pointer"/>
                                             </button>
                                         </div>
                                     </div>
@@ -86,8 +84,8 @@
                     {/each}
                 {/if}
             </Carousel.Content>
-            <Carousel.Previous/>
-            <Carousel.Next/>
+            <Carousel.Previous class="hidden md:flex absolute inset-0 top-[50%] left-[-2%] "/>
+            <Carousel.Next class="hidden md:flex absolute top-[50%] right-[-2%]"/>
         </Carousel.Root>
     </div>
 </div>

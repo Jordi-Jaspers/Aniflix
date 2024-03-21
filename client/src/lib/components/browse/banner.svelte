@@ -32,13 +32,12 @@
                  alt="thumbnail"/>
             <div class="p-2 pl-8 flex flex-col h-fit">
                 <div class="space-y-4">
-                    <h1 class="uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}</h1>
-                    <div class="flex space-x-2 items-center">
-                        <Badge variant="outline" class='text-[0.75rem] h-[1.1rem] px-1.5 {anime.status === "COMPLETED" ? "bg-green-600" : "bg-primary"}'>{anime.status}</Badge>
-                        <Badge variant="outline" class="text-[0.75rem] h-[1.1rem] px-1.5 bg-blue-500">
-                            {#if anime.subbed} SUB {:else} SUB {/if}
-                        </Badge>
-                    </div>
+                    <h1 class="flex items-center uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}
+                            <Badge variant="outline" class='ml-2 {anime.status === "COMPLETED" ? "bg-green-600" : "bg-primary"}'>{anime.status}</Badge>
+                            <Badge variant="outline" class="ml-2 bg-blue-500">
+                                {#if anime.subbed} SUB {:else} SUB {/if}
+                            </Badge>
+                    </h1>
                     <div class="flex items-center text-xs xl:text-sm text-[gray]">
                         {anime.rating / 10} <StarIcon class="ml-[0.5rem] h-4 w-fit text-amber-300 fill-amber-300"/>
                         <span class="mx-2"> • </span>
