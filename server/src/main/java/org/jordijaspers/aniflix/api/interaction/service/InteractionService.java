@@ -101,7 +101,7 @@ public class InteractionService {
         LOGGER.info("Anime '{}' successfully added to library for user '{}'", anime.getTitle(), user.getUsername());
     }
 
-    @Async("anime.import")
+    @Async
     public void importLibrary(final List<KetsuData> library, final User user) {
         LOGGER.info("Attempting to import library with '{}' entries", library.size());
         int failed = 0;

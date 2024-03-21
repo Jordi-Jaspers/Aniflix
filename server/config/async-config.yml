@@ -20,11 +20,3 @@ executors:
     maxPoolSize: 30
     keepAliveTime: 60
     maxPendingRequests: 60
-systems:
-  - name: anime
-    defaultExecutor: default_executor
-    defaultTimeout: 60
-    # Tasks in alphabetical order
-    tasks:
-      - method: import
-      - method: synchronize
