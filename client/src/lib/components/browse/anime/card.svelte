@@ -7,7 +7,6 @@
 
     export let anime: AnimeResponse;
     setAnime(anime);
-
 </script>
 
 <Root>
@@ -23,7 +22,7 @@
                 <p class="w-[80%] text-xs font-light text-center">Watch</p>
             </div>
             <div class="flex justify-evenly md:justify-center w-full md:w-fit space-x-2">
-<!--                    <LibraryButton isAdded={false}/>-->
+                    <LibraryButton isAdded={false}/>
                     <LikeButton/>
             </div>
         </div>

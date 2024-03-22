@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class InteractionService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(InteractionService.class);
 
     private final InteractionRepository interactionRepository;

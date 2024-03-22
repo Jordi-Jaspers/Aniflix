@@ -87,6 +87,12 @@ public final class Paths {
 
     public static final String UNLIKE_ANIME_PATH = ANIME_DETAILS + "/dislike";
 
+    public static final String ADD_TO_LIBRARY_PATH = ANIME_DETAILS + "/library/add";
+
+    public static final String REMOVE_FROM_LIBRARY_PATH = ANIME_DETAILS + "/library/remove";
+
+    /* ------------------------------- LIBRARY ENDPOINTS ------------------------------- */
+
     public static final String LIBRARY_PATH = BASE_PATH + "/library";
 
     public static final String LIBRARY_IMPORT_PATH = LIBRARY_PATH + IMPORT_PART;

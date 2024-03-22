@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
-import org.jordijaspers.aniflix.api.interaction.model.request.InteractionRequest;
 import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
 import org.jordijaspers.aniflix.api.interaction.model.response.InteractionResponse;
 import org.jordijaspers.aniflix.api.interaction.service.LibraryService;
@@ -12,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +33,23 @@ public class LibraryController {
 
     private final InteractionMapper interactionMapper;
 
+    @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('USER')")
+    @DeleteMapping(path = REMOVE_FROM_LIBRARY_PATH)
+    public ResponseEntity<Void> removeFromLibrary(@PathVariable("id") final int anilistId) {
+        libraryService.removeFromLibrary(new Anime(anilistId));
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('USER')")
+    @PostMapping(path = ADD_TO_LIBRARY_PATH)
+    public ResponseEntity<Void> addToLibrary(@PathVariable("id") final int anilistId) {
+        libraryService.addToLibrary(new Anime(anilistId));
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_LIBRARY_PATH, produces = APPLICATION_JSON_VALUE)
@@ -40,23 +57,7 @@ public class LibraryController {
         final List<Interaction> library = libraryService.getFullLibraryForUser();
         return ResponseEntity.status(OK).body(interactionMapper.toBasicResponse(library));
     }
-
-    @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
-    @PostMapping(path = ANIME_LIBRARY_PATH, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addToLibrary(@RequestBody final InteractionRequest request) {
-        libraryService.addToLibrary(new Anime(request.getAnilistId()));
-        return ResponseEntity.status(NO_CONTENT).build();
-    }
-
-    @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
-    @DeleteMapping(path = ANIME_LIBRARY_PATH, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> removeFromLibrary(@RequestBody final InteractionRequest request) {
-        libraryService.removeFromLibrary(new Anime(request.getAnilistId()));
-        return ResponseEntity.status(NO_CONTENT).build();
-    }
-
+    
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_LIBRARY_SEARCH_PATH, produces = APPLICATION_JSON_VALUE)
