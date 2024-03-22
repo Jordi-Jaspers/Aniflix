@@ -3,7 +3,7 @@
     import {openModal} from "$lib/api/util";
     import {PlayIcon} from "lucide-svelte";
     import {setAnime} from "$lib/components/store/anime-context-store";
-    import {LikeButton} from "$lib/components/general";
+    import {LikeButton, LibraryButton} from "$lib/components/general";
 
     export let anime: AnimeResponse;
     setAnime(anime);
@@ -22,7 +22,7 @@
                 <p class="w-[80%] text-xs font-light text-center">Watch</p>
             </div>
             <div class="flex justify-evenly md:justify-center w-full md:w-fit space-x-2">
-                    <LibraryButton isAdded={false}/>
+                    <LibraryButton/>
                     <LikeButton/>
             </div>
         </div>

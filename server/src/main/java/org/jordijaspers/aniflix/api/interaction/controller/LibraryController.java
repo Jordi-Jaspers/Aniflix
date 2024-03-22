@@ -9,7 +9,6 @@ import org.jordijaspers.aniflix.api.interaction.model.response.InteractionRespon
 import org.jordijaspers.aniflix.api.interaction.service.LibraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +34,7 @@ public class LibraryController {
 
     @ResponseStatus(NO_CONTENT)
     @PreAuthorize("hasAuthority('USER')")
-    @DeleteMapping(path = REMOVE_FROM_LIBRARY_PATH)
+    @PostMapping(path = REMOVE_FROM_LIBRARY_PATH)
     public ResponseEntity<Void> removeFromLibrary(@PathVariable("id") final int anilistId) {
         libraryService.removeFromLibrary(new Anime(anilistId));
         return ResponseEntity.status(NO_CONTENT).build();
@@ -48,7 +47,6 @@ public class LibraryController {
         libraryService.addToLibrary(new Anime(anilistId));
         return ResponseEntity.status(NO_CONTENT).build();
     }
-
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
