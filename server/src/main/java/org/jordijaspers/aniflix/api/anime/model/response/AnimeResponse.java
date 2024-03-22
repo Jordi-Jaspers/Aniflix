@@ -36,4 +36,8 @@ public class AnimeResponse {
 
     private int likes;
 
+    private boolean liked;
+
+    private boolean inLibrary;
+
 }

@@ -8,6 +8,8 @@ import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.interaction.model.Interaction;
+import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +29,11 @@ public class AnimeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AnimeService.class);
 
-    private final ConsumetService consumetService;
-
     private final AnimeRepository animeRepository;
+
+    private final InteractionRepository interactionRepository;
+
+    private final ConsumetService consumetService;
 
     private final SynchronizationService synchronizationService;
 
@@ -50,15 +55,28 @@ public class AnimeService {
     }
 
     public List<Anime> getPopularAnime(final int perPage, final int page) {
-        return consumetService.getPopular(perPage, page);
+        final List<Anime> collection = consumetService.getPopular(perPage, page);
+        applyUserInteractions(collection);
+        return collection;
     }
 
     public List<Anime> getTrendingAnime(final int perPage, final int page) {
-        return consumetService.getTrending(perPage, page);
+        final List<Anime> collection = consumetService.getTrending(perPage, page);
+        applyUserInteractions(collection);
+        return collection;
     }
 
     public List<Anime> getAnimeByGenre(final Genres genre, final int perPage, final int page) {
-        return consumetService.getByGenre(genre, perPage, page);
+        final List<Anime> collection = consumetService.getByGenre(genre, perPage, page);
+        applyUserInteractions(collection);
+        return collection;
+    }
+
+    public Anime findByAnilistId(final int anilistId) {
+        LOGGER.info("Attempting to look up anime with Anilist ID '{}'", anilistId);
+        return animeRepository.findByAnilistId(anilistId)
+                .map(this::updateAnimeInfo)
+                .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
     }
 
     public Anime findAnimeByTitle(final String title) {
@@ -80,14 +98,14 @@ public class AnimeService {
                 });
     }
 
-    public Anime findByAnilistId(final int anilistId) {
-        LOGGER.info("Attempting to look up anime with Anilist ID '{}'", anilistId);
-        return animeRepository.findByAnilistId(anilistId)
-                .map(this::updateAnimeInfo)
-                .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
+    private Anime updateAnimeInfo(final Anime anime) {
+        if (!anime.isCompleted()) {
+            synchronizationService.synchronizeData(anime);
+        }
+        return anime;
     }
 
-    public Anime saveAnime(final Anime anime) {
+    private Anime saveAnime(final Anime anime) {
         LOGGER.info("Anime with title '{}' not yet in the database, attempting to save it.", anime.getTitle());
 
         // Detach episodes from the anime temporarily
@@ -107,10 +125,17 @@ public class AnimeService {
         return animeRepository.save(preSave);
     }
 
-    public Anime updateAnimeInfo(final Anime anime) {
-        if (!anime.isCompleted()) {
-            synchronizationService.synchronizeData(anime);
-        }
-        return anime;
+    private void applyUserInteractions(final List<Anime> collection) {
+        final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(collection, getLoggedInUser());
+        interactions.forEach(interaction -> {
+            collection.stream()
+                    .filter(anime -> anime.equals(interaction.getAnime()))
+                    .findFirst()
+                    .ifPresent(anime -> {
+                        anime.setWatchStatus(interaction.getWatchStatus());
+                        anime.setLiked(interaction.isLiked());
+                        anime.setInLibrary(interaction.isInLibrary());
+                    });
+        });
     }
 }

@@ -83,6 +83,10 @@ public final class Paths {
 
     /* ------------------------------- INTERACTION ENDPOINTS ------------------------------- */
 
+    public static final String LIKE_ANIME_PATH = ANIME_DETAILS + "/like";
+
+    public static final String UNLIKE_ANIME_PATH = ANIME_DETAILS + "/dislike";
+
     public static final String LIBRARY_PATH = BASE_PATH + "/library";
 
     public static final String LIBRARY_IMPORT_PATH = LIBRARY_PATH + IMPORT_PART;
@@ -91,11 +95,7 @@ public final class Paths {
 
     public static final String ANIME_LIBRARY_SEARCH_PATH = ANIME_LIBRARY_PATH + SEARCH_PART;
 
-    public static final String LIKED_PATH = BASE_PATH + "/liked";
 
-    public static final String ANIME_LIKED_PATH = LIKED_PATH + ANIME_PART;
-
-    public static final String ANIME_LIKED_SEARCH_PATH = ANIME_LIKED_PATH + SEARCH_PART;
 
     /* ------------------------------- END ------------------------------- */
 

@@ -55,7 +55,10 @@ public enum ApiErrorCode implements ApiError {
             "Something went wrong while trying to communicate with the Consumet API."),
     ANIME_NOT_FOUND_ERROR(
             "ANI-0016",
-            "Could not find anime in the database, nor in the Consumet API.");
+            "Could not find anime in the database, nor in the Consumet API."),
+    NO_USER_LOGGED_IN_ERROR(
+            "ANI-0017",
+            "No user is logged in. Cannot perform action without authorization.");
 
     /**
      * The error code.

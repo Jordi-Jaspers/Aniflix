@@ -1,6 +1,6 @@
 import {curl} from "$lib/api/client";
-import {useAnimeInfo, useShowInfoModal} from "$lib/store";
 import {SERVER_URLS} from "$lib/api/paths";
+import {useModalInfo, useShowInfoModal} from "$lib/components/store/store";
 
 export function getRandomValues(array: any[], count: number) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -20,8 +20,13 @@ export async function openModal(anilistId: number): Promise<void> {
 
     if (response.ok) {
         const interaction: InteractionResponse = await response.json();
-        useAnimeInfo.set(interaction.anime);
+        useModalInfo.set(interaction);
         useShowInfoModal.set(true);
     }
+}
+
+export function closeModal(): void {
+    useModalInfo.set({} as InteractionResponse);
+    useShowInfoModal.set(false);
 }
 

@@ -112,6 +112,8 @@ class AnimeResponse {
 	subbed: boolean;
 	likes: number;
 	episodes: EpisodeResponse[];
+	liked: boolean;
+	inLibrary: boolean;
 }
 
 class EpisodeResponse {
@@ -134,6 +136,8 @@ class ConstantResponse {
 
 class InteractionResponse {
 	anime: AnimeResponse;
+	liked: boolean;
+	inLibrary: boolean;
 	watchStatus: string;
 	lastSeenEpisode: number;
 	lastInteraction: Date;

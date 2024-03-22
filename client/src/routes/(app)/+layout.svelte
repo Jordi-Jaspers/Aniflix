@@ -2,9 +2,8 @@
     import {goto} from '$app/navigation';
     import Header from '$lib/components/app/header/header.svelte';
     import Footer from '$lib/components/app/footer/footer.svelte';
-    import {useErrorMessage, useHasAuthError, useHasError, useShowInfoModal} from '$lib/store';
+    import {useErrorMessage, useHasAuthError, useHasError, useShowInfoModal} from '$lib/components/store/store';
     import ErrorMessage from '$lib/components/general/error-message.svelte';
-
     import {onMount} from 'svelte';
     import {isUserAuthenticated} from "$lib/api/client";
     import {CLIENT_URLS} from "$lib/api/paths";
@@ -27,7 +26,7 @@
             <Header/>
             <slot/>
         </div>
-        <ErrorMessage isVisible={$useHasError} error={$useErrorMessage}/>
+        <ErrorMessage/>
         <Footer/>
     </main>
 {/if}

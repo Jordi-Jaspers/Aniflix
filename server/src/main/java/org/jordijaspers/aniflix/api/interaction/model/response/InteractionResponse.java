@@ -18,6 +18,10 @@ public class InteractionResponse {
 
     private ZonedDateTime lastInteraction;
 
+    private boolean liked;
+
+    private boolean inLibrary;
+
     public <T extends AnimeResponse> void setAnime(final T anime) {
         this.anime = (DetailedAnimeResponse) anime;
     }

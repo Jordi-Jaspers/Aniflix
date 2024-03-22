@@ -100,11 +100,17 @@ public class Anime implements Serializable {
     @Column(name = "updated")
     private LocalDateTime updated;
 
-    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "anime", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Interaction> interactions = new HashSet<>();
 
     @Transient
     private WatchStatus watchStatus;
+
+    @Transient
+    private boolean liked;
+
+    @Transient
+    private boolean inLibrary;
 
     /**
      * Constructor for JPA.

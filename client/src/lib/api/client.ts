@@ -1,4 +1,4 @@
-import {useAuthenticated, useErrorMessage, useHasAuthError, useHasError} from '$lib/store';
+import {useAuthenticated, useErrorMessage, useHasAuthError, useHasError} from '$lib/components/store/store';
 import {goto} from "$app/navigation";
 import {CLIENT_URLS, SERVER_URLS} from "$lib/api/paths";
 

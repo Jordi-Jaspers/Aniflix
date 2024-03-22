@@ -46,7 +46,7 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.3"
+    id("org.springframework.boot") version "3.2.4"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.4"
@@ -114,7 +114,7 @@ dependencies {
     implementation(group = "org.passay", name = "passay", version = "1.6.4")
 
     // Used to validate entities and beans
-    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0-M1")
+    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0-M2")
     implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M2")
 
     // Mail service provider that supports thymeleaf templating.
@@ -122,7 +122,7 @@ dependencies {
 
     // Hibernate's core ORM functionality
     implementation(group = "org.hibernate", name = "hibernate-validator", version = "8.0.1.Final")
-    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.4.4.Final")
+    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.5.0.CR1")
 
     // Java utility classes for the classes that are in java.lang's hierarchy
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
@@ -166,13 +166,6 @@ quality {
 }
 
 // ============== TASK CONFIGURATION ================
-tasks.withType<Test> {
-    useJUnitPlatform()
-    testLogging {
-        events = setOf(FAILED, PASSED, SKIPPED)
-    }
-}
-
 tasks.getByName<BootJar>("bootJar") {
     duplicatesStrategy = INCLUDE
     archiveBaseName.set(lowerCase(applicationName))
@@ -203,6 +196,14 @@ tasks.withType<JavaCompile> {
     )
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events = setOf(FAILED, PASSED, SKIPPED)
+    }
+}
+
+
 tasks.named<DefaultTask>("build") {
     finalizedBy("cyclonedxBom", "dependencyUpdates")
 }
@@ -219,7 +220,6 @@ tasks.withType<CycloneDxTask> {
 }
 
 tasks.named<BootRun>("bootRun") {
-    // Setting up a debugPort if needed.
     val arguments = ArrayList<String>()
     if (project.hasProperty("debugPort")) {
         arguments.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=" + findProperty("debugPort"))

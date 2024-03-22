@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ErrorMessage from '$lib/components/general/error-message.svelte';
-	import {useAuthenticated, useHasError} from '$lib/store';
+	import {useAuthenticated, useHasError} from '$lib/components/store/store';
 	import {onMount} from 'svelte';
 	import '../app.pcss';
 

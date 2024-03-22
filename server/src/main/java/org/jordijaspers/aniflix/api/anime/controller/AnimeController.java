@@ -58,7 +58,7 @@ public class AnimeController {
     @GetMapping(path = ANIME_DETAILS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<InteractionResponse> getAnimeDetails(@PathVariable("id") final int anilistId,
                                                                @AuthenticationPrincipal final UserTokenPrincipal principal) {
-        final Interaction interaction = interactionService.getInteractedAnime(anilistId, principal.getUser());
+        final Interaction interaction = interactionService.getInteractedAnime(new Anime(anilistId), principal.getUser());
         final InteractionResponse response = interactionMapper.toDetailedResponse(interaction);
         return ResponseEntity.status(OK).body(response);
     }

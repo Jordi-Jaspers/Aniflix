@@ -2,7 +2,7 @@
     import {Button} from "$lib/components/ui/button";
     import {InfoIcon, PlayIcon, StarIcon} from "lucide-svelte";
     import {Badge} from "$lib/components/ui/badge";
-    import {useAnimeInfo, useShowInfoModal} from "$lib/store";
+    import {useModalInfo, useShowInfoModal} from "$lib/components/store/store";
     import {openModal} from "$lib/api/util";
 
     export let anime: AnimeResponse;
@@ -81,7 +81,7 @@
                             <PlayIcon/>
                             <p>Watch Now</p>
                         </Button>
-                        <Button on:click={openModal} class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80">
+                        <Button on:click={() => openModal(anime.anilistId)} class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80">
                             <InfoIcon/>
                             <p>More Info</p>
                         </Button>

@@ -26,6 +26,10 @@ public class EpisodeResponse {
 
     private Set<StreamingLinkResponse> streamingLinks = new HashSet<>();
 
+    private boolean liked;
+
+    private boolean inLibrary;
+
     /**
      * Returns the urlId with a leading slash.
      */
