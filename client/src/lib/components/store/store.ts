@@ -6,3 +6,6 @@ export const useErrorMessage:Writable<string> = writable('');
 export const useHasError:Writable<boolean> = writable(false);
 export const useShowInfoModal:Writable<boolean> = writable(false);
 export const useModalInfo:Writable<InteractionResponse> = writable({} as InteractionResponse);
+
+
+export const useCarouselColumns:Writable<CarouselColumns> = writable({} as CarouselColumns);

@@ -1,0 +1,50 @@
+<script lang="ts">
+    import {Item} from "$lib/components/ui/carousel/index.ts";
+    import {onMount} from "svelte";
+    import {curl} from "$lib/api/client";
+    import {Skeleton} from "$lib/components/ui/skeleton";
+    import {AnimeCard} from "$lib/components/browse";
+
+    export let genre: string = '';
+    export let url: string;
+
+    let collection: AnimeResponse[];
+    onMount(async () => {
+        const body: AnimeRequest = {
+            page: 1,
+            perPage: 25,
+            title: '',
+            genre: genre,
+            season: ''
+        };
+
+        const response: Response = await curl(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (response.ok) {
+            collection = await response.json();
+        }
+    });
+</script>
+
+{#if collection}
+    {#each collection as anime}
+        <Item class="basis-auto">
+            <AnimeCard {anime}/>
+        </Item>
+    {/each}
+{:else}
+    {#each Array(20) as i}
+        <Item class="basis-auto">
+            <Skeleton class="w-64 h-full rounded-t-[0.75rem] aspect-[420/600]"/>
+        </Item>
+    {/each}
+{/if}
+
+
+

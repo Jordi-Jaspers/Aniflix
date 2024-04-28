@@ -9,6 +9,11 @@ declare global {
 		// class Platform {}
 	}
 }
+// ======================== MODELS ===========================
+class CarouselColumns {
+	columns: number;
+	width: number;
+}
 
 // ======================== EXCEPTION ========================
 class Exception {

@@ -1,13 +1,15 @@
 import Banner from './banner.svelte'
-import AnimeCarousel from './anime/carousel.svelte'
-import EpisodeCarousel from './episode/carousel.svelte'
+import Carousel from './carousel.svelte'
 import AnimeCard from './anime/card.svelte'
+import AnimeCards from './anime/cards.svelte'
 import EpisodeCard from './episode/card.svelte'
+import EpisodeCards from './episode/cards.svelte'
 
 export {
     Banner,
-    EpisodeCarousel,
-    AnimeCarousel,
-    EpisodeCard,
-    AnimeCard
+    Carousel,
+    AnimeCards,
+    EpisodeCards,
+    AnimeCard,
+    EpisodeCard
 }

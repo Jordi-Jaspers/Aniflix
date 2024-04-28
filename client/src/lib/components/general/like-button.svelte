@@ -41,11 +41,13 @@
         }
     }
 </script>
-<Button class="h-[40px] w-[40px] flex p-2 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:bg-[#2a2a2a]/60 hover:border-white"
-        on:click={handleLike}>
-    {#if $anime.liked}
-        <Heart class="h-[24px] w-[24px] text-primary fill-primary"/>
-    {:else}
-        <HeartOff class="h-[24px] w-[24px]"/>
-    {/if}
-</Button>
+
+{#if $anime.liked}
+    <button on:click={handleLike}>
+        <Heart class="w-auto aspect-square h-full p-1 rounded-full border-2 text-primary border-primary bg-[#2a2a2a]/60 transition hover:opacity-75"/>
+    </button>
+{:else}
+    <button on:click={handleLike}>
+        <HeartOff class="w-auto aspect-square h-full p-1 rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
+    </button>
+{/if}

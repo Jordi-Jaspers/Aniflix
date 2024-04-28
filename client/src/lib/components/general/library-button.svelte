@@ -1,6 +1,5 @@
 <script lang="ts">
-    import {BookOpen, BookOpenCheck} from 'lucide-svelte';
-    import {Button} from "$lib/components/ui/button";
+    import {Bookmark, BookmarkCheck} from 'lucide-svelte';
     import {getAnime} from "$lib/components/store/anime-context-store";
     import type {Writable} from "svelte/store";
     import {curl} from "$lib/api/client";
@@ -42,11 +41,12 @@
     }
 </script>
 
-<Button class="h-[40px] w-[40px] flex p-2 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:bg-[#2a2a2a]/60 hover:border-white"
-        on:click={handleInLibrary}>
-    {#if $anime.inLibrary}
-        <BookOpenCheck class="h-[24px] w-[24px] text-green-600"/>
-    {:else}
-        <BookOpen class="h-[24px] w-[24px]"/>
-    {/if}
-</Button>
+{#if $anime.inLibrary}
+    <button on:click={handleInLibrary}>
+        <BookmarkCheck class="w-auto aspect-square h-full p-1 rounded-full border-2 text-primary border-primary bg-[#2a2a2a]/60 transition hover:opacity-75"/>
+    </button>
+{:else}
+    <button on:click={handleInLibrary}>
+        <Bookmark class="w-auto aspect-square h-full p-1 rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
+    </button>
+{/if}

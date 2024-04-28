@@ -2,7 +2,7 @@
     import {goto} from '$app/navigation';
     import Header from '$lib/components/app/header/header.svelte';
     import Footer from '$lib/components/app/footer/footer.svelte';
-    import {useErrorMessage, useHasAuthError, useHasError, useShowInfoModal} from '$lib/components/store/store';
+    import {useHasAuthError, useShowInfoModal} from '$lib/components/store/store';
     import ErrorMessage from '$lib/components/general/error-message.svelte';
     import {onMount} from 'svelte';
     import {isUserAuthenticated} from "$lib/api/client";

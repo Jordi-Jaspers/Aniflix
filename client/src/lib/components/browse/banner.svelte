@@ -32,12 +32,7 @@
                  alt="thumbnail"/>
             <div class="p-2 pl-8 flex flex-col h-fit">
                 <div class="space-y-4">
-                    <h1 class="flex items-center uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}
-                            <Badge variant="outline" class='ml-2 {anime.status === "COMPLETED" ? "bg-green-600" : "bg-primary"}'>{anime.status}</Badge>
-                            <Badge variant="outline" class="ml-2 bg-blue-500">
-                                {#if anime.subbed} SUB {:else} SUB {/if}
-                            </Badge>
-                    </h1>
+                    <h1 class="flex items-center uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}</h1>
                     <div class="flex items-center text-xs xl:text-sm text-[gray]">
                         {anime.rating / 10} <StarIcon class="ml-[0.5rem] h-4 w-fit text-amber-300 fill-amber-300"/>
                         <span class="mx-2"> • </span>
@@ -45,7 +40,7 @@
                         <span class="mx-2"> • </span>
                         {genres.join(', ')}
                     </div>
-                    <article class="py-2 text-white/75 font-extralight text-justify text-[1.2vw] w-[80%] xl:text-md prose">
+                    <article class="text-[1.4vw] xl:text-[1.2rem] py-2 text-white/75 font-extralight text-justify w-[80%] prose">
                         {@html description}
                     </article>
                 </div>
@@ -64,25 +59,24 @@
                 </div>
             </div>
         </div>
-
-        <div class="h-[110vw] mx-[8%] mt-8 rounded-xl border border-primary/75 overflow-hidden space-x-4 flex md:hidden">
-            <div class="w-full"
-                 style="background-image: url({anime.image}); background-size: cover; background-position: center;  background-repeat: no-repeat;">
+        <div class="aspect-[460/650] max-h-[650px] max-w-[460px] w-[75%] mx-auto mt-8 rounded-xl border border-primary/75 overflow-hidden space-x-4 flex md:hidden">
+            <div class="w-full" style="background-image: url({anime.image}); background-size: cover; background-position: center;  background-repeat: no-repeat;">
                 <div class="h-full w-full bg-gradient-to-b from-transparent to-black/90 flex flex-col justify-end">
-                    <div class="flex flex-col justify-center text-center items-center">
-                        <h1 class="text-xl sm:text-3xl uppercase">{anime.title}</h1>
-                        <p class="py-4 font-extralight flex space-x-4">
+                    <div class="flex flex-col justify-center text-center items-center px-8">
+                        <h1 class="xs:text-xs sm:text-lg uppercase font-bold">{anime.title}</h1>
+                        <p class="text-white/75 text-xs font-extralight flex space-x-4 pb-4 pt-2 ">
                             {genres.join(' • ')}
                         </p>
                     </div>
 
-                    <div class="flex space-x-4 justify-center pb-8 px-8">
-                        <Button class="w-[50%] space-x-2 border border-primary/75 text-white transition hover:bg-primary/75">
-                            <PlayIcon/>
-                            <p>Watch Now</p>
+                    <div class="flex space-x-4 justify-center pb-8 px-4">
+                        <Button class="w-[50%] space-x-2 border border-primary/75 text-white transition hover:bg-primary/75 text-sm h-8 py-4">
+                            <PlayIcon class="h-4 w-4"/>
+                            <p>Watch</p>
                         </Button>
-                        <Button on:click={() => openModal(anime.anilistId)} class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80">
-                            <InfoIcon/>
+                        <Button class="w-[50%] space-x-2 bg-black/80 border text-white transition opacity-100 hover:opacity-75 hover:bg-black/80 h-8 py-4"
+                                on:click={() => openModal(anime.anilistId)}>
+                            <InfoIcon class="h-4 w-4"/>
                             <p>More Info</p>
                         </Button>
                     </div>
