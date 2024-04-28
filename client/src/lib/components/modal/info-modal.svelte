@@ -73,6 +73,7 @@
                         </div>
                     </Button>
 
+                    <!--TODO: these buttons dont fucking work.-->
                     <LikeButton/>
                     <LibraryButton/>
                 </div>
