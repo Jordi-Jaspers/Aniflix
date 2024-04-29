@@ -42,10 +42,10 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.6.5",
-    "bits-ui": "^0.17.0",
+    "bits-ui": "^0.21.5",
     "clsx": "^2.1.0",
     "embla-carousel-svelte": "^8.0.0",
-    "lucide-svelte": "^0.314.0",
+    "lucide-svelte": "^0.376.1",
     "svelte-motion": "^0.12.2",
     "svelte-player": "^0.0.21",
     "sveltekit-embed": "^0.0.12",

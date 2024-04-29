@@ -83,9 +83,15 @@ spring:
     use-legacy-processing: true
 
   jpa:
-    properties.hibernate.enable_lazy_load_no_trans: true
     show-sql: ${SHOW_SQL:true}
     open-in-view: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        batch_versioned_data: true
+        jdbc.batch_size: 100
+        order_updates: true
+        order_inserts: true
 
 # ======= HAWAII AUTOCONFIGURATION OVERRIDE =======
 hawaii:

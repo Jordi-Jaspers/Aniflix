@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Select as SelectPrimitive } from "bits-ui";
-	import { cn, flyAndScale } from "$lib/utils";
 	import { scale } from "svelte/transition";
+	import { cn, flyAndScale } from "$lib/utils.js";
 
 	type $$Props = SelectPrimitive.ContentProps;
 	type $$Events = SelectPrimitive.ContentEvents;
@@ -13,7 +13,7 @@
 	export let outTransitionConfig: $$Props["outTransitionConfig"] = {
 		start: 0.95,
 		opacity: 0,
-		duration: 50
+		duration: 50,
 	};
 
 	let className: $$Props["class"] = undefined;

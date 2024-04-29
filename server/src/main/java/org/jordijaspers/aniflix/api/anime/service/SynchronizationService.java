@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class SynchronizationService {
     private final AnimeRepository animeRepository;
 
     @Async
+    @Transactional
     public void synchronizeData(final Anime anime) {
         LOGGER.info("Synchronizing consumet data with the database for id '{}'", anime.getAnilistId());
         final Anime updatedInfo = consumetService.getAnimeDetails(anime.getAnilistId());

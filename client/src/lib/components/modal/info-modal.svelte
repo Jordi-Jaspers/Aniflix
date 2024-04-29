@@ -8,6 +8,7 @@
     import {LibraryButton, LikeButton, SpeakerButton} from "$lib/components/general/index.js";
     import {Badge} from "$lib/components/ui/badge";
     import {closeModal} from "$lib/api/util";
+    import {EpisodeList} from "$lib/components/browse";
 
     let isPlaying: boolean = false;
     let isMuted: boolean = false;
@@ -34,7 +35,7 @@
 {#if $useShowInfoModal}
     <button on:click={() => closeModal()} class="!z-[100] fixed backdrop-brightness-50 w-full h-full inset-0"/>
     <div role="presentation" on:close={() => closeModal()} on:keypress={handleEscape}
-         class="!z-[1000] fixed bg-secondary inset-0 rounded-md top-8 bottom-8 mx-auto h-auto w-full max-w-[90%] lg:max-w-4xl overflow-scroll">
+         class="!z-[1000] fixed bg-secondary inset-0 rounded-t-md top-8  mx-auto h-auto w-full max-w-[90%] lg:max-w-4xl overflow-scroll">
         <button class="absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"
                 on:click={() => closeModal()}>
             <X class="h-6 w-6"/>
@@ -64,10 +65,10 @@
                             <PlayIcon class="p-1 fill-white/75 hover:fill-white"/>
                         </div>
                     </Button>
-                    
+
                     <div class="flex justify-center h-10 space-x-2">
-                        <LikeButton value={$useModalInfo.anime} />
-                        <LibraryButton value={$useModalInfo.anime} />
+                        <LikeButton value={$useModalInfo.anime}/>
+                        <LibraryButton value={$useModalInfo.anime}/>
                     </div>
                 </div>
                 {#if isPlaying}
@@ -120,6 +121,7 @@
                     </div>
                 </div>
             </div>
+            <EpisodeList episodes={$useModalInfo.anime.episodes}/>
         </div>
     </div>
 {/if}
