@@ -8,8 +8,6 @@
     import {LibraryButton, LikeButton, SpeakerButton} from "$lib/components/general/index.js";
     import {Badge} from "$lib/components/ui/badge";
     import {closeModal} from "$lib/api/util";
-    import {getAnime, setAnime} from "$lib/components/store/anime-context-store";
-    import type {Writable} from "svelte/store";
 
     let isPlaying: boolean = false;
     let isMuted: boolean = false;
@@ -31,12 +29,6 @@
             closeModal();
         }
     }
-
-    useModalInfo.subscribe((value) => {
-        if (value.anime) {
-            setAnime(value.anime);
-        }
-    });
 </script>
 
 {#if $useShowInfoModal}
@@ -72,10 +64,11 @@
                             <PlayIcon class="p-1 fill-white/75 hover:fill-white"/>
                         </div>
                     </Button>
-
-                    <!--TODO: these buttons dont fucking work.-->
-                    <LikeButton/>
-                    <LibraryButton/>
+                    
+                    <div class="flex justify-center h-10 space-x-2">
+                        <LikeButton value={$useModalInfo.anime} />
+                        <LibraryButton value={$useModalInfo.anime} />
+                    </div>
                 </div>
                 {#if isPlaying}
                     <SpeakerButton isMuted={isMuted} on:click={() => isMuted = !isMuted}/>

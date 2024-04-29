@@ -20,7 +20,6 @@
         if (response.ok) {
             let constants: ConstantResponse = await response.json();
             genres = getRandomValues(constants.genres, 3)
-            console.log(genres[0])
         }
     });
 </script>

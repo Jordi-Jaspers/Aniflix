@@ -4,7 +4,6 @@
     import {openModal} from "$lib/api/util";
 
     export let anime: AnimeResponse;
-    setAnime(anime);
 </script>
 
 <div class="flex flex-col w-64 h-full rounded-t-[0.75rem] overflow-hidden">
@@ -28,8 +27,8 @@
                     <h3 class="text-sm text-bold text-white h-[2.5rem] overflow-hidden">
                         {anime.title.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}
                     </h3>
-                    <div class="flex justify-center h-7 w-7">
-                        <LibraryButton/>
+                    <div class="flex justify-center h-8 w-8">
+                        <LibraryButton value={anime}/>
                     </div>
                 </div>
             </div>

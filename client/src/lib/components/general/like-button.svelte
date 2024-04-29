@@ -1,15 +1,18 @@
 <script lang="ts">
     import {Heart, HeartOff} from 'lucide-svelte';
     import {Button} from "$lib/components/ui/button";
-    import {getAnime} from "$lib/components/store/anime-context-store";
+    import {getAnime, setAnime} from "$lib/components/store/anime-context-store";
     import type {Writable} from "svelte/store";
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
 
-    // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding
+    export let value: AnimeResponse;
+    setAnime(value);
+
     const anime: Writable<AnimeResponse> = getAnime();
     let isRequesting = false;
 
+    // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding
     async function handleLike() {
         if (isRequesting) return; // Ignore if a request is already in progress
         isRequesting = true;
@@ -42,12 +45,12 @@
     }
 </script>
 
-{#if $anime.liked}
+{#if $anime && $anime.liked}
     <button on:click={handleLike}>
-        <Heart class="w-auto aspect-square h-full p-1 rounded-full border-2 text-primary border-primary bg-[#2a2a2a]/60 transition hover:opacity-75"/>
+        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 text-primary fill-primary border-primary bg-[#2a2a2a]/60 transition hover:opacity-75"/>
     </button>
 {:else}
     <button on:click={handleLike}>
-        <HeartOff class="w-auto aspect-square h-full p-1 rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
+        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
     </button>
 {/if}
