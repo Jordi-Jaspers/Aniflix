@@ -41,7 +41,6 @@ public class TokenService {
      */
     @Scheduled(fixedDelay = 30 * MILLIS_PER_SECOND)
     public void deleteExpiredTokens() {
-        LOGGER.debug("[Automatic Cleanup] - Deleting expired tokens from the database.");
         tokenRepository.deleteExpiredTokens();
     }
 

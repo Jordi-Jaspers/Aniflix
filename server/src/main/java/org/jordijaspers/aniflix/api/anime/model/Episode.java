@@ -16,6 +16,7 @@ import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,14 +43,17 @@ public class Episode implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "number")
     private int number;
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "duration")
+    private long duration;
+
+    @Column(name = "air_date")
+    private LocalDateTime airDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Anime anime;

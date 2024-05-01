@@ -9,7 +9,7 @@ import org.jordijaspers.aniflix.api.anime.model.request.PageRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
 import org.jordijaspers.aniflix.api.interaction.model.response.InteractionResponse;

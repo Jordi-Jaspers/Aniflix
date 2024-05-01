@@ -6,8 +6,8 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
-import org.jordijaspers.aniflix.api.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
 import org.slf4j.Logger;
@@ -116,10 +116,8 @@ public class AnimeService {
         final Anime preSave = animeRepository.save(anime);
 
         // Reattach episodes and set their anime reference
-        episodes.forEach(episode -> {
-            episode.setAnime(preSave);
-            preSave.getEpisodes().add(episode);
-        });
+        episodes.forEach(episode -> episode.setAnime(preSave));
+        preSave.setEpisodes(episodes);
 
         // Save the anime with episodes
         return animeRepository.save(preSave);

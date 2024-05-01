@@ -120,6 +120,9 @@ dependencies {
     // Mail service provider that supports thymeleaf templating.
     implementation(group = "jakarta.mail", name = "jakarta.mail-api", version = "2.1.3")
 
+    // Reactive Jikan is a Java client for the Jikan API.
+    implementation(group = "net.sandrohc", name = "reactive-jikan", version = "2.2.0")
+
     // Hibernate's core ORM functionality
     implementation(group = "org.hibernate", name = "hibernate-validator", version = "8.0.1.Final")
     implementation(group = "org.hibernate", name = "hibernate-core", version = "6.5.0.CR1")

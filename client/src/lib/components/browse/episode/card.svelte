@@ -11,8 +11,8 @@
 </script>
 
 <div class="flex flex-col w-64 h-full rounded-t-[0.75rem] overflow-hidden">
-    <div class="relative aspect-[420/600] w-auto h-full bg-[#1a1920] opacity-100 hover:opacity-75 transition-all text-white duration-200">
-        <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-[#1a1920] justify-center items-center flex"
+    <div class="relative aspect-[420/600] w-auto h-full bg-card opacity-100 hover:opacity-75 transition-all text-white duration-200">
+        <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-card justify-center items-center flex"
                 on:click={() => goto("/watch/" + episode.anilistId + "/" + episode.episodeNumber)}
                 on:mouseover={() => hovering = true}
                 on:mouseleave={() => hovering = false}
@@ -27,10 +27,10 @@
              height={600}/>
     </div>
 
-    <div class="flex w-full pb-4 bg-[#1a1920]">
+    <div class="flex w-full pb-4 bg-card">
         <div class="text-[#d2d2d2] h-full w-full flex px-[4%] object-center space-x-2">
             <div class="w-full max-h-full space-y-1">
-                <p class="text-xs text-[#666666] font-light whitespace-nowrap">
+                <p class="text-xs text-[gray] font-light whitespace-nowrap">
                     Episode {episode.episodeNumber}
                 </p>
                 <div class="flex justify-between space-x-2 items-center">

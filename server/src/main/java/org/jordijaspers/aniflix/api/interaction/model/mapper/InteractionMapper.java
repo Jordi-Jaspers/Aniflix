@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper(
-        config = SharedMapperConfiguration.class
-)
+@Mapper(config = SharedMapperConfiguration.class)
 public abstract class InteractionMapper {
 
     @Autowired

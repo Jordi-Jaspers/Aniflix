@@ -8,11 +8,11 @@ import org.jordijaspers.aniflix.api.anime.model.request.AnimeRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistEpisode;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistInfoResult;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistOverview;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistRecentEpisode;
-import org.jordijaspers.aniflix.api.consumet.model.anilist.AnilistSearchResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.IterableMapping;
@@ -20,16 +20,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.time.ZonedDateTime;
 import java.util.AbstractMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.time.ZoneOffset.UTC;
 import static java.util.Objects.nonNull;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
-import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.QueryParams.*;
+import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class AnimeMapper {
@@ -103,9 +106,14 @@ public abstract class AnimeMapper {
                     response.setEpisodeNumber(episode.getNumber());
                     response.setEpisodeUrl(episode.getUrl());
                     response.setDescription(episode.getDescription());
-                    response.setImage(anime.getImageUrl());
+                    response.setDuration(episode.getDuration());
+                    response.setImage(episode.getImage());
+                    if (nonNull(episode.getAirDate())) {
+                        response.setAirDate(ZonedDateTime.of(episode.getAirDate(), UTC));
+                    }
                     return response;
                 })
+                .sorted(Comparator.comparingInt(EpisodeResponse::getEpisodeNumber))
                 .collect(Collectors.toList());
     }
 

@@ -2,10 +2,11 @@ package org.jordijaspers.aniflix.api.anime.model.response;
 
 import lombok.Data;
 
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.jordijaspers.aniflix.api.consumet.ConsumetConstants.Constants.SLASH;
+import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
 
 @Data
 public class EpisodeResponse {
@@ -24,11 +25,11 @@ public class EpisodeResponse {
 
     private String image;
 
+    private ZonedDateTime airDate;
+
+    private long duration;
+
     private Set<StreamingLinkResponse> streamingLinks = new HashSet<>();
-
-    private boolean liked;
-
-    private boolean inLibrary;
 
     /**
      * Returns the urlId with a leading slash.

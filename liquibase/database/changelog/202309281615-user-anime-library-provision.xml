@@ -19,6 +19,7 @@
             CREATE TABLE IF NOT EXISTS anime
             (
                 anilist_id     INTEGER AUTO_INCREMENT PRIMARY KEY,
+                mal_id         INTEGER      NOT NULL,
                 title          VARCHAR(255) NOT NULL,
                 description    TEXT,
                 total_episodes INTEGER      NOT NULL,
@@ -41,8 +42,9 @@
                 url_id              TEXT         NOT NULL,
                 number              INTEGER      NOT NULL,
                 title               VARCHAR(255) NOT NULL,
-                description         TEXT,
                 image               TEXT         NOT NULL,
+                duration            INTEGER      NOT NULL,
+                air_date            TIMESTAMP,
                 UNIQUE (url_id),
                 FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
             );

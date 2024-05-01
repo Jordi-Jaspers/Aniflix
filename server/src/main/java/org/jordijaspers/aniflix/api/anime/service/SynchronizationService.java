@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
-import org.jordijaspers.aniflix.api.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;

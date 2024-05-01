@@ -8,7 +8,7 @@
 
 <div class="flex flex-col w-64 h-full rounded-t-[0.75rem] overflow-hidden">
     <div class="relative aspect-[420/600] w-auto h-full">
-        <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-[#1a1920]"
+        <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-card"
                 on:click={() => openModal(anime.anilistId)}/>
         <img class="w-full h-full bg-center bg-no-repeat mb-2 cursor-pointer"
              src={anime.image}
@@ -17,10 +17,10 @@
              height={600}/>
     </div>
 
-    <div class="flex w-full pb-4 bg-[#1a1920]">
+    <div class="flex w-full pb-4 bg-card">
         <div class="text-[#d2d2d2] h-full w-full flex px-[4%] object-center space-x-2">
             <div class="w-full max-h-full space-y-1">
-                <p class="text-xs text-[#666666] font-light whitespace-nowrap">
+                <p class="text-xs text-[gray] font-light whitespace-nowrap">
                     {anime.totalEpisodes} Episodes - {anime.releaseYear ? anime.releaseYear : new Date().getFullYear()}
                 </p>
                 <div class="flex justify-between space-x-2 items-center">

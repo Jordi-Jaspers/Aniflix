@@ -129,6 +129,8 @@ class EpisodeResponse {
 	episodeUrl: string;
 	description: string;
 	image: string;
+	airDate: Date;
+	duration: number;
 }
 
 class ConstantResponse {

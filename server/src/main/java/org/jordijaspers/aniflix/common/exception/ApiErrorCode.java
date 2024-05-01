@@ -58,7 +58,10 @@ public enum ApiErrorCode implements ApiError {
             "Could not find anime in the database, nor in the Consumet API."),
     NO_USER_LOGGED_IN_ERROR(
             "ANI-0017",
-            "No user is logged in. Cannot perform action without authorization.");
+            "No user is logged in. Cannot perform action without authorization."),
+    JIKAN_API_ERROR(
+            "ANI-0018",
+            "Something went wrong while trying to communicate with the Jikan API.");
 
     /**
      * The error code.

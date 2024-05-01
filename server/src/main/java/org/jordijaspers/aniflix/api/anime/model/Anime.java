@@ -31,7 +31,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import static io.micrometer.common.util.StringUtils.isNotBlank;
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
@@ -49,6 +49,9 @@ public class Anime implements Serializable {
     @Id
     @Column(name = "anilist_id")
     private Integer anilistId;
+
+    @Column(name = "mal_id")
+    private Integer malId;
 
     @Column(name = "title")
     private String title;
@@ -124,10 +127,10 @@ public class Anime implements Serializable {
      * recently updated (15 minutes) we consider it complete for now.
      */
     public boolean isCompleted() {
-        final boolean hasDescriptions = episodes.stream().allMatch(episode -> isNotBlank(episode.getDescription()));
+        final boolean hasAiringDate = episodes.stream().allMatch(episode -> nonNull(episode.getAirDate()));
         return status.equals(COMPLETED)
                 && episodes.size() == totalEpisodes
-                && hasDescriptions;
+                && hasAiringDate;
     }
 
     /**

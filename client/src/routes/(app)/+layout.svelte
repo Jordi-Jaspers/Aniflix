@@ -20,7 +20,7 @@
 </script>
 
 {#if isAuthenticated}
-    <main class="h-screen {$useShowInfoModal && 'noscroll'}">
+    <main class="h-screen {$useShowInfoModal && 'noscroll overflow-hidden'}">
         <InfoModal/>
         <div class="relative flex flex-col">
             <Header/>
