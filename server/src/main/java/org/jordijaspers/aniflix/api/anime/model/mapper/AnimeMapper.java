@@ -105,7 +105,6 @@ public abstract class AnimeMapper {
                     response.setEpisodeTitle(episode.getTitle());
                     response.setEpisodeNumber(episode.getNumber());
                     response.setEpisodeUrl(episode.getUrl());
-                    response.setDescription(episode.getDescription());
                     response.setDuration(episode.getDuration());
                     response.setImage(episode.getImage());
                     if (nonNull(episode.getAirDate())) {

@@ -17,7 +17,7 @@ plugins {
     id("java-library")
 
     // Liquibase Plugin
-    id("org.liquibase.gradle") version "2.2.1"
+    id("org.liquibase.gradle") version "2.2.2"
 
     // Automatically generates a list of updatable dependencies.
     id("com.github.ben-manes.versions") version "0.51.0"
@@ -36,7 +36,7 @@ java {
  */
 dependencies {
     // Load the dependencies needed for liquibase to run (changelog parsers and JDBC drivers)
-    liquibaseRuntime(group = "org.liquibase", name = "liquibase-core", version = "4.26.0")
+    liquibaseRuntime(group = "org.liquibase", name = "liquibase-core", version = "4.27.0")
     liquibaseRuntime(group = "info.picocli", name = "picocli", version = "4.7.5")
     liquibaseRuntime(group = "org.yaml", name = "snakeyaml", version = "2.2")
     liquibaseRuntime(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.3.3")

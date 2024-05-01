@@ -46,7 +46,7 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.4"
+    id("org.springframework.boot") version "3.2.5"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.4"
@@ -101,7 +101,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.
-    implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.4.0")
+    implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.5.0")
 
     // Provides the core of hawaii framework such as the response entity exception handling.
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-async", version = hawaiiVersion)
@@ -137,14 +137,14 @@ dependencies {
     implementation(group = "org.apache.httpcomponents", name = "httpclient", version = "4.5.14")
 
     // Apache Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation.
-    implementation(group = "commons-io", name = "commons-io", version = "2.15.1")
+    implementation(group = "commons-io", name = "commons-io", version = "2.16.1")
 
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
     implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.38-rc3")
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.3")
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.4")
 }
 
 // ============== PLUGIN CONFIGURATION ================
@@ -155,7 +155,7 @@ quality {
     autoRegistration = true
     configDir = "src/quality/config/"
 
-    spotbugsVersion = "4.8.3"
+    spotbugsVersion = "4.8.4"
     spotbugs = true
 
     pmdVersion = "6.55.0"

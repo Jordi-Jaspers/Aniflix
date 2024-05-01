@@ -22,7 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
@@ -70,11 +69,6 @@ public class ConsumetService {
                 final OffsetDateTime airDate = jikanEpisode.getAired();
                 if (nonNull(airDate)) {
                     episode.setAirDate(airDate.toLocalDateTime());
-                }
-
-                final String synopsis = jikanEpisode.getSynopsis();
-                if (!isBlank(synopsis)) {
-                    episode.setDescription(synopsis);
                 }
 
                 final long duration = nonNull(jikanEpisode.getDuration())
