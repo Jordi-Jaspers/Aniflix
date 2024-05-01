@@ -3,11 +3,10 @@
     import Header from '$lib/components/app/header/header.svelte';
     import Footer from '$lib/components/app/footer/footer.svelte';
     import {useHasAuthError, useShowInfoModal} from '$lib/components/store/store';
-    import ErrorMessage from '$lib/components/general/error-message.svelte';
-    import {onMount} from 'svelte';
     import {isUserAuthenticated} from "$lib/api/client";
     import {CLIENT_URLS} from "$lib/api/paths";
     import {InfoModal} from "$lib/components/modal/index.js";
+    import {onMount} from 'svelte';
 
     let isAuthenticated: boolean;
     onMount(async () => {
@@ -26,7 +25,6 @@
             <Header/>
             <slot/>
         </div>
-        <ErrorMessage/>
         <Footer/>
     </main>
 {/if}

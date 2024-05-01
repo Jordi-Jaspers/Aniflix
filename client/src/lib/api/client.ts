@@ -1,6 +1,7 @@
-import {useAuthenticated, useErrorMessage, useHasAuthError, useHasError} from '$lib/components/store/store';
+import {useAuthenticated, useHasAuthError} from '$lib/components/store/store';
 import {goto} from "$app/navigation";
 import {CLIENT_URLS, SERVER_URLS} from "$lib/api/paths";
+import toast from 'svelte-french-toast';
 
 const ISSUER: string = import.meta.env.VITE_SERVER_ISSUER;
 
@@ -60,6 +61,11 @@ export async function curl(endpoint: string, options: RequestInit = {}): Promise
         const tokens = await refreshTokens();
         if (typeof tokens === 'string') {
             await goto(CLIENT_URLS.LOGIN_URL);
+            toast.error(tokens, {
+                duration: 5000,
+                position: 'bottom-center',
+                style: 'background: #262626; color: #ffffff;'
+            });
         } else {
             updateTokens(tokens);
             accessToken = localStorage.getItem('ANIFLIX_ACCESS_TOKEN');
@@ -70,9 +76,12 @@ export async function curl(endpoint: string, options: RequestInit = {}): Promise
     headers.append('Authorization', `Bearer ${accessToken}`);
     const response: Response = await fetch(endpoint, {...options, headers});
 
-    if (!response.ok) {
-        useHasError.set(true);
-        useErrorMessage.set(await getErrorMessage(response));
+    if (!response.ok && response.status !== 401) {
+        toast.error(await getErrorMessage(response), {
+            duration: 5000,
+            position: 'bottom-center',
+            style: 'background: #262626; color: #ffffff;'
+        });
     }
     return response;
 }
@@ -91,7 +100,14 @@ export async function isUserAuthenticated(): Promise<boolean> {
     const refreshToken = localStorage.getItem('ANIFLIX_REFRESH_TOKEN');
     if (refreshToken && isValid(refreshToken)) {
         const response = await refreshTokens();
-        return typeof response !== 'string';
+        if (typeof response !== 'string') {
+            return true;
+        }
+        toast.error(response, {
+            duration: 5000,
+            position: 'bottom-center',
+            style: 'background: #dc2626;'
+        });
     }
 
     return false;
@@ -130,7 +146,9 @@ async function refreshTokens(): Promise<AuthorizeResponse | string> {
 async function getErrorMessage(response: Response): Promise<string> {
     const exception: Exception | ValidationException = await response.json();
     if ('apiErrorReason' in exception) {
-        return exception.apiErrorReason;
+        return exception.statusMessage + ": " + exception.apiErrorReason;
+    } else if ('errorMessage' in exception) {
+        return exception.statusMessage + ": " + exception.errorMessage;
     } else if ('errors' in exception) {
         let errorMessages: string = 'The following fields contain errors:\n';
         exception.errors.forEach((error: ValidationField) => {
@@ -183,5 +201,3 @@ function updateTokens(response: AuthorizeResponse) {
     localStorage.setItem('ANIFLIX_ACCESS_TOKEN', response.accessToken);
     localStorage.setItem('ANIFLIX_REFRESH_TOKEN', response.refreshToken);
 }
-
-

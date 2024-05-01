@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col justify-between p-[4%]">
-                        <div class="space-y-2 h-24 overflow-hidden">
+                        <div class="space-y-2 h-[5.5rem] overflow-hidden">
                             <div class="flex items-center text-[gray] text-sm w-full">
                                 <div class="flex items-center space-x-1">
                                     <p> {recommendation.rating / 10} </p>
@@ -57,7 +57,7 @@
 
                                 <span class="mx-2"> | </span>
                                 <span> {recommendation.episodes} Episodes </span>
-                                <div class="hidden md:block mx-2 flex text-white h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs !z-40">
+                                <div class="hidden md:flex mx-2 text-white h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs !z-40">
                                     HD
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 }
                             </h3>
                         </div>
-                        <div class="h-10 flex justify-center space-x-8">
+                        <div class="h-10 flex justify-center space-x-8 my-4">
                             <!-- TODO: Make them buttons work for recommendations -->
                             <LibraryButton value={anime}/>
                             <LikeButton value={anime}/>
