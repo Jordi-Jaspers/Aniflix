@@ -12,6 +12,6 @@
 		</div>
 		<h1 class="text-4xl font-bold mb-4">404 - Page Not Found</h1>
 		<p class="text-lg mb-8">Oops! The page you're looking for doesn't exist.</p>
-		<a href="/" class="text-blue-500 hover:underline">Go back to the homepage</a>
+		<a href="/browse" class="text-blue-500 hover:underline">Go back to the homepage</a>
 	</div>
 {/if}
