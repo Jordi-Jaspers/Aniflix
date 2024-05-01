@@ -145,6 +145,16 @@ class EpisodeResponse {
 	duration: number;
 }
 
+class NewsPostResponse {
+	articleId: string;
+	title: string;
+	uploadedAt: Date;
+	intro: string;
+	description: string;
+	thumbnail: string;
+	url: string;
+}
+
 class ConstantResponse {
 	genres: string[];
 	seasons: string[];

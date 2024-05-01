@@ -81,6 +81,10 @@ public final class Paths {
 
     public static final String ANIME_BANNER = ANIME_PATH + "/banner";
 
+    /* ------------------------------- NEWS ENDPOINTS ------------------------------- */
+
+    public static final String NEWS_PATH = BASE_PATH + "/news";
+
     /* ------------------------------- INTERACTION ENDPOINTS ------------------------------- */
 
     public static final String LIKE_ANIME_PATH = ANIME_DETAILS + "/like";

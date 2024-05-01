@@ -41,6 +41,10 @@ public final class ConsumetConstants {
         public static final String ADVANCED_SEARCH = "/meta/anilist/advanced-search";
 
         public static final String SEARCH = "/meta/anilist/{query}";
+
+        public static final String ANIME_NEWS_FEED = "/news/ann/recent-feeds";
+
+        public static final String ANIME_NEWS_DETAILS = "/news/ann/info";
     }
 
     /**

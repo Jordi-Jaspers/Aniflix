@@ -158,8 +158,11 @@ https://www.youtube.com/watch?v=ABbww4CFQSo&ab_channel=developedbyed
 https://docs.consumet.org/rest-api/Meta/anilist-anime/get-anime-info
 
 https://consumet.aniflix.stream/meta/anilist/info/162803?provider=gogoanime
-
+https://www.npmjs.com/package/svelte-motion
+https://svelte-french-toast.com/
 https://www.npmjs.com/package/svelte-player
 https://lucide.dev/
 https://www.shadcn-svelte.com/docs/components/dropdown-menu
 https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values
+https://github.com/SandroHc/reactive-jikan
+https://docs.api.jikan.moe/#tag/anime/operation/getAnimeRecommendations

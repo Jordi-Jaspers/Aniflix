@@ -78,10 +78,6 @@ public class ConsumetService {
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
     }
 
-    public List<AnilistRecommendation> getRecommendationsForAnime(final int anilistId) {
-        return consumetRepository.getAnimeRecommendations(anilistId);
-    }
-
     public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
         return consumetRepository.getAnimeByGenre(genre.getName(), perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)
@@ -94,7 +90,13 @@ public class ConsumetService {
                 .toList();
     }
 
-    public static Map<String, String> applyDefaultFilters(final String input, final Map<String, String> filters) {
+    public List<AnilistRecommendation> getRecommendationsForAnime(final int anilistId) {
+        return consumetRepository.getAnimeRecommendations(anilistId);
+    }
+
+    // ======================================== PRIVATE METHODS ========================================
+
+    private static Map<String, String> applyDefaultFilters(final String input, final Map<String, String> filters) {
         final String title = input.replace("-", " ");
         final String regex = "\\s+(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
         final Matcher matcher = Pattern.compile(regex).matcher(input.toUpperCase());

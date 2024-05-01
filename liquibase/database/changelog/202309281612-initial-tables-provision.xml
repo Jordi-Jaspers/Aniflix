@@ -9,8 +9,6 @@
             Creating the initial ANIFLIX tables.
         </ext:documentation>
         <sql>
-
-
             -- Create the "user" table
             CREATE TABLE IF NOT EXISTS user
             (
@@ -63,6 +61,19 @@
                 id serial PRIMARY KEY,
                 public_key BLOB NOT NULL,
                 private_key BLOB NOT NULL
+            );
+
+            -- Create the "news_post" table
+            CREATE TABLE IF NOT EXISTS news_post
+            (
+                id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+                article_id  VARCHAR(512) NOT NULL,
+                title       VARCHAR(512) NOT NULL,
+                uploaded_at TIMESTAMP    NOT NULL,
+                intro       TEXT         NOT NULL,
+                description TEXT         NOT NULL,
+                thumbnail   VARCHAR(512) NOT NULL,
+                url         VARCHAR(512) NOT NULL
             );
         </sql>
     </changeSet>

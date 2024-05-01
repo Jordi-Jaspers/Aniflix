@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsFeed;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
@@ -21,7 +23,6 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -46,9 +47,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Searches for an anime by its name.
-     *
-     * @param query The name of the anime.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
@@ -57,9 +56,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Searches for an anime by its name and apply any filters.
-     *
-     * @param filters The filters to apply.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
@@ -68,7 +65,6 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
                 .uri(uriBuilder -> {
                     uriBuilder.path(ADVANCED_SEARCH);
                     filters.forEach(uriBuilder::queryParam);
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uriBuilder.build());
                     return uriBuilder.build();
                 })
                 .retrieve()
@@ -87,13 +83,10 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @LogExecutionTime
     public AnilistInfoResult getAnimeDetails(final int id) {
         return client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(ANIME_DETAILS)
-                            .build(id);
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(ANIME_DETAILS)
+                        .build(id)
+                )
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(AnilistInfoResult.class)
@@ -108,13 +101,10 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @LogExecutionTime
     public List<AnilistRecommendation> getAnimeRecommendations(final int id) {
         final AnilistInfoResult result = client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(ANIME_DATA)
-                            .build(id);
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(ANIME_DATA)
+                        .build(id)
+                )
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(AnilistInfoResult.class)
@@ -125,25 +115,18 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns a list of popular Anime TV series.
-     *
-     * @param results The number of results to return.
-     * @param page    The page to return.
+     * {@inheritDoc}
      */
-
     @Override
     @LogExecutionTime
     public ResultPage<AnilistOverview> getPopularAnime(final int results, final int page) {
         return client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(POPULAR_ANIME)
-                            .queryParam(PAGE_PARAM, page)
-                            .queryParam(PER_PAGE_PARAM, results)
-                            .build();
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(POPULAR_ANIME)
+                        .queryParam(PAGE_PARAM, page)
+                        .queryParam(PER_PAGE_PARAM, results)
+                        .build()
+                )
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(new ParameterizedTypeReference<ResultPage<AnilistOverview>>() {
@@ -154,24 +137,17 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns a list of trending Anime TV series.
-     *
-     * @param results The number of results to return.
-     * @param page    The page to return.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
     public ResultPage<AnilistOverview> getTrendingAnime(final int results, final int page) {
         return client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(TRENDING_ANIME)
-                            .queryParam(PAGE_PARAM, page)
-                            .queryParam(PER_PAGE_PARAM, results)
-                            .build();
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(TRENDING_ANIME)
+                        .queryParam(PAGE_PARAM, page)
+                        .queryParam(PER_PAGE_PARAM, results)
+                        .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(new ParameterizedTypeReference<ResultPage<AnilistOverview>>() {
@@ -182,25 +158,17 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns a list of recently released episodes of currently airing Anime TV series
-     * by retrieving all the recent episodes and filtering out the ones that are chinese.
-     *
-     * @param results The number of results to return.
-     * @param page    The page to return.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
     public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page) {
         return client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(RECENT_EPISODES)
-                            .queryParam(PAGE_PARAM, page)
-                            .queryParam(PER_PAGE_PARAM, results)
-                            .build();
-                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(RECENT_EPISODES)
+                        .queryParam(PAGE_PARAM, page)
+                        .queryParam(PER_PAGE_PARAM, results)
+                        .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(new ParameterizedTypeReference<ResultPage<AnilistRecentEpisode>>() {
@@ -211,28 +179,20 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns a list of Anime TV series that match the given genre.
-     *
-     * @param genre   The genre to search for.
-     * @param results The number of results to return.
-     * @param page    The page to return.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
     public ResultPage<AnilistOverview> getAnimeByGenre(final String genre, final int results, final int page) {
         return client.get()
-                .uri(uriBuilder -> {
-                    final URI uri = uriBuilder
-                            .path(ADVANCED_SEARCH)
-                            .queryParam(TYPE_PARAM, "ANIME")
-                            .queryParam(SORT_PARAM, "[\"SCORE_DESC\",\"UPDATED_AT_DESC\",\"TRENDING_DESC\"]")
-                            .queryParam(GENRES_PARAM, "[\"" + genre + "\"]")
-                            .queryParam(PAGE_PARAM, page)
-                            .queryParam(PER_PAGE_PARAM, results)
-                            .build();
-                    LOGGER.info("Calling Consumet API with the following URL: '{}'", uri);
-                    return uri;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .path(ADVANCED_SEARCH)
+                        .queryParam(TYPE_PARAM, "ANIME")
+                        .queryParam(SORT_PARAM, "[\"SCORE_DESC\",\"UPDATED_AT_DESC\",\"TRENDING_DESC\"]")
+                        .queryParam(GENRES_PARAM, "[\"" + genre + "\"]")
+                        .queryParam(PAGE_PARAM, page)
+                        .queryParam(PER_PAGE_PARAM, results)
+                        .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)
                 .bodyToMono(new ParameterizedTypeReference<ResultPage<AnilistOverview>>() {
@@ -243,10 +203,45 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns all the meta information for a specified episode by its id.
-     *
-     * @param id      The id of the anime.
-     * @param episode The number of the episode.
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public List<AnilistNewsFeed> getNewsFeed() {
+        return client.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(ANIME_NEWS_FEED)
+                        .queryParam("topic", "[\"anime\"]")
+                        .build())
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                .bodyToMono(new ParameterizedTypeReference<List<AnilistNewsFeed>>() {
+
+                })
+                .doOnError(onObjectMappingErrorLog())
+                .block();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public AnilistNewsPost getNewsPost(final String id) {
+        return client.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(ANIME_NEWS_DETAILS)
+                        .queryParam("id", id)
+                        .build())
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                .bodyToMono(AnilistNewsPost.class)
+                .doOnError(onObjectMappingErrorLog())
+                .block();
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime
@@ -255,10 +250,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns all the media sources for a specified episode by its id.
-     *
-     * @param id      The id of the anime.
-     * @param episode The number of the episode.
+     * {@inheritDoc}
      */
     @Override
     @LogExecutionTime

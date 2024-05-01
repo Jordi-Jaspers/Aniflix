@@ -23,6 +23,7 @@ export const SERVER_URLS = {
     ANIME_TRENDING_PATH: `${SERVER_BASE_URL}/anime/trending`,
     ANIME_GENRE_PATH: `${SERVER_BASE_URL}/anime/genre`,
     ANIME_RECOMMENDATION_PATH: `${SERVER_BASE_URL}/anime/{id}/recommendations`,
+    NEWS_PATH: `${SERVER_BASE_URL}/news`,
 };
 
 export const CLIENT_URLS = {

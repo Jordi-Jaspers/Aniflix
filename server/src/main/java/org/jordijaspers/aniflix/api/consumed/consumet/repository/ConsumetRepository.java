@@ -2,6 +2,8 @@ package org.jordijaspers.aniflix.api.consumed.consumet.repository;
 
 import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsFeed;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
@@ -88,4 +90,15 @@ public interface ConsumetRepository {
      */
     ResultPage<AnilistOverview> getEpisodeLinks(String id, int episode);
 
+    /**
+     * Returns the latest news articles.
+     */
+    List<AnilistNewsFeed> getNewsFeed();
+
+    /**
+     * Returns the details of a news article specified by its id.
+     *
+     * @param id The id of the news article.
+     */
+    AnilistNewsPost getNewsPost(String id);
 }
