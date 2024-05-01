@@ -127,10 +127,12 @@ public class Anime implements Serializable {
      * recently updated (15 minutes) we consider it complete for now.
      */
     public boolean isCompleted() {
+        final boolean isRecentlyUpdated = nonNull(updated) && updated.isAfter(LocalDateTime.now().minusMinutes(15));
         final boolean hasAiringDate = episodes.stream().allMatch(episode -> nonNull(episode.getAirDate()));
         return status.equals(COMPLETED)
                 && episodes.size() == totalEpisodes
-                && hasAiringDate;
+                && hasAiringDate
+                || isRecentlyUpdated;
     }
 
     /**

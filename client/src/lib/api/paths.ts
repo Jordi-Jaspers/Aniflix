@@ -21,7 +21,8 @@ export const SERVER_URLS = {
     ANIME_RECENT_PATH: `${SERVER_BASE_URL}/anime/recent`,
     ANIME_POPULAR_PATH: `${SERVER_BASE_URL}/anime/popular`,
     ANIME_TRENDING_PATH: `${SERVER_BASE_URL}/anime/trending`,
-    ANIME_GENRE_PATH: `${SERVER_BASE_URL}/anime/genre`
+    ANIME_GENRE_PATH: `${SERVER_BASE_URL}/anime/genre`,
+    ANIME_RECOMMENDATION_PATH: `${SERVER_BASE_URL}/anime/{id}/recommendations`,
 };
 
 export const CLIENT_URLS = {

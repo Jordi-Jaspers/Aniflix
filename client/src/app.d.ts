@@ -101,6 +101,18 @@ class AuthorizeResponse {
 	validated: boolean;
 }
 
+class RecommendationResponse {
+	anilistId: number;
+	malId: number;
+	title: string;
+	status: string;
+	episodes: number;
+	image: string;
+	cover: string;
+	rating: number;
+	type: string;
+}
+
 class AnimeResponse {
 	anilistId: number;
 	title: string;

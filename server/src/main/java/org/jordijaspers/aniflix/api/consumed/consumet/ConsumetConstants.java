@@ -36,10 +36,11 @@ public final class ConsumetConstants {
 
         public static final String ANIME_DETAILS = "/meta/anilist/info/{id}";
 
+        public static final String ANIME_DATA = "/meta/anilist/data/{id}";
+
         public static final String ADVANCED_SEARCH = "/meta/anilist/advanced-search";
 
         public static final String SEARCH = "/meta/anilist/{query}";
-
     }
 
     /**

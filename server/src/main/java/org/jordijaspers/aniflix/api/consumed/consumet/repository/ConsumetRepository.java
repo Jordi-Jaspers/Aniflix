@@ -4,8 +4,10 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ConsumetRepository {
@@ -25,9 +27,14 @@ public interface ConsumetRepository {
     ResultPage<AnilistSearchResult> searchAnime(Map<String, String> filters);
 
     /**
-     * Returns the details of an Anime specified by its id.
+     * Returns the details of an Anime specified by its id, with the episodes.
      */
     AnilistInfoResult getAnimeDetails(int id);
+
+    /**
+     * Returns the recommendations for an Anime specified by its id.
+     */
+    List<AnilistRecommendation> getAnimeRecommendations(int id);
 
     /**
      * Returns a list of popular Anime TV series.

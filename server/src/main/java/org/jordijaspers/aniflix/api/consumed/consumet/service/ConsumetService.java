@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.jikan.repository.JikanRepository;
@@ -22,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
@@ -61,29 +63,7 @@ public class ConsumetService {
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
-
-        final Map<Integer, AnimeEpisode> jikanEpisodes = jikanRepository.getAnimeEpisodes(anime.getMalId());
-        anime.getEpisodes().forEach(episode -> {
-            final AnimeEpisode jikanEpisode = jikanEpisodes.get(episode.getNumber());
-            if (nonNull(jikanEpisode)) {
-                final OffsetDateTime airDate = jikanEpisode.getAired();
-                if (nonNull(airDate)) {
-                    episode.setAirDate(airDate.toLocalDateTime());
-                }
-
-                final long duration = nonNull(jikanEpisode.getDuration())
-                        ? jikanEpisode.getDuration().toSeconds()
-                        : 1440;
-                episode.setDuration(duration);
-
-                final String title = nonNull(jikanEpisode.getTitle())
-                        ? jikanEpisode.getTitle()
-                        : "Episode " + episode.getNumber();
-                episode.setTitle(title);
-            }
-        });
-
-        return anime;
+        return provisionDataFromJikan(anime);
     }
 
     public Anime getAnimeDetails(final String title) {
@@ -96,6 +76,10 @@ public class ConsumetService {
                 .map(consumetRepository::getAnimeDetails)
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+    }
+
+    public List<AnilistRecommendation> getRecommendationsForAnime(final int anilistId) {
+        return consumetRepository.getAnimeRecommendations(anilistId);
     }
 
     public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
@@ -142,5 +126,35 @@ public class ConsumetService {
         } else {
             return true;
         }
+    }
+
+    private Anime provisionDataFromJikan(final Anime anime) {
+        if (isBlank(anime.getTrailerUrl())) {
+            final String trailerUrl = jikanRepository.getAnimeTrailer(anime.getMalId()).getYoutubeId();
+            anime.setTrailerUrl(trailerUrl);
+        }
+
+        final Map<Integer, AnimeEpisode> jikanEpisodes = jikanRepository.getAnimeEpisodes(anime.getMalId(), anime.getTotalEpisodes());
+        anime.getEpisodes().forEach(episode -> {
+            final AnimeEpisode jikanEpisode = jikanEpisodes.get(episode.getNumber());
+            if (nonNull(jikanEpisode)) {
+                final OffsetDateTime airDate = jikanEpisode.getAired();
+                if (nonNull(airDate)) {
+                    episode.setAirDate(airDate.toLocalDateTime());
+                }
+
+                final long duration = nonNull(jikanEpisode.getDuration())
+                        ? jikanEpisode.getDuration().toSeconds()
+                        : 1440;
+                episode.setDuration(duration);
+
+                final String title = nonNull(jikanEpisode.getTitle())
+                        ? jikanEpisode.getTitle()
+                        : "Episode " + episode.getNumber();
+                episode.setTitle(title);
+            }
+        });
+
+        return anime;
     }
 }

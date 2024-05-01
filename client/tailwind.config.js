@@ -1,4 +1,4 @@
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import {fontFamily} from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -14,6 +14,10 @@ const config = {
 			}
 		},
 		extend: {
+			gridTemplateColumns: {
+				'auto-fill-100': 'repeat(auto-fill, minmax(100px, 1fr))',
+				'auto-fit-100': 'repeat(auto-fit, minmax(100px, 1fr))',
+			},
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',

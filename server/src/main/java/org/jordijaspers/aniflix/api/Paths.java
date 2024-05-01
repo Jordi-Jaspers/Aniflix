@@ -91,6 +91,8 @@ public final class Paths {
 
     public static final String REMOVE_FROM_LIBRARY_PATH = ANIME_DETAILS + "/library/remove";
 
+    public static final String ANIME_RECOMMENDATIONS = ANIME_DETAILS + "/recommendations";
+
     /* ------------------------------- LIBRARY ENDPOINTS ------------------------------- */
 
     public static final String LIBRARY_PATH = BASE_PATH + "/library";
@@ -100,8 +102,6 @@ public final class Paths {
     public static final String ANIME_LIBRARY_PATH = LIBRARY_PATH + ANIME_PART;
 
     public static final String ANIME_LIBRARY_SEARCH_PATH = ANIME_LIBRARY_PATH + SEARCH_PART;
-
-
 
     /* ------------------------------- END ------------------------------- */
 

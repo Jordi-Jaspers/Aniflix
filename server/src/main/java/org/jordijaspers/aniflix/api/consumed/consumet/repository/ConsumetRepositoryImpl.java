@@ -6,9 +6,11 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
+import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -48,6 +51,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param query The name of the anime.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistSearchResult> searchAnime(final String query) {
         return searchAnime(Map.of(QUERY_PARAM, query));
     }
@@ -58,6 +62,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param filters The filters to apply.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistSearchResult> searchAnime(final Map<String, String> filters) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -76,9 +81,10 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
-     * Returns the details of an Anime specified by its id.
+     * {@inheritDoc}
      */
     @Override
+    @LogExecutionTime
     public AnilistInfoResult getAnimeDetails(final int id) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -96,6 +102,29 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public List<AnilistRecommendation> getAnimeRecommendations(final int id) {
+        final AnilistInfoResult result = client.get()
+                .uri(uriBuilder -> {
+                    final URI uri = uriBuilder
+                            .path(ANIME_DATA)
+                            .build(id);
+                    LOGGER.info("[Consumet API] Invoking Consumet API with the following URL: '{}'", uri);
+                    return uri;
+                })
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                .bodyToMono(AnilistInfoResult.class)
+                .doOnError(onObjectMappingErrorLog())
+                .block();
+
+        return nonNull(result) ? result.getRecommendations() : List.of();
+    }
+
+    /**
      * Returns a list of popular Anime TV series.
      *
      * @param results The number of results to return.
@@ -103,6 +132,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
 
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistOverview> getPopularAnime(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -130,6 +160,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param page    The page to return.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistOverview> getTrendingAnime(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -158,6 +189,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param page    The page to return.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -186,6 +218,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param page    The page to return.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistOverview> getAnimeByGenre(final String genre, final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -216,6 +249,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param episode The number of the episode.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistOverview> getEpisodeInformation(final String id, final int episode) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -227,6 +261,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * @param episode The number of the episode.
      */
     @Override
+    @LogExecutionTime
     public ResultPage<AnilistOverview> getEpisodeLinks(final String id, final int episode) {
         throw new UnsupportedOperationException("Not implemented yet");
     }

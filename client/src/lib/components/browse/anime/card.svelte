@@ -1,12 +1,11 @@
 <script lang="ts">
-    import {setAnime} from "$lib/components/store/anime-context-store";
     import {LibraryButton} from "$lib/components/general";
     import {openModal} from "$lib/api/util";
 
     export let anime: AnimeResponse;
 </script>
 
-<div class="flex flex-col w-64 h-full rounded-t-[0.75rem] overflow-hidden">
+<div class="flex flex-col w-56 h-full rounded-t-[0.75rem] overflow-hidden">
     <div class="relative aspect-[420/600] w-auto h-full">
         <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-card"
                 on:click={() => openModal(anime.anilistId)}/>

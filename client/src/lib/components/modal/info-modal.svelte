@@ -8,7 +8,7 @@
     import {LibraryButton, LikeButton, SpeakerButton} from "$lib/components/general/index.js";
     import {Badge} from "$lib/components/ui/badge";
     import {closeModal} from "$lib/api/util";
-    import {EpisodeList} from "$lib/components/browse";
+    import {EpisodeList, RecommendationCard, RecommendationCards} from "$lib/components/browse";
     import {Root, List, Trigger, Content} from "$lib/components/ui/tabs";
 
     let isPlaying: boolean = false;
@@ -36,7 +36,7 @@
 {#if $useShowInfoModal}
     <button on:click={() => closeModal()} class="!z-[100] fixed backdrop-brightness-50 w-full h-full inset-0"/>
     <div role="presentation" on:close={() => closeModal()} on:keypress={handleEscape}
-         class="!z-[1000] fixed bg-background inset-0 rounded-t-md top-8  mx-auto h-auto w-full max-w-[90%] lg:max-w-4xl overscroll-auto overflow-y-scroll">
+         class="!z-[1000] fixed bg-background inset-0 mx-auto h-auto w-full md:rounded-t-md md:top-8 md:max-w-[90%] lg:max-w-4xl overscroll-auto overflow-y-scroll">
         <button class="absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"
                 on:click={() => closeModal()}>
             <X class="h-6 w-6"/>
@@ -86,7 +86,7 @@
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
                     }
                     <Badge variant="outline" class="bg-blue-500 ml-4">
-                        {#if $useModalInfo.anime.subbed} SUB{:else} SUB{/if}
+                        {#if $useModalInfo.anime.subbed} SUB{:else} DUB{/if}
                     </Badge>
                 </h1>
 
@@ -139,7 +139,7 @@
                     <EpisodeList episodes={$useModalInfo.anime.episodes}/>
                 </Content>
                 <Content value="Recommended">
-                    Change your password here.
+                    <RecommendationCards anime={$useModalInfo.anime}/>
                 </Content>
             </Root>
         </div>

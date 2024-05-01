@@ -10,15 +10,15 @@
     setAnilistId(episode.anilistId);
 </script>
 
-<div class="flex flex-col w-64 h-full rounded-t-[0.75rem] overflow-hidden">
-    <div class="relative aspect-[420/600] w-auto h-full bg-card opacity-100 hover:opacity-75 transition-all text-white duration-200">
+<div class="flex flex-col w-56 h-full rounded-t-[0.75rem] overflow-hidden">
+    <div class="relative aspect-[420/600] w-auto h-full bg-card opacity-100 hover:opacity-75 transition-all text-white ">
         <button class="absolute w-full h-full bg-gradient-to-b from-transparent lg:to-[99%] to-card justify-center items-center flex"
                 on:click={() => goto("/watch/" + episode.anilistId + "/" + episode.episodeNumber)}
                 on:mouseover={() => hovering = true}
                 on:mouseleave={() => hovering = false}
                 on:focus={() => hovering = true}
         >
-            <PlayIcon class="h-10 w-10 text-transparent {hovering && 'text-white fill-white'} transition-all duration-200"/>
+            <PlayIcon class="h-10 w-10 text-white fill-white opacity-0 {hovering && 'opacity-100'} transition-opacity"/>
         </button>
         <img class="w-full h-full bg-center bg-no-repeat mb-2 cursor-pointer"
              src={episode.image}
