@@ -24,6 +24,7 @@ export const SERVER_URLS = {
     ANIME_GENRE_PATH: `${SERVER_BASE_URL}/anime/genre`,
     ANIME_RECOMMENDATION_PATH: `${SERVER_BASE_URL}/anime/{id}/recommendations`,
     NEWS_PATH: `${SERVER_BASE_URL}/news`,
+    NEWS_DETAILS_PATH: `${SERVER_BASE_URL}/news/{id}`,
 };
 
 export const CLIENT_URLS = {

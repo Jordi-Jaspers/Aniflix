@@ -11,6 +11,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecen
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
+import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.slf4j.Logger;
@@ -211,7 +212,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(ANIME_NEWS_FEED)
-                        .queryParam("topic", "[\"anime\"]")
+                        .queryParam("topic", NewsGenre.getCommaSeparatedGenres())
                         .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)

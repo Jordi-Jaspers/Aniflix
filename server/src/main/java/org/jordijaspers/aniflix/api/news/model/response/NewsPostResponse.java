@@ -6,6 +6,8 @@ import java.time.ZonedDateTime;
 
 @Data
 public class NewsPostResponse {
+    
+    private Integer id;
 
     private String articleId;
 
@@ -16,6 +18,8 @@ public class NewsPostResponse {
     private String intro;
 
     private String description;
+
+    private String topic;
 
     private String thumbnail;
 

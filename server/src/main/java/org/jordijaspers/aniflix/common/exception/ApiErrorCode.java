@@ -61,7 +61,10 @@ public enum ApiErrorCode implements ApiError {
             "No user is logged in. Cannot perform action without authorization."),
     JIKAN_API_ERROR(
             "ANI-0018",
-            "Something went wrong while trying to communicate with the Jikan API.");
+            "Something went wrong while trying to communicate with the Jikan API."),
+    NEWS_POST_NOT_FOUND_ERROR(
+            "ANI-0019",
+            "Could not find the requested news post.");
 
     /**
      * The error code.

@@ -17,18 +17,18 @@
         <div class="flex justify-center px-6 py-2 w-full cursor-pointer hover:bg-primary/60 rounded-[0.75rem]">
             <div class="relative flex flex-row justify-between h-full w-full space-x-4">
                 <div class="flex items-center space-x-8">
-                    <p class="font-semibold text-md text-[gray]">
+                    <p class="font-semibold text-md text-muted-foreground">
                         {episode.episodeNumber}
                     </p>
                     <div>
                         <p class="font-semibold text-sm text-white">
                             {episode.episodeTitle}
                         </p>
-                        <div class="flex items-center space-x-2 font-light text-sm text-[gray] w-full text-justify">
-                            <p class="font-light text-sm text-[gray]">
+                        <div class="flex items-center space-x-2 font-light text-sm text-muted-foreground w-full text-justify">
+                            <p class="font-light text-sm text-muted-foreground">
                                 {episode.duration / 60} min
                             </p>
-                            <span class="text-[gray]">•</span>
+                            <span class="text-muted-foreground">•</span>
                             <CalendarDays class="h-4 w-4"/>
                             <p class="">
                                 {#if episode.airDate}

@@ -85,6 +85,8 @@ public final class Paths {
 
     public static final String NEWS_PATH = BASE_PATH + "/news";
 
+    public static final String NEWS_DETAILS = NEWS_PATH + ID_PART;
+
     /* ------------------------------- INTERACTION ENDPOINTS ------------------------------- */
 
     public static final String LIKE_ANIME_PATH = ANIME_DETAILS + "/like";

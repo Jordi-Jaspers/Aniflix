@@ -30,7 +30,7 @@
     <div class="flex w-full pb-4 bg-card">
         <div class="text-[#d2d2d2] h-full w-full flex px-[4%] object-center space-x-2">
             <div class="w-full max-h-full space-y-1">
-                <p class="text-xs text-[gray] font-light whitespace-nowrap">
+                <p class="text-xs text-muted-foreground font-light whitespace-nowrap">
                     Episode {episode.episodeNumber}
                 </p>
                 <div class="flex justify-between space-x-2 items-center">

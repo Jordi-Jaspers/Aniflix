@@ -1,13 +1,9 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these classs
 declare global {
-	namespace App {
-		// class Error {}
-		// class Locals {}
-		// class PageData {}
-		// class PageState {}
-		// class Platform {}
-	}
+	namespace App { }
+	declare const __NAME__: string;
+	declare const __VERSION__: string;
 }
 // ======================== MODELS ===========================
 class CarouselColumns {
@@ -146,11 +142,13 @@ class EpisodeResponse {
 }
 
 class NewsPostResponse {
+	id: number;
 	articleId: string;
 	title: string;
 	uploadedAt: Date;
 	intro: string;
 	description: string;
+	topic: string;
 	thumbnail: string;
 	url: string;
 }

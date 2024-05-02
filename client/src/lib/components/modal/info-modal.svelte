@@ -90,7 +90,7 @@
                     </Badge>
                 </h1>
 
-                <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2] text-[gray] text-sm">
+                <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2] text-muted-foreground text-sm">
                     <div class="flex items-center space-x-1">
                         <p> {$useModalInfo.anime.rating / 10} </p>
                         <StarIcon class="ml-0.5 h-3 w-fit text-amber-300 fill-amber-300"/>
@@ -113,7 +113,7 @@
                 </article>
                 <div class="flex flex-col text-sm space-y-4">
                     <div class="text-white">
-                        <span class="text-[gray]">Genres:</span>{' '}
+                        <span class="text-muted-foreground">Genres:</span>{' '}
                         {$useModalInfo.anime.genres
                             .filter(genre => genre !== "UNKNOWN")
                             .map(genre => genre.charAt(0) + genre.slice(1).toLowerCase())
@@ -121,11 +121,11 @@
                         }
                     </div>
                     <div class="text-white">
-                        <span class="text-[gray]">Media:</span>{' '}
+                        <span class="text-muted-foreground">Media:</span>{' '}
                         {$useModalInfo.anime.mediaType}
                     </div>
                     <div class="text-white">
-                        <span class="text-[gray]">Status:</span>{' '}
+                        <span class="text-muted-foreground">Status:</span>{' '}
                         {$useModalInfo.anime.status.charAt(0) + $useModalInfo.anime.status.slice(1).toLowerCase()}
                     </div>
                 </div>

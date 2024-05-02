@@ -3,6 +3,7 @@
     import {onMount} from 'svelte';
     import '../app.pcss';
     import toast, {Toaster} from "svelte-french-toast";
+    import {ModeWatcher} from "mode-watcher";
 
     let hasError: boolean;
     onMount(() => {
@@ -20,6 +21,7 @@
 </script>
 
 <main>
+    <ModeWatcher />
     <slot class="bg-[#1a1920]"/>
     <Toaster />
 </main>

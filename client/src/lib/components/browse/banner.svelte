@@ -33,7 +33,7 @@
             <div class="p-2 pl-8 flex flex-col h-fit">
                 <div class="space-y-4">
                     <h1 class="flex items-center uppercase font-bold leading-none text-2xl xl:text-3xl">{anime.title}</h1>
-                    <div class="flex items-center text-xs xl:text-sm text-[gray]">
+                    <div class="flex items-center text-xs xl:text-sm text-muted-foreground">
                         {anime.rating / 10} <StarIcon class="ml-[0.5rem] h-4 w-fit text-amber-300 fill-amber-300"/>
                         <span class="mx-2"> • </span>
                         {anime.totalEpisodes} Episodes

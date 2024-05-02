@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.api.news.model.NewsPost;
 import org.jordijaspers.aniflix.api.news.repository.NewsRepository;
 import org.slf4j.Logger;
@@ -77,7 +78,7 @@ public class SynchronizationService {
     /**
      * Synchronize the news feed data with the database. This will retrieve all the news posts and necessary information.
      */
-    @Scheduled(fixedDelay = 30, timeUnit = MINUTES)
+    @Scheduled(fixedDelay = 5, timeUnit = MINUTES)
     public void synchronizeNewsFeed() {
         LOGGER.info("Synchronizing news feed data with the database");
         final LocalDateTime lastUploadedAt = newsRepository.findLatestUploadedAt().orElse(LocalDateTime.MIN);
@@ -93,11 +94,13 @@ public class SynchronizationService {
                     newsPost.setIntro(anilistPost.getIntro());
                     newsPost.setDescription(anilistPost.getDescription());
                     newsPost.setThumbnail(anilistPost.getThumbnail());
+                    newsPost.setTopic(NewsGenre.ofName(anilistFeed.getTopics().get(0)));
                     newsPost.setUrl(anilistPost.getUrl());
                     return newsPost;
                 })
                 .toList();
 
+        LOGGER.info("Saving '{}' new news posts", posts.size());
         newsRepository.saveAll(posts);
         LOGGER.info("Synchronization completed for news feed data");
     }

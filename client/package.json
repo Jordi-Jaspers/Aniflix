@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "aniflix.stream",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
   "engines": {
@@ -46,6 +46,7 @@
     "clsx": "^2.1.0",
     "embla-carousel-svelte": "^8.0.0",
     "lucide-svelte": "^0.376.1",
+    "mode-watcher": "^0.3.0",
     "svelte-french-toast": "^1.2.0",
     "svelte-motion": "^0.12.2",
     "svelte-player": "^0.0.21",

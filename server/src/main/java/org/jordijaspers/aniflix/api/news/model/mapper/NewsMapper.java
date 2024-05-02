@@ -5,6 +5,7 @@ import org.jordijaspers.aniflix.api.news.model.response.NewsPostResponse;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public abstract class NewsMapper {
 
     @Named("toNewsFeedResponse")
+    @Mapping(target = "topic", expression = "java(newsPost.getTopic().getGenre())")
     public abstract NewsPostResponse toNewsFeedResponse(NewsPost newsPost);
 
     @IterableMapping(qualifiedByName = "toNewsFeedResponse")

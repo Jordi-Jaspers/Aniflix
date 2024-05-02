@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Search } from 'lucide-svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
+	import {Button} from "$lib/components/ui/button";
 
 	let searchTerm: string | null;
 	let isOpen: boolean = false;
@@ -44,7 +45,7 @@
 		bind:value={searchTerm}
 		on:keydown={handleEscape}
 	/>
-	<button on:click={toggleSearchBar} class="items-center flex justify-center">
+	<Button on:click={toggleSearchBar} variant="ghost" size="icon">
 		<Search />
-	</button>
+	</Button>
 </div>

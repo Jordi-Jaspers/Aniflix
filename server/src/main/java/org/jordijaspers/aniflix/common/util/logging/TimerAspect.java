@@ -29,10 +29,8 @@ public class TimerAspect {
         final Object proceed = joinPoint.proceed();
         final long endTime = System.currentTimeMillis();
 
-        final String className = joinPoint.getSignature().getDeclaringTypeName();
         final String methodName = joinPoint.getSignature().getName();
-
-        LOGGER.info("[Execution Timer] Signature '{}' ({}) took '{}' ms to finish.", methodName, className, endTime - startTime);
+        LOGGER.info("[Execution Timer] Signature '{}' took '{}' ms to finish.", methodName, endTime - startTime);
         return proceed;
     }
 }

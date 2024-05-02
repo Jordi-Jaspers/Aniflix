@@ -72,6 +72,7 @@
                 uploaded_at TIMESTAMP    NOT NULL,
                 intro       TEXT         NOT NULL,
                 description TEXT         NOT NULL,
+                topic       VARCHAR(64)  NOT NULL,
                 thumbnail   VARCHAR(512) NOT NULL,
                 url         VARCHAR(512) NOT NULL
             );

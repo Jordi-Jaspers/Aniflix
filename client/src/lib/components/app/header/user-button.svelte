@@ -14,6 +14,7 @@
     import {curl, logout} from "$lib/api/client";
     import {onMount} from "svelte";
     import {SERVER_URLS} from "$lib/api/paths";
+    import {Button} from "$lib/components/ui/button";
 
     let user: UserDetailsResponse;
     onMount(async () => {
@@ -52,12 +53,15 @@
 {#if user}
     <DropdownMenu.Root onOpenChange={handleClick}>
         <DropdownMenu.Trigger class="h-full max-h-[24px] space-x-2 flex items-center">
-            <Menu class="flex md:hidden"/>
-            <CircleUserRound class="hidden md:flex"/>
-            <div class="flex-col text-start hidden md:flex">
-                <span class="text-xs font-bold">{user.firstName} {user.lastName}</span>
-                <span class="font-extralight text-[0.5em]">{user.authorities}</span>
-            </div>
+            <Button variant="ghost" size="icon" class="flex md:hidden">
+                <Menu />
+            </Button>
+                <CircleUserRound class="hidden md:flex"/>
+                <div class="flex-col text-start hidden md:flex">
+                    <span class="text-xs font-bold">{user.firstName} {user.lastName}</span>
+                    <span class="font-extralight text-[0.5em]">{user.authorities}</span>
+                </div>
+
             <ChevronRight class="h-4 w-4 duration-200 hidden md:flex {isOpen && 'rotate-90'}"/>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content class="mt-4 w-fit min-w-[20%]">
