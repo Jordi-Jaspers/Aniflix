@@ -97,7 +97,7 @@
                             alt="{post.title}"
                             class="aspect-square w-full rounded-[0.75rem] object-cover"
                     />
-                    <div class="space-y-2">
+                    <div class="space-y-2 overflow-hidden">
                         <div class="flex text-center items-center space-x-2 text-muted-foreground font-extralight text-xs">
                             <span class="w-3 h-3 bg-primary rounded-full"/>
                             <p>{post.topic.charAt(0).toUpperCase() + post.topic.slice(1)}</p>
