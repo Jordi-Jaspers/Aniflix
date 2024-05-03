@@ -13,7 +13,7 @@
 <div class="flex flex-col w-56 h-full rounded-t-[0.75rem] overflow-hidden">
     <div class="relative aspect-[420/600] w-auto h-full bg-card-accent opacity-100 hover:opacity-75 transition-all">
         <button class="absolute w-full h-full bg-gradient-to-b dark:from-transparent dark:lg:to-[99%] dark:to-card-accent justify-center items-center flex"
-                on:click={() => goto("/watch/" + episode.anilistId + "/" + episode.episodeNumber)}
+                on:click={() => goto("/watch/" + episode.anilistId + "/episode/" + episode.episodeNumber)}
                 on:mouseover={() => hovering = true}
                 on:mouseleave={() => hovering = false}
                 on:focus={() => hovering = true}

@@ -3,8 +3,10 @@ package org.jordijaspers.aniflix.api.recommendation.controller;
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.jordijaspers.aniflix.api.recommendation.model.mapper.RecommendationMapper;
 import org.jordijaspers.aniflix.api.recommendation.model.response.RecommendationResponse;
+import org.jordijaspers.aniflix.api.recommendation.service.RecommendationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class RecommendationController {
 
-    private final ConsumetService consumetService;
+    private final RecommendationService recommendationService;
 
     private final RecommendationMapper recommendationMapper;
 
@@ -30,7 +32,7 @@ public class RecommendationController {
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_RECOMMENDATIONS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RecommendationResponse>> getAnimeRecommendations(@PathVariable("id") final int anilistId) {
-        final List<AnilistRecommendation> recommendations = consumetService.getRecommendationsForAnime(anilistId);
-        return ResponseEntity.status(OK).body(recommendationMapper.toRecommendationResponses(recommendations));
+        final List<Recommendation> recommendations = recommendationService.getAnimeRecommendations(anilistId);
+        return ResponseEntity.status(OK).body(recommendationMapper.toRecommendationsResponses(recommendations));
     }
 }

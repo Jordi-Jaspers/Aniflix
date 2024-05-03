@@ -1,181 +1,189 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these classs
 declare global {
-	namespace App { }
-	declare const __NAME__: string;
-	declare const __VERSION__: string;
+    namespace App {
+    }
+    declare const __NAME__: string;
+    declare const __VERSION__: string;
 }
+
 // ======================== MODELS ===========================
 class CarouselColumns {
-	columns: number;
-	width: number;
+    columns: number;
+    width: number;
 }
 
 // ======================== EXCEPTION ========================
 class Exception {
-	method: string;
-	uri: string;
-	query: null;
-	contentType: string;
-	statusCode: number;
-	statusMessage: string;
-	errorMessage: string;
-	apiErrorCode: string;
-	apiErrorReason: string;
+    method: string;
+    uri: string;
+    query: null;
+    contentType: string;
+    statusCode: number;
+    statusMessage: string;
+    errorMessage: string;
+    apiErrorCode: string;
+    apiErrorReason: string;
 }
 
 class ValidationException {
-	method: string;
-	uri: string;
-	query: null;
-	contentType: string;
-	statusCode: number;
-	statusMessage: string;
-	errorMessage: string;
-	errors: ValidationField[];
+    method: string;
+    uri: string;
+    query: null;
+    contentType: string;
+    statusCode: number;
+    statusMessage: string;
+    errorMessage: string;
+    errors: ValidationField[];
 }
 
 class ValidationField {
-	code: string;
-	field: string;
+    code: string;
+    field: string;
 }
 
 // ======================== REQUESTS ========================
 
 class LoginRequest {
-	email: string;
-	password: string;
+    email: string;
+    password: string;
 }
 
 class RefreshTokenRequest {
-	refreshToken: string;
+    refreshToken: string;
 }
 
 class RegisterRequest {
-	email: string;
-	firstName: string;
-	lastName: string;
-	password: string;
-	passwordConfirmation: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    passwordConfirmation: string;
 }
 
 class AnimeRequest {
-	page: number;
-	perPage: number;
-	title: string;
-	genre: string;
-	season: string;
+    page: number;
+    perPage: number;
+    title: string;
+    genre: string;
+    season: string;
 }
 
 // ======================== RESPONSE ========================
 
 class RegisterResponse {
-	email: string;
-	authorities: string[];
-	enabled: boolean;
-	validated: boolean;
+    email: string;
+    authorities: string[];
+    enabled: boolean;
+    validated: boolean;
 }
 
 class UserDetailsResponse {
-	firstName: string;
-	lastName: string;
-	email: string;
-	authorities: string[];
-	lastLogin: Date;
-	enabled: boolean;
-	validated: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    authorities: string[];
+    lastLogin: Date;
+    enabled: boolean;
+    validated: boolean;
 }
 
 class AuthorizeResponse {
-	email: string;
-	authorities: string[];
-	lastLogin: Date;
-	accessToken: string;
-	refreshToken: string;
-	expiresAt: Date;
-	enabled: boolean;
-	validated: boolean;
+    email: string;
+    authorities: string[];
+    lastLogin: Date;
+    accessToken: string;
+    refreshToken: string;
+    expiresAt: Date;
+    enabled: boolean;
+    validated: boolean;
 }
 
 class RecommendationResponse {
-	anilistId: number;
-	malId: number;
-	title: string;
-	status: string;
-	episodes: number;
-	image: string;
-	cover: string;
-	rating: number;
-	type: string;
+    anilistId: number;
+    malId: number;
+    title: string;
+    status: string;
+    episodes: number;
+    image: string;
+    cover: string;
+    rating: number;
+    type: string;
+    liked: boolean;
+    inLibrary: boolean;
+    lastSeenEpisode: number;
+    watchStatus: string;
 }
 
 class AnimeResponse {
-	anilistId: number;
-	title: string;
-	description: string;
-	totalEpisodes: number;
-	rating: number;
-	status: string;
-	image: string;
-	cover: string;
-	trailer: string;
-	releaseYear: number;
-	genres: string[];
-	mediaType: string;
-	subbed: boolean;
-	likes: number;
-	episodes: EpisodeResponse[];
-	liked: boolean;
-	inLibrary: boolean;
+    anilistId: number;
+    title: string;
+    description: string;
+    totalEpisodes: number;
+    rating: number;
+    status: string;
+    image: string;
+    cover: string;
+    trailer: string;
+    releaseYear: number;
+    genres: string[];
+    mediaType: string;
+    subbed: boolean;
+    likes: number;
+    episodes: EpisodeResponse[];
+    liked: boolean;
+    inLibrary: boolean;
+    lastSeenEpisode: number;
+    watchStatus: string;
 }
 
 class EpisodeResponse {
-	anilistId: number;
-	title: string;
-	episodeTitle: string;
-	episodeNumber: number;
-	episodeUrl: string;
-	description: string;
-	image: string;
-	airDate: Date;
-	duration: number;
+    anilistId: number;
+    title: string;
+    episodeTitle: string;
+    episodeNumber: number;
+    episodeUrl: string;
+    description: string;
+    image: string;
+    airDate: Date;
+    duration: number;
 }
 
 class NewsPostResponse {
-	id: number;
-	articleId: string;
-	title: string;
-	uploadedAt: Date;
-	intro: string;
-	description: string;
-	topic: string;
-	thumbnail: string;
-	url: string;
+    id: number;
+    articleId: string;
+    title: string;
+    uploadedAt: Date;
+    intro: string;
+    description: string;
+    topic: string;
+    thumbnail: string;
+    url: string;
 }
 
 class ConstantResponse {
-	genres: string[];
-	seasons: string[];
-	status: string[];
-	mediaTypes: string[];
-	watchStatus: string[];
+    genres: string[];
+    seasons: string[];
+    status: string[];
+    mediaTypes: string[];
+    watchStatus: string[];
 }
 
 class InteractionResponse {
-	anime: AnimeResponse;
-	liked: boolean;
-	inLibrary: boolean;
-	watchStatus: string;
-	lastSeenEpisode: number;
-	lastInteraction: Date;
+    anime: AnimeResponse;
+    liked: boolean;
+    inLibrary: boolean;
+    watchStatus: string;
+    lastSeenEpisode: number;
+    lastInteraction: Date;
 }
 
 // ======================== JWT ========================
 
 class JwtPayload {
-	authorities: string[];
-	exp: number;
-	iat: number;
-	iss: string;
-	sub: string;
+    authorities: string[];
+    exp: number;
+    iat: number;
+    iss: string;
+    sub: string;
 }

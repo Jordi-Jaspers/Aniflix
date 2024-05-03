@@ -8,8 +8,8 @@
     import {LibraryButton, LikeButton, SpeakerButton} from "$lib/components/general/index.js";
     import {Badge} from "$lib/components/ui/badge";
     import {closeModal} from "$lib/api/util";
-    import {EpisodeList, RecommendationCard, RecommendationCards} from "$lib/components/browse";
-    import {Root, List, Trigger, Content} from "$lib/components/ui/tabs";
+    import {EpisodeList, RecommendationCards} from "$lib/components/browse";
+    import {Content, List, Root, Trigger} from "$lib/components/ui/tabs";
 
     let isPlaying: boolean = false;
     let isMuted: boolean = false;
@@ -46,18 +46,20 @@
             <img class="w-full aspect-video object-cover object-center brightness-85 {isPlaying && 'hidden'}"
                  src={$useModalInfo.anime.cover}
                  alt="thumbnail"/>
-            <div class="h-full brightness-85  {isPlaying ? '' : 'hidden'}">
-                <SveltePlayer url="https://www.youtube.com/watch?v={$useModalInfo.anime.trailer}"
-                              config={opts}
-                              height="100%"
-                              width="100%"
-                              bind:muted={isMuted}
-                              on:play={() => isPlaying = true}
-                              on:pause={() => isPlaying = false}
-                              on:ended={() => isPlaying = false}>
-                    <div slot="play-icon"/>
-                </SveltePlayer>
-            </div>
+            {#if import.meta.env.VITE_ENV === 'production'}
+                <div class="h-full brightness-85  {isPlaying ? '' : 'hidden'}">
+                    <SveltePlayer url="https://www.youtube.com/watch?v={$useModalInfo.anime.trailer}"
+                                  config={opts}
+                                  height="100%"
+                                  width="100%"
+                                  bind:muted={isMuted}
+                                  on:play={() => isPlaying = true}
+                                  on:pause={() => isPlaying = false}
+                                  on:ended={() => isPlaying = false}>
+                        <div slot="play-icon"/>
+                    </SveltePlayer>
+                </div>
+            {/if}
             <div class="absolute bottom-10 flex w-full items-center justify-between px-10">
                 <div class="flex items-center space-x-2">
                     <Button class="pl-4 pr-1 space-x-4 rounded-full opacity-80 transition hover:opacity-100">
@@ -73,7 +75,7 @@
                     </div>
                 </div>
                 {#if isPlaying}
-                        <SpeakerButton isMuted={isMuted} on:click={() => isMuted = !isMuted}/>
+                    <SpeakerButton isMuted={isMuted} on:click={() => isMuted = !isMuted}/>
                 {/if}
             </div>
         </div>
@@ -128,14 +130,32 @@
                         <span class="text-muted-foreground">Status:</span>{' '}
                         {$useModalInfo.anime.status.charAt(0) + $useModalInfo.anime.status.slice(1).toLowerCase()}
                     </p>
+                    <p>
+                        <span class="text-muted-foreground">Watch Status:</span>{' '}
+                        {$useModalInfo.anime.watchStatus}
+                    </p>
+                    <p>
+                        <span class="text-muted-foreground">Last Seen:</span>{' '}
+                        {#if $useModalInfo.anime.lastSeenEpisode === 0}
+                            -
+                        {:else}
+                            Episode { $useModalInfo.anime.lastSeenEpisode }
+                        {/if}
+                    </p>
                 </div>
             </div>
             <Root value="Episodes" class="py-8">
                 <List class="bg-transparent space-x-4">
-                    <Trigger value="Episodes" class="p-0 text-xl data-[state=active]:bg-transparent data-[state=active]:border-b-2 border-primary rounded-none" >Episodes</Trigger>
-                    <Trigger value="Recommended" class="p-0 text-xl data-[state=active]:bg-transparent data-[state=active]:border-b-2 border-primary rounded-none">Recommended</Trigger>
+                    <Trigger value="Episodes"
+                             class="p-0 text-xl data-[state=active]:bg-transparent data-[state=active]:border-b-2 border-primary rounded-none">
+                        Episodes
+                    </Trigger>
+                    <Trigger value="Recommended"
+                             class="p-0 text-xl data-[state=active]:bg-transparent data-[state=active]:border-b-2 border-primary rounded-none">
+                        Recommended
+                    </Trigger>
                 </List>
-                <Content value="Episodes" >
+                <Content value="Episodes">
                     <EpisodeList episodes={$useModalInfo.anime.episodes}/>
                 </Content>
                 <Content value="Recommended">

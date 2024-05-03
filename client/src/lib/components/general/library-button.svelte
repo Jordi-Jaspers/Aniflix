@@ -5,10 +5,10 @@
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
 
-    export let value: AnimeResponse;
+    export let value: AnimeResponse | RecommendationResponse;
     setAnime(value);
 
-    const anime: Writable<AnimeResponse> = getAnime();
+    const anime: Writable<AnimeResponse | RecommendationResponse> = getAnime();
     let isRequesting = false;
 
     // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding
@@ -46,10 +46,12 @@
 
 {#if $anime && $anime.inLibrary}
     <button on:click={handleInLibrary}>
-        <BookmarkCheck class="w-auto aspect-square h-full p-1.5 rounded-full border-2 text-primary border-primary bg-card/60 transition hover:opacity-75"/>
+        <BookmarkCheck
+                class="w-auto aspect-square h-full p-1.5 rounded-full border-2 text-primary border-primary bg-card/60 transition hover:opacity-75"/>
     </button>
 {:else}
     <button on:click={handleInLibrary}>
-        <Bookmark class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
+        <Bookmark
+                class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] dark:hover:border-primary/60 bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
     </button>
 {/if}

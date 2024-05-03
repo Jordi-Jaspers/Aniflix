@@ -45,7 +45,7 @@
 		bind:value={searchTerm}
 		on:keydown={handleEscape}
 	/>
-	<Button on:click={toggleSearchBar} variant="ghost" size="icon">
+	<Button on:click={toggleSearchBar} variant="ghost" size="icon" class="rounded-[0.75rem]">
 		<Search />
 	</Button>
 </div>

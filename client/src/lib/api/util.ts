@@ -29,4 +29,3 @@ export function closeModal(): void {
     useModalInfo.set({} as InteractionResponse);
     useShowInfoModal.set(false);
 }
-

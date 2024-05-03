@@ -40,4 +40,8 @@ public class AnimeResponse {
 
     private boolean inLibrary;
 
+    private int lastSeenEpisode;
+
+    private String watchStatus;
+
 }

@@ -1,6 +1,7 @@
 package org.jordijaspers.aniflix.api.recommendation.model.mapper;
 
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
+import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.jordijaspers.aniflix.api.recommendation.model.response.RecommendationResponse;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.IterableMapping;
@@ -15,10 +16,17 @@ public abstract class RecommendationMapper {
 
     @Mapping(target = "anilistId", source = "id")
     @Mapping(target = "title", expression = "java(recommendation.getPreferredTitle())")
+    @Named("toRecommendation")
+    public abstract Recommendation toRecommendation(AnilistRecommendation recommendation);
+
+    @IterableMapping(qualifiedByName = "toRecommendation")
+    public abstract List<Recommendation> toRecommendations(List<AnilistRecommendation> recommendations);
+
+    @Mapping(target = "watchStatus", expression = "java(recommendation.getWatchStatus().getValue())")
     @Named("toRecommendationResponse")
-    public abstract RecommendationResponse toRecommendationResponse(AnilistRecommendation recommendation);
+    public abstract RecommendationResponse toRecommendationResponse(Recommendation recommendation);
 
     @IterableMapping(qualifiedByName = "toRecommendationResponse")
-    public abstract List<RecommendationResponse> toRecommendationResponses(List<AnilistRecommendation> recommendations);
+    public abstract List<RecommendationResponse> toRecommendationsResponses(List<Recommendation> recommendations);
 
 }

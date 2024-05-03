@@ -6,10 +6,10 @@
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
 
-    export let value: AnimeResponse;
+    export let value: AnimeResponse | RecommendationResponse;
     setAnime(value);
 
-    const anime: Writable<AnimeResponse> = getAnime();
+    const anime: Writable<AnimeResponse | RecommendationResponse> = getAnime();
     let isRequesting = false;
 
     // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding
@@ -51,6 +51,6 @@
     </button>
 {:else}
     <button on:click={handleLike}>
-        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
+        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-card-foreground dark:hover:border-primary/60 dark:border-[gray] bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
     </button>
 {/if}

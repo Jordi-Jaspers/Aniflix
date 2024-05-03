@@ -8,7 +8,7 @@
 
     async function handleClickedEpisode() {
         $useShowInfoModal = false;
-        await goto("/watch/" + episode.anilistId + "/" + episode.episodeNumber);
+        await goto("/watch/" + episode.anilistId + "/episode/" + episode.episodeNumber);
     }
 </script>
 

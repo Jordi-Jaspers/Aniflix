@@ -107,13 +107,16 @@ public class Anime implements Serializable {
     private Set<Interaction> interactions = new HashSet<>();
 
     @Transient
-    private WatchStatus watchStatus;
-
-    @Transient
     private boolean liked;
 
     @Transient
     private boolean inLibrary;
+
+    @Transient
+    private WatchStatus watchStatus = WatchStatus.NOT_STARTED;
+
+    @Transient
+    private int lastSeenEpisode;
 
     /**
      * Constructor for JPA.

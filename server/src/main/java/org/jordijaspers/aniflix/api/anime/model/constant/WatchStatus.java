@@ -10,9 +10,11 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public enum WatchStatus {
 
-    NOT_STARTED,
-    WATCHING,
-    COMPLETED;
+    NOT_STARTED("Not started"),
+    WATCHING("Watching"),
+    COMPLETED("Completed");
+
+    private final String value;
 
     /**
      * @return A stream of the configured WatchStatus.
@@ -27,4 +29,5 @@ public enum WatchStatus {
     public static List<String> getAll() {
         return stream().map(Enum::name).toList();
     }
+
 }

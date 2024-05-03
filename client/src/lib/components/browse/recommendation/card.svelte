@@ -1,15 +1,12 @@
 <script lang="ts">
     import {Play, StarIcon} from "lucide-svelte";
+    import {LibraryButton, LikeButton} from "$lib/components/general";
+    import {goto} from "$app/navigation";
 
     export let recommendation: RecommendationResponse;
-
-    function handleClickedRecommendation(anilistId: number) {
-        console.log('clicked recommendation', anilistId);
-        // TODO: PLay first episode of the anime.
-    }
 </script>
 
-<div class={"m-[0.1em] min-h-[18em] h-[100%] cursor-pointer rounded bg-card-accent shadow-lg overflow-hidden"}>
+<div class={"m-[0.1em] min-h-[18em] h-[100%] rounded bg-card-accent shadow-lg overflow-hidden"}>
     <div class={"relative overflow-hidden hover:opacity-75 transition-opacity duration-200"}>
         <img
                 src={recommendation.image}
@@ -19,10 +16,17 @@
                 height={650}
         />
         <div class="align-center flex h-full justify-center items-center absolute top-0 bottom-0 left-0 right-0 opacity-0 hover:transition-opacity hover:opacity-100 hover:duration-200 hover:ease-in">
-            <button class="flex items-center justify-center w-auto aspect-square h-14 p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] bg-card-accent/60 "
-                    on:click={() => handleClickedRecommendation(recommendation.anilistId)}>
-                <Play/>
-            </button>
+            <button class="absolute w-full h-full items-center" on:click={() => goto("/watch/" + recommendation.anilistId + "/episode/")}/>
+           <div class="flex flex-col justify-center items-center">
+               <div class="flex items-center justify-center w-14 h-auto aspect-square  p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] bg-card-accent/60">
+                   <Play/>
+               </div>
+               {#if recommendation.lastSeenEpisode === 0}
+                   <p class="text-xs"> You haven't seen this anime yet </p>
+               {:else}
+                   <p class="text-xs"> Continue at {recommendation.lastSeenEpisode} </p>
+               {/if}
+           </div>
         </div>
     </div>
     <div class="flex flex-col justify-between p-[4%]">
@@ -39,18 +43,17 @@
                     HD
                 </div>
             </div>
-            <h3 class="flex text-md font-bold items-center">
+            <h4 class="flex text-md font-bold items-center">
                 {recommendation.title.split(' ')
                     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                     .split('-')
                     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
                 }
-            </h3>
+            </h4>
         </div>
         <div class="h-10 flex justify-center space-x-8 my-4">
-            <!-- TODO: Make them buttons work for recommendations -->
-            <!--            <LibraryButton />-->
-            <!--            <LikeButton />-->
+            <LikeButton value={recommendation}/>
+            <LibraryButton value={recommendation}/>
         </div>
     </div>
 </div>

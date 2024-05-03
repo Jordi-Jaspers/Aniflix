@@ -42,7 +42,7 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.6.5",
-    "bits-ui": "^0.21.5",
+    "bits-ui": "^0.21.7",
     "clsx": "^2.1.0",
     "embla-carousel-svelte": "^8.0.0",
     "lucide-svelte": "^0.376.1",

@@ -11,6 +11,8 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecom
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.jikan.repository.JikanRepository;
+import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
+import org.jordijaspers.aniflix.api.recommendation.model.mapper.RecommendationMapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,8 @@ public class ConsumetService {
 
     private final AnimeMapper animeMapper;
 
+    private final RecommendationMapper recommendationMapper;
+
     @Cacheable(value = "recentEpisodes", unless = "#result.size() == 0")
     public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
         return consumetRepository.getRecentEpisodes(perPage, page).getResults();
@@ -55,6 +59,13 @@ public class ConsumetService {
     public List<Anime> getTrending(final int perPage, final int page) {
         return consumetRepository.getTrendingAnime(perPage, page).getResults().stream()
                 .map(animeMapper::toAnime)
+                .toList();
+    }
+
+    @Cacheable(value = "animeRecommendations", key = "#anilistId")
+    public List<Recommendation> getRecommendationsForAnime(final int anilistId) {
+        return consumetRepository.getAnimeRecommendations(anilistId).stream()
+                .map(recommendationMapper::toRecommendation)
                 .toList();
     }
 
@@ -88,10 +99,6 @@ public class ConsumetService {
         return consumetRepository.searchAnime(filters).getResults().stream()
                 .map(animeMapper::toAnime)
                 .toList();
-    }
-
-    public List<AnilistRecommendation> getRecommendationsForAnime(final int anilistId) {
-        return consumetRepository.getAnimeRecommendations(anilistId);
     }
 
     // ======================================== PRIVATE METHODS ========================================

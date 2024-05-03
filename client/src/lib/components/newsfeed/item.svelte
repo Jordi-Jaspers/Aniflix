@@ -26,7 +26,7 @@
 {#if post}
     <div class="relative w-full rounded-[0.75rem] flex flex-col text-center space-y-4 hover:bg-muted md:h-[36rem] p-4 md:p-2">
         <button class="absolute h-full w-full" on:click={() => goto(CLIENT_URLS.NEWS_URL + "/" + post.id.toString())}/>
-        <img class="aspect-square w-full rounded-[0.75rem] object-cover" src="{post.thumbnail}" alt="{post.title}"/>
+        <img class="aspect-square w-full h-auto rounded-[0.75rem] object-cover" src="{post.thumbnail}" alt="{post.title}"/>
         <div class="space-y-2 overflow-hidden">
             <div class="flex text-center items-center space-x-2 text-muted-foreground font-extralight text-xs">
                 <span class="w-3 h-3 rounded-full" style="background-color: {getNewsTopicColor(post.topic)}"/>

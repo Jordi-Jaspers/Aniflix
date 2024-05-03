@@ -80,6 +80,7 @@ public abstract class AnimeMapper {
     @Mapping(source = "coverUrl", target = "cover")
     @Mapping(source = "trailerUrl", target = "trailer")
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
+    @Mapping(target = "watchStatus", expression = "java(anime.getWatchStatus().getValue())")
     public abstract AnimeResponse toResponseWithoutEpisodes(Anime anime);
 
     @IterableMapping(qualifiedByName = "toResponseWithoutEpisodes")
@@ -91,6 +92,7 @@ public abstract class AnimeMapper {
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
     @Mapping(target = "episodes", expression = "java(toEpisodeResponse(anime))")
     @Mapping(target = "trailer", source = "trailerUrl")
+    @Mapping(target = "watchStatus", expression = "java(anime.getWatchStatus().getValue())")
     public abstract DetailedAnimeResponse toResponseWithEpisodes(Anime anime);
 
     @IterableMapping(qualifiedByName = "toResponseWithEpisodes")

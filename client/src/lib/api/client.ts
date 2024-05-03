@@ -106,7 +106,7 @@ export async function isUserAuthenticated(): Promise<boolean> {
         toast.error(response, {
             duration: 5000,
             position: 'bottom-center',
-            style: 'background: #dc2626;'
+            style: 'background: #262626; color: #ffffff;'
         });
     }
 

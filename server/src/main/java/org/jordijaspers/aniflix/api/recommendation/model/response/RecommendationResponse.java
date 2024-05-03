@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RecommendationResponse {
 
-    private Long anilistId;
+    private Integer anilistId;
 
     private Long malId;
 
@@ -22,5 +22,13 @@ public class RecommendationResponse {
     private long rating;
 
     private String type;
+
+    private boolean liked;
+
+    private boolean inLibrary;
+
+    private int lastSeenEpisode;
+
+    private String watchStatus;
 
 }

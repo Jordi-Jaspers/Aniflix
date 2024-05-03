@@ -17,8 +17,8 @@ public interface InteractionRepository extends JpaRepository<Interaction, Intege
             + "LEFT JOIN FETCH i.anime anime "
             + "LEFT JOIN FETCH anime.genres genres "
             + "WHERE i.user = ?2 "
-            + "AND anime IN (?1)")
-    List<Interaction> findAllByAnilistIdIn(List<Anime> anime, User user);
+            + "AND anime.anilistId IN (?1)")
+    List<Interaction> findAllByAnilistIdIn(List<Integer> ids, User user);
 
     @Query("FROM Interaction i "
             + "LEFT JOIN FETCH i.anime anime "

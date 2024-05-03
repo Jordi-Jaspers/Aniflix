@@ -124,15 +124,18 @@ public class AnimeService {
     }
 
     private void applyUserInteractions(final List<Anime> collection) {
-        final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(collection, getLoggedInUser());
+        final List<Integer> anilistIds = collection.stream().map(Anime::getAnilistId).toList();
+        final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(anilistIds, getLoggedInUser());
         interactions.forEach(interaction -> {
             collection.stream()
                     .filter(anime -> anime.equals(interaction.getAnime()))
                     .findFirst()
                     .ifPresent(anime -> {
+                        LOGGER.info("Applying user interactions to anime '{}'.", anime.getTitle());
                         anime.setWatchStatus(interaction.getWatchStatus());
                         anime.setLiked(interaction.isLiked());
                         anime.setInLibrary(interaction.isInLibrary());
+                        anime.setLastSeenEpisode(interaction.getLastSeenEpisode());
                     });
         });
     }

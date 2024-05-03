@@ -26,8 +26,8 @@
 
 {#if anime && genres && genres.length > 0}
     <div class="absolute left-0 right-0 w-full h-full bg-gradient-to-l from-background via-transparent to-background !-z-10"/>
-    <div class="absolute left-0 right-0 w-full h-[40%] bg-gradient-to-b from-transparent from-50% to-background !-z-10"/>
-    <div class="absolute left-0 right-0 w-full h-[40%] !-z-20 opacity-[10%] bg-no-repeat bg-center bg-cover" style="background-image: url({anime.cover});"/>
+    <div class="absolute left-0 right-0 w-full h-[56rem] bg-gradient-to-b from-transparent from-50% to-background !-z-10"/>
+    <div class="absolute left-0 right-0 w-full h-[56rem] !-z-20 opacity-[15%] bg-no-repeat bg-center bg-cover" style="background-image: url({anime.cover});"/>
     <Banner anime={anime}/>
     <Carousel title="Recent Episodes">
         <EpisodeCards/>
