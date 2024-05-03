@@ -23,6 +23,7 @@
 		--border: 0 0% 89.8%;
 		--input: 0 0% 89.8%;
 		--ring: 0 72.2% 50.6%;
+		--card-accent: 180 3.45% 94.31%;
 	}
 
 	.dark {
@@ -46,6 +47,7 @@
 		--input: 0 0% 14.9%;
 		--ring: 0 72.2% 50.6%;
 		--radius: 0.75rem;
+		--card-accent: 0 0% 9.8%;
 	}
 
 	pre {
@@ -59,8 +61,6 @@
 		white-space: pre-wrap;
 		overflow-x: auto;
 	}
-
-
 }
 
 @layer base {
@@ -70,4 +70,24 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+}
+
+h1 {
+	@apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+h2 {
+	@apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
+}
+
+h3 {
+	@apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+h4 {
+	@apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+blockquote {
+	@apply mt-6 border-l-2 pl-6 italic;
 }

@@ -1,7 +1,6 @@
 // Base URL for the API
 const SERVER_BASE_URL: string = import.meta.env.VITE_SERVER_BASE_URL + '/api';
 
-
 export const SERVER_URLS = {
     SERVER_BASE_URL,
     AUTH_PATH: `${SERVER_BASE_URL}/auth`,
@@ -30,6 +29,11 @@ export const SERVER_URLS = {
 export const CLIENT_URLS = {
     LOGIN_URL: '/login',
     BROWSE_URL: '/browse',
+    LIBRARY_URL: '/library',
+    NEWS_URL: '/news',
+    PROFILE_URL: '/profile',
+    SETTINGS_URL: '/settings',
+    BUG_REPORT_URL: '/bug-report',
 };
 
 

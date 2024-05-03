@@ -21,9 +21,9 @@
                         {episode.episodeNumber}
                     </p>
                     <div>
-                        <p class="font-semibold text-sm text-white">
+                        <h4 class="font-semibold text-lg">
                             {episode.episodeTitle}
-                        </p>
+                        </h4>
                         <div class="flex items-center space-x-2 font-light text-sm text-muted-foreground w-full text-justify">
                             <p class="font-light text-sm text-muted-foreground">
                                 {episode.duration / 60} min

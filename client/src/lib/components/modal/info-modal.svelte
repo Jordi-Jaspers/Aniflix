@@ -60,10 +60,10 @@
             </div>
             <div class="absolute bottom-10 flex w-full items-center justify-between px-10">
                 <div class="flex items-center space-x-2">
-                    <Button class=" pr-1 space-x-4 rounded-[0.75rem] border-primary/75 text-white/75 transition bg-primary/75 hover:text-white">
+                    <Button class="pl-4 pr-1 space-x-4 rounded-full opacity-80 transition hover:opacity-100">
                         <p>Watch Now</p>
-                        <div class="rounded-[0.75rem] bg-secondary/50 w-12 p-1 flex justify-center">
-                            <PlayIcon class="p-1 fill-white/75 hover:fill-white"/>
+                        <div class="rounded-full bg-secondary/50 w-12 p-1 flex justify-center">
+                            <PlayIcon class="p-1 fill-white"/>
                         </div>
                     </Button>
 
@@ -73,13 +73,13 @@
                     </div>
                 </div>
                 {#if isPlaying}
-                    <SpeakerButton isMuted={isMuted} on:click={() => isMuted = !isMuted}/>
+                        <SpeakerButton isMuted={isMuted} on:click={() => isMuted = !isMuted}/>
                 {/if}
             </div>
         </div>
         <div class="px-10 items-center space-y-6 text-lg w-full flex-col justify-center z-10">
             <div class="space-y-2">
-                <h1 class="flex text-3xl font-bold text-white items-center">
+                <h3 class="flex items-center">
                     {$useModalInfo.anime.title.split(' ')
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                         .split('-')
@@ -88,7 +88,7 @@
                     <Badge variant="outline" class="bg-blue-500 ml-4">
                         {#if $useModalInfo.anime.subbed} SUB{:else} DUB{/if}
                     </Badge>
-                </h1>
+                </h3>
 
                 <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2] text-muted-foreground text-sm">
                     <div class="flex items-center space-x-1">
@@ -100,34 +100,34 @@
                     <span> {$useModalInfo.anime.releaseYear} </span>
                     <span class="mx-2"> | </span>
                     <span> {$useModalInfo.anime.totalEpisodes} Episodes </span>
-                    <div class="mx-2 flex text-white h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs !z-40">
+                    <p class="mx-2 flex h-4 items-center justify-center rounded border px-1.5 text-xs">
                         HD
-                    </div>
+                    </p>
                 </div>
             </div>
 
 
             <div class="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row">
-                <article class="w-[85%] text-white font-extralight leading-7 text-justify text-sm prose">
+                <article class="w-[85%] font-extralight leading-7 text-justify text-sm prose">
                     {@html $useModalInfo.anime.description.replace(/\(Source:.*\)/, '')}
                 </article>
                 <div class="flex flex-col text-sm space-y-4">
-                    <div class="text-white">
+                    <p>
                         <span class="text-muted-foreground">Genres:</span>{' '}
                         {$useModalInfo.anime.genres
                             .filter(genre => genre !== "UNKNOWN")
                             .map(genre => genre.charAt(0) + genre.slice(1).toLowerCase())
                             .join(', ')
                         }
-                    </div>
-                    <div class="text-white">
+                    </p>
+                    <p>
                         <span class="text-muted-foreground">Media:</span>{' '}
                         {$useModalInfo.anime.mediaType}
-                    </div>
-                    <div class="text-white">
+                    </p>
+                    <p>
                         <span class="text-muted-foreground">Status:</span>{' '}
                         {$useModalInfo.anime.status.charAt(0) + $useModalInfo.anime.status.slice(1).toLowerCase()}
-                    </div>
+                    </p>
                 </div>
             </div>
             <Root value="Episodes" class="py-8">

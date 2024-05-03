@@ -50,8 +50,9 @@ const config = {
 				},
 				card: {
 					DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
-				}
+					foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
+					accent: 'hsl(var(--card-accent) / <alpha-value>)'
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

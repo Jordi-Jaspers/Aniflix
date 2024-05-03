@@ -3,7 +3,7 @@
     import {onMount} from "svelte";
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
-    import {AnimeCards, Carousel, EpisodeCards} from "$lib/components/browse/index.js";
+    import {AnimeCards, Carousel, EpisodeCards} from "$lib/components/browse/index";
     import {getRandomValues} from "$lib/api/util";
 
     let anime: AnimeResponse;

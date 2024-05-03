@@ -6,12 +6,14 @@
     export let isMuted: boolean = false;
 </script>
 
-<Button class="h-[40px] w-[40px] flex p-2 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:bg-[#2a2a2a]/60 hover:border-white"
+<button class="w-auto aspect-square h-full p-1.5 rounded-full border-2 transition opacity-60 hover:opacity-100 border-card-foreground dark:border-[gray]"
     on:click
     on:keydown>
     {#if isMuted}
-        <VolumeX class="h-[24px] w-[24px]"/>
+        <VolumeX/>
     {:else}
-        <Volume2 class="h-[24px] w-[24px]"/>
+        <Volume2/>
     {/if}
-</Button>
+</button>
+
+

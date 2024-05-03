@@ -12,9 +12,14 @@ public enum NewsGenre {
 
     GENERAL("general"),
     ANIME("anime"),
-    ANIMATION("animation"),
     MANGA("manga"),
-    GAMES("games");
+    GAMES("games"),
+    LIVE_ACTION("live-action"),
+    EVENTS("events"),
+    PEOPLE("people"),
+    NOVELS("novels"),
+    INDUSTRY("industry"),
+    MUSIC("music");
 
     private final String genre;
 

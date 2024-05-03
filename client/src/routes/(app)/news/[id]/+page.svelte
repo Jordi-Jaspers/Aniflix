@@ -15,6 +15,10 @@
     });
 </script>
 
-<pre>
-{JSON.stringify(post, null, 2)}
-</pre>
+{#if post}
+    <pre>{JSON.stringify(post, null, 2)}</pre>
+
+    <h1>{post.title}</h1>
+{/if}
+
+

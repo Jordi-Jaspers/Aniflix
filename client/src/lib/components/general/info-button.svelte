@@ -8,5 +8,5 @@
 </script>
 
 <button on:click={() => openModal($anilistId)}>
-    <InfoIcon class="w-auto aspect-square h-full rounded-full bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
+    <InfoIcon class="w-auto aspect-square h-full rounded-full bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
 </button>

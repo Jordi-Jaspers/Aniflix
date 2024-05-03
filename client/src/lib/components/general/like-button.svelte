@@ -47,10 +47,10 @@
 
 {#if $anime && $anime.liked}
     <button on:click={handleLike}>
-        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 text-primary fill-primary border-primary bg-[#2a2a2a]/60 transition hover:opacity-75"/>
+        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 text-primary fill-primary border-primary bg-card/60 transition hover:opacity-75"/>
     </button>
 {:else}
     <button on:click={handleLike}>
-        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:text-primary/60 hover:border-primary/60"/>
+        <Heart class="w-auto aspect-square h-full p-1.5 rounded-full border-2 border-card-foreground dark:border-[gray] bg-card/60 transition hover:text-primary/60 hover:border-primary/60"/>
     </button>
 {/if}

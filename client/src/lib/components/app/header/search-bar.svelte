@@ -40,7 +40,7 @@
 <div class="flex flex-row items-center">
 	<Input
 		id="search-bar"
-		class="h-6 mr-1 {isOpen ? 'w-36 transition-all duration-500 ease-out sm:w-48 bg-black' : 'w-0 border-0 duration-500 ease-in'}"
+		class="h-6 mr-1 rounded-[0.75rem] {isOpen ? 'w-36 transition-all duration-500 ease-out sm:w-48 bg-background' : 'w-0 border-0 duration-500 ease-in'}"
 		placeholder="Search"
 		bind:value={searchTerm}
 		on:keydown={handleEscape}
