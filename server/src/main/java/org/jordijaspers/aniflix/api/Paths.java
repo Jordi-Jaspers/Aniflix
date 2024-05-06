@@ -81,6 +81,12 @@ public final class Paths {
 
     public static final String ANIME_BANNER = ANIME_PATH + "/banner";
 
+    /* ------------------------------- EPISODE ENDPOINTS ------------------------------- */
+
+    public static final String EPISODES_PATH = ANIME_DETAILS + "/episode";
+
+    public static final String EPISODE_PATH = EPISODES_PATH + "/{episodeNumber}";
+
     /* ------------------------------- NEWS ENDPOINTS ------------------------------- */
 
     public static final String NEWS_PATH = BASE_PATH + "/news";

@@ -23,7 +23,7 @@ public class InteractionService {
 
     public Interaction getInteractedAnime(final Integer anilistId) {
         final User user = getLoggedInUser();
-        LOGGER.info("Looking up anime with id '{}' between the interactions of user '{}'.", anilistId, user.getUsername());
+        LOGGER.info("User '{}' interacted with anime which has anilist ID '{}'.", user.getUsername(), anilistId);
         return interactionRepository.findByAnilistId(anilistId, user)
                 .map(interaction -> {
                     LOGGER.info("User '{}' has interacted with anime ('{}') before.", user.getUsername(), anilistId);

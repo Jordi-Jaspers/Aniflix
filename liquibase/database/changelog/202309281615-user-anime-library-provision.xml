@@ -49,15 +49,6 @@
                 FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
             );
 
-            CREATE TABLE IF NOT EXISTS streaming_link
-            (
-                id         INTEGER AUTO_INCREMENT PRIMARY KEY,
-                episode_id INTEGER      NOT NULL,
-                link       TEXT         NOT NULL,
-                resolution VARCHAR(255) NOT NULL,
-                FOREIGN KEY (episode_id) REFERENCES episode (id) ON DELETE CASCADE
-            );
-
             CREATE TABLE IF NOT EXISTS anime_genre
             (
                 id                  INTEGER AUTO_INCREMENT PRIMARY KEY,

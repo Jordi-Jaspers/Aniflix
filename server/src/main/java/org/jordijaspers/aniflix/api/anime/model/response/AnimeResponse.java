@@ -1,10 +1,7 @@
 package org.jordijaspers.aniflix.api.anime.model.response;
 
-import jakarta.persistence.Transient;
 import lombok.Data;
-import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;

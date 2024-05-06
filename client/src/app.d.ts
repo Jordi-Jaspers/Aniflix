@@ -1,5 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these classs
+import type {PlayerUrl} from "svelte-player/dist/players/types";
+
 declare global {
     namespace App {
     }
@@ -12,6 +14,23 @@ class AnimeInfo {
    anilistId: number;
    inLibrary: boolean;
    liked: boolean;
+}
+
+class SveltePlayerConfig {
+    url: string = '';
+    pip: boolean = false;
+    playing: boolean = true;
+    controls: boolean = false;
+    light: boolean = false;
+    volume: number = 1.0;
+    muted: boolean = false;
+    played: number = 0;
+    loaded: number = 0;
+    duration: number = 0;
+    playbackRate: number = 1.0;
+    loop: boolean = false;
+    urlInput: string = '';
+    seeking: boolean = false;
 }
 
 // ======================== EXCEPTION ========================
@@ -154,11 +173,22 @@ class EpisodeResponse {
     title: string;
     episodeTitle: string;
     episodeNumber: number;
-    episodeUrl: string;
+    episodeId: string;
     description: string;
     image: string;
     airDate: Date;
     duration: number;
+    streamingLinks: StreamingLinksResponse;
+}
+
+class StreamingLinksResponse {
+    referer: string;
+    sources: StreamingSourcesResponse[];
+}
+
+class StreamingSourcesResponse {
+    src: string;
+    quality: string;
 }
 
 class NewsPostResponse {

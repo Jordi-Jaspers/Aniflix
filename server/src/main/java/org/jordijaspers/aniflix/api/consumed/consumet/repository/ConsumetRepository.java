@@ -8,6 +8,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverv
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 
 import java.util.List;
 import java.util.Map;
@@ -80,20 +81,11 @@ public interface ConsumetRepository {
     ResultPage<AnilistOverview> getAnimeByGenre(String genre, int results, int page);
 
     /**
-     * Returns all the meta information for a specified episode by its id.
-     *
-     * @param id      The id of the anime.
-     * @param episode The number of the episode.
-     */
-    ResultPage<AnilistOverview> getEpisodeInformation(String id, int episode);
-
-    /**
      * Returns all the media sources for a specified episode by its id.
      *
-     * @param id      The id of the anime.
-     * @param episode The number of the episode.
+     * @param episodeId The id of the episode.
      */
-    ResultPage<AnilistOverview> getEpisodeLinks(String id, int episode);
+    AnilistStreamingLinks getEpisodeLinks(String episodeId);
 
     /**
      * Returns the latest news articles.

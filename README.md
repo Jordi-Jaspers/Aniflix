@@ -166,3 +166,6 @@ https://www.shadcn-svelte.com/docs/components/dropdown-menu
 https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values
 https://github.com/SandroHc/reactive-jikan
 https://docs.api.jikan.moe/#tag/anime/operation/getAnimeRecommendations
+https://fikryfahrezy.github.io/svelte-player
+https://github.com/fikryfahrezy/svelte-player/blob/main/src/routes/%2Bpage.svelte
+https://www.npmjs.com/package/screenfull

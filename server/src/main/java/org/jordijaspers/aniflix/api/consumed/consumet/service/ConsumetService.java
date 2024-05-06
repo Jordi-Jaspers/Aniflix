@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import net.sandrohc.jikan.model.anime.AnimeEpisode;
 import org.hawaiiframework.repository.DataNotFoundException;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
+import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
+import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSource;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.jikan.repository.JikanRepository;
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
@@ -23,6 +26,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -87,6 +91,15 @@ public class ConsumetService {
         return consumetRepository.getAnimeRecommendations(anilistId).stream()
                 .map(recommendationMapper::toRecommendation)
                 .toList();
+    }
+    @Cacheable(value = "streamingLinks", key = "#episodeId")
+    public StreamingLinks getStreamingsLinks(final String episodeId) {
+        final AnilistStreamingLinks anilistLinks = consumetRepository.getEpisodeLinks(episodeId);
+        final List<StreamingSource> sources = anilistLinks.getSources().stream()
+                .map(source -> new StreamingSource(source.getUrl(), source.getQuality()))
+                .toList();
+
+        return new StreamingLinks(anilistLinks.getHeaders().get("Referer"), sources);
     }
 
     public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {

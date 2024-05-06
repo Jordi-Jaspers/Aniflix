@@ -2,6 +2,7 @@
     import {Button} from "$lib/components/ui/button";
     import {InfoIcon, PlayIcon, StarIcon} from "lucide-svelte";
     import {openModal} from "$lib/api/util";
+    import {goto} from "$app/navigation";
 
     export let anime: AnimeResponse;
     let genres: string[] = anime.genres
@@ -45,7 +46,7 @@
             </div>
 
             <div class="flex space-x-4 py-8">
-                <Button class="pl-4 pr-1 space-x-4 rounded-full opacity-80 transition hover:opacity-100">
+                <Button class="pl-4 pr-1 space-x-4 rounded-full opacity-80 transition hover:opacity-100" on:click={() => goto("/watch/" + anime.anilistId + "/episode/1")}>
                     <p>Watch Now</p>
                     <div class="rounded-full bg-secondary/50 w-12 p-1 flex justify-center">
                         <PlayIcon class="p-1 fill-white"/>

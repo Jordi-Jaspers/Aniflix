@@ -41,12 +41,12 @@
   },
   "type": "module",
   "dependencies": {
-    "axios": "^1.6.5",
     "bits-ui": "^0.21.7",
     "clsx": "^2.1.0",
     "embla-carousel-svelte": "^8.0.0",
     "lucide-svelte": "^0.376.1",
     "mode-watcher": "^0.3.0",
+    "screenfull": "^6.0.2",
     "svelte-french-toast": "^1.2.0",
     "svelte-motion": "^0.12.2",
     "svelte-player": "^0.0.21",

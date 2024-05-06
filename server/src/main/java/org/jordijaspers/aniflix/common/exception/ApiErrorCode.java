@@ -64,7 +64,10 @@ public enum ApiErrorCode implements ApiError {
             "Something went wrong while trying to communicate with the Jikan API."),
     NEWS_POST_NOT_FOUND_ERROR(
             "ANI-0019",
-            "Could not find the requested news post.");
+            "Could not find the requested news post."),
+    ANIME_EPISODE_NOT_FOUND_ERROR(
+            "ANI-0020",
+            "Could not find the requested episode of the anime.");
 
     /**
      * The error code.

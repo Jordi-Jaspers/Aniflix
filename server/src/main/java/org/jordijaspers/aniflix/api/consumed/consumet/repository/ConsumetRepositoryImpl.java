@@ -10,6 +10,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverv
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
 import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
@@ -103,16 +104,16 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @Override
     @LogExecutionTime
     public AnilistInfoResult getAnimeInfo(final int id) {
-       return client.get()
-               .uri(uriBuilder -> uriBuilder
-                       .path(ANIME_DATA)
-                       .build(id)
-               )
-               .retrieve()
-               .onStatus(HttpStatusCode::isError, this::handleConsumetError)
-               .bodyToMono(AnilistInfoResult.class)
-               .doOnError(onObjectMappingErrorLog())
-               .block();
+        return client.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(ANIME_DATA)
+                        .build(id)
+                )
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                .bodyToMono(AnilistInfoResult.class)
+                .doOnError(onObjectMappingErrorLog())
+                .block();
     }
 
     /**
@@ -264,19 +265,18 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     /**
      * {@inheritDoc}
      */
-    @Override
     @LogExecutionTime
-    public ResultPage<AnilistOverview> getEpisodeInformation(final String id, final int episode) {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @LogExecutionTime
-    public ResultPage<AnilistOverview> getEpisodeLinks(final String id, final int episode) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public AnilistStreamingLinks getEpisodeLinks(final String episodeId) {
+        return client.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(EPISODE_LINKS)
+                        .build(episodeId)
+                )
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                .bodyToMono(AnilistStreamingLinks.class)
+                .doOnError(onObjectMappingErrorLog())
+                .block();
     }
 
     // ======================== PRIVATE METHODS ========================

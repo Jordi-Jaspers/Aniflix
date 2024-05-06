@@ -1,6 +1,5 @@
 package org.jordijaspers.aniflix.api.anime.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,8 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,9 +16,10 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
@@ -58,7 +58,13 @@ public class Episode implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Anime anime;
 
-    @OneToMany(mappedBy = "episode", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<StreamingLink> streamingLinks = new HashSet<>();
+    @Transient
+    private StreamingLinks streamingLinks;
 
+    /**
+     * Remove the slash in the beginning if present.
+     */
+    public String getUrl() {
+        return url.startsWith(SLASH) ? url.substring(1) : url;
+    }
 }

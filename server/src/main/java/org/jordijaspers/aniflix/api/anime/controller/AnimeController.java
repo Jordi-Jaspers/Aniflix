@@ -39,11 +39,7 @@ public class AnimeController {
 
     private final AnimeService animeService;
 
-    private final InteractionService interactionService;
-
     private final AnimeMapper animeMapper;
-
-    private final InteractionMapper interactionMapper;
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
