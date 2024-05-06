@@ -36,7 +36,7 @@ public class LibraryController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = REMOVE_FROM_LIBRARY_PATH)
     public ResponseEntity<Void> removeFromLibrary(@PathVariable("id") final int anilistId) {
-        libraryService.removeFromLibrary(new Anime(anilistId));
+        libraryService.removeFromLibrary(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
@@ -44,7 +44,7 @@ public class LibraryController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ADD_TO_LIBRARY_PATH)
     public ResponseEntity<Void> addToLibrary(@PathVariable("id") final int anilistId) {
-        libraryService.addToLibrary(new Anime(anilistId));
+        libraryService.addToLibrary(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 

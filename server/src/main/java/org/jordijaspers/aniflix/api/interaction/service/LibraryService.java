@@ -44,20 +44,20 @@ public class LibraryService {
                 : interactionRepository.searchLibraryByTitleForUser(title, user);
     }
 
-    public void removeFromLibrary(final Anime anime) {
-        final User user = getLoggedInUser();
-        final Interaction interaction = interactionService.getInteractedAnime(anime, user);
+    public void removeFromLibrary(final Integer anilistId) {
+        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
         interaction.setInLibrary(false);
         interactionService.updateInteraction(interaction);
-        LOGGER.info("Anime '{}' successfully removed from library for user '{}'", interaction.getAnime().getTitle(), user.getUsername());
+        LOGGER.info("Anime '{}' ('{}') successfully removed from the library for user '{}'",
+                interaction.getAnime().getTitle(), anilistId, getLoggedInUser().getUsername());
     }
 
-    public void addToLibrary(final Anime anime) {
-        final User user = getLoggedInUser();
-        final Interaction interaction = interactionService.getInteractedAnime(anime, user);
+    public void addToLibrary(final Integer anilistId) {
+        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
         interaction.setInLibrary(true);
         interactionService.updateInteraction(interaction);
-        LOGGER.info("Anime '{}' successfully added to library for user '{}'", interaction.getAnime().getTitle(), user.getUsername());
+        LOGGER.info("Anime '{}' ('{}') successfully added to the library for user '{}'",
+                interaction.getAnime().getTitle(), anilistId, getLoggedInUser().getUsername());
     }
 
     @Async
@@ -83,7 +83,7 @@ public class LibraryService {
     }
 
     private void importInteraction(final Interaction update) {
-        final Interaction interaction = interactionService.getInteractedAnime(update.getAnime(), update.getUser());
+        final Interaction interaction = interactionService.getInteractedAnime(update.getAnime().getAnilistId());
         interaction.setLastSeenEpisode(update.getLastSeenEpisode());
         interactionRepository.save(interaction);
     }

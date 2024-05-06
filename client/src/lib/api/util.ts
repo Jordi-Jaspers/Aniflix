@@ -19,13 +19,13 @@ export async function openModal(anilistId: number): Promise<void> {
         });
 
     if (response.ok) {
-        const interaction: InteractionResponse = await response.json();
-        useModalInfo.set(interaction);
+        const anime: AnimeResponse = await response.json();
+        useModalInfo.set(anime);
         useShowInfoModal.set(true);
     }
 }
 
 export function closeModal(): void {
-    useModalInfo.set({} as InteractionResponse);
+    useModalInfo.set({} as AnimeResponse);
     useShowInfoModal.set(false);
 }

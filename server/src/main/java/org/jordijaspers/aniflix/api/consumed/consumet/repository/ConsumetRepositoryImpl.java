@@ -28,9 +28,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Endpoints.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Repository
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -100,19 +102,37 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
-    public List<AnilistRecommendation> getAnimeRecommendations(final int id) {
-        final AnilistInfoResult result = client.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(ANIME_DATA)
-                        .build(id)
-                )
-                .retrieve()
-                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
-                .bodyToMono(AnilistInfoResult.class)
-                .doOnError(onObjectMappingErrorLog())
-                .block();
+    public AnilistInfoResult getAnimeInfo(final int id) {
+       return client.get()
+               .uri(uriBuilder -> uriBuilder
+                       .path(ANIME_DATA)
+                       .build(id)
+               )
+               .retrieve()
+               .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+               .bodyToMono(AnilistInfoResult.class)
+               .doOnError(onObjectMappingErrorLog())
+               .block();
+    }
 
-        return nonNull(result) ? result.getRecommendations() : List.of();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public List<AnilistRecommendation> getAnimeRecommendations(final int id) {
+        AnilistInfoResult result;
+        try {
+            result = getAnimeInfo(id);
+        } catch (final Exception exception) {
+            result = getAnimeDetails(id);
+        }
+
+        return isNull(result) || isEmpty(result.getRecommendations())
+                ? List.of()
+                : result.getRecommendations().stream()
+                .filter(recommendation -> nonNull(recommendation.getId()))
+                .toList();
     }
 
     /**

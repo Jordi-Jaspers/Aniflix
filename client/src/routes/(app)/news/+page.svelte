@@ -43,7 +43,7 @@
     });
 </script>
 
-<div class="px-[4%] max-w-[1024px] w-full mx-auto">
+<div class="px-[4%] max-w-[1096px] w-full mx-auto">
     <h1 class="text-3xl font-bold border-l-2 border-primary px-4 my-4">Recent News</h1>
 
     <!-- Grid view on desktop, single card on mobile, reactive to resizing-->

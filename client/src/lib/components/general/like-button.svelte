@@ -1,15 +1,11 @@
 <script lang="ts">
-    import {Heart, HeartOff} from 'lucide-svelte';
-    import {Button} from "$lib/components/ui/button";
-    import {getAnime, setAnime} from "$lib/components/store/anime-context-store";
+    import {Heart} from 'lucide-svelte';
     import type {Writable} from "svelte/store";
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
+    import {getAnimeInfo} from "$lib/components/store/anime-context-store";
 
-    export let value: AnimeResponse | RecommendationResponse;
-    setAnime(value);
-
-    const anime: Writable<AnimeResponse | RecommendationResponse> = getAnime();
+    const anime: Writable<AnimeResponse | RecommendationResponse> = getAnimeInfo();
     let isRequesting = false;
 
     // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding
@@ -22,7 +18,7 @@
                 $anime.liked = false;
                 const response: Response = await curl(
                     SERVER_URLS.ANIME_DISLIKE_PATH.replace('{id}', $anime.anilistId.toString()),
-                    { method: 'POST' }
+                    {method: 'POST'}
                 );
 
                 if (!response.ok) {
@@ -32,7 +28,7 @@
                 $anime.liked = true;
                 const response: Response = await curl(
                     SERVER_URLS.ANIME_LIKE_PATH.replace('{id}', $anime.anilistId.toString()),
-                    { method: 'POST' }
+                    {method: 'POST'}
                 );
 
                 if (!response.ok) {

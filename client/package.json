@@ -50,7 +50,6 @@
     "svelte-french-toast": "^1.2.0",
     "svelte-motion": "^0.12.2",
     "svelte-player": "^0.0.21",
-    "sveltekit-embed": "^0.0.12",
     "tailwind-merge": "^2.2.0",
     "tailwind-variants": "^0.1.20"
   }

@@ -105,5 +105,3 @@ hawaii:
         enabled: true
       request-id:
         enabled: true
-      open-telemetry-tracing-response:
-        enabled: false

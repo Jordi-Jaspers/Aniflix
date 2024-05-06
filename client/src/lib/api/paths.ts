@@ -16,6 +16,7 @@ export const SERVER_URLS = {
     ANIME_ADD_LIBRARY_PATH: `${SERVER_BASE_URL}/anime/{id}/library/add`,
     ANIME_REMOVE_LIBRARY_PATH: `${SERVER_BASE_URL}/anime/{id}/library/remove`,
     ANIME_CONSTANT_PATH: `${SERVER_BASE_URL}/constant`,
+    ANIME_SEARCH_PATH: `${SERVER_BASE_URL}/anime/search`,
     ANIME_BANNER_PATH: `${SERVER_BASE_URL}/anime/banner`,
     ANIME_RECENT_PATH: `${SERVER_BASE_URL}/anime/recent`,
     ANIME_POPULAR_PATH: `${SERVER_BASE_URL}/anime/popular`,
@@ -34,6 +35,7 @@ export const CLIENT_URLS = {
     PROFILE_URL: '/profile',
     SETTINGS_URL: '/settings',
     BUG_REPORT_URL: '/bug-report',
+    SEARCH_URL: '/search',
 };
 
 

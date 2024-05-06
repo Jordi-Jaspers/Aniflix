@@ -2,8 +2,10 @@
     import {Play, StarIcon} from "lucide-svelte";
     import {LibraryButton, LikeButton} from "$lib/components/general";
     import {goto} from "$app/navigation";
+    import {setAnime} from "$lib/components/store/anime-context-store";
 
     export let recommendation: RecommendationResponse;
+    setAnime(recommendation);
 </script>
 
 <div class={"m-[0.1em] min-h-[18em] h-[100%] rounded bg-card-accent shadow-lg overflow-hidden"}>
@@ -52,8 +54,8 @@
             </h4>
         </div>
         <div class="h-10 flex justify-center space-x-8 my-4">
-            <LikeButton value={recommendation}/>
-            <LibraryButton value={recommendation}/>
+            <LikeButton />
+            <LibraryButton />
         </div>
     </div>
 </div>

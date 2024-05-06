@@ -51,8 +51,10 @@ public class AnilistRecentEpisode implements Serializable {
             return title.getEnglish().toLowerCase();
         } else if (nonNull(title.getRomaji())) {
             return title.getRomaji().toLowerCase();
-        } else {
+        } else if (nonNull(title.getJapanse())) {
             return title.getJapanse().toLowerCase();
+        } else {
+            return "";
         }
     }
 }

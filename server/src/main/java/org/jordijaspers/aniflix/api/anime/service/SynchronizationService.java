@@ -1,6 +1,10 @@
 package org.jordijaspers.aniflix.api.anime.service;
 
 import lombok.RequiredArgsConstructor;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
@@ -23,9 +27,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
+@Aspect
 @Service
 @RequiredArgsConstructor
 public class SynchronizationService {
@@ -47,7 +53,13 @@ public class SynchronizationService {
      */
     @Async
     @Transactional
+    @AfterReturning(value = "@annotation(SynchronizeAnime)", returning = "anime")
     public void synchronizeData(final Anime anime) {
+        if (isNull(anime) || anime.isCompleted()) {
+            LOGGER.info("Anime with id '{}' is already completed or null, skipping synchronization", anime.getAnilistId());
+            return;
+        }
+
         LOGGER.info("Synchronizing consumet data with the database for id '{}'", anime.getAnilistId());
         final Anime updatedInfo = consumetService.getAnimeDetails(anime.getAnilistId());
         // Set the Genre from the old anime to the updated anime

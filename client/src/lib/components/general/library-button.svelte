@@ -1,14 +1,11 @@
 <script lang="ts">
     import {Bookmark, BookmarkCheck} from 'lucide-svelte';
-    import {getAnime, setAnime} from "$lib/components/store/anime-context-store";
+    import {getAnimeInfo} from "$lib/components/store/anime-context-store";
     import type {Writable} from "svelte/store";
     import {curl} from "$lib/api/client";
     import {SERVER_URLS} from "$lib/api/paths";
 
-    export let value: AnimeResponse | RecommendationResponse;
-    setAnime(value);
-
-    const anime: Writable<AnimeResponse | RecommendationResponse> = getAnime();
+    const anime: Writable<AnimeInfo> = getAnimeInfo();
     let isRequesting = false;
 
     // https://www.youtube.com/watch?v=V0VfR0eaz98&list=WL&index=84&ab_channel=Joshtriedcoding

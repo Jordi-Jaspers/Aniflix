@@ -47,7 +47,7 @@
 
 {#if post}
 
-    <div class="px-[4%] max-w-[1024px] w-full mx-auto">
+    <div class="px-[4%] max-w-[1096px] w-full mx-auto">
         <img src={post.thumbnail} alt={post.title} class="w-full h-[20rem] object-cover mb-8 rounded-[0.75rem]"/>
 
         <div class="space-y-4">

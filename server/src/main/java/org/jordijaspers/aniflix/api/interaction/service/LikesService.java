@@ -17,19 +17,17 @@ public class LikesService {
 
     private final InteractionService interactionService;
 
-    public void removeFromLikes(final Anime anime) {
-        final User user = getLoggedInUser();
-        final Interaction interaction = interactionService.getInteractedAnime(anime, user);
+    public void removeFromLikes(final Integer anilistId) {
+        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
         interaction.setLiked(false);
         interactionService.updateInteraction(interaction);
-        LOGGER.info("User '{}' unliked anime '{}'", user.getUsername(), interaction.getAnime().getTitle());
+        LOGGER.info("User '{}' unliked anime '{}' ('{}')", getLoggedInUser().getUsername(), interaction.getAnime().getTitle(), anilistId);
     }
 
-    public void addToLikes(final Anime anime) {
-        final User user = getLoggedInUser();
-        final Interaction interaction = interactionService.getInteractedAnime(anime, user);
+    public void addToLikes(final Integer anilistId) {
+        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
         interaction.setLiked(true);
         interactionService.updateInteraction(interaction);
-        LOGGER.info("User '{}' liked anime '{}'", getLoggedInUser().getUsername(), interaction.getAnime().getTitle());
+        LOGGER.info("User '{}' liked anime '{}' ('{}')", getLoggedInUser().getUsername(), interaction.getAnime().getTitle(), anilistId);
     }
 }

@@ -5,7 +5,6 @@
     import {SERVER_URLS} from "$lib/api/paths";
     import {RecommendationCard} from "$lib/components/browse";
 
-
     export let anime: AnimeResponse;
     let recommendations: RecommendationResponse[];
     onMount(async () => {
@@ -22,7 +21,7 @@
     });
 </script>
 
-<div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
+<div class="grid gap-4 py-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
     {#if recommendations}
         {#each recommendations as recommendation}
             <RecommendationCard {recommendation} />

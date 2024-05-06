@@ -24,7 +24,7 @@ public class LikesController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = LIKE_ANIME_PATH)
     public ResponseEntity<Void> likeAnime(@PathVariable("id") final int anilistId) {
-        likesService.addToLikes(new Anime(anilistId));
+        likesService.addToLikes(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
@@ -32,7 +32,7 @@ public class LikesController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = UNLIKE_ANIME_PATH)
     public ResponseEntity<Void> dislikeAnime(@PathVariable("id") final int anilistId) {
-        likesService.removeFromLikes(new Anime(anilistId));
+        likesService.removeFromLikes(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 }

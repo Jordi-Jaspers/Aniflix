@@ -3,9 +3,8 @@
     import SearchBar from '$lib/components/app/header/search-bar.svelte';
     import UserButton from '$lib/components/app/header/user-button.svelte';
     import {onMount} from 'svelte';
-    import { page } from '$app/stores';
+    import {page} from '$app/stores';
     import {LightSwitch} from "$lib/components/general/index.js";
-    import {useModalInfo} from "$lib/components/store/store";
     import {Badge} from "$lib/components/ui/badge";
 
     let currentPath = "";

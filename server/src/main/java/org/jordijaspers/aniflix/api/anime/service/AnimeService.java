@@ -6,13 +6,17 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
+import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
+import org.jordijaspers.aniflix.api.interaction.service.InteractionService;
+import org.jordijaspers.aniflix.api.interaction.service.UserInteractionEnhancer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,18 +35,18 @@ public class AnimeService {
 
     private final AnimeRepository animeRepository;
 
-    private final InteractionRepository interactionRepository;
+    private final UserInteractionEnhancer userInteractionEnhancer;
 
     private final ConsumetService consumetService;
 
-    private final SynchronizationService synchronizationService;
-
-    public List<Anime> searchAnime(final Map<String, String> filters) {
-        return consumetService.searchAnime(filters);
-    }
-
     public List<AnilistRecentEpisode> getAnimeOfRecentEpisodes(final int perPage, final int page) {
         return consumetService.getRecentEpisodes(perPage, page);
+    }
+
+    public List<Anime> searchAnime(final Map<String, String> filters) {
+        final List<Anime> anime = consumetService.searchAnime(filters);
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
     }
 
     public Anime getAnimeBanner() {
@@ -55,28 +59,34 @@ public class AnimeService {
     }
 
     public List<Anime> getPopularAnime(final int perPage, final int page) {
-        final List<Anime> collection = consumetService.getPopular(perPage, page);
-        applyUserInteractions(collection);
-        return collection;
+        final List<Anime> anime = consumetService.getPopular(perPage, page);
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
     }
 
     public List<Anime> getTrendingAnime(final int perPage, final int page) {
-        final List<Anime> collection = consumetService.getTrending(perPage, page);
-        applyUserInteractions(collection);
-        return collection;
+        final List<Anime> anime = consumetService.getTrending(perPage, page);
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
     }
 
     public List<Anime> getAnimeByGenre(final Genres genre, final int perPage, final int page) {
-        final List<Anime> collection = consumetService.getByGenre(genre, perPage, page);
-        applyUserInteractions(collection);
-        return collection;
+        final List<Anime> anime = consumetService.getByGenre(genre, perPage, page);
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
+    }
+
+    public boolean isAnimeInDatabase(final int anilistId) {
+        return animeRepository.existsById(anilistId);
     }
 
     public Anime findByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime with Anilist ID '{}'", anilistId);
-        return animeRepository.findByAnilistId(anilistId)
-                .map(this::updateAnimeInfo)
+        final Anime anime = animeRepository.findByAnilistId(anilistId)
                 .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
+
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
     }
 
     public Anime findAnimeByTitle(final String title) {
@@ -86,8 +96,7 @@ public class AnimeService {
         }
 
         LOGGER.info("Attempting to look up anime with title '{}'", title);
-        return animeRepository.findByTitle(title)
-                .map(this::updateAnimeInfo)
+        final Anime anime = animeRepository.findByTitle(title)
                 .orElseGet(() -> {
                     try {
                         return saveAnime(consumetService.getAnimeDetails(title));
@@ -96,12 +105,8 @@ public class AnimeService {
                         return null;
                     }
                 });
-    }
 
-    private Anime updateAnimeInfo(final Anime anime) {
-        if (!anime.isCompleted()) {
-            synchronizationService.synchronizeData(anime);
-        }
+        userInteractionEnhancer.applyAnime(anime);
         return anime;
     }
 
@@ -121,22 +126,5 @@ public class AnimeService {
 
         // Save the anime with episodes
         return animeRepository.save(preSave);
-    }
-
-    private void applyUserInteractions(final List<Anime> collection) {
-        final List<Integer> anilistIds = collection.stream().map(Anime::getAnilistId).toList();
-        final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(anilistIds, getLoggedInUser());
-        interactions.forEach(interaction -> {
-            collection.stream()
-                    .filter(anime -> anime.equals(interaction.getAnime()))
-                    .findFirst()
-                    .ifPresent(anime -> {
-                        LOGGER.info("Applying user interactions to anime '{}'.", anime.getTitle());
-                        anime.setWatchStatus(interaction.getWatchStatus());
-                        anime.setLiked(interaction.isLiked());
-                        anime.setInLibrary(interaction.isInLibrary());
-                        anime.setLastSeenEpisode(interaction.getLastSeenEpisode());
-                    });
-        });
     }
 }

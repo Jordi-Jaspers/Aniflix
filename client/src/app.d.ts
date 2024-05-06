@@ -8,9 +8,10 @@ declare global {
 }
 
 // ======================== MODELS ===========================
-class CarouselColumns {
-    columns: number;
-    width: number;
+class AnimeInfo {
+   anilistId: number;
+   inLibrary: boolean;
+   liked: boolean;
 }
 
 // ======================== EXCEPTION ========================
@@ -65,8 +66,8 @@ class AnimeRequest {
     page: number;
     perPage: number;
     title: string;
-    genre: string;
-    season: string;
+    genre: string | null;
+    season: string | null;
 }
 
 // ======================== RESPONSE ========================
@@ -99,6 +100,15 @@ class AuthorizeResponse {
     validated: boolean;
 }
 
+class InteractionResponse {
+    anime: AnimeResponse;
+    liked: boolean;
+    inLibrary: boolean;
+    watchStatus: string;
+    lastSeenEpisode: number;
+    lastInteraction: Date;
+}
+
 class RecommendationResponse {
     anilistId: number;
     malId: number;
@@ -113,6 +123,7 @@ class RecommendationResponse {
     inLibrary: boolean;
     lastSeenEpisode: number;
     watchStatus: string;
+    lastInteraction: Date;
 }
 
 class AnimeResponse {
@@ -135,6 +146,7 @@ class AnimeResponse {
     inLibrary: boolean;
     lastSeenEpisode: number;
     watchStatus: string;
+    lastInteraction: Date;
 }
 
 class EpisodeResponse {
@@ -167,15 +179,6 @@ class ConstantResponse {
     status: string[];
     mediaTypes: string[];
     watchStatus: string[];
-}
-
-class InteractionResponse {
-    anime: AnimeResponse;
-    liked: boolean;
-    inLibrary: boolean;
-    watchStatus: string;
-    lastSeenEpisode: number;
-    lastInteraction: Date;
 }
 
 // ======================== JWT ========================

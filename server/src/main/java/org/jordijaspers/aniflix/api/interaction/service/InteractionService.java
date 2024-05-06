@@ -1,7 +1,6 @@
 package org.jordijaspers.aniflix.api.interaction.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
@@ -9,39 +8,36 @@ import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
 @Service
 @RequiredArgsConstructor
 public class InteractionService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InteractionService.class);
 
-    private final InteractionRepository interactionRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(InteractionService.class);
 
     private final AnimeService animeService;
 
-    @Transactional
-    public Interaction getInteractedAnime(final Anime anime, final User user) {
-        return interactionRepository.findByAnilistId(anime, user)
+    private final InteractionRepository interactionRepository;
+
+    public Interaction getInteractedAnime(final Integer anilistId) {
+        final User user = getLoggedInUser();
+        LOGGER.info("Looking up anime with id '{}' between the interactions of user '{}'.", anilistId, user.getUsername());
+        return interactionRepository.findByAnilistId(anilistId, user)
                 .map(interaction -> {
-                    LOGGER.info("User '{}' has interacted with anime ('{}') before.", user.getUsername(), anime.getAnilistId());
-                    final Anime updatedAnime = animeService.findByAnilistId(interaction.getAnime().getAnilistId());
-                    interaction.setAnime(updatedAnime);
+                    LOGGER.info("User '{}' has interacted with anime ('{}') before.", user.getUsername(), anilistId);
                     return interaction;
                 })
                 .orElseGet(() -> {
-                    LOGGER.info("User '{}' has not interacted with anime ('{}') yet.", user.getUsername(), anime.getAnilistId());
-                    return addToInteractions(new Interaction(user, anime));
+                    LOGGER.info("User '{}' has not interacted with anime ('{}') yet.", user.getUsername(), anilistId);
+                    return animeService.isAnimeInDatabase(anilistId)
+                            ? new Interaction(user, anilistId)
+                            : new Interaction(user, animeService.findByAnilistId(anilistId));
                 });
     }
 
     public void updateInteraction(final Interaction interaction) {
         interactionRepository.save(interaction);
-    }
-
-    private Interaction addToInteractions(final Interaction interaction) {
-        final Anime anime = animeService.findByAnilistId(interaction.getAnilistId());
-        interaction.setAnime(anime);
-        return interactionRepository.save(interaction);
     }
 }

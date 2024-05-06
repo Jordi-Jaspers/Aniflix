@@ -72,6 +72,14 @@ public class Interaction implements Serializable {
     }
 
     /**
+     * Creates a new Interaction with an anilist id for a specific user.
+     */
+    public Interaction(final User user, final Integer anilistId) {
+        this.user = user;
+        this.anime = new Anime(anilistId);
+    }
+
+    /**
      * Retrieve the anilist id of the anime when available.
      */
     public int getAnilistId() {

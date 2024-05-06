@@ -33,6 +33,7 @@ import java.util.Set;
 
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
+import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
@@ -113,10 +114,13 @@ public class Anime implements Serializable {
     private boolean inLibrary;
 
     @Transient
-    private WatchStatus watchStatus = WatchStatus.NOT_STARTED;
+    private int lastSeenEpisode;
 
     @Transient
-    private int lastSeenEpisode;
+    private WatchStatus watchStatus = NOT_STARTED;
+
+    @Transient
+    private LocalDateTime lastInteraction;
 
     /**
      * Constructor for JPA.

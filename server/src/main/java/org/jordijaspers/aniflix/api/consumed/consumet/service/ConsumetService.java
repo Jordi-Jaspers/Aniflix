@@ -62,13 +62,6 @@ public class ConsumetService {
                 .toList();
     }
 
-    @Cacheable(value = "animeRecommendations", key = "#anilistId")
-    public List<Recommendation> getRecommendationsForAnime(final int anilistId) {
-        return consumetRepository.getAnimeRecommendations(anilistId).stream()
-                .map(recommendationMapper::toRecommendation)
-                .toList();
-    }
-
     @Cacheable(value = "animeDetails", key = "#anilistId")
     public Anime getAnimeDetails(final Integer anilistId) {
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
@@ -87,6 +80,13 @@ public class ConsumetService {
                 .map(consumetRepository::getAnimeDetails)
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+    }
+
+    @Cacheable(value = "animeRecommendations", key = "#anilistId")
+    public List<Recommendation> getRecommendationsForAnime(final int anilistId) {
+        return consumetRepository.getAnimeRecommendations(anilistId).stream()
+                .map(recommendationMapper::toRecommendation)
+                .toList();
     }
 
     public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {

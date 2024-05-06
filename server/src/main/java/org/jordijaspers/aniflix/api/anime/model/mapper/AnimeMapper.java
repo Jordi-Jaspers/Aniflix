@@ -121,10 +121,10 @@ public abstract class AnimeMapper {
     public Map<String, String> toFilters(final AnimeRequest request) {
         return Stream.of(
                         pair(QUERY_PARAM, request.getTitle()),
-                        pair(GENRES_PARAM, String.valueOf(request.getGenre())),
-                        pair(SEASON_PARAM, String.valueOf(request.getSeason())),
                         pair(PAGE_PARAM, String.valueOf(request.getPage())),
-                        pair(PER_PAGE_PARAM, String.valueOf(request.getPerPage()))
+                        pair(PER_PAGE_PARAM, String.valueOf(request.getPerPage())),
+                        pair(GENRES_PARAM, nonNull(request.getGenre()) ? String.valueOf(request.getGenre()) : null),
+                        pair(SEASON_PARAM, nonNull(request.getSeason()) ? String.valueOf(request.getSeason()) : null)
                 )
                 .filter(entry -> nonNull(entry.getValue()) && isNotEmpty(entry.getValue()) && !ZERO_VALUE.equals(entry.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

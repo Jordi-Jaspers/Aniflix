@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Data
 public class AnilistSearchResult {
 
@@ -64,6 +66,14 @@ public class AnilistSearchResult {
      * Returns the title of the anime in the language you prefer.
      */
     public String getPreferredTitle() {
-        return title.getEnglish().toLowerCase();
+        if (nonNull(title.getEnglish())) {
+            return title.getEnglish().toLowerCase();
+        } else if (nonNull(title.getRomaji())) {
+            return title.getRomaji().toLowerCase();
+        } else if (nonNull(title.getJapanse())) {
+            return title.getJapanse().toLowerCase();
+        } else {
+            return "";
+        }
     }
 }

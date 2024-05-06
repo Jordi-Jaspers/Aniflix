@@ -34,6 +34,11 @@ public interface ConsumetRepository {
     AnilistInfoResult getAnimeDetails(int id);
 
     /**
+     * Returns the Anime specified by its id, without the episodes.
+     */
+    AnilistInfoResult getAnimeInfo(int id);
+
+    /**
      * Returns the recommendations for an Anime specified by its id.
      */
     List<AnilistRecommendation> getAnimeRecommendations(int id);

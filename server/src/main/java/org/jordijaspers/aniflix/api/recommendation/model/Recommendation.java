@@ -6,7 +6,9 @@ import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 @Data
@@ -43,5 +45,8 @@ public class Recommendation implements Serializable {
     private int lastSeenEpisode;
 
     @Transient
-    private WatchStatus watchStatus = WatchStatus.NOT_STARTED;
+    private WatchStatus watchStatus = NOT_STARTED;
+
+    @Transient
+    private LocalDateTime lastInteraction;
 }

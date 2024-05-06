@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.api.anime.model.request.AnimeRequest;
 import org.jordijaspers.aniflix.api.anime.model.request.GenreRequest;
 import org.jordijaspers.aniflix.api.anime.model.request.PageRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
+import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
@@ -46,7 +47,7 @@ public class AnimeController {
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = ANIME_SEARCH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(path = ANIME_SEARCH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AnimeResponse>> searchAnime(@RequestBody final AnimeRequest request) {
         final Map<String, String> filters = animeMapper.toFilters(request);
         final List<Anime> anime = animeService.searchAnime(filters);
@@ -56,11 +57,9 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_DETAILS, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<InteractionResponse> getAnimeDetails(@PathVariable("id") final int anilistId,
-                                                               @AuthenticationPrincipal final UserTokenPrincipal principal) {
-        final Interaction interaction = interactionService.getInteractedAnime(new Anime(anilistId), principal.getUser());
-        final InteractionResponse response = interactionMapper.toDetailedResponse(interaction);
-        return ResponseEntity.status(OK).body(response);
+    public ResponseEntity<DetailedAnimeResponse> getAnimeDetails(@PathVariable("id") final int anilistId) {
+        final Anime anime = animeService.findByAnilistId(anilistId);
+        return ResponseEntity.status(OK).body(animeMapper.toResponseWithEpisodes(anime));
     }
 
     // ======================================== ANIME OVERVIEW ========================================

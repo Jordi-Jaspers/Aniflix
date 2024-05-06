@@ -10,6 +10,7 @@
     import {closeModal} from "$lib/api/util";
     import {EpisodeList, RecommendationCards} from "$lib/components/browse";
     import {Content, List, Root, Trigger} from "$lib/components/ui/tabs";
+    import {setAnime} from "$lib/components/store/anime-context-store";
 
     let isPlaying: boolean = false;
     let isMuted: boolean = false;
@@ -31,10 +32,17 @@
             closeModal();
         }
     }
+
+    useModalInfo.subscribe((value) => {
+        if (value) {
+            setAnime(value);
+        }
+    });
 </script>
 
 {#if $useShowInfoModal}
-    <button on:click={() => closeModal()} class="!z-[100] fixed backdrop-brightness-50 w-full h-full inset-0"/>
+    <button on:click={() => closeModal()}
+            class="!z-[100] fixed backdrop-brightness-50 w-full h-full inset-0 overflow-y-auto scroll-smooth"/>
     <div role="presentation" on:close={() => closeModal()} on:keypress={handleEscape}
          class="!z-[1000] fixed bg-background inset-0 mx-auto h-auto w-full md:rounded-t-md md:top-8 md:max-w-[90%] lg:max-w-4xl overscroll-auto overflow-y-scroll">
         <button class="absolute m-[1em] top-0 right-0 h-9 w-9 flex justify-center items-center bg-[#1a1920]/80 hover:bg-[#1a1920] rounded-full text-white !z-40 onclick"
@@ -44,11 +52,11 @@
         <div class="relative aspect-video w-full !z-[-100]">
             <div class="absolute right-0 aspect-video h-full bg-gradient-to-b from-transparent to-background"/>
             <img class="w-full aspect-video object-cover object-center brightness-85 {isPlaying && 'hidden'}"
-                 src={$useModalInfo.anime.cover}
+                 src={$useModalInfo.cover}
                  alt="thumbnail"/>
             {#if import.meta.env.VITE_ENV === 'production'}
                 <div class="h-full brightness-85  {isPlaying ? '' : 'hidden'}">
-                    <SveltePlayer url="https://www.youtube.com/watch?v={$useModalInfo.anime.trailer}"
+                    <SveltePlayer url="https://www.youtube.com/watch?v={$useModalInfo.trailer}"
                                   config={opts}
                                   height="100%"
                                   width="100%"
@@ -70,8 +78,8 @@
                     </Button>
 
                     <div class="flex justify-center h-10 space-x-2">
-                        <LikeButton value={$useModalInfo.anime}/>
-                        <LibraryButton value={$useModalInfo.anime}/>
+                        <LikeButton/>
+                        <LibraryButton/>
                     </div>
                 </div>
                 {#if isPlaying}
@@ -82,26 +90,26 @@
         <div class="px-10 items-center space-y-6 text-lg w-full flex-col justify-center z-10">
             <div class="space-y-2">
                 <h3 class="flex items-center">
-                    {$useModalInfo.anime.title.split(' ')
+                    {$useModalInfo.title.split(' ')
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                         .split('-')
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
                     }
                     <Badge variant="outline" class="bg-blue-500 ml-4">
-                        {#if $useModalInfo.anime.subbed} SUB{:else} DUB{/if}
+                        {#if $useModalInfo.subbed} SUB{:else} DUB{/if}
                     </Badge>
                 </h3>
 
                 <div class="flex items-center text-[1.1vw] h-[1.2vw] w-[1.2] text-muted-foreground text-sm">
                     <div class="flex items-center space-x-1">
-                        <p> {$useModalInfo.anime.rating / 10} </p>
+                        <p> {$useModalInfo.rating / 10} </p>
                         <StarIcon class="ml-0.5 h-3 w-fit text-amber-300 fill-amber-300"/>
                     </div>
 
                     <span class="mx-2"> | </span>
-                    <span> {$useModalInfo.anime.releaseYear} </span>
+                    <span> {$useModalInfo.releaseYear} </span>
                     <span class="mx-2"> | </span>
-                    <span> {$useModalInfo.anime.totalEpisodes} Episodes </span>
+                    <span> {$useModalInfo.totalEpisodes} Episodes </span>
                     <p class="mx-2 flex h-4 items-center justify-center rounded border px-1.5 text-xs">
                         HD
                     </p>
@@ -111,12 +119,12 @@
 
             <div class="flex flex-col gap-x-10 gap-y-4 font-light w-full md:flex-row">
                 <article class="w-[85%] font-extralight leading-7 text-justify text-sm prose">
-                    {@html $useModalInfo.anime.description.replace(/\(Source:.*\)/, '')}
+                    {@html $useModalInfo.description.replace(/\(Source:.*\)/, '')}
                 </article>
                 <div class="flex flex-col text-sm space-y-4">
                     <p>
                         <span class="text-muted-foreground">Genres:</span>{' '}
-                        {$useModalInfo.anime.genres
+                        {$useModalInfo.genres
                             .filter(genre => genre !== "UNKNOWN")
                             .map(genre => genre.charAt(0) + genre.slice(1).toLowerCase())
                             .join(', ')
@@ -124,22 +132,22 @@
                     </p>
                     <p>
                         <span class="text-muted-foreground">Media:</span>{' '}
-                        {$useModalInfo.anime.mediaType}
+                        {$useModalInfo.mediaType}
                     </p>
                     <p>
                         <span class="text-muted-foreground">Status:</span>{' '}
-                        {$useModalInfo.anime.status.charAt(0) + $useModalInfo.anime.status.slice(1).toLowerCase()}
+                        {$useModalInfo.status.charAt(0) + $useModalInfo.status.slice(1).toLowerCase()}
                     </p>
                     <p>
                         <span class="text-muted-foreground">Watch Status:</span>{' '}
-                        {$useModalInfo.anime.watchStatus}
+                        {$useModalInfo.watchStatus}
                     </p>
                     <p>
                         <span class="text-muted-foreground">Last Seen:</span>{' '}
-                        {#if $useModalInfo.anime.lastSeenEpisode === 0}
+                        {#if $useModalInfo.lastSeenEpisode === 0}
                             -
                         {:else}
-                            Episode { $useModalInfo.anime.lastSeenEpisode }
+                            Episode { $useModalInfo.lastSeenEpisode }
                         {/if}
                     </p>
                 </div>
@@ -156,10 +164,10 @@
                     </Trigger>
                 </List>
                 <Content value="Episodes">
-                    <EpisodeList episodes={$useModalInfo.anime.episodes}/>
+                    <EpisodeList episodes={$useModalInfo.episodes}/>
                 </Content>
                 <Content value="Recommended">
-                    <RecommendationCards anime={$useModalInfo.anime}/>
+                    <RecommendationCards anime={$useModalInfo}/>
                 </Content>
             </Root>
         </div>

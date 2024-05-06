@@ -2,6 +2,8 @@ package org.jordijaspers.aniflix.api.recommendation.model.response;
 
 import lombok.Data;
 
+import java.time.ZonedDateTime;
+
 @Data
 public class RecommendationResponse {
 
@@ -27,8 +29,10 @@ public class RecommendationResponse {
 
     private boolean inLibrary;
 
+    private String watchStatus;
+
     private int lastSeenEpisode;
 
-    private String watchStatus;
+    private ZonedDateTime lastInteraction;
 
 }
