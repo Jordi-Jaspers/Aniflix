@@ -169,3 +169,7 @@ https://docs.api.jikan.moe/#tag/anime/operation/getAnimeRecommendations
 https://fikryfahrezy.github.io/svelte-player
 https://github.com/fikryfahrezy/svelte-player/blob/main/src/routes/%2Bpage.svelte
 https://www.npmjs.com/package/screenfull
+
+
+Rate Limit Problem:
+https://anilist.gitbook.io/anilist-apiv2-docs/overview/rate-limiting
