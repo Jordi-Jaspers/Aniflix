@@ -70,6 +70,10 @@ public final class ConsumetConstants {
 
         public static final String SEASON_PARAM = "season";
 
+        public static final String PROVIDER_PARAM = "provider";
+
+        public static final String SERVER_PARAM = "server";
+
         // =========================== DEFAULT PARAM VALUES ===========================
 
         public static final String ZERO_VALUE = "0";

@@ -37,8 +37,11 @@ public class Episode implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "url_id")
-    private String url;
+    @Column(name = "gogoanime_id")
+    private String gogoanimeId;
+
+    @Column(name = "zoro_id")
+    private String zoroId;
 
     @Column(name = "title")
     private String title;
@@ -60,11 +63,4 @@ public class Episode implements Serializable {
 
     @Transient
     private StreamingLinks streamingLinks;
-
-    /**
-     * Remove the slash in the beginning if present.
-     */
-    public String getUrl() {
-        return url.startsWith(SLASH) ? url.substring(1) : url;
-    }
 }

@@ -8,17 +8,20 @@ import org.jordijaspers.aniflix.api.anime.model.request.AnimeRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
+import org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.ZonedDateTime;
 import java.util.AbstractMap;
@@ -34,8 +37,11 @@ import static java.util.Objects.nonNull;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 
-@Mapper(config = SharedMapperConfiguration.class)
+@Mapper(config = SharedMapperConfiguration.class, imports = AnilistProviders.class)
 public abstract class AnimeMapper {
+
+    @Autowired
+    protected DomainHealthChecker healthChecker;
 
     @Mapping(target = "anilistId", source = "id")
     @Mapping(target = "title", expression = "java(result.getPreferredTitle())")
@@ -64,8 +70,10 @@ public abstract class AnimeMapper {
     @Mapping(target = "mediaType", source = "type")
     public abstract Anime toAnime(AnilistInfoResult result);
 
-    @Mapping(target = "url", source = "urlId")
+    @Mapping(target = "gogoanimeId", expression = "java(healthChecker.getActiveProvider() == AnilistProviders.GOGOANIME ? source.getId() : null)")
+    @Mapping(target = "zoroId", expression = "java(healthChecker.getActiveProvider() == AnilistProviders.ZORO ? source.getId() : null)")
     @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
+    @Mapping(target = "id", ignore = true)
     public abstract Episode toEpisode(AnilistEpisode source);
 
     @Named("toRecentEpisodesResponse")
@@ -106,7 +114,6 @@ public abstract class AnimeMapper {
                     response.setTitle(anime.getTitle());
                     response.setEpisodeTitle(episode.getTitle());
                     response.setEpisodeNumber(episode.getNumber());
-                    response.setEpisodeId(episode.getUrl());
                     response.setDuration(episode.getDuration());
                     response.setImage(episode.getImage());
                     if (nonNull(episode.getAirDate())) {

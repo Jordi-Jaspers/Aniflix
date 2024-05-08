@@ -9,7 +9,7 @@ import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.C
 public class AnilistEpisode {
 
     @JsonProperty("id")
-    private String urlId;
+    private String id;
 
     @JsonProperty("title")
     private String title;
@@ -23,12 +23,4 @@ public class AnilistEpisode {
     @JsonProperty("image")
     private String image;
 
-    /**
-     * Returns the urlId with a leading slash.
-     */
-    public String getUrlId() {
-        return urlId.startsWith(SLASH)
-                ? urlId
-                : SLASH + urlId;
-    }
 }

@@ -35,6 +35,11 @@ public interface ConsumetRepository {
     AnilistInfoResult getAnimeDetails(int id);
 
     /**
+     * Returns the details of an Anime specified by its id and provider.
+     */
+    AnilistInfoResult getAnimeDetails(int id, String provider);
+
+    /**
      * Returns the Anime specified by its id, without the episodes.
      */
     AnilistInfoResult getAnimeInfo(int id);
@@ -85,7 +90,7 @@ public interface ConsumetRepository {
      *
      * @param episodeId The id of the episode.
      */
-    AnilistStreamingLinks getEpisodeLinks(String episodeId);
+    AnilistStreamingLinks getEpisodeLinks(String episodeId, final String provider);
 
     /**
      * Returns the latest news articles.

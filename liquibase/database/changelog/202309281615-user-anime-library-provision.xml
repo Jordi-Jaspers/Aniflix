@@ -39,14 +39,16 @@
             (
                 id                  INTEGER AUTO_INCREMENT PRIMARY KEY,
                 anime_anilist_id    INTEGER      NOT NULL,
-                url_id              TEXT         NOT NULL,
+                gogoanime_id        TEXT         NULL,
+                zoro_id             TEXT         NULL,
                 number              INTEGER      NOT NULL,
                 title               VARCHAR(255) NOT NULL,
                 image               TEXT         NOT NULL,
                 duration            INTEGER      NOT NULL,
                 air_date            TIMESTAMP,
                 UNIQUE (url_id),
-                FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE
+                FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE,
+                CONSTRAINT episode_id CHECK (gogoanime_id IS NOT NULL OR zoro_id IS NOT NULL)
             );
 
             CREATE TABLE IF NOT EXISTS anime_genre

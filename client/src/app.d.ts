@@ -173,8 +173,6 @@ class EpisodeResponse {
     title: string;
     episodeTitle: string;
     episodeNumber: number;
-    episodeId: string;
-    description: string;
     image: string;
     airDate: Date;
     duration: number;

@@ -10,12 +10,12 @@ import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSource;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.jikan.repository.JikanRepository;
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.jordijaspers.aniflix.api.recommendation.model.mapper.RecommendationMapper;
+import org.jordijaspers.aniflix.common.exception.AnilistProvidersDownException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -38,6 +37,8 @@ import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class ConsumetService {
+
+    private final DomainHealthChecker healthChecker;
 
     private final ConsumetRepository consumetRepository;
 
@@ -68,13 +69,23 @@ public class ConsumetService {
 
     @Cacheable(value = "animeDetails", key = "#anilistId")
     public Anime getAnimeDetails(final Integer anilistId) {
+        healthChecker.validateAvailability();
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
         return provisionDataFromJikan(anime);
     }
 
+    public Anime getAnimeDetailsForProvider(final Integer anilistId, final String provider) {
+        healthChecker.validateAvailability();
+        final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId, provider))
+                .map(animeMapper::toAnime)
+                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+        return provisionDataFromJikan(anime);
+    }
+
     public Anime getAnimeDetails(final String title) {
+        healthChecker.validateAvailability();
         final Map<String, String> filters = applyDefaultFilters(title, new ConcurrentHashMap<>());
         return consumetRepository.searchAnime(filters).getResults().stream()
                 .filter(result -> filterResults(result, title))
@@ -88,13 +99,16 @@ public class ConsumetService {
 
     @Cacheable(value = "animeRecommendations", key = "#anilistId")
     public List<Recommendation> getRecommendationsForAnime(final int anilistId) {
+        healthChecker.validateAvailability();
         return consumetRepository.getAnimeRecommendations(anilistId).stream()
                 .map(recommendationMapper::toRecommendation)
                 .toList();
     }
-    @Cacheable(value = "streamingLinks", key = "#episodeId")
-    public StreamingLinks getStreamingsLinks(final String episodeId) {
-        final AnilistStreamingLinks anilistLinks = consumetRepository.getEpisodeLinks(episodeId);
+
+    @Cacheable(value = "streamingLinks", key = "#id + #provider")
+    public StreamingLinks getStreamingsLinks(final String id, final String provider) {
+        healthChecker.validateAvailability();
+        final AnilistStreamingLinks anilistLinks = consumetRepository.getEpisodeLinks(id, provider);
         final List<StreamingSource> sources = anilistLinks.getSources().stream()
                 .map(source -> new StreamingSource(source.getUrl(), source.getQuality()))
                 .toList();

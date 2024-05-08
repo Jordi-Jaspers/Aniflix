@@ -67,7 +67,13 @@ public enum ApiErrorCode implements ApiError {
             "Could not find the requested news post."),
     ANIME_EPISODE_NOT_FOUND_ERROR(
             "ANI-0020",
-            "Could not find the requested episode of the anime.");
+            "Could not find the requested episode of the anime."),
+    ANILIST_PROVIDERS_DOWN_ERROR(
+            "ANI-0021",
+            "All Anilist providers are currently down. Please try again later."),
+    STREAMING_LINKS_NOT_FOUND_ERROR(
+            "ANI-0022",
+            "Could not find the streaming links for the requested episode.");
 
     /**
      * The error code.

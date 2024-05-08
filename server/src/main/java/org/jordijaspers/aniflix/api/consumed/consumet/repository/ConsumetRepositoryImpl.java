@@ -12,6 +12,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecom
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
+import org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker;
 import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
@@ -23,6 +24,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -33,6 +35,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Endpoints.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
+import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.ZORO;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Repository
@@ -45,9 +48,14 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
 
     private final WebClient client;
 
-    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client, final ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    private final DomainHealthChecker domainHealthChecker;
+
+    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client,
+                                  final DomainHealthChecker domainHealthChecker,
+                                  final ObjectMapper objectMapper) {
         this.client = client;
+        this.objectMapper = objectMapper;
+        this.domainHealthChecker = domainHealthChecker;
     }
 
     /**
@@ -86,8 +94,18 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @Override
     @LogExecutionTime
     public AnilistInfoResult getAnimeDetails(final int id) {
+        return getAnimeDetails(id, domainHealthChecker.getActiveProvider().getProvider());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public AnilistInfoResult getAnimeDetails(final int id, final String provider) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
+                        .queryParam(PROVIDER_PARAM, provider)
                         .path(ANIME_DETAILS)
                         .build(id)
                 )
@@ -106,6 +124,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     public AnilistInfoResult getAnimeInfo(final int id) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
+                        .queryParam(PROVIDER_PARAM, domainHealthChecker.getActiveProvider().getProvider())
                         .path(ANIME_DATA)
                         .build(id)
                 )
@@ -266,11 +285,19 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      * {@inheritDoc}
      */
     @LogExecutionTime
-    public AnilistStreamingLinks getEpisodeLinks(final String episodeId) {
+    public AnilistStreamingLinks getEpisodeLinks(final String episodeId, final String provider) {
         return client.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(EPISODE_LINKS)
-                        .build(episodeId)
+                .uri(uriBuilder -> {
+                            final UriBuilder builder = uriBuilder
+                                    .path(EPISODE_LINKS)
+                                    .queryParam(PROVIDER_PARAM, provider);
+
+                            if (provider.equals(ZORO.getProvider())) {
+                                builder.queryParam(SERVER_PARAM, "vidstreaming");
+                            }
+
+                            return builder.build(episodeId);
+                        }
                 )
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)

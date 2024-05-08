@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, Integer> {
@@ -17,4 +18,6 @@ public interface EpisodeRepository extends JpaRepository<Episode, Integer> {
             + "WHERE anime.anilistId = ?1 AND episode.number = ?2")
     Optional<Episode> findEpisodeByEpisodeAndAnilistId(int anilistId, int episodeNumber);
 
+    @LogExecutionTime
+    Set<Episode> findAllByAnime_AnilistId(Integer anilistId);
 }

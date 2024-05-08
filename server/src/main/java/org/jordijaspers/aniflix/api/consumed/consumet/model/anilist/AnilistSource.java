@@ -18,6 +18,6 @@ public class AnilistSource {
     private boolean isM3U8;
 
     @JsonProperty("quality")
-    private String quality;
+    private String quality = "Backup";
 
 }

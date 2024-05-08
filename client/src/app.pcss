@@ -72,6 +72,20 @@
 	}
 }
 
+.slider {
+	@apply
+	[&::-webkit-slider-thumb]:appearance-none
+	[&::-webkit-slider-thumb]:h-4
+	[&::-webkit-slider-thumb]:w-auto
+	[&::-webkit-slider-thumb]:aspect-square
+	[&::-webkit-slider-thumb]:rounded-full
+	[&::-webkit-slider-thumb]:bg-background
+	[&::-webkit-slider-thumb]:ring-2
+	[&::-webkit-slider-thumb]:ring-primary
+
+	[&::-webkit-slider-runnable-track]:bg-transparent
+}
+
 h1 {
 	@apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
 }
