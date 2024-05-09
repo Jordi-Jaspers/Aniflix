@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClientRequest;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @Getter
@@ -52,11 +51,12 @@ public class DomainHealthChecker {
     @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)
     public void ping() {
         LOGGER.info("[HealthCheck] Checking the health of the configured Anilist Providers.");
-        Arrays.stream(AnilistProviders.values())
-                .forEach(provider -> {
+        AnilistProviders.getDomains().stream()
+                .filter(domain -> {
                     try {
+                        LOGGER.info("[HealthCheck] Pinging provider's domain '{}'.", domain);
                         client.get()
-                                .uri(provider.getDomain())
+                                .uri(domain)
                                 .httpRequest(httpRequest -> {
                                     HttpClientRequest reactorRequest = httpRequest.getNativeRequest();
                                     reactorRequest.responseTimeout(Duration.ofMillis(500));
@@ -65,13 +65,23 @@ public class DomainHealthChecker {
                                 .bodyToMono(Void.class)
                                 .block();
 
-                        anyAvailableDomain = true;
-                        activeProvider = provider;
+                        return true;
                     } catch (final Exception exception) {
-                        LOGGER.error("[HealthCheck] No connection could be established with the provider '{}'.", provider.getProvider());
-                        anyAvailableDomain = false;
+                        LOGGER.error("[HealthCheck] No connection could be established with the domain '{}'.", domain);
                     }
-                });
+                    return false;
+                })
+                .findFirst()
+                .ifPresentOrElse(
+                        provider -> {
+                            anyAvailableDomain = true;
+                            activeProvider = AnilistProviders.getProviderByDomain(provider);
+                        },
+                        () -> {
+                            anyAvailableDomain = false;
+                            activeProvider = null;
+                        });
+
         LOGGER.info("[HealthCheck] Finished health check of the configured Anilist Providers. Active provider: '{}'.", activeProvider);
     }
 

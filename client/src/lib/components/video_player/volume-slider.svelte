@@ -7,6 +7,7 @@
     export let showVolume: boolean;
 
     let prevVolume: number = 1;
+
     function toggleMute() {
         if (!muted) {
             prevVolume = volume;
@@ -20,7 +21,8 @@
 </script>
 
 
-<div class="relative flex space-x-2 group" on:mouseenter={() => showVolume = true} on:mouseleave={() => showVolume = false} role="group">
+<div class="relative flex space-x-2 group !z-20" on:mouseenter={() => showVolume = true} on:mouseleave={() => showVolume = false}
+     role="group">
     <button aria-label="mute" class="h-full" on:click={toggleMute}>
         {#if muted || volume === 0}
             <VolumeX class="aspect-square h-full w-auto hover:scale-125"/>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {PauseIcon, Play, RotateCcw, RotateCw} from "lucide-svelte";
+    import {Pause, Play, RotateCcw, RotateCw} from "lucide-svelte";
     import type {SveltePlayerRef} from "svelte-player/dist/types";
 
     export let playing: boolean;
@@ -8,6 +8,7 @@
     function togglePlay() {
         playing = !playing;
     }
+
     function rewind() {
         playerRef.seekTo(playerRef.getCurrentTime() - 15);
     }
@@ -17,18 +18,18 @@
     }
 </script>
 
-<button aria-label="play" class="h-full w-full" on:click={togglePlay}>
+<button aria-label="play" class="h-full w-full hover:scale-125" on:click={togglePlay}>
     {#if playing}
-        <PauseIcon class="aspect-square h-full w-auto fill-white hover:scale-125"/>
+        <Pause class="aspect-square h-full w-auto stroke-[1px] fill-white"/>
     {:else}
-        <Play class="aspect-square h-full w-auto hover:scale-125"/>
+        <Play class="aspect-square h-full w-auto stroke-[1px] fill-white"/>
     {/if}
 </button>
 
 <button aria-label="rewind" class="hidden h-full w-full" on:click={rewind}>
-    <RotateCcw class="aspect-square h-full w-auto hover:scale-125"/>
+    <RotateCcw class="aspect-square h-full w-auto hover:scale-125 stroke-[1px]"/>
 </button>
 
 <button aria-label="forward" class="hidden h-full w-full" on:click={forward}>
-    <RotateCw class="aspect-square h-full w-auto hover:scale-125"/>
+    <RotateCw class="aspect-square h-full w-auto hover:scale-125 stroke-[1px]"/>
 </button>

@@ -7,7 +7,6 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.anime.repository.EpisodeRepository;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
 import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
@@ -23,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -34,7 +31,6 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.GOGOANIME;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.ZORO;
 
-@Aspect
 @Service
 @RequiredArgsConstructor
 public class SynchronizationService {
@@ -58,7 +54,6 @@ public class SynchronizationService {
      */
     @Async
     @Transactional
-    @AfterReturning(value = "@annotation(SynchronizeAnime)", returning = "anime")
     public void synchronizeData(final Anime anime) {
         if (isNull(anime) || anime.isCompleted()) {
             LOGGER.info("Anime with id '{}' is already completed or null, skipping synchronization", anime.getAnilistId());
@@ -78,8 +73,8 @@ public class SynchronizationService {
 
         // Provision the existing episodes with the urls of the new episodes.
         final Set<Episode> incompleteEpisodes = anime.getEpisodes().stream()
-                        .filter(episode -> isNull(episode.getGogoanimeId()) || isNull(episode.getZoroId()))
-                        .collect(Collectors.toSet());
+                .filter(episode -> isNull(episode.getGogoanimeId()) || isNull(episode.getZoroId()))
+                .collect(Collectors.toSet());
 
         // Update the incomplete episodes with the new episodes
         incompleteEpisodes.forEach(incompleteEpisode -> {

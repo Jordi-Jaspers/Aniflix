@@ -11,4 +11,8 @@
     });
 </script>
 
+<head>
+    <title>Login - Aniflix</title>
+</head>
+
 <slot class="flex h-screen flex-col"/>

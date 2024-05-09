@@ -6,17 +6,12 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
-import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
-import org.jordijaspers.aniflix.api.interaction.model.Interaction;
-import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
-import org.jordijaspers.aniflix.api.interaction.service.InteractionService;
 import org.jordijaspers.aniflix.api.interaction.service.UserInteractionEnhancer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +20,6 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +32,8 @@ public class AnimeService {
     private final UserInteractionEnhancer userInteractionEnhancer;
 
     private final ConsumetService consumetService;
+
+    private final SynchronizationService synchronizationService;
 
     public List<AnilistRecentEpisode> getAnimeOfRecentEpisodes(final int perPage, final int page) {
         return consumetService.getRecentEpisodes(perPage, page);
@@ -86,6 +82,7 @@ public class AnimeService {
                 .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
 
         userInteractionEnhancer.applyAnime(anime);
+        synchronizationService.synchronizeData(anime);
         return anime;
     }
 
@@ -107,6 +104,7 @@ public class AnimeService {
                 });
 
         userInteractionEnhancer.applyAnime(anime);
+        synchronizationService.synchronizeData(anime);
         return anime;
     }
 

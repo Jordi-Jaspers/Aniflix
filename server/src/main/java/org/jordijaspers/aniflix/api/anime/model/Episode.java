@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
@@ -63,4 +64,20 @@ public class Episode implements Serializable {
 
     @Transient
     private StreamingLinks streamingLinks;
+
+    /**
+     * Remove the slash at the start in the gogoanime id, if it exists.
+     * @return
+     */
+    public String getGogoanimeId() {
+        return nonNull(gogoanimeId) && gogoanimeId.startsWith(SLASH) ? gogoanimeId.substring(1) : gogoanimeId;
+    }
+
+    /**
+     * Remove the slash at the start in the zoro id, if it exists.
+     * @return
+     */
+    public String getZoroId() {
+        return nonNull(zoroId) && zoroId.startsWith(SLASH) ? zoroId.substring(1) : zoroId;
+    }
 }

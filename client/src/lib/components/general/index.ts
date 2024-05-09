@@ -4,6 +4,7 @@ import SpeakerButton from './speaker-button.svelte'
 import InfoButton from './info-button.svelte'
 import LightSwitch from './light-switch.svelte'
 import Duration from './duration.svelte'
+import LoadingScreen from './loading-screen.svelte'
 
 export {
     LikeButton,
@@ -11,5 +12,6 @@ export {
     SpeakerButton,
     InfoButton,
     LightSwitch,
-    Duration
+    Duration,
+    LoadingScreen
 }

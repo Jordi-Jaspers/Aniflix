@@ -21,6 +21,7 @@ public abstract class EpisodeMapper {
     @Mapping(target = "image", source = "episode.image")
     @Mapping(target = "airDate", source = "episode.airDate")
     @Mapping(target = "duration", source = "episode.duration")
+    @Mapping(target = "totalEpisodes", source = "episode.anime.totalEpisodes")
     public abstract EpisodeResponse toEpisodeResponse(Episode episode);
 
     @IterableMapping(qualifiedByName = "toEpisodeResponse")
