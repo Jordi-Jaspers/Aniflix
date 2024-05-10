@@ -51,7 +51,7 @@
 	}
 
 	pre {
-		background-color: #CAC030;
+		background-color: #cac030;
 		color: #000000;
 		border-radius: 5px;
 		padding: 10px;
@@ -73,17 +73,16 @@
 }
 
 .slider {
-	@apply
-	[&::-webkit-slider-thumb]:appearance-none
+	@apply [&::-webkit-slider-runnable-track]:bg-transparent
+	[&::-webkit-slider-thumb]:aspect-square
 	[&::-webkit-slider-thumb]:h-4
 	[&::-webkit-slider-thumb]:w-auto
-	[&::-webkit-slider-thumb]:aspect-square
+	[&::-webkit-slider-thumb]:appearance-none
 	[&::-webkit-slider-thumb]:rounded-full
 	[&::-webkit-slider-thumb]:bg-background
 	[&::-webkit-slider-thumb]:ring-2
-	[&::-webkit-slider-thumb]:ring-primary
 
-	[&::-webkit-slider-runnable-track]:bg-transparent
+	[&::-webkit-slider-thumb]:ring-primary;
 }
 
 h1 {

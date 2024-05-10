@@ -7,11 +7,11 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	define: {
 		__NAME__: `"${pkg.name}"`,
-		__VERSION__: `"${pkg.version}"`,
+		__VERSION__: `"${pkg.version}"`
 	},
 	resolve: {
 		alias: {
-			$lib: path.resolve('./src/lib'),
+			$lib: path.resolve('./src/lib')
 		}
 	}
 });

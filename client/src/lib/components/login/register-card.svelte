@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Socials from '$lib/components/login/socials.svelte';
-	import {Button} from '$lib/components/ui/button';
-	import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '$lib/components/ui/card';
-	import {Input} from '$lib/components/ui/input';
-	import {Label} from '$lib/components/ui/label';
-	import {ShieldAlert, ShieldCheck} from 'lucide-svelte';
-	import {register} from "$lib/api/client";
+	import { Button } from '$lib/components/ui/button';
+	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { ShieldAlert, ShieldCheck } from 'lucide-svelte';
+	import { register } from '$lib/api/client';
 
 	let formData: RegisterRequest = {
 		email: '',
@@ -38,11 +38,11 @@
 		<CardContent class="grid gap-4">
 			<div class="grid gap-2">
 				<Label>Email</Label>
-				<Input id="email" type="email" placeholder="johndoe@example.com" autocomplete="username" required bind:value={formData.email}/>
+				<Input id="email" type="email" placeholder="johndoe@example.com" autocomplete="username" required bind:value={formData.email} />
 			</div>
 			<div class="grid gap-2">
 				<Label>First Name</Label>
-				<Input id="firstName" type="firstName" placeholder="John" required bind:value={formData.firstName}/>
+				<Input id="firstName" type="firstName" placeholder="John" required bind:value={formData.firstName} />
 			</div>
 			<div class="grid gap-2">
 				<Label>Last Name</Label>
@@ -50,11 +50,11 @@
 			</div>
 			<div class="grid gap-2">
 				<Label>Password</Label>
-				<Input id="password" type="password" autocomplete="new-password" required bind:value={formData.password}/>
+				<Input id="password" type="password" autocomplete="new-password" required bind:value={formData.password} />
 			</div>
 			<div class="grid gap-2">
 				<Label>Confirm Password</Label>
-				<Input id="passwordConfirmation" type="password" autocomplete="new-password" required bind:value={formData.passwordConfirmation}/>
+				<Input id="passwordConfirmation" type="password" autocomplete="new-password" required bind:value={formData.passwordConfirmation} />
 			</div>
 
 			{#if errorMessage && registerResponse === undefined}

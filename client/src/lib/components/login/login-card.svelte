@@ -1,13 +1,13 @@
 <script lang="ts">
-	import {goto} from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import Socials from '$lib/components/login/socials.svelte';
-	import {Button} from '$lib/components/ui/button';
-	import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '$lib/components/ui/card';
-	import {Input} from '$lib/components/ui/input';
-	import {Label} from '$lib/components/ui/label';
-	import {ShieldAlert, ShieldEllipsis} from 'lucide-svelte';
-	import {CLIENT_URLS} from "$lib/api/paths";
-	import {authorize} from "$lib/api/client";
+	import { Button } from '$lib/components/ui/button';
+	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { ShieldAlert, ShieldEllipsis } from 'lucide-svelte';
+	import { CLIENT_URLS } from '$lib/api/paths';
+	import { authorize } from '$lib/api/client';
 
 	let formData: LoginRequest = {
 		email: '',
@@ -43,13 +43,7 @@
 			</div>
 			<div class="grid gap-2">
 				<Label>Password</Label>
-				<Input
-					type="password"
-					placeholder="Password"
-					autocomplete="current-password"
-					required
-					bind:value={formData.password}
-				/>
+				<Input type="password" placeholder="Password" autocomplete="current-password" required bind:value={formData.password} />
 			</div>
 
 			{#if errorMessage && authorizeResponse === undefined}

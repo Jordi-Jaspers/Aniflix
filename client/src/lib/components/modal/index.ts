@@ -1,5 +1,3 @@
-import InfoModal from './info-modal.svelte'
+import InfoModal from './info-modal.svelte';
 
-export {
-    InfoModal
-}
+export { InfoModal };

@@ -1,38 +1,40 @@
 <script lang="ts">
-    import {LibraryButton} from "$lib/components/general";
-    import {openModal} from "$lib/api/util";
-    import {setAnime} from "$lib/components/store/anime-context-store";
+	import { LibraryButton } from '$lib/components/general';
+	import { openModal } from '$lib/api/util';
+	import { setAnime } from '$lib/components/store/anime-context-store';
 
-    export let anime: AnimeResponse;
-    setAnime(anime);
+	export let anime: AnimeResponse;
+	setAnime(anime);
 </script>
 
-<div class="flex flex-col w-56 h-full rounded-t-[0.75rem] overflow-hidden">
-    <div class="relative aspect-[420/600] w-auto h-full bg-card-accent opacity-100 hover:opacity-75 transition-all">
-        <button class="absolute w-full h-full bg-gradient-to-b dark:from-transparent dark:lg:to-[99%] dark:to-card-accent justify-center items-center flex"
-                on:click={() => openModal(anime.anilistId)}/>
-        <img class="w-full h-full bg-center bg-no-repeat mb-2 cursor-pointer"
-             src={anime.image}
-             alt={anime.title}
-             width={420}
-             height={600}/>
-    </div>
+<div class="flex h-full w-56 flex-col overflow-hidden rounded-t-[0.75rem]">
+	<div class="relative aspect-[420/600] h-full w-auto bg-card-accent opacity-100 transition-all hover:opacity-75">
+		<button
+			class="absolute flex h-full w-full items-center justify-center bg-gradient-to-b dark:from-transparent dark:to-card-accent dark:lg:to-[99%]"
+			on:click={() => openModal(anime.anilistId)}
+		/>
+		<img class="mb-2 h-full w-full cursor-pointer bg-center bg-no-repeat" src={anime.image} alt={anime.title} width={420} height={600} />
+	</div>
 
-    <div class="flex w-full pb-4 bg-card-accent py-2">
-        <div class="h-full w-full flex px-[4%] object-center space-x-2">
-            <div class="w-full max-h-full space-y-1">
-                <p class="text-xs text-muted-foreground font-light whitespace-nowrap">
-                    {anime.totalEpisodes} Episodes - {anime.releaseYear ? anime.releaseYear : new Date().getFullYear()}
-                </p>
-                <div class="flex justify-between space-x-2 items-center">
-                    <h4 class="text-sm h-[2.5rem] overflow-hidden">
-                        {anime.title.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}
-                    </h4>
-                    <div class="flex justify-center h-8 w-8">
-                        <LibraryButton/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="flex w-full bg-card-accent py-2 pb-4">
+		<div class="flex h-full w-full space-x-2 object-center px-[4%]">
+			<div class="max-h-full w-full space-y-1">
+				<p class="whitespace-nowrap text-xs font-light text-muted-foreground">
+					{anime.totalEpisodes} Episodes - {anime.releaseYear ? anime.releaseYear : new Date().getFullYear()}
+				</p>
+				<div class="flex items-center justify-between space-x-2">
+					<h4 class="h-[2.5rem] overflow-hidden text-sm">
+						{anime.title
+							.toLowerCase()
+							.split(' ')
+							.map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+							.join(' ')}
+					</h4>
+					<div class="flex h-8 w-8 justify-center">
+						<LibraryButton />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

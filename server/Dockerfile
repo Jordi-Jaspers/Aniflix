@@ -1,4 +1,10 @@
+# STEP 1: Create a builder image
+# The first step depends on a create build image first by executing the following command: `./gradlew clean build`.
 FROM eclipse-temurin:17-jdk-jammy AS create-slimjre
+
+LABEL version="0.0.1-SNAPSHOT"
+LABEL description="Aniflix Server Docker Image"
+LABEL maintainer="Jordi Jaspers"
 
 # Copy the generated jar file in a temporary directory
 RUN mkdir /workspace
@@ -11,7 +17,7 @@ RUN jlink --no-header-files --no-man-pages --compress=2 --strip-java-debug-attri
 # Extract the JAR file so it can be run directly from disk
 RUN mkdir unpacked; cd unpacked; jar -xf /workspace/aniflix.jar
 
-# Create the runtime image
+# STEP 2: Create a smaller runtime image for the application
 FROM ubuntu:jammy
 
 # Setup the Ubuntu environment
@@ -51,7 +57,7 @@ COPY --from=create-slimjre --chown=top:top /workspace/slimjre /opt/workspace/sli
 ARG SPRING_PROFILES_INCLUDE="development"
 
 # Default environment variables, these can be overwritten when calling "docker run"
-ENV  SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE \
+ENV SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE \
     TZ="Europe/Amsterdam" \
     JAVA_TOOL_OPTIONS="-XX:+IgnoreUnrecognizedVMOptions -XX:+UseContainerSupport -XX:+IdleTuningCompactOnIdle -XX:+IdleTuningGcOnIdle" \
     HEAP_SIZE_MIN="64m" \
