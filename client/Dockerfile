@@ -21,7 +21,7 @@ ARG VITE_SERVER_BASE_URL='https://aniflix.stream'
 ARG VITE_SERVER_ISSUER='https://aniflix.stream'
 
 # Run your build process
-RUN bun install && bun update && bun run build
+RUN bun install --frozen-lockfile && bun run build
 
 # STEP 2: Create a smaller image for running the application
 FROM oven/bun

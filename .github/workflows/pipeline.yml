@@ -10,23 +10,39 @@ jobs:
   build-client:
     name: Build Aniflix Client
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           version: latest
 
-      - name: Install Bun version manager
-        uses: oven-sh/setup-bun@v1
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          bun-version: latest
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: build project
-        run: cd client && bun install --frozen-lockfile && bun run build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./client/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/aniflix/client_snapshot:latest
 
   build-server:
     name: Build Aniflix Server
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
     env:
       SEGMENT_DOWNLOAD_TIMEOUT_MINS: '5'
 
@@ -47,7 +63,7 @@ jobs:
             server/**/gradle-wrapper.properties
 
       - name: Build with Gradle
-        run: cd server && ./gradlew clean build --no-daemon --stacktrace
+        run: ./gradlew clean build --no-daemon --stacktrace
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
