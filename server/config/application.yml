@@ -71,7 +71,7 @@ spring:
       port: ${SPRING_REDIS_PORT:6379}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://mariadb:3306/tst_aniflix}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://mariadb:3306/test}
     username: ${SPRING_DATASOURCE_USERNAME:username}
     password: ${SPRING_DATASOURCE_PASSWORD:password}
     driver-class-name: org.mariadb.jdbc.Driver
@@ -89,6 +89,7 @@ spring:
     open-in-view: false
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
         enable_lazy_load_no_trans: true
         batch_versioned_data: true
         jdbc.batch_size: 100
