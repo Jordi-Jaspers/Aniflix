@@ -1,10 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/client" # Location of package manifests
+  # Update dependencies for github actions.
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "daily"
-  - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/server" # Location of package manifests
+
+  # Update dependencies for Client using NPM.
+  - package-ecosystem: "npm"
+    directory: "/client"
+    schedule:
+      interval: "daily"
+
+  # Update dependencies for Server using Gradle.
+  - package-ecosystem: "gradle"
+    directory: "/server"
     schedule:
       interval: "daily"

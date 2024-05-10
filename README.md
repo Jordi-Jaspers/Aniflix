@@ -193,4 +193,5 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Jikan API Docs: <https://docs.api.jikan.moe/>
 * Reactive Jikan For Spring Boot: <https://github.com/SandroHc/reactive-jikan>
 * screenfull: <https://www.npmjs.com/package/screenfull>
+* NPM Vs. Bun Cheatsheet: <https://dev.to/equiman/npm-vs-yarn-vs-pnpm-commands-cheatsheet-3el8>
 
