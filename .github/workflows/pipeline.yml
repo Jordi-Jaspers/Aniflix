@@ -23,7 +23,7 @@ jobs:
       - name: Docker Build & Push Action
         uses: mr-smithers-excellent/docker-build-push@v6.4
         with:
-          image: aniflix-snapshot/server
+          image: jordijaspers/aniflix-snapshot
           addLatest: true
 
           platform: linux/amd64,linux/arm64,linux/arm/v7
