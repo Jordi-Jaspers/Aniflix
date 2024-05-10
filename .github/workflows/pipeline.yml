@@ -23,4 +23,4 @@ jobs:
           bun-version: latest
 
       - name: build project
-        run: bun install --frozen-lockfile && bun build
+        run: cd client && bun install --frozen-lockfile && bun build
