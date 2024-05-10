@@ -37,8 +37,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./client/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/aniflix/client_snapshot:latest
 
@@ -83,6 +82,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./server/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/aniflix/server_snapshot:latest
