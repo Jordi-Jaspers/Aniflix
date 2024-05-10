@@ -56,7 +56,6 @@ public class AuthenticationController {
 
     @ResponseStatus(OK)
     @PostMapping(path = TOKEN_PATH)
-    // TODO: re-use of refresh token detection.
     public ResponseEntity<UserResponse> refreshTokens(@RequestBody final RefreshTokenRequest request) {
         final User user = authenticationService.refresh(request.getRefreshToken());
         return ResponseEntity.status(OK).body(userMapper.toUserResponse(user));

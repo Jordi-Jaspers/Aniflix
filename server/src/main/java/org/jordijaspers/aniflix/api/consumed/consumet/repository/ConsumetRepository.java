@@ -71,8 +71,6 @@ public interface ConsumetRepository {
     /**
      * Returns a list of recently released episodes of currently airing Anime TV series
      * by retrieving all the recent episodes and filtering out the ones that are chinese.
-     * <p>
-     * TODO: Should be changed to '/meta/anilist/recent-episodes' when the API is updated.
      *
      * @param results The number of results to return.
      * @param page    The page to return.
