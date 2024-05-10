@@ -6,7 +6,6 @@ import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.email.model.MailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
