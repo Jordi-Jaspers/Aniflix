@@ -1,0 +1,26 @@
+name: Aniflix Pipeline
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+
+jobs:
+
+  build-client:
+    name: Build Aniflix Client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          version: latest
+
+      - name: Install Bun version manager
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: build project
+        run: bun install --frozen-lockfile && bun build
