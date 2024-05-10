@@ -50,7 +50,7 @@ USER aniflix
 WORKDIR /opt/workspace
 
 # Install the slim JRE in the container
-COPY --from=create-slimjre --chown=top:top /workspace/slimjre /opt/workspace/slimjre/
+COPY --from=create-slimjre --chown=aniflix:aniflix /workspace/slimjre /opt/workspace/slimjre/
 
 # These are build arguments that will be set by Jenkins at build time to the running Inbucket container, but
 # they will also be added to the environment list below, so they can be overridden at run time in Kubernetes/Docker
@@ -74,6 +74,7 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /bin/sh -c "/usr/bin/wge
 EXPOSE 8080 8009
 
 # Install the Spring boot config files in the container
+RUN mkdir -p /opt/workspace/config
 COPY --chown=aniflix:aniflix config /opt/workspace/config
 
 # Install the unpacked Spring Boot application in the container
@@ -99,7 +100,7 @@ CMD /opt/workspace/slimjre/bin/java \
 # Add tomcat native library to java.library.path
 -Djava.library.path=/opt/workspace/slimjre/lib/default:/opt/workspace/slimjre/lib:/usr/lib64:/usr/lib:/usr/lib/x86_64-linux-gnu \
 # Bootable jar file
--cp /opt/workspace/app:/opt/workspace/app/lib/* nl.vodafoneziggo.smc.top.Top \
+-cp /opt/workspace/app:/opt/workspace/app/lib/* org.jordijaspers.aniflix.Aniflix \
 # Spring boot properties
 --spring.config.additional-location=/opt/workspace/config/ \
 --spring.output.ansi.enabled=always \
