@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.email.model.MailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(EmailService.class)
+@Profile("!development")
 public class DefaultEmailService implements EmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
