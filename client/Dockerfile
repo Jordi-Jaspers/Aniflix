@@ -17,9 +17,6 @@ COPY . .
 ARG VITE_ENV='production'
 ARG VITE_SERVER_PORT=3000
 
-ARG VITE_SERVER_BASE_URL='https://aniflix.stream'
-ARG VITE_SERVER_ISSUER='https://aniflix.stream'
-
 # Run your build process
 RUN bun install --frozen-lockfile && bun run build
 
