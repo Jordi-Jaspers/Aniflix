@@ -3,6 +3,9 @@ package org.jordijaspers.aniflix.common.util;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Utility class for string operations.
+ */
 @SuppressWarnings("PMD.ShortVariable")
 public final class StringUtil {
 

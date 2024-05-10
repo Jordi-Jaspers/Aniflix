@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * The repository for the anime.
+ */
 @Repository
 public interface AnimeRepository extends JpaRepository<Anime, Integer> {
 

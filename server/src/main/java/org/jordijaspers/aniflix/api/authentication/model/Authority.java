@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * The authority of a user.
+ */
 @Getter
 @AllArgsConstructor
 public enum Authority {

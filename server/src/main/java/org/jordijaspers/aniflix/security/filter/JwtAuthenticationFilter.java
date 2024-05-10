@@ -17,12 +17,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.util.StringUtils.startsWithIgnoreCase;
 
 /**
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         final String jwt = authorizationHeader.substring(BEARER.length());
-        if (StringUtils.hasText(jwt)) {
+        if (hasText(jwt)) {
             try {
                 LOGGER.debug("Found JWT token in request headers: '{}'", jwt);
                 final String email = jwtService.extractSubject(jwt);

@@ -21,6 +21,10 @@ import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.authentication.model.Authority.USER;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.*;
 
+/**
+ * A service to manage users, their registration and authentication. It also implements the {@link UserDetailsService}
+ * to load users by their username. So, Spring Security can use this service to authenticate users.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {

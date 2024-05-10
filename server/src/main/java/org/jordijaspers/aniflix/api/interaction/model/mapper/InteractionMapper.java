@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+/**
+ * The mapper for interactions.
+ */
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class InteractionMapper {
 

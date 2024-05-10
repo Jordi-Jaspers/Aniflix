@@ -7,6 +7,9 @@ import org.jordijaspers.aniflix.api.genre.model.Genre;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * The genres of an anime.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum Genres {

@@ -6,6 +6,9 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The response for the anime.
+ */
 @Data
 public class AnimeResponse {
 

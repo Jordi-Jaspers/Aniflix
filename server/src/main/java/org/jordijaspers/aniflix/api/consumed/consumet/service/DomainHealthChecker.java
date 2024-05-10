@@ -1,6 +1,5 @@
 package org.jordijaspers.aniflix.api.consumed.consumet.service;
 
-import lombok.Getter;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.common.exception.AnilistProvidersDownException;
 import org.slf4j.Logger;
@@ -14,33 +13,21 @@ import reactor.netty.http.client.HttpClientRequest;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-@Getter
+import static java.util.Objects.isNull;
+import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.NO_PROVIDER;
+
+/**
+ * The DomainHealthChecker is responsible for checking the health of the configured Anilist Providers.
+ */
 @Component
 public class DomainHealthChecker {
 
-    /**
-     * The default class logger.
-     */
     private static final Logger LOGGER = LoggerFactory.getLogger(DomainHealthChecker.class);
 
-    /**
-     * Indicates whether any of the configured domains are reachable.
-     */
-    private boolean anyAvailableDomain = false;
+    private static AnilistProviders activeProvider = NO_PROVIDER;
 
-    /**
-     * The current active provider.
-     */
-    private AnilistProviders activeProvider = null;
-
-    /**
-     * The WebClient to use for the health checks.
-     */
     private final WebClient client;
 
-    /**
-     * The default AllArgsConstructor.
-     */
     public DomainHealthChecker(@Qualifier("consumetClient") final WebClient client) {
         this.client = client;
     }
@@ -58,7 +45,7 @@ public class DomainHealthChecker {
                         client.get()
                                 .uri(domain)
                                 .httpRequest(httpRequest -> {
-                                    HttpClientRequest reactorRequest = httpRequest.getNativeRequest();
+                                    final HttpClientRequest reactorRequest = httpRequest.getNativeRequest();
                                     reactorRequest.responseTimeout(Duration.ofMillis(500));
                                 })
                                 .retrieve()
@@ -73,14 +60,9 @@ public class DomainHealthChecker {
                 })
                 .findFirst()
                 .ifPresentOrElse(
-                        provider -> {
-                            anyAvailableDomain = true;
-                            activeProvider = AnilistProviders.getProviderByDomain(provider);
-                        },
-                        () -> {
-                            anyAvailableDomain = false;
-                            activeProvider = null;
-                        });
+                        provider -> activeProvider = AnilistProviders.getProviderByDomain(provider),
+                        () -> activeProvider = NO_PROVIDER
+                );
 
         LOGGER.info("[HealthCheck] Finished health check of the configured Anilist Providers. Active provider: '{}'.", activeProvider);
     }
@@ -88,9 +70,17 @@ public class DomainHealthChecker {
     /**
      * Validate the availability of the Anilist Providers.
      */
-    public void validateAvailability() {
-        if (!anyAvailableDomain) {
+    public static void validateAvailability() {
+        if (isNull(activeProvider) || activeProvider == NO_PROVIDER) {
             throw new AnilistProvidersDownException();
         }
+    }
+
+    /**
+     * @return the active provider if available, else throws an exception.
+     */
+    public static AnilistProviders getActiveProvider() {
+        validateAvailability();
+        return activeProvider;
     }
 }

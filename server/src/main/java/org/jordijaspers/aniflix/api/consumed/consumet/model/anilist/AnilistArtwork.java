@@ -3,6 +3,9 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * The artwork of an anime.
+ */
 @Data
 public class AnilistArtwork {
 

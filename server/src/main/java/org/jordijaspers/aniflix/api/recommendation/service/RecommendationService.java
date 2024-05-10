@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * A service to manage recommendations for anime.
+ */
 @Service
 @RequiredArgsConstructor
 public class RecommendationService {

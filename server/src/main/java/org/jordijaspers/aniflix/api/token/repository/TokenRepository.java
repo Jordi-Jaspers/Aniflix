@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The repository for the {@link Token} entity.
+ */
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 

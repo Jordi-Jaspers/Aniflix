@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * The status of an anime.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum AnimeStatus {

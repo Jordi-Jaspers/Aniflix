@@ -2,12 +2,15 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-import static java.util.Objects.nonNull;
-
+/**
+ * The search result of an anime.
+ */
 @Data
+@EqualsAndHashCode(exclude = "status")
 public class AnilistSearchResult {
 
     @JsonProperty("id")
@@ -60,20 +63,5 @@ public class AnilistSearchResult {
      */
     public String getStatus() {
         return status.toUpperCase();
-    }
-
-    /**
-     * Returns the title of the anime in the language you prefer.
-     */
-    public String getPreferredTitle() {
-        if (nonNull(title.getEnglish())) {
-            return title.getEnglish().toLowerCase();
-        } else if (nonNull(title.getRomaji())) {
-            return title.getRomaji().toLowerCase();
-        } else if (nonNull(title.getJapanse())) {
-            return title.getJapanse().toLowerCase();
-        } else {
-            return "";
-        }
     }
 }

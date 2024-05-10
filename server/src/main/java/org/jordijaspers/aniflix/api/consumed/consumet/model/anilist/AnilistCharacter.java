@@ -7,6 +7,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The character of an anime.
+ */
 @Data
 public class AnilistCharacter {
 

@@ -9,6 +9,9 @@ import java.io.Serializable;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The streaming source model.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

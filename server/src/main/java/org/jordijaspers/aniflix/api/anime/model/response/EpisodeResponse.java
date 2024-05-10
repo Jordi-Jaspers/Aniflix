@@ -4,11 +4,10 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
-
+/**
+ * The response for the episode.
+ */
 @Data
 @ToString
 public class EpisodeResponse {

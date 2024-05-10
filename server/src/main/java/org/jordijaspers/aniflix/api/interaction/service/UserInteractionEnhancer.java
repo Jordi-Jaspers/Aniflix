@@ -15,6 +15,10 @@ import java.util.Objects;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
+/**
+ * A service to enhance anime and recommendation objects with user interactions.
+ * It will apply these interactions to the transient fields of the objects.
+ */
 @Component
 @RequiredArgsConstructor
 public class UserInteractionEnhancer {

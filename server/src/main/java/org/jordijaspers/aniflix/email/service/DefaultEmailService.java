@@ -26,6 +26,11 @@ public class DefaultEmailService implements EmailService {
     private final JavaMailSender mailSender;
 
     @Override
+    public void sendUserValidationEmail(final User recipient) {
+        LOGGER.error("This feature is not implemented yet.");
+    }
+
+    @Override
     public void sendEmail(final User recipient, final MailMessage mailMessage) {
         final MimeMessagePreparator messagePreparator = mimeMessage -> {
             final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
@@ -40,10 +45,5 @@ public class DefaultEmailService implements EmailService {
         } catch (MailException e) {
             throw new HawaiiException("Error sending email.", e);
         }
-    }
-
-    @Override
-    public void sendUserValidationEmail(final User recipient) {
-        LOGGER.error("This feature is not implemented yet.");
     }
 }

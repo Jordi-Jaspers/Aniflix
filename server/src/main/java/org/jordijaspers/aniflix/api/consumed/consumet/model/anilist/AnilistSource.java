@@ -3,11 +3,9 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
-
+/**
+ * The source of an anime.
+ */
 @Data
 public class AnilistSource {
 

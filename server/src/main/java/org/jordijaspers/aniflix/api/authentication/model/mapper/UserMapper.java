@@ -13,6 +13,9 @@ import org.mapstruct.Mapping;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The mapper for the user.
+ */
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class UserMapper {
 

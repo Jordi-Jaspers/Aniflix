@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 
+/**
+ * The response for the news posts.
+ */
 @Data
 public class NewsPostResponse {
     

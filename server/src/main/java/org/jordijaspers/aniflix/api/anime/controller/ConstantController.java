@@ -18,6 +18,9 @@ import static org.jordijaspers.aniflix.api.Paths.ANIME_CONSTANT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the anime constants.
+ */
 @RestController
 @RequiredArgsConstructor
 public class ConstantController {

@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+/**
+ * Converts a {@link Jwt} into a {@link JwtUserPrincipalAuthenticationToken}.
+ */
 @Data
 @Component
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {

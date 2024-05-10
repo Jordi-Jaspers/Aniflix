@@ -16,13 +16,15 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
+import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The episode of an anime which represents an episode in the database.
+ */
 @Data
 @Entity
 @Table(name = "episode")
@@ -67,7 +69,6 @@ public class Episode implements Serializable {
 
     /**
      * Remove the slash at the start in the gogoanime id, if it exists.
-     * @return
      */
     public String getGogoanimeId() {
         return nonNull(gogoanimeId) && gogoanimeId.startsWith(SLASH) ? gogoanimeId.substring(1) : gogoanimeId;
@@ -75,9 +76,19 @@ public class Episode implements Serializable {
 
     /**
      * Remove the slash at the start in the zoro id, if it exists.
-     * @return
      */
     public String getZoroId() {
         return nonNull(zoroId) && zoroId.startsWith(SLASH) ? zoroId.substring(1) : zoroId;
+    }
+
+    /**
+     * @return the correct id of the episode based on the active provider.
+     */
+    public String getActiveEpisodeId() {
+        return switch (getActiveProvider()) {
+            case GOGOANIME -> getGogoanimeId();
+            case ZORO -> getZoroId();
+            default -> null;
+        };
     }
 }

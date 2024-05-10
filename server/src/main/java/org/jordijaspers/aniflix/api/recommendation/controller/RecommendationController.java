@@ -1,8 +1,6 @@
 package org.jordijaspers.aniflix.api.recommendation.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
-import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.jordijaspers.aniflix.api.recommendation.model.mapper.RecommendationMapper;
 import org.jordijaspers.aniflix.api.recommendation.model.response.RecommendationResponse;
@@ -20,6 +18,9 @@ import static org.jordijaspers.aniflix.api.Paths.ANIME_RECOMMENDATIONS;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the recommendations.
+ */
 @RestController
 @RequiredArgsConstructor
 public class RecommendationController {

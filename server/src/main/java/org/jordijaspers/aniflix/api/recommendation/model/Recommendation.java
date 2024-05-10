@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The recommendation model which represents a recommendation.
+ */
 @Data
 public class Recommendation implements Serializable {
 

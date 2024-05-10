@@ -11,11 +11,14 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
+/**
+ * The mapper for the recommendations.
+ */
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class RecommendationMapper {
 
     @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(recommendation.getPreferredTitle())")
+    @Mapping(target = "title", expression = "java(recommendation.getTitle().getPreferredTitle())")
     @Named("toRecommendation")
     public abstract Recommendation toRecommendation(AnilistRecommendation recommendation);
 

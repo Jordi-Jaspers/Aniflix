@@ -11,6 +11,9 @@ import java.util.List;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The streaming links of an anime.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

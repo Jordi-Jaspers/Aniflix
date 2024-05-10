@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.NEWS_POST_NOT_FOUND_ERROR;
 
+/**
+ * The service for the news posts.
+ */
 @Service
 @RequiredArgsConstructor
 public class NewsService {

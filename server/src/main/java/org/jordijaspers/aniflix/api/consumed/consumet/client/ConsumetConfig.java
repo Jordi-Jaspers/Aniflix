@@ -19,6 +19,9 @@ import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.C
 import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The configuration for the Consumet API WebClient.
+ */
 @Configuration
 @RequiredArgsConstructor
 public class ConsumetConfig {

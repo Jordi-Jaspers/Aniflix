@@ -8,6 +8,9 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
+/**
+ * The mapper for the streaming links.
+ */
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class StreamingLinkMapper {
 

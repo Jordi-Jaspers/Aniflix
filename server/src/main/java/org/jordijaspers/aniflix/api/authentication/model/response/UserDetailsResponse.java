@@ -5,6 +5,9 @@ import lombok.Data;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * A response model for user details.
+ */
 @Data
 public class UserDetailsResponse {
 

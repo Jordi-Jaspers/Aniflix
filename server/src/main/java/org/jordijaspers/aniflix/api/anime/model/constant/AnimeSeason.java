@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * An enum to represent the different seasons of the year.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum AnimeSeason {

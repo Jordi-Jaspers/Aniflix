@@ -6,10 +6,11 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 
-import static java.util.Objects.nonNull;
-import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The recent episode of an anime.
+ */
 @Data
 public class AnilistRecentEpisode implements Serializable {
 
@@ -34,27 +35,4 @@ public class AnilistRecentEpisode implements Serializable {
     @JsonProperty("image")
     private String image;
 
-    /**
-     * Returns the urlId with a leading slash.
-     */
-    public String getEpisodeUrl() {
-        return episodeUrl.startsWith(SLASH)
-                ? episodeUrl
-                : SLASH + episodeUrl;
-    }
-
-    /**
-     * Returns the title of the anime in the language you prefer.
-     */
-    public String getPreferredTitle() {
-        if (nonNull(title.getEnglish())) {
-            return title.getEnglish().toLowerCase();
-        } else if (nonNull(title.getRomaji())) {
-            return title.getRomaji().toLowerCase();
-        } else if (nonNull(title.getJapanse())) {
-            return title.getJapanse().toLowerCase();
-        } else {
-            return "";
-        }
-    }
 }

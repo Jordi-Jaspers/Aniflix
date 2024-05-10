@@ -31,6 +31,9 @@ import java.util.List;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The user entity.
+ */
 @Data
 @Entity
 @NoArgsConstructor

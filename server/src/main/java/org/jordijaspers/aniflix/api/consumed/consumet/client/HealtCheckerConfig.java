@@ -17,6 +17,9 @@ import static org.springframework.http.HttpHeaders.ACCEPT;
 import static org.springframework.http.HttpHeaders.CONNECTION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The configuration for the HealthChecker WebClient.
+ */
 @Configuration
 @RequiredArgsConstructor
 public class HealtCheckerConfig {

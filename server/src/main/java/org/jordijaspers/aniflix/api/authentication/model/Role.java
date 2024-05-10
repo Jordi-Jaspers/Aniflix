@@ -20,6 +20,9 @@ import java.util.Set;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The role entity.
+ */
 @Data
 @Entity
 @NoArgsConstructor

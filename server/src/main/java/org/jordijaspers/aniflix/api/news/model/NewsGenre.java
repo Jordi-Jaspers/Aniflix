@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * The genres for the news posts.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum NewsGenre {

@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
+/**
+ * The repository for the genres.
+ */
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
 

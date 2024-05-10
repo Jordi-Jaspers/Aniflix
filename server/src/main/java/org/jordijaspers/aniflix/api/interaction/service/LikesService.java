@@ -1,8 +1,6 @@
 package org.jordijaspers.aniflix.api.interaction.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.anime.model.Anime;
-import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
+/**
+ * A service to manage user interactions with certain Anime.
+ */
 @Service
 @RequiredArgsConstructor
 public class LikesService {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LikesService.class);
 
     private final InteractionService interactionService;

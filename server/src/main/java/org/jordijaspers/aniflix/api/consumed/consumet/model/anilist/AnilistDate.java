@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * The date of an anime.
+ */
 @Data
 public class AnilistDate {
 

@@ -3,6 +3,9 @@ package org.jordijaspers.aniflix.api.anime.model.request;
 import lombok.Data;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 
+/**
+ * The request for the genres.
+ */
 @Data
 public class GenreRequest {
 

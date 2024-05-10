@@ -25,6 +25,9 @@ import static org.jordijaspers.aniflix.api.Paths.*;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the authentication.
+ */
 @RestController
 @RequiredArgsConstructor
 public class AuthenticationController {

@@ -1,7 +1,6 @@
 package org.jordijaspers.aniflix.api.interaction.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
 import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
@@ -24,6 +23,9 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the library.
+ */
 @RestController
 @RequiredArgsConstructor
 public class LibraryController {
@@ -55,7 +57,7 @@ public class LibraryController {
         final List<Interaction> library = libraryService.getFullLibraryForUser();
         return ResponseEntity.status(OK).body(interactionMapper.toBasicResponse(library));
     }
-    
+
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_LIBRARY_SEARCH_PATH, produces = APPLICATION_JSON_VALUE)

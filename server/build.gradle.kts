@@ -49,7 +49,7 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
-    id("io.spring.dependency-management") version "1.1.4"
+    id("io.spring.dependency-management") version "1.1.5"
 
     // Quality plugin for Checkstyle, PMD and Spotbugs.
     id("ru.vyarus.quality") version "5.0.0"
@@ -131,7 +131,7 @@ dependencies {
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
 
     // Contain types that extend and augment the Java Collections Framework.
-    implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.4")
+    implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M1")
 
     // HTTPClient provides an efficient, up-to-date, and feature-rich package implementing the client side of the most recent HTTP standards and recommendations.
     implementation(group = "org.apache.httpcomponents", name = "httpclient", version = "4.5.14")
@@ -140,7 +140,7 @@ dependencies {
     implementation(group = "commons-io", name = "commons-io", version = "2.16.1")
 
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
-    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.38-rc3")
+    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.39")
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
@@ -153,15 +153,15 @@ dependencies {
  */
 quality {
     autoRegistration = true
-    configDir = "src/quality/config/"
+    configDir = "src/quality/"
 
-    spotbugsVersion = "4.8.4"
+    spotbugsVersion = "4.8.5"
     spotbugs = true
 
     pmdVersion = "6.55.0"
     pmd = true
 
-    checkstyleVersion = "10.12.7"
+    checkstyleVersion = "10.16.0"
     checkstyle = true
 
     codenarcVersion = "3.3.0"

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A generic representation of a page of results in Consumet API.
+ *
+ * @param <T> the type of the results.
+ */
 @Data
 public class ResultPage<T> {
 

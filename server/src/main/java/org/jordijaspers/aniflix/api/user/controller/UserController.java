@@ -15,6 +15,9 @@ import static org.jordijaspers.aniflix.api.Paths.USER_DETAILS;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the user endpoints.
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserController {

@@ -3,6 +3,9 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * The names of an actor.
+ */
 @Data
 @SuppressWarnings("PMD.FieldNamingConventions")
 public class AnilistActorNames {
@@ -17,7 +20,7 @@ public class AnilistActorNames {
     private String full;
     
     @JsonProperty("native")
-    private String _native;
+    private String nativeName;
     
     @JsonProperty("userPreferred")
     private String userPreferred;

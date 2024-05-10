@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * A response model for user registration.
+ */
 @Data
 public class RegisterResponse {
 

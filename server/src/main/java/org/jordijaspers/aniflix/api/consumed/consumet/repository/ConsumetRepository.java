@@ -13,6 +13,9 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStrea
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The repository for the Consumet API.
+ */
 public interface ConsumetRepository {
 
     /**
@@ -90,7 +93,7 @@ public interface ConsumetRepository {
      *
      * @param episodeId The id of the episode.
      */
-    AnilistStreamingLinks getEpisodeLinks(String episodeId, final String provider);
+    AnilistStreamingLinks getEpisodeLinks(String episodeId, String provider);
 
     /**
      * Returns the latest news articles.

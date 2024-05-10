@@ -10,6 +10,9 @@ import java.util.List;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
+/**
+ * The news feed of an anime.
+ */
 @Data
 public class AnilistNewsFeed {
 

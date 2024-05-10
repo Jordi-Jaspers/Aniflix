@@ -11,6 +11,9 @@ import java.util.Map;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * An {@link AbstractOAuth2TokenAuthenticationToken} implementation that uses a {@link UserTokenPrincipal} as the principal.
+ */
 @Transient
 public class JwtUserPrincipalAuthenticationToken extends AbstractOAuth2TokenAuthenticationToken<UserTokenPrincipal> {
 

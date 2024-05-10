@@ -11,14 +11,8 @@ import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
-import org.jordijaspers.aniflix.api.interaction.model.Interaction;
-import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
-import org.jordijaspers.aniflix.api.interaction.model.response.InteractionResponse;
-import org.jordijaspers.aniflix.api.interaction.service.InteractionService;
-import org.jordijaspers.aniflix.security.principal.UserTokenPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +27,9 @@ import static org.jordijaspers.aniflix.api.Paths.*;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the anime endpoints.
+ */
 @RestController
 @RequiredArgsConstructor
 public class AnimeController {

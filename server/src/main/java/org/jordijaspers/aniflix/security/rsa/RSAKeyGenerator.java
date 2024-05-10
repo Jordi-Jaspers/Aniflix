@@ -18,6 +18,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+/**
+ * A service that generates and loads RSA keys in the database.
+ */
 @Component
 @RequiredArgsConstructor
 public class RSAKeyGenerator {

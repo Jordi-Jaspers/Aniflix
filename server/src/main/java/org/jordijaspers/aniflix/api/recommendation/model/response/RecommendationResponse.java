@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 
+/**
+ * The response object for the recommendation.
+ */
 @Data
 public class RecommendationResponse {
 

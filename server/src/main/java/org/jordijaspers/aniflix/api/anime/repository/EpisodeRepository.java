@@ -9,7 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The repository for the episodes.
+ */
 @Repository
+@SuppressWarnings("PMD.MethodNamingConventions")
 public interface EpisodeRepository extends JpaRepository<Episode, Integer> {
 
     @LogExecutionTime

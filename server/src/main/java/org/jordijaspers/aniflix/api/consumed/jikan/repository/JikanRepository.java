@@ -8,6 +8,9 @@ import net.sandrohc.jikan.model.common.Trailer;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The repository for the Jikan API.
+ */
 public interface JikanRepository {
 
     /**

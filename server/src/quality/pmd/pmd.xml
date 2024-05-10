@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
     <description>
-        Slightly tweaked PMD ruleset for Hawaii projects.
+        General Java quality rules.
     </description>
 
     <!-- BEST PRACTICES -->
@@ -39,6 +39,7 @@
         <exclude name="ShortVariable"/>
         <exclude name="ShortClassName"/>
     </rule>
+
     <rule ref="category/java/codestyle.xml/LongVariable">
         <properties>
             <property name="minimum" value="50"/>
@@ -67,7 +68,10 @@
         <exclude name="TooManyMethods"/>
         <exclude name="AvoidUncheckedExceptionsInSignatures"/>
         <exclude name="AvoidCatchingGenericException"/>
+        <exclude name="SignatureDeclareThrowsException"/>
     </rule>
+
+    <!-- CATEGORY -->
     <rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
         <properties>
             <property name="problemDepth" value="4"/>
@@ -75,8 +79,8 @@
     </rule>
 
     <!-- DOCUMENTATION -->
+    <!-- Checkstyle controls documentation validity  -->
     <rule ref="category/java/documentation.xml">
-        <!-- TODO: turn on again please -->
         <exclude name="CommentRequired"/>
         <exclude name="CommentSize"/>
     </rule>
@@ -87,8 +91,8 @@
         <exclude name="EmptyFinalizer"/>
         <exclude name="FinalizeOnlyCallsSuperFinalize"/>
         <exclude name="FinalizeDoesNotCallSuperFinalize"/>
-        <exclude name="MissingSerialVersionUID"/>
         <exclude name="UseLocaleWithCaseConversions"/>
+        <exclude name="InvalidLogMessageFormat"/>
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
         <properties>
@@ -114,5 +118,4 @@
         <exclude name="UseStringBufferForStringAppends"/>
         <exclude name="AvoidInstantiatingObjectsInLoops"/>
     </rule>
-
 </ruleset>

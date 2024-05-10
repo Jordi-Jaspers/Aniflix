@@ -12,7 +12,6 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecom
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
-import org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker;
 import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
@@ -36,8 +35,12 @@ import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Endpoints.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.ZORO;
+import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
+/**
+ * The implementation of the {@link ConsumetRepository} interface.
+ */
 @Repository
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class ConsumetRepositoryImpl implements ConsumetRepository {
@@ -48,14 +51,9 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
 
     private final WebClient client;
 
-    private final DomainHealthChecker domainHealthChecker;
-
-    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client,
-                                  final DomainHealthChecker domainHealthChecker,
-                                  final ObjectMapper objectMapper) {
+    public ConsumetRepositoryImpl(@Qualifier("consumetClient") final WebClient client, final ObjectMapper objectMapper) {
         this.client = client;
         this.objectMapper = objectMapper;
-        this.domainHealthChecker = domainHealthChecker;
     }
 
     /**
@@ -94,7 +92,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @Override
     @LogExecutionTime
     public AnilistInfoResult getAnimeDetails(final int id) {
-        return getAnimeDetails(id, domainHealthChecker.getActiveProvider().getProvider());
+        return getAnimeDetails(id, getActiveProvider().getProvider());
     }
 
     /**
@@ -124,7 +122,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     public AnilistInfoResult getAnimeInfo(final int id) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
-                        .queryParam(PROVIDER_PARAM, domainHealthChecker.getActiveProvider().getProvider())
+                        .queryParam(PROVIDER_PARAM, getActiveProvider().getProvider())
                         .path(ANIME_DATA)
                         .build(id)
                 )
@@ -284,6 +282,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     /**
      * {@inheritDoc}
      */
+    @Override
     @LogExecutionTime
     public AnilistStreamingLinks getEpisodeLinks(final String episodeId, final String provider) {
         return client.get()
@@ -312,7 +311,6 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
         LOGGER.error("[Consumet API] Received an error response from the server with status code '{}'", clientResponse.statusCode());
         return clientResponse.bodyToMono(String.class)
                 .flatMap(response -> {
-                    final Mono<Throwable> error = Mono.error(new ConsumetAPIException(response));
                     try {
                         final ConsumetError errorResponse = objectMapper.readValue(response, ConsumetError.class);
                         if (nonNull(errorResponse)) {
@@ -322,7 +320,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
                     } catch (final JsonProcessingException noConsumetError) {
                         LOGGER.error("[Consumet API] Unknown error response from Consumet API: '{}'", response);
                     }
-                    return error;
+                    return Mono.error(new ConsumetAPIException(response));
                 });
     }
 

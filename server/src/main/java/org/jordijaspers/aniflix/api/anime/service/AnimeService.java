@@ -21,6 +21,9 @@ import java.util.Set;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * The service which handles the anime data.
+ */
 @Service
 @RequiredArgsConstructor
 public class AnimeService {

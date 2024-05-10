@@ -1,6 +1,5 @@
 package org.jordijaspers.aniflix.api.interaction.repository;
 
-import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
@@ -11,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The repository for interactions.
+ */
 @Repository
 public interface InteractionRepository extends JpaRepository<Interaction, Integer> {
 

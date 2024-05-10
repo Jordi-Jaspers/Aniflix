@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The detailed anime response.
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class DetailedAnimeResponse extends AnimeResponse {

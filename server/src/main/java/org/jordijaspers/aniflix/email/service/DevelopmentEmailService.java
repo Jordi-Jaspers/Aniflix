@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+/**
+ * A service to send emails in a development environment.
+ */
 @Service
 @Profile("development")
 @RequiredArgsConstructor

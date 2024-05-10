@@ -25,6 +25,9 @@ import java.time.LocalDateTime;
 import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.*;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The interaction entity.
+ */
 @Data
 @Entity
 @NoArgsConstructor

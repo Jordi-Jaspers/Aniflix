@@ -21,7 +21,6 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.ZonedDateTime;
 import java.util.AbstractMap;
@@ -34,17 +33,18 @@ import java.util.stream.Stream;
 
 import static java.time.ZoneOffset.UTC;
 import static java.util.Objects.nonNull;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 
-@Mapper(config = SharedMapperConfiguration.class, imports = AnilistProviders.class)
+/**
+ * The mapper for the anime.
+ */
+@Mapper(config = SharedMapperConfiguration.class, imports = {AnilistProviders.class, DomainHealthChecker.class})
 public abstract class AnimeMapper {
 
-    @Autowired
-    protected DomainHealthChecker healthChecker;
-
     @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getPreferredTitle())")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
     @Mapping(target = "imageUrl", source = "image")
     @Mapping(target = "coverUrl", source = "cover")
     @Mapping(target = "releaseYear", source = "releaseDate")
@@ -52,7 +52,7 @@ public abstract class AnimeMapper {
     public abstract Anime toAnime(AnilistSearchResult result);
 
     @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getPreferredTitle())")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
     @Mapping(target = "imageUrl", source = "image")
     @Mapping(target = "coverUrl", source = "cover")
     @Mapping(target = "trailerUrl", source = "trailer.id")
@@ -62,7 +62,7 @@ public abstract class AnimeMapper {
     public abstract Anime toAnime(AnilistOverview result);
 
     @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getPreferredTitle())")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
     @Mapping(target = "imageUrl", source = "image")
     @Mapping(target = "coverUrl", source = "cover")
     @Mapping(target = "trailerUrl", source = "trailer.id")
@@ -70,14 +70,20 @@ public abstract class AnimeMapper {
     @Mapping(target = "mediaType", source = "type")
     public abstract Anime toAnime(AnilistInfoResult result);
 
-    @Mapping(target = "gogoanimeId", expression = "java(healthChecker.getActiveProvider() == AnilistProviders.GOGOANIME ? source.getId() : null)")
-    @Mapping(target = "zoroId", expression = "java(healthChecker.getActiveProvider() == AnilistProviders.ZORO ? source.getId() : null)")
+    @Mapping(
+            target = "gogoanimeId",
+            expression = "java(DomainHealthChecker.getActiveProvider() == AnilistProviders.GOGOANIME ? source.getId() : null)"
+    )
+    @Mapping(
+            target = "zoroId",
+            expression = "java(DomainHealthChecker.getActiveProvider() == AnilistProviders.ZORO ? source.getId() : null)"
+    )
     @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
     @Mapping(target = "id", ignore = true)
     public abstract Episode toEpisode(AnilistEpisode source);
 
     @Named("toRecentEpisodesResponse")
-    @Mapping(target = "title", expression = "java(source.getPreferredTitle())")
+    @Mapping(target = "title", expression = "java(source.getTitle().getPreferredTitle())")
     public abstract EpisodeResponse toRecentEpisodesResponse(AnilistRecentEpisode source);
 
     @IterableMapping(qualifiedByName = "toRecentEpisodesResponse")
@@ -106,6 +112,9 @@ public abstract class AnimeMapper {
     @IterableMapping(qualifiedByName = "toResponseWithEpisodes")
     public abstract List<DetailedAnimeResponse> toResponseWithEpisodes(List<Anime> anime);
 
+    /**
+     * Converts a list of anime to a list of anime responses.
+     */
     public List<EpisodeResponse> toEpisodeResponse(final Anime anime) {
         return anime.getEpisodes().stream()
                 .map(episode -> {
@@ -125,15 +134,18 @@ public abstract class AnimeMapper {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Converts a request to a map of filters.
+     */
     public Map<String, String> toFilters(final AnimeRequest request) {
         return Stream.of(
                         pair(QUERY_PARAM, request.getTitle()),
                         pair(PAGE_PARAM, String.valueOf(request.getPage())),
                         pair(PER_PAGE_PARAM, String.valueOf(request.getPerPage())),
-                        pair(GENRES_PARAM, nonNull(request.getGenre()) ? String.valueOf(request.getGenre()) : null),
-                        pair(SEASON_PARAM, nonNull(request.getSeason()) ? String.valueOf(request.getSeason()) : null)
+                        pair(GENRES_PARAM, nonNull(request.getGenre()) ? String.valueOf(request.getGenre()) : ""),
+                        pair(SEASON_PARAM, nonNull(request.getSeason()) ? String.valueOf(request.getSeason()) : "")
                 )
-                .filter(entry -> nonNull(entry.getValue()) && isNotEmpty(entry.getValue()) && !ZERO_VALUE.equals(entry.getValue()))
+                .filter(entry -> isNotBlank(entry.getValue()) && isNotEmpty(entry.getValue()) && !ZERO_VALUE.equals(entry.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 

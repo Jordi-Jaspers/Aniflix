@@ -18,6 +18,9 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
+/**
+ * A service to manage the library of a user.
+ */
 @Service
 @RequiredArgsConstructor
 public class LibraryService {

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
+/**
+ * A service to manage user interactions with certain Anime.
+ */
 @Service
 @RequiredArgsConstructor
 public class InteractionService {

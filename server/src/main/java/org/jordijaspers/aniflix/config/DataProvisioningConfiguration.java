@@ -14,6 +14,9 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * A configuration class that provisions data when the application context is started.
+ */
 @Component
 @RequiredArgsConstructor
 public class DataProvisioningConfiguration {

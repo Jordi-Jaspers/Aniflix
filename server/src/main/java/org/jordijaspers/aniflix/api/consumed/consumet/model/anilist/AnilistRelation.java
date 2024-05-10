@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import lombok.Data;
 
+/**
+ * The relation of an anime.
+ */
 @Data
 public class AnilistRelation {
 

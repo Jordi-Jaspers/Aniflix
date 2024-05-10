@@ -17,6 +17,9 @@ import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.token.model.TokenType.*;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.AUTHORIZATION_ERROR;
 
+/**
+ * A service to manage authentication.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {

@@ -16,6 +16,9 @@ import static org.jordijaspers.aniflix.api.Paths.EPISODE_PATH;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * The controller for the episode endpoints.
+ */
 @RestController
 @RequiredArgsConstructor
 public class EpisodeController {

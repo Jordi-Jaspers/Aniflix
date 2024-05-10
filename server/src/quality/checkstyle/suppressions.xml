@@ -7,8 +7,12 @@
      (https://checkstyle.sourceforge.io/config_filters.html#SuppressionFilter)-->
 <suppressions>
 
+    <!--<suppress message="Missing a Javadoc comment."/>-->
     <!--<suppress checks="NewlineAtEndOfFileCheck" files="Sample.java"/>-->
 
-    <!--<suppress message="Missing a Javadoc comment."/>-->
+    <suppress checks="MethodName" files=".*Repository.java"/>
+    <suppress checks="ClassDataAbstractionCoupling" files=".*"/>
+    <suppress checks="ClassFanOutComplexity" files=".*"/>
+    <suppress checks="SignatureDeclareThrowsException" files=".*"/>
 
 </suppressions>

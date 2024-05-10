@@ -48,7 +48,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
  */
 @Configuration
 @EnableWebSecurity
-@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration implements WebMvcConfigurer {
 
@@ -120,9 +119,7 @@ public class WebSecurityConfiguration implements WebMvcConfigurer {
         });
 
         // Add Exception Handling for unauthorized requests.
-        http.exceptionHandling(handler -> {
-            handler.authenticationEntryPoint(authenticationEntryPoint);
-        });
+        http.exceptionHandling(handler -> handler.authenticationEntryPoint(authenticationEntryPoint));
 
         // Configure Endpoints
         http.authorizeHttpRequests(accessManagement -> {

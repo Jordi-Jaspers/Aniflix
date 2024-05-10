@@ -5,6 +5,9 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.MapperConfig;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * A shared mapper configuration for the MapStruct mappers.
+ */
 @MapperConfig(
         componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,

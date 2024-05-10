@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The repository for the news posts.
+ */
 @Repository
 public interface NewsRepository extends JpaRepository<NewsPost, Integer> {
 

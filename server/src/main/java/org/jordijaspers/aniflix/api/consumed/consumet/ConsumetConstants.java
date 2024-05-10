@@ -74,6 +74,8 @@ public final class ConsumetConstants {
 
         public static final String SERVER_PARAM = "server";
 
+        public static final String PART_PARAM = "part";
+
         // =========================== DEFAULT PARAM VALUES ===========================
 
         public static final String ZERO_VALUE = "0";

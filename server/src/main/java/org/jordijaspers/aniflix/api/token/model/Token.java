@@ -23,6 +23,9 @@ import java.time.LocalDateTime;
 
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The token model which represents a token in the database.
+ */
 @Data
 @Builder
 @Entity

@@ -7,6 +7,9 @@ import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 
 import java.time.ZonedDateTime;
 
+/**
+ * The response of an interaction.
+ */
 @Data
 public class InteractionResponse {
 

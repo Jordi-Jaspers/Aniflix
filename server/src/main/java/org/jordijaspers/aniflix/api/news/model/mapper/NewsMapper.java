@@ -10,6 +10,9 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
+/**
+ * The mapper for the news posts.
+ */
 @Mapper(config = SharedMapperConfiguration.class)
 public abstract class NewsMapper {
 

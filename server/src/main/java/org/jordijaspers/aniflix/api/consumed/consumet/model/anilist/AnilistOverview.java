@@ -6,8 +6,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.nonNull;
-
+/**
+ * The search result of an anime.
+ */
 @Data
 public class AnilistOverview {
 
@@ -55,19 +56,4 @@ public class AnilistOverview {
 
     @JsonProperty("type")
     private String type;
-
-    /**
-     * Returns the title of the anime in the language you prefer.
-     */
-    public String getPreferredTitle() {
-        if (nonNull(title.getEnglish())) {
-            return title.getEnglish().toLowerCase();
-        } else if (nonNull(title.getRomaji())) {
-            return title.getRomaji().toLowerCase();
-        } else if (nonNull(title.getJapanse())) {
-            return title.getJapanse().toLowerCase();
-        } else {
-            return "";
-        }
-    }
 }

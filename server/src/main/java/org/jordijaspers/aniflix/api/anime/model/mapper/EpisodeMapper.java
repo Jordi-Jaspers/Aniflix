@@ -10,7 +10,10 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(config = SharedMapperConfiguration.class, uses = {StreamingLinkMapper.class})
+/**
+ * The mapper for the episodes.
+ */
+@Mapper(config = SharedMapperConfiguration.class, uses = StreamingLinkMapper.class)
 public abstract class EpisodeMapper {
 
     @Named("toEpisodeResponse")

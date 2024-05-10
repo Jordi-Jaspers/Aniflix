@@ -1,8 +1,6 @@
 package org.jordijaspers.aniflix.api.anime.service;
 
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
@@ -23,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -31,6 +30,9 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.GOGOANIME;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.ZORO;
 
+/**
+ * The service which synchronizes certain data from the consumet API with the database.
+ */
 @Service
 @RequiredArgsConstructor
 public class SynchronizationService {
@@ -59,8 +61,9 @@ public class SynchronizationService {
             LOGGER.info("Anime with id '{}' is already completed or null, skipping synchronization", anime.getAnilistId());
             return;
         }
-
         LOGGER.info("Synchronizing consumet data with the database for id '{}'", anime.getAnilistId());
+
+        // Retrieve the updated anime data from all the providers.
         final Anime gogoAnimeInfo = consumetService.getAnimeDetailsForProvider(anime.getAnilistId(), GOGOANIME.getProvider());
         final Anime zoroInfo = consumetService.getAnimeDetailsForProvider(anime.getAnilistId(), ZORO.getProvider());
 
@@ -71,56 +74,11 @@ public class SynchronizationService {
         final Set<Episode> gogoAnimeEpisodes = gogoAnimeInfo.getEpisodes();
         final Set<Episode> zoroEpisodes = zoroInfo.getEpisodes();
 
-        // Provision the existing episodes with the urls of the new episodes.
-        final Set<Episode> incompleteEpisodes = anime.getEpisodes().stream()
-                .filter(episode -> isNull(episode.getGogoanimeId()) || isNull(episode.getZoroId()))
-                .collect(Collectors.toSet());
-
         // Update the incomplete episodes with the new episodes
-        incompleteEpisodes.forEach(incompleteEpisode -> {
-            if (isNull(incompleteEpisode.getGogoanimeId())) {
-                final Episode gogoEpisode = gogoAnimeEpisodes.stream()
-                        .filter(episode -> episode.getNumber() == incompleteEpisode.getNumber())
-                        .findFirst()
-                        .orElse(null);
-
-                if (nonNull(gogoEpisode)) {
-                    incompleteEpisode.setGogoanimeId(gogoEpisode.getGogoanimeId());
-                    gogoAnimeEpisodes.remove(gogoEpisode);
-                }
-            }
-
-            if (isNull(incompleteEpisode.getZoroId())) {
-                final Episode zoroEpisode = zoroEpisodes.stream()
-                        .filter(episode -> episode.getNumber() == incompleteEpisode.getNumber())
-                        .findFirst()
-                        .orElse(null);
-
-                if (nonNull(zoroEpisode)) {
-                    incompleteEpisode.setZoroId(zoroEpisode.getZoroId());
-                    zoroEpisodes.remove(zoroEpisode);
-                }
-            }
-        });
-
-        // Save the updated episodes
-        episodeRepository.saveAll(incompleteEpisodes);
+        updateIncompleteEpisodes(gogoAnimeEpisodes, zoroEpisodes, anime.getEpisodes());
 
         // Update the new episodes with the anime ID
-        gogoAnimeEpisodes.forEach(gogoanimeEpisode -> {
-            final Episode episode = zoroEpisodes.stream()
-                    .filter(zoroEpisode -> gogoanimeEpisode.getNumber() == zoroEpisode.getNumber())
-                    .findFirst()
-                    .orElse(null);
-
-            gogoanimeEpisode.setAnime(anime);
-            if (nonNull(episode)) {
-                gogoanimeEpisode.setZoroId(episode.getZoroId());
-            }
-        });
-
-        // Save the new episodes
-        episodeRepository.saveAll(gogoAnimeEpisodes);
+        updateNewEpisodes(gogoAnimeEpisodes, zoroEpisodes, anime);
 
         // Retrieve all the updated episodes.
         final Set<Episode> updatedEpisodes = episodeRepository.findAllByAnime_AnilistId(anime.getAnilistId());
@@ -161,5 +119,46 @@ public class SynchronizationService {
         LOGGER.info("Saving '{}' new news posts", posts.size());
         newsRepository.saveAll(posts);
         LOGGER.info("Synchronization completed for news feed data");
+    }
+
+    private void updateNewEpisodes(final Set<Episode> gogoAnimeEpisodes, final Set<Episode> zoroEpisodes, final Anime anime) {
+        gogoAnimeEpisodes.forEach(gogoanimeEpisode -> {
+            final Episode episode = zoroEpisodes.stream()
+                    .filter(zoroEpisode -> gogoanimeEpisode.getNumber() == zoroEpisode.getNumber())
+                    .findFirst()
+                    .orElse(null);
+
+            gogoanimeEpisode.setAnime(anime);
+            if (nonNull(episode)) {
+                gogoanimeEpisode.setZoroId(episode.getZoroId());
+            }
+        });
+        episodeRepository.saveAll(gogoAnimeEpisodes);
+    }
+
+    private void updateIncompleteEpisodes(final Set<Episode> gogoAnimeEpisodes, final Set<Episode> zoroEpisodes,
+                                          final Set<Episode> animeEpisodes) {
+        final Set<Episode> incompleteEpisodes = animeEpisodes.stream()
+                .filter(episode -> isNull(episode.getGogoanimeId()) || isNull(episode.getZoroId()))
+                .collect(Collectors.toSet());
+
+        incompleteEpisodes.forEach(incompleteEpisode -> {
+            updateEpisodeId(incompleteEpisode, gogoAnimeEpisodes, Episode::getGogoanimeId);
+            updateEpisodeId(incompleteEpisode, zoroEpisodes, Episode::getZoroId);
+        });
+        episodeRepository.saveAll(incompleteEpisodes);
+    }
+
+    private void updateEpisodeId(final Episode incompleteEpisode, final Set<Episode> episodes,
+                                 final Function<Episode, String> getIdFunction) {
+        if (isNull(getIdFunction.apply(incompleteEpisode))) {
+            episodes.stream()
+                    .filter(episode -> episode.getNumber() == incompleteEpisode.getNumber())
+                    .findFirst()
+                    .ifPresent(episode -> {
+                        getIdFunction.apply(incompleteEpisode);
+                        episodes.remove(episode);
+                    });
+        }
     }
 }

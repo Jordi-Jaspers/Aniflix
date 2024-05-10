@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * A custom password strength validator.
+ */
 @Component
 public class CustomPasswordValidator {
 

@@ -1,7 +1,6 @@
 package org.jordijaspers.aniflix.api.interaction.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.interaction.service.LikesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +13,9 @@ import static org.jordijaspers.aniflix.api.Paths.LIKE_ANIME_PATH;
 import static org.jordijaspers.aniflix.api.Paths.UNLIKE_ANIME_PATH;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
+/**
+ * The controller for likes.
+ */
 @RestController
 @RequiredArgsConstructor
 public class LikesController {

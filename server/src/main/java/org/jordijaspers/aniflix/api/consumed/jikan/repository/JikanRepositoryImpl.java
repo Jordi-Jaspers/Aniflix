@@ -20,6 +20,9 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * The implementation of the {@link JikanRepository} interface.
+ */
 @Repository
 public class JikanRepositoryImpl implements JikanRepository {
 

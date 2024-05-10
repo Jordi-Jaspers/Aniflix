@@ -36,6 +36,9 @@ import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMP
 import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The anime model which contains all the information about the anime in the database.
+ */
 @Data
 @Entity
 @NoArgsConstructor
