@@ -27,13 +27,13 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
           addLatest: true
-
-          platform: linux/amd64,linux/arm64,linux/arm/v7
-
-
+          directory: ./client
           dockerfile: Dockerfile
+
           multiPlatform: true
+          platform: linux/amd64,linux/arm64,linux/arm/v7
 
 #  build-server:
 #    name: Build Aniflix Server
