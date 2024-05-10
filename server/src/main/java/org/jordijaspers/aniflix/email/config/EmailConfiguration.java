@@ -28,6 +28,8 @@ public class EmailConfiguration {
         mailSender.setHost(emailProperties.getHost());
         mailSender.setPort(emailProperties.getPort());
         mailSender.setProtocol(emailProperties.getProtocol());
+        mailSender.setUsername(emailProperties.getUsername());
+        mailSender.setPassword(emailProperties.getPassword());
         mailSender.setDefaultEncoding(emailProperties.getEncoding());
         mailSender.getJavaMailProperties().put("mail.transport.protocol", emailProperties.getProtocol());
         return mailSender;

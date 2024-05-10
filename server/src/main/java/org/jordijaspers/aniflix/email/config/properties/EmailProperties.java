@@ -28,6 +28,16 @@ public class EmailProperties {
     private String address;
 
     /**
+     * The username to authenticate with the mail server.
+     */
+    private String username;
+
+    /**
+     * The password to authenticate with the mail server.
+     */
+    private String password;
+
+    /**
      * The protocol to send mail with.
      */
     private String protocol;

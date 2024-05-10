@@ -9,6 +9,8 @@ application:
     host: ${EMAIL_HOST:localhost}
     port: ${EMAIL_PORT:2500}
     address: ${EMAIL_ADDRESS:no-reply@localhost}
+    username: ${EMAIL_USERNAME:no-login@localhost.com}
+    password: ${EMAIL_PASSWORD:password}
     protocol: smtp
     encoding: UTF-8
 

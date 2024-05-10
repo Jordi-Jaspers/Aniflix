@@ -153,6 +153,8 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 | `SPRING_DATASOURCE_PASSWORD` | tst_aniflix                                   | Password for the MariaDB datasource              |
 | `SHOW_SQL`                   | false                                         | Whether to show SQL queries in logs              |
 | `ASYNC_CONFIG`               | ./config/async-config.yml                     | Path to the asynchronous configuration file      |
+| `EMAIL_USERNAME`             | no-login@localhost                            | The username of the mail server                  |
+| `EMAIL_PASSWORD`             | password                                      | The password of the mail server                  |
 
 #### Client Environment Variables
 
