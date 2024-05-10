@@ -22,7 +22,7 @@ application:
 
 # ======= CONSUMET CONFIGURATION =======
 consumet:
-  url: ${CONSUMET_URL:https://consumet.aniflix.stream}
+  url: ${CONSUMET_URL:https://consumet.com}
 
 # ======= MANAGEMENT ENDPOINTS =======
 management:
@@ -67,13 +67,13 @@ spring:
       enable-statistics: true
   data:
     redis:
-      host: ${SPRING_REDIS_HOST:100.72.31.107}
+      host: ${SPRING_REDIS_HOST:redis}
       port: ${SPRING_REDIS_PORT:6379}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://100.72.31.107:3306/tst_aniflix}
-    username: ${SPRING_DATASOURCE_USERNAME:tst_aniflix}
-    password: ${SPRING_DATASOURCE_PASSWORD:tst_aniflix}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://mariadb:3306/tst_aniflix}
+    username: ${SPRING_DATASOURCE_USERNAME:username}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
     driver-class-name: org.mariadb.jdbc.Driver
 
   jackson:

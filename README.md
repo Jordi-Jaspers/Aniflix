@@ -65,7 +65,9 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 ## 📝 Notes <a name = "notes"></a>
 
 ---
+
 ### TODO List
+
 * Re-use of refresh token detection.
 * Implementing User management
 * Bug Support email
@@ -94,6 +96,7 @@ Videos can only be autoplayed in the client whenever the videos are muted. This 
 link will provide more information on this policy: https://developer.chrome.com/blog/autoplay/
 
 ---
+
 ### Anilist Rate Limiting
 
 Rate limiting is currently set to 90 requests per minute.
@@ -132,29 +135,29 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 
 #### Server Environment Variables
 
-| Variable Name                | Default Value                                 | Description                                      |
-|------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `EMAIL_HOST`                 | localhost                                     | Hostname for the email server                    |
-| `EMAIL_PORT`                 | 2500                                          | Port number for the email server                 |
-| `EMAIL_ADDRESS`              | no-reply@localhost                            | Sender email address                             |
-| `JWT_LIFETIME_SECONDS`       | 900                                           | Lifetime of JWT tokens in seconds                |
-| `CORS_ALLOWED_ORIGINS`       | *                                             | Comma-separated list of allowed origins for CORS |
-| `CONSUMET_URL`               | https://consumet.aniflix.stream               | URL for the CONSUMET service                     |
-| `TOMCAT_AJP_ENABLED`         | true                                          | Whether AJP connector is enabled for Tomcat      |
-| `TOMCAT_AJP_PORT`            | 8009                                          | Port number for AJP connector                    |
-| `TOMCAT_AJP_SECRET_REQUIRED` | false                                         | Whether secret is required for AJP connector     |
-| `TOMCAT_AJP_SECRET`          | 6qyuET3rNuzYRBtrBQjh8zCe                      | Secret for AJP connector                         |
-| `LOGGING_CONFIG`             | ./config/logback-spring.xml                   | Path to the logging configuration file           |
-| `SPRING_PROFILES_INCLUDE`    | development                                   | Comma-separated list of profiles to include      |
-| `SPRING_REDIS_HOST`          | 100.72.31.107                                 | Hostname for the Redis server                    |
-| `SPRING_REDIS_PORT`          | 6379                                          | Port number for the Redis server                 |
-| `SPRING_DATASOURCE_URL`      | jdbc:mariadb://100.72.31.107:3306/tst_aniflix | URL for the MariaDB datasource                   |
-| `SPRING_DATASOURCE_USERNAME` | tst_aniflix                                   | Username for the MariaDB datasource              |
-| `SPRING_DATASOURCE_PASSWORD` | tst_aniflix                                   | Password for the MariaDB datasource              |
-| `SHOW_SQL`                   | false                                         | Whether to show SQL queries in logs              |
-| `ASYNC_CONFIG`               | ./config/async-config.yml                     | Path to the asynchronous configuration file      |
-| `EMAIL_USERNAME`             | no-login@localhost                            | The username of the mail server                  |
-| `EMAIL_PASSWORD`             | password                                      | The password of the mail server                  |
+| Variable Name                | Default Value                    | Description                                      |
+|------------------------------|----------------------------------|--------------------------------------------------|
+| `EMAIL_HOST`                 | localhost                        | Hostname for the email server                    |
+| `EMAIL_PORT`                 | 2500                             | Port number for the email server                 |
+| `EMAIL_ADDRESS`              | no-reply@localhost               | Sender email address                             |
+| `EMAIL_USERNAME`             | no-login@localhost               | The username of the mail server                  |
+| `EMAIL_PASSWORD`             | password                         | Path to the asynchronous configuration file      |
+| `JWT_LIFETIME_SECONDS`       | 900                              | Lifetime of JWT tokens in seconds                |
+| `CORS_ALLOWED_ORIGINS`       | *                                | Comma-separated list of allowed origins for CORS |
+| `CONSUMET_URL`               | https://localhost.com            | URL for the CONSUMET service                     |
+| `TOMCAT_AJP_ENABLED`         | true                             | Whether AJP connector is enabled for Tomcat      |
+| `TOMCAT_AJP_PORT`            | 8009                             | Port number for AJP connector                    |
+| `TOMCAT_AJP_SECRET_REQUIRED` | false                            | Whether secret is required for AJP connector     |
+| `TOMCAT_AJP_SECRET`          | 6qyuET3rNuzYRBtrBQjh8zCe         | Secret for AJP connector                         |
+| `LOGGING_CONFIG`             | ./config/logback-spring.xml      | Path to the logging configuration file           |
+| `SPRING_PROFILES_INCLUDE`    | development                      | Comma-separated list of profiles to include      |
+| `SPRING_REDIS_HOST`          | 100.72.31.107                    | Hostname for the Redis server                    |
+| `SPRING_REDIS_PORT`          | 6379                             | Port number for the Redis server                 |
+| `SPRING_DATASOURCE_URL`      | jdbc:mariadb://mariadb:3306/test | URL for the MariaDB datasource                   |
+| `SPRING_DATASOURCE_USERNAME` | username                         | Username for the MariaDB datasource              |
+| `SPRING_DATASOURCE_PASSWORD` | password                         | Password for the MariaDB datasource              |
+| `SHOW_SQL`                   | false                            | Whether to show SQL queries in logs              |
+| `ASYNC_CONFIG`               | ./config/async-config.yml        | Path to the asynchronous configuration file      |
 
 #### Client Environment Variables
 
@@ -165,6 +168,7 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 | `VITE_ENV`             | development            | Environment mode (e.g., development, production) |
 
 ## 🛠️ Stack <a name = "stack"></a>
+
 - [Spring Boot](https://spring.io/projects/spring-boot) - Java framework for building back-end applications.
 - [Redis](https://redis.io/) - In-memory data structure store.
 - [SvelteKit](https://kit.svelte.dev/) - Frontend framework for building web applications.
@@ -179,6 +183,7 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 - [Git](https://git-scm.com/) - Version Control
 
 ## 🚀 References <a name = "references"></a>
+
 * Troubleshooting: <https://stackoverflow.com/>
 * Next.js: <https://nextjs.org/docs/getting-started>
 * TailwindCSS: <https://tailwindcss.com/docs>
@@ -190,7 +195,8 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Svelte Player example: <https://github.com/fikryfahrezy/svelte-player/blob/main/src/routes/%2Bpage.svelte>
 * Lucide: <https://lucide.dev/>
 * Shadcn Svelte: <https://www.shadcn-svelte.com/>
-* Spring Boot Redis Properties: <https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values>
+* Spring Boot Redis
+  Properties: <https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values>
 * Jikan API: <https://jikan.moe/>
 * Jikan API Docs: <https://docs.api.jikan.moe/>
 * Reactive Jikan For Spring Boot: <https://github.com/SandroHc/reactive-jikan>
