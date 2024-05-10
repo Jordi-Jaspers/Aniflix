@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.9_9-jdk-jammy AS create-slimjre
+FROM eclipse-temurin:17-jdk-jammy AS create-slimjre
 
 # Copy the generated jar file in a temporary directory
 RUN mkdir /workspace
@@ -48,20 +48,18 @@ COPY --from=create-slimjre --chown=top:top /workspace/slimjre /opt/workspace/sli
 
 # These are build arguments that will be set by Jenkins at build time to the running Inbucket container, but
 # they will also be added to the environment list below, so they can be overridden at run time in Kubernetes/Docker
-ARG SPRING_PROFILES_INCLUDE="dev"
+ARG SPRING_PROFILES_INCLUDE="development"
 
-# Set the correct timezone inside the container
-ENV TZ="Europe/Amsterdam" \
-    # Default environment variables, these can be overwritten when calling "docker run"
+# Default environment variables, these can be overwritten when calling "docker run"
+ENV  SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE \
+    TZ="Europe/Amsterdam" \
     JAVA_TOOL_OPTIONS="-XX:+IgnoreUnrecognizedVMOptions -XX:+UseContainerSupport -XX:+IdleTuningCompactOnIdle -XX:+IdleTuningGcOnIdle" \
     HEAP_SIZE_MIN="64m" \
     HEAP_SIZE="512m" \
     METASPACE_SIZE_MIN="32m" \
     METASPACE_SIZE="128m" \
     SHARE_CLASSES_SIZE="128m" \
-    SHARE_CLASSES_AOT_SIZE="100m" \
-
-    SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE
+    SHARE_CLASSES_AOT_SIZE="100m"
 
 # Container health check
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /bin/sh -c "/usr/bin/wget -Y off -nv -t1 --spider -O - http://localhost:8080/aniflix/actuator/health || exit 1"
@@ -100,4 +98,3 @@ CMD /opt/workspace/slimjre/bin/java \
 --spring.config.additional-location=/opt/workspace/config/ \
 --spring.output.ansi.enabled=always \
 --spring.profiles.include=${SPRING_PROFILES_INCLUDE}
-
