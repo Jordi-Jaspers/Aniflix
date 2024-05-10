@@ -194,4 +194,5 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Reactive Jikan For Spring Boot: <https://github.com/SandroHc/reactive-jikan>
 * screenfull: <https://www.npmjs.com/package/screenfull>
 * NPM Vs. Bun Cheatsheet: <https://dev.to/equiman/npm-vs-yarn-vs-pnpm-commands-cheatsheet-3el8>
+* DockerHub github actions: <https://github.com/marketplace/actions/docker-build-push-action?version=v6.4#tagging-the-image-using-gitops>
 
