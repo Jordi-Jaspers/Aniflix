@@ -27,6 +27,9 @@ jobs:
   build-server:
     name: Build Aniflix Server
     runs-on: ubuntu-latest
+    env:
+      SEGMENT_DOWNLOAD_TIMEOUT_MINS: '5'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,8 +43,8 @@ jobs:
           java-version: '17'
           cache: 'gradle'
           cache-dependency-path: | # optional
-            sub-project/*.gradle*
-            sub-project/**/gradle-wrapper.properties
+            server/*.gradle*
+            server/**/gradle-wrapper.properties
 
       - name: Build with Gradle
         run: cd server && ./gradlew clean build --no-daemon --stacktrace
