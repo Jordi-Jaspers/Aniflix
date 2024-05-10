@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./client
-          file: ./Dockerfile
+          file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/aniflix/client_snapshot:latest
 
