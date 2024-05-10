@@ -33,7 +33,7 @@ jobs:
           dockerfile: ./client/Dockerfile
 
           multiPlatform: true
-          platform: linux/amd64,linux/arm64,linux/arm/v7
+          platform: linux/amd64,linux/arm64
 
 #  build-server:
 #    name: Build Aniflix Server
