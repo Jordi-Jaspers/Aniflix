@@ -7,7 +7,6 @@ on:
     branches: [ master, develop ]
 
 jobs:
-
   build-client:
     name: Build Aniflix Client
     runs-on: ubuntu-latest
@@ -23,4 +22,26 @@ jobs:
           bun-version: latest
 
       - name: build project
-        run: cd client && bun install --frozen-lockfile && bun build
+        run: cd client && bun install --frozen-lockfile && bun run build
+
+  build-server:
+    name: Build Aniflix Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          version: latest
+
+      - name: Set up JDK 17 Temurin
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+          cache-dependency-path: | # optional
+            sub-project/*.gradle*
+            sub-project/**/gradle-wrapper.properties
+
+      - name: Build with Gradle
+        run: cd server && ./gradlew clean build --no-daemon --stacktrace
