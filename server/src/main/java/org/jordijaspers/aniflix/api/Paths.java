@@ -17,7 +17,7 @@ public final class Paths {
 
     public static final String ERROR_PATH = "/error";
 
-    public static final String ACTUATOR_PATH = BASE_PATH + "/actuator";
+    public static final String ACTUATOR_PATH = "/actuator";
 
     public static final String WILDCARD_PART = "/**";
 

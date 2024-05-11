@@ -68,7 +68,7 @@ ENV SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE \
     SHARE_CLASSES_AOT_SIZE="100m"
 
 # Container health check
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /bin/sh -c "/usr/bin/wget -Y off -nv -t1 --spider -O - http://localhost:8080/api/actuator/health || exit 1"
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /bin/sh -c "/usr/bin/wget -Y off -nv -t1 --spider -O - http://localhost:8080/actuator/health || exit 1"
 
 # Expose ports 8080 for HTTP and 8009 for AJP
 EXPOSE 8080 8009
