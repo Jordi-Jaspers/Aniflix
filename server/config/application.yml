@@ -26,6 +26,7 @@ consumet:
 
 # ======= MANAGEMENT ENDPOINTS =======
 management:
+  context-path: /api/actuator
   endpoint:
     health:
       show-details: "always"

@@ -15,7 +15,9 @@ COPY . .
 
 # These are build arguments that will be set by Jenkins at build time to the running Inbucket container, but
 ARG VITE_ENV='production'
-ARG VITE_SERVER_PORT=3000
+ARG VITE_PORT=3000
+ARG VITE_SERVER_BASE_URL='http://localhost:8080'
+ARG VITE_SERVER_ISSUER='http://localhost:3000'
 
 # Run your build process
 RUN bun install --frozen-lockfile && bun run build
@@ -33,7 +35,7 @@ ENV VITE_ENV=$VITE_ENV \
 COPY --from=builder /workspace/build .
 
 # Expose the port the application will run on
-EXPOSE $VITE_SERVER_PORT
+EXPOSE $VITE_PORT
 
 #Start the BUN server
 CMD ["bun", "run", "start"]
