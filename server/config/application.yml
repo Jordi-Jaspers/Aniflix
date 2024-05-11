@@ -26,13 +26,14 @@ consumet:
 
 # ======= MANAGEMENT ENDPOINTS =======
 management:
-  endpoint:
+  endpoints:
+    web:
+      base-path: /api/actuator
     health:
       show-details: "always"
 
 # ====== SERVER CONFIG ======
 server:
-  contextPath: ${SERVER_CONTEXT_PATH:/}
   port: 8080
 
 tomcat:
@@ -54,9 +55,9 @@ springdoc:
   enable-spring-security: true
   swagger-ui:
     disable-swagger-default-url: true
-    path: /rest/api/public/docs/openapi.html
+    path: /api/public/docs/openapi.html
   api-docs:
-    path: /rest/api/public/docs
+    path: /api/public/docs
 
 # ======= SPRING CONFIGURATION =======
 spring:

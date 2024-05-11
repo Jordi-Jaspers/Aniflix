@@ -17,8 +17,6 @@ public final class Paths {
 
     public static final String ERROR_PATH = "/error";
 
-    public static final String ACTUATOR_PATH = "/actuator";
-
     public static final String WILDCARD_PART = "/**";
 
     public static final String WILDCARD = "*";
@@ -37,9 +35,7 @@ public final class Paths {
 
     /* ------------------------------- PUBLIC ENDPOINTS ------------------------------- */
 
-    public static final String PUBLIC_METRICS_PATH = PUBLIC_PATH + "/metrics";
-
-    public static final String PUBLIC_HEALTH_PATH = ACTUATOR_PATH + "/health";
+    public static final String PUBLIC_ACTUATOR_PATH = BASE_PATH + "/actuator";
 
     /* ------------------------------- AUTH ENDPOINTS ------------------------------- */
 

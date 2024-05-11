@@ -123,7 +123,7 @@ public class WebSecurityConfiguration implements WebMvcConfigurer {
 
         // Configure Endpoints
         http.authorizeHttpRequests(accessManagement -> {
-            accessManagement.requestMatchers(ACTUATOR_PATH + WILDCARD_PART).permitAll();
+            accessManagement.requestMatchers(PUBLIC_ACTUATOR_PATH + WILDCARD_PART).permitAll();
             accessManagement.requestMatchers(PUBLIC_PATH + WILDCARD_PART).permitAll();
             accessManagement.requestMatchers(AUTH_PATH + WILDCARD_PART).permitAll();
             accessManagement.requestMatchers(OPENAPI_PATH + WILDCARD_PART).permitAll();
