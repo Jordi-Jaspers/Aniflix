@@ -31,11 +31,7 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          buildArgs:
-            VITE_SERVER_BASE_URL=${{ secrets.VITE_SERVER_BASE_URL }}
-            VITE_SERVER_ISSUER=${{ secrets.VITE_SERVER_ISSUER }}
-            VITE_ENV=${{ secrets.VITE_ENV }}
-            VITE_PORT=${{ secrets.VITE_PORT }}
+          buildArgs: VITE_SERVER_BASE_URL=${{ secrets.VITE_SERVER_BASE_URL }},VITE_SERVER_ISSUER=${{ secrets.VITE_SERVER_ISSUER }},VITE_ENV=${{ secrets.VITE_ENV }},VITE_PORT=${{ secrets.VITE_PORT }}
 
           addLatest: true
           directory: ./client
