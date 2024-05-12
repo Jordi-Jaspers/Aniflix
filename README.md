@@ -73,13 +73,16 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 * Bug Support email
 * Data sync between API and database
 * Create video player for mobile
-* Make search input more mobile friendly
-* Navigation not working
+* Navigation not working on mobile
 * Implement Bug Fix page
 * Add stripe Donation link
 * Add advanced search implementation (filters)
 * Implement library function
-* fix titles in regular search on mobile view
+* Fix video player on mobile (https://www.reddit.com/r/sveltejs/comments/10aec85/anyone_knows_of_a_good_responsive_video_player/)
+* Darkmode by default.
+* Convert all assets from png to webp
+* Beter sizing images (https://kit.svelte.dev/docs/images)
+* Add SEO (https://kit.svelte.dev/docs/seo)
 * ... 
 
 ---

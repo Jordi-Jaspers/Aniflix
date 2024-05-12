@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Logo from '$lib/assets/icons/aniflix-logo-large.png';
+	import FullLogo from '$lib/assets/icons/aniflix-logo-large.png';
+	import SmallLogo from '$lib/assets/icons/aniflix-icon-small.png';
 	import SearchBar from '$lib/components/app/header/search-bar.svelte';
 	import UserButton from '$lib/components/app/header/user-button.svelte';
 	import { onMount } from 'svelte';
@@ -29,7 +30,8 @@
 >
 	<div class="flex flex-row items-center space-x-4">
 		<div class="flex items-center space-x-1">
-			<img alt="AniFlix Logo" class="h-full max-h-[32px]" src={Logo} />
+			<img alt="AniFlix Full Logo" class="h-full max-h-[32px] hidden md:block" src={FullLogo} />
+			<img alt="AniFlix Small Logo" class="h-full max-h-[32px] block md:hidden" src={SmallLogo} />
 			{#if import.meta.env.VITE_ENV !== 'production'}
 				<Badge variant="outline" class="my-3 bg-green-600">TST</Badge>
 			{/if}

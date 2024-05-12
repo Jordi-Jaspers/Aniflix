@@ -44,13 +44,13 @@
 {#if $useShowSearchResults}
 	<div class="mx-auto flex w-full max-w-[1096px] flex-col space-y-4 px-[4%] py-4">
 		<div class="flex justify-between">
-			<h1 class="border-l-2 border-primary px-4 text-3xl font-bold">Search Results</h1>
-			<button class="flex items-center hover:underline hover:opacity-80" on:click={() => goto(CLIENT_URLS.SEARCH_URL)}>
+			<h1 class="border-l-2 border-primary pl-4 text-2xl md:text-3xl font-bold w-full">Search Results</h1>
+			<button class="flex items-center hover:underline hover:opacity-80 w-full justify-end text-sm md:text-lg" on:click={() => goto(CLIENT_URLS.SEARCH_URL)}>
 				<span>Advanced Search</span>
 				<ChevronRight class="h-4 w-4" />
 			</button>
 		</div>
-		<div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+		<div class="grid gap-4 px-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
 			{#each searchResults as result}
 				<SearchResult {result} />
 			{/each}

@@ -11,10 +11,12 @@
 	import { EpisodeList, RecommendationCards } from '$lib/components/browse';
 	import { Content, List, Root, Trigger } from '$lib/components/ui/tabs';
 	import { setAnime } from '$lib/components/store/anime-context-store';
+	import {goto} from "$app/navigation";
 
 	let isPlaying: boolean = false;
 	let isMuted: boolean = false;
 
+	let lastEpisode: number = $useModalInfo.lastSeenEpisode !== 0 ? $useModalInfo.lastSeenEpisode : 1;
 	const opts: RecursivePartial<PlayerConfig> = {
 		youtube: {
 			playerVars: {
@@ -79,7 +81,9 @@
 			{/if}
 			<div class="absolute bottom-10 flex w-full items-center justify-between px-10">
 				<div class="flex items-center space-x-2">
-					<Button class="space-x-4 rounded-full pl-4 pr-1 opacity-80 transition hover:opacity-100">
+					<Button class="space-x-4 rounded-full pl-4 pr-1 opacity-80 transition hover:opacity-100"
+							on:click={() => goto('/watch/' + $useModalInfo.anilistId + '/episode/' + lastEpisode)}
+					>
 						<p>Watch Now</p>
 						<div class="flex w-12 justify-center rounded-full bg-secondary/50 p-1">
 							<PlayIcon class="fill-white p-1" />
