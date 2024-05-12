@@ -72,7 +72,15 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 * Implementing User management
 * Bug Support email
 * Data sync between API and database
-* ...
+* Create video player for mobile
+* Make search input more mobile friendly
+* Navigation not working
+* Implement Bug Fix page
+* Add stripe Donation link
+* Add advanced search implementation (filters)
+* Implement library function
+* fix titles in regular search on mobile view
+* ... 
 
 ---
 
