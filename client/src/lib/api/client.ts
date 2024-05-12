@@ -90,23 +90,26 @@ export async function curl(endpoint: string, options: RequestInit = {}): Promise
 export async function isUserAuthenticated(): Promise<boolean> {
 	// Check if access token is valid and not expired.
 	const accessToken = localStorage.getItem('ANIFLIX_ACCESS_TOKEN');
+	console.log('Checking if there is an access token: ' + accessToken);
 	if (accessToken && isValid(accessToken) && !expiresIn(accessToken)) {
+		console.log('Access token is valid and not expired.');
 		return true;
 	}
 
-	// Check if refresh token is valid a
+	// Check if refresh token is valid.
 	const refreshToken = localStorage.getItem('ANIFLIX_REFRESH_TOKEN');
 	if (refreshToken && isValid(refreshToken)) {
 		const response = await refreshTokens();
 		if (typeof response !== 'string') {
 			return true;
 		}
-		toast.error(response, {
-			duration: 5000,
-			position: 'bottom-center',
-			style: 'background: #262626; color: #ffffff;'
-		});
 	}
+
+	toast.error('You are unauthorized or your session has expired.', {
+		duration: 5000,
+		position: 'bottom-center',
+		style: 'background: #262626; color: #ffffff;'
+	});
 
 	return false;
 }

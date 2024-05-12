@@ -3,7 +3,7 @@ application:
   properties:
     name: aniflix
     version: 0.0.1-SNAPSHOT
-    url: https://aniflix.stream
+    url: ${APPLICATION_URL:https://localhost:8080}
 
   email:
     host: ${EMAIL_HOST:localhost}
