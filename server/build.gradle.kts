@@ -195,11 +195,12 @@ tasks.withType<JavaCompile> {
     options.isDeprecation = true
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(
-            arrayOf(
-                    "-Xlint:all",
-                    "-Xlint:-processing",
-                    "-Werror"
-            )
+        arrayOf(
+            "-Xlint:all",
+            "-Xlint:-processing",
+            "-Amapstruct.defaultComponentModel=spring",
+            "-Werror"
+        )
     )
 }
 
@@ -232,14 +233,14 @@ tasks.named<BootRun>("bootRun") {
     }
 
     arguments.addAll(
-            arrayOf(
-                    "-Xms512m",
-                    "-Xmx4096m",
-                    "-XX:MetaspaceSize=128m",
-                    "-XX:MaxMetaspaceSize=256m",
-                    "-XX:+UseG1GC",
-                    "-Djava.awt.headless=true"
-            )
+        arrayOf(
+            "-Xms512m",
+            "-Xmx4096m",
+            "-XX:MetaspaceSize=128m",
+            "-XX:MaxMetaspaceSize=256m",
+            "-XX:+UseG1GC",
+            "-Djava.awt.headless=true"
+        )
     )
     jvmArgs(arguments)
 }
