@@ -127,7 +127,7 @@ tasks.named<JavaCompile>("compileAotTestJava").configure {
 
 ### Autoplaying Videos
 
-Videos can only be autoplayed in the client whenever the videos are muted. This is a policy that is enforced by the browser. The following
+Videos can only be auto played in the client whenever the videos are muted. This is a policy that is enforced by the browser. The following
 link will provide more information on this policy: https://developer.chrome.com/blog/autoplay/
 
 ---

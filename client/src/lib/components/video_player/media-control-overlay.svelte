@@ -62,7 +62,7 @@
 	style="transition: opacity 0.5s ease; {overlayVisible ? 'opacity: 1;' : 'opacity: 0;'}"
 >
 	<!-- Top row functionalities  -->
-	<div class="flex-grow-1 flex h-[4vw] max-h-10 min-h-4 items-center justify-between">
+	<div class="flex-grow-1 flex h-[4vw] max-h-12 min-h-6 items-center justify-between">
 		<button aria-label="Back to Browse" class="h-full w-full" on:click={() => goto(CLIENT_URLS.BROWSE_URL)}>
 			<ArrowLeft class="aspect-square h-full w-auto hover:scale-125" />
 		</button>

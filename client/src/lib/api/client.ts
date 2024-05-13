@@ -106,9 +106,7 @@ async function fetchWithRetry(endpoint: string, options: RequestInit, headers: H
 export async function isUserAuthenticated(): Promise<boolean> {
 	// Check if access token is valid and not expired.
 	const accessToken = localStorage.getItem('ANIFLIX_ACCESS_TOKEN');
-	console.log('Checking if there is an access token: ' + accessToken);
 	if (accessToken && isValid(accessToken) && !expiresIn(accessToken)) {
-		console.log('Access token is valid and not expired.');
 		return true;
 	}
 
