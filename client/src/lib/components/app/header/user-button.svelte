@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { Button } from '$lib/components/ui/button';
+	import { goto } from '$app/navigation';
 
 	let user: UserDetailsResponse;
 	onMount(async () => {
@@ -58,17 +59,32 @@
 			<DropdownMenu.Label class="mx-8 text-center">{greetingsMessage()}</DropdownMenu.Label>
 			<DropdownMenu.Separator class="block md:hidden" />
 			<DropdownMenu.Group class="block md:hidden">
-				<DropdownMenu.Item>
-					<Newspaper class="mr-2 h-4 w-4" />
-					<span>News</span>
-				</DropdownMenu.Item>
-				<DropdownMenu.Item>
+				<DropdownMenu.Item
+					data-sveltekit-preload-data="hover"
+					on:click={() => {
+						goto('/browse');
+					}}
+				>
 					<Compass class="mr-2 h-4 w-4" />
 					<span>Browse</span>
 				</DropdownMenu.Item>
-				<DropdownMenu.Item>
+				<DropdownMenu.Item
+					data-sveltekit-preload-data="hover"
+					on:click={() => {
+						goto('/library');
+					}}
+				>
 					<Library class="mr-2 h-4 w-4" />
 					<span>Library</span>
+				</DropdownMenu.Item>
+				<DropdownMenu.Item
+					data-sveltekit-preload-data="hover"
+					on:click={() => {
+						goto('/news');
+					}}
+				>
+					<Newspaper class="mr-2 h-4 w-4" />
+					<span>News</span>
 				</DropdownMenu.Item>
 			</DropdownMenu.Group>
 			<DropdownMenu.Separator />
@@ -77,15 +93,15 @@
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</DropdownMenu.Item>
-				<DropdownMenu.Item>
+				<DropdownMenu.Item href={import.meta.env.VITE_STRIPE_DONATION_URL}>
 					<Coffee class="mr-2 h-4 w-4" />
 					<span>Donate Coffee</span>
 				</DropdownMenu.Item>
 			</DropdownMenu.Group>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Item class="data-[highlighted]:bg-primary/75">
+			<DropdownMenu.Item class="data-[highlighted]:bg-primary/75" href="{import.meta.env.VITE_PROJECT_REPOSITORY}/issues">
 				<Bug class="mr-2 h-4 w-4" />
-				<span>Report Bug</span>
+				<span>Report Bug/Features</span>
 			</DropdownMenu.Item>
 			<DropdownMenu.Item on:click={() => logout()} class="data-[highlighted]:bg-primary/75">
 				<LogOut class="mr-2 h-4 w-4" />

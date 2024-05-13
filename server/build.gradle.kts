@@ -142,6 +142,11 @@ dependencies {
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
     implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.39")
 
+    // Hawaii-framework must-have logging dependencies.
+    implementation(group = "org.slf4j", name = "jcl-over-slf4j", version = "2.1.0-alpha1")
+    implementation(group = "net.logstash.logback", name = "logstash-logback-encoder", version = "7.4")
+    implementation(group = "ch.qos.logback", name = "logback-access", version = "1.4.14")
+
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
     testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.4")
@@ -193,7 +198,6 @@ tasks.withType<JavaCompile> {
             arrayOf(
                     "-Xlint:all",
                     "-Xlint:-processing",
-                    "-Amapstruct.defaultComponentModel=spring",
                     "-Werror"
             )
     )
@@ -205,7 +209,6 @@ tasks.withType<Test> {
         events = setOf(FAILED, PASSED, SKIPPED)
     }
 }
-
 
 tasks.named<DefaultTask>("build") {
     finalizedBy("cyclonedxBom", "dependencyUpdates")

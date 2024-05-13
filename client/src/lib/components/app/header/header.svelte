@@ -30,17 +30,21 @@
 >
 	<div class="flex flex-row items-center space-x-4">
 		<div class="flex items-center space-x-1">
-			<img alt="AniFlix Full Logo" class="h-full max-h-[32px] hidden md:block" src={FullLogo} />
-			<img alt="AniFlix Small Logo" class="h-full max-h-[32px] block md:hidden" src={SmallLogo} />
-			{#if import.meta.env.VITE_ENV !== 'production'}
-				<Badge variant="outline" class="my-3 bg-green-600">TST</Badge>
+			<img alt="AniFlix Full Logo" class="hidden h-full max-h-[32px] md:block" src={FullLogo} />
+			<img alt="AniFlix Small Logo" class="block h-full max-h-[32px] md:hidden" src={SmallLogo} />
+			{#if import.meta.env.VITE_ENV === 'test'}
+				<Badge variant="outline" class="my-3 bg-blue-600">TST</Badge>
+			{/if}
+
+			{#if import.meta.env.VITE_ENV === 'development'}
+				<Badge variant="outline" class="my-3 bg-green-600">DEV</Badge>
 			{/if}
 		</div>
 
 		<div class="hidden flex-row space-x-4 text-xs font-light md:flex">
-			<a class={currentPath.includes('/browse') ? 'font-bold' : ''} href="/browse">Browse</a>
-			<a class={currentPath.includes('/news') ? 'font-bold' : ''} href="/news">News</a>
-			<a class={currentPath.includes('/library') ? 'font-bold' : ''} href="/library">Library</a>
+			<a data-sveltekit-preload-data="hover" class={currentPath.includes('/browse') ? 'font-bold' : ''} href="/browse">Browse</a>
+			<a data-sveltekit-preload-data="hover" class={currentPath.includes('/news') ? 'font-bold' : ''} href="/news">News</a>
+			<a data-sveltekit-preload-data="hover" class={currentPath.includes('/library') ? 'font-bold' : ''} href="/library">Library</a>
 		</div>
 	</div>
 

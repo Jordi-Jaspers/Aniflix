@@ -44,8 +44,11 @@
 {#if $useShowSearchResults}
 	<div class="mx-auto flex w-full max-w-[1096px] flex-col space-y-4 px-[4%] py-4">
 		<div class="flex justify-between">
-			<h1 class="border-l-2 border-primary pl-4 text-2xl md:text-3xl font-bold w-full">Search Results</h1>
-			<button class="flex items-center hover:underline hover:opacity-80 w-full justify-end text-sm md:text-lg" on:click={() => goto(CLIENT_URLS.SEARCH_URL)}>
+			<h1 class="w-full border-l-2 border-primary pl-4 text-2xl font-bold md:text-3xl">Search Results</h1>
+			<button
+				class="flex w-full items-center justify-end text-sm hover:underline hover:opacity-80 md:text-lg"
+				on:click={() => goto(CLIENT_URLS.SEARCH_URL)}
+			>
 				<span>Advanced Search</span>
 				<ChevronRight class="h-4 w-4" />
 			</button>

@@ -22,8 +22,7 @@
 
 ## 📝 Introduction
 
-**Author:** Jordi
-Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](https://www.linkedin.com/in/jordi-jaspers/ "Linkedin Page")]
+**Author:** Jordi Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](https://www.linkedin.com/in/jordi-jaspers/ "Linkedin Page")]
 <p align="left">
       <a href="https://ie.linkedin.com/in/jordi-jaspers">
          <img alt="Mail" title="Connect via email" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
@@ -73,16 +72,14 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 * Bug Support email
 * Data sync between API and database
 * Create video player for mobile
-* Navigation not working on mobile
 * Implement Bug Fix page
-* Add stripe Donation link
 * Add advanced search implementation (filters)
 * Implement library function
 * Fix video player on mobile (https://www.reddit.com/r/sveltejs/comments/10aec85/anyone_knows_of_a_good_responsive_video_player/)
-* Darkmode by default.
 * Convert all assets from png to webp
-* Beter sizing images (https://kit.svelte.dev/docs/images)
+* Better sizing images (https://kit.svelte.dev/docs/images)
 * Add SEO (https://kit.svelte.dev/docs/seo)
+* Add Native Compilation
 * ... 
 
 ---
@@ -99,6 +96,33 @@ U+FF66 - U+FF9F: half-width katakana (Japanese only)
 
 to check if a character contains a japanese/roman character you can use the following regex:
 `/[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[a-zA-Z0-9]+|[ａ-ｚＡ-Ｚ０-９]+|[々〆〤ヶ]+/u`
+---
+
+### Native Compilation with spring boot.
+
+Native compilation is still a weird thing.. need to figure this stuff out. but that will take some time.
+
+``` gradle
+// add native build support
+id("org.graalvm.buildtools.native") version "0.10.1"
+
+graalvmNative {
+    binaries.all {
+        resources.autodetect()
+    }
+    toolchainDetection = false
+}
+
+
+tasks.named<JavaCompile>("compileAotJava").configure {
+    options.compilerArgs.remove("-Werror")
+}
+
+tasks.named<JavaCompile>("compileAotTestJava").configure {
+    options.compilerArgs.remove("-Werror")
+}
+```
+
 ---
 
 ### Autoplaying Videos

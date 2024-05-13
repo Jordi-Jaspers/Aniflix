@@ -18,7 +18,8 @@ jobs:
     env:
       REGISTRY_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.CLIENT_SNAPSHOT_REPO || secrets.CLIENT_RELEASE_REPO }}
       SERVER_BASE_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.VITE_SERVER_TST_BASE_URL || secrets.VITE_SERVER_BASE_URL }}
-      ENVIRONMENT: ${{ (github.ref == 'refs/heads/develop') && 'development' || 'production' }}
+      ENVIRONMENT: ${{ (github.ref == 'refs/heads/develop') && 'test' || 'production' }}
+      DONATION_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.VITE_STRIPE_DONATION_TST_URL || secrets.VITE_STRIPE_DONATION_URL }}
 
     steps:
       - name: Checkout repository
@@ -33,7 +34,7 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          buildArgs: VITE_SERVER_BASE_URL=${{ env.SERVER_BASE_URL }},VITE_SERVER_ISSUER=${{ env.SERVER_BASE_URL }},VITE_ENV=${{ env.ENVIRONMENT }},VITE_PORT=${{ secrets.VITE_PORT }}
+          buildArgs: VITE_SERVER_BASE_URL=${{ env.SERVER_BASE_URL }},VITE_SERVER_ISSUER=${{ env.SERVER_BASE_URL }},VITE_ENV=${{ env.ENVIRONMENT }},VITE_PORT=${{ secrets.VITE_PORT }},VITE_STRIPE_DONATION_URL=${{env.DONATION_URL}},VITE_PROJECT_REPOSITORY=${{secrets.VITE_PROJECT_REPOSITORY}}
 
           addLatest: true
           directory: ./client
