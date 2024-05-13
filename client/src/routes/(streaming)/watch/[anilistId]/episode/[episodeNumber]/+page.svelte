@@ -155,12 +155,12 @@
         {light}
         config={{
                 file: {
-                    forceHLS: !Hls.isSupported(),
+                    // forceHLS: !Hls.isSupported(),
                     forceVideo: true,
                     hlsVersion: '0.12.4',
+                    forceSafariHLS: true,
                 }
             }}
-        playsinline
         on:ready={handleReady}
         on:play={() => (playing = true)}
         on:pause={() => (playing = false)}
