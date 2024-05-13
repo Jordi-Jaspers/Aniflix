@@ -65,6 +65,9 @@ plugins {
 
     // Automatically generates a list of updatable dependencies.
     id("com.github.ben-manes.versions") version "0.51.0"
+
+    // add native build support
+    id("org.graalvm.buildtools.native") version "0.10.1"
 }
 
 /**
@@ -173,8 +176,21 @@ quality {
     codenarc = true
 }
 
+/**
+ * Auto-detect the resources in native image.
+ */
+graalvmNative {
+    binaries {
+        named("main") {
+            buildArgs.add("--static")
+            buildArgs.add("--libc=musl")
+        }
+    }
+}
+
 // ============== TASK CONFIGURATION ================
 tasks.getByName<BootJar>("bootJar") {
+    enabled = false
     duplicatesStrategy = INCLUDE
     archiveBaseName.set(lowerCase(applicationName))
     archiveVersion.set(project.version.toString())
@@ -188,19 +204,36 @@ tasks.getByName<BootJar>("bootJar") {
 }
 
 tasks.named<Jar>("jar") {
-    enabled = false
+    enabled = true
+    duplicatesStrategy = INCLUDE
+    archiveBaseName.set(lowerCase(applicationName))
+    archiveVersion.set(project.version.toString())
+    archiveFileName.set("${lowerCase(applicationName)}.jar")
+    manifest {
+        attributes("Name" to lowerCase(applicationName))
+        attributes("Implementation-Title" to applicationDescription)
+        attributes("Implementation-Vendor" to author)
+        attributes("Implementation-Version" to project.version.toString())
+    }
 }
 
 tasks.withType<JavaCompile> {
     options.isDeprecation = true
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(
-            arrayOf(
-                    "-Xlint:all",
-                    "-Xlint:-processing",
-                    "-Werror"
-            )
+        arrayOf(
+            "-Xlint:all",
+            "-Xlint:-processing"
+        )
     )
+}
+
+tasks.named<JavaCompile>("compileAotJava").configure {
+    options.compilerArgs.remove("-Werror")
+}
+
+tasks.named<JavaCompile>("compileAotTestJava").configure {
+    options.compilerArgs.remove("-Werror")
 }
 
 tasks.withType<Test> {
@@ -232,14 +265,14 @@ tasks.named<BootRun>("bootRun") {
     }
 
     arguments.addAll(
-            arrayOf(
-                    "-Xms512m",
-                    "-Xmx4096m",
-                    "-XX:MetaspaceSize=128m",
-                    "-XX:MaxMetaspaceSize=256m",
-                    "-XX:+UseG1GC",
-                    "-Djava.awt.headless=true"
-            )
+        arrayOf(
+            "-Xms512m",
+            "-Xmx4096m",
+            "-XX:MetaspaceSize=128m",
+            "-XX:MaxMetaspaceSize=256m",
+            "-XX:+UseG1GC",
+            "-Djava.awt.headless=true"
+        )
     )
     jvmArgs(arguments)
 }
