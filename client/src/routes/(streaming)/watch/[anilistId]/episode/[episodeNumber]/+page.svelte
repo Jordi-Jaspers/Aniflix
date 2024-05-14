@@ -46,6 +46,7 @@
 
 		isMobile = Device.isMobile;
 		isSafari = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
+		toast("Loading HLS on " + isMobile ? "Mobile" : "Desktop" + " device with " + isSafari ? "Safari" : "Chrome" + " browser.");
 
 		const anilistId: string = $page.params.anilistId.toString();
 		const episodeNumber: string = $page.params.episodeNumber.toString();
@@ -169,7 +170,7 @@
 	config={{
 		file: {
 			forceHLS: isMobile,
-			forceVideo: true,
+			forceVideo: isMobile || isSafari,
 			hlsVersion: '0.12.4',
 			forceSafariHLS: isSafari
 		}
