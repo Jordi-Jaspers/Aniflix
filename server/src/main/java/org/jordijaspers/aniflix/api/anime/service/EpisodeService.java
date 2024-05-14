@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
-import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_EPISODE_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.STREAMING_LINKS_NOT_FOUND_ERROR;
 
 /**
@@ -64,7 +63,6 @@ public class EpisodeService {
 
     private Episode getInteractedEpisode(final int anilistId, final int episodeNumber) {
         interactionService.getInteractedAnime(anilistId);
-        return episodeRepository.findEpisodeByEpisodeAndAnilistId(anilistId, episodeNumber)
-                .orElseThrow(() -> new DataNotFoundException(ANIME_EPISODE_NOT_FOUND_ERROR));
+        return episodeRepository.findEpisodeByEpisodeAndAnilistId(anilistId, episodeNumber).orElse(null);
     }
 }
