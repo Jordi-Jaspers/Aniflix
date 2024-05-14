@@ -15,6 +15,12 @@
 	});
 </script>
 
+<head>
+	<title>Watch - Aniflix</title>
+	<meta name="description" content="Stream your favorite movies anime." />
+	<meta name="keywords" content="movies, anime, episodes, stream, watch, online" />
+</head>
+
 {#if isAuthenticated}
 	<main class="h-screen w-screen overflow-hidden bg-black">
 		<slot />

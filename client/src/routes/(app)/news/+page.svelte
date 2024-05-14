@@ -43,6 +43,12 @@
 	});
 </script>
 
+<head>
+	<title>News - Aniflix</title>
+	<meta name="description" content="The latest news and updates from the Aniflix team." />
+	<meta name="keywords" content="Aniflix, news, updates, anime, manga, community" />
+</head>
+
 <div class="mx-auto w-full max-w-[1096px] px-[4%]">
 	<h1 class="my-4 border-l-2 border-primary px-4 text-3xl font-bold">Recent News</h1>
 

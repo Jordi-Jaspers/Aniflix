@@ -13,6 +13,8 @@
 
 <head>
 	<title>Login - Aniflix</title>
+	<meta name="description" content="Login or Register to AniFlix.stream" />
+	<meta name="keywords" content="AniFlix, Login, Register, Authentication" />
 </head>
 
 <slot class="flex h-screen flex-col" />

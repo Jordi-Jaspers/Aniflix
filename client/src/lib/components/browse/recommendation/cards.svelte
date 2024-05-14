@@ -4,6 +4,7 @@
 	import { curl } from '$lib/api/client';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { RecommendationCard } from '$lib/components/browse';
+	import { writable } from 'svelte/store';
 
 	export let anime: AnimeResponse;
 	let recommendations: RecommendationResponse[];
@@ -19,9 +20,23 @@
 			recommendations = await response.json();
 		}
 	});
+
+	const width = writable(window.innerWidth > 400 ? '200px' : '100px');
+	onMount(() => {
+		const updateWidth = () => {
+			width.set(window.innerWidth > 400 ? '200px' : '100px');
+		};
+
+		window.addEventListener('resize', updateWidth);
+		return () => {
+			window.removeEventListener('resize', updateWidth);
+		};
+	});
+
+	$: console.log(width);
 </script>
 
-<div class="grid gap-4 py-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
+<div class="grid gap-4 py-4" style="grid-template-columns: repeat(auto-fill, minmax({$width}, 1fr))">
 	{#if recommendations}
 		{#each recommendations as recommendation}
 			<RecommendationCard {recommendation} />

@@ -15,9 +15,9 @@
 	}
 </script>
 
-<div class={'m-[0.1em] h-[100%] min-h-[18em] overflow-hidden rounded bg-card-accent shadow-lg'}>
+<div class={'m-[0.1em] h-[100%] min-h-[14em] overflow-hidden rounded bg-card-accent shadow-lg'}>
 	<div class={'relative overflow-hidden transition-opacity duration-200 hover:opacity-75'}>
-		<img src={recommendation.image} alt={recommendation.title} class={'aspect-[460/650] object-cover brightness-75'} />
+		<img src={recommendation.image} alt={recommendation.title} class={'aspect-[460/650] w-full object-cover brightness-75'} />
 		<div
 			class="align-center absolute bottom-0 left-0 right-0 top-0 flex h-full items-center justify-center opacity-0 hover:opacity-100 hover:transition-opacity hover:duration-200 hover:ease-in"
 		>
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col justify-between p-[4%]">
-		<div class="h-[5.5rem] space-y-2 overflow-hidden">
+		<div class="hidden h-[5.5rem] space-y-2 overflow-hidden sm:block">
 			<div class="flex w-full items-center text-sm text-muted-foreground">
 				<div class="flex items-center space-x-1">
 					<p>{recommendation.rating / 10}</p>
@@ -61,7 +61,7 @@
 					.join('-')}
 			</h4>
 		</div>
-		<div class="my-4 flex h-10 justify-center space-x-8">
+		<div class="my-4 flex h-10 justify-center space-x-4 md:space-x-8">
 			<LikeButton />
 			<LibraryButton />
 		</div>

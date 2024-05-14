@@ -27,6 +27,12 @@
 	$: isLoading = !anime || !genres || genres.length === 0;
 </script>
 
+<head>
+	<title>Browse - Aniflix</title>
+	<meta name="description" content="Browse through the latest anime episodes and trending anime on Aniflix." />
+	<meta name="keywords" content="anime, browse, episodes, trending, popular, genres" />
+</head>
+
 {#if isLoading}
 	<LoadingScreen />
 {:else}
