@@ -18,6 +18,8 @@ ARG VITE_ENV='production'
 ARG VITE_PORT=3000
 ARG VITE_SERVER_BASE_URL='http://localhost:8080'
 ARG VITE_SERVER_ISSUER='http://localhost:3000'
+ARG VITE_PROJECT_REPOSITORY='https://github.com/'
+ARG VITE_STRIPE_DONATION_URL='https://donate.stripe.com/'
 
 # Run your build process
 RUN bun install --frozen-lockfile && bun run build
@@ -29,7 +31,9 @@ FROM oven/bun
 ENV VITE_ENV=$VITE_ENV \
     VITE_SERVER_PORT=$VITE_SERVER_PORT \
     VITE_SERVER_BASE_URL=$VITE_SERVER_BASE_URL \
-    VITE_SERVER_ISSUER=$VITE_SERVER_ISSUER
+    VITE_SERVER_ISSUER=$VITE_SERVER_ISSUER \
+    VITE_PROJECT_REPOSITORY=$VITE_PROJECT_REPOSITORY \
+    VITE_STRIPE_DONATION_URL=$VITE_STRIPE_DONATION_URL
 
 # Copy only the necessary files from the builder image to the final image
 COPY --from=builder /workspace/build .
