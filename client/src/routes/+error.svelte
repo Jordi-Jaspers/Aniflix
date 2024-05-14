@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp';
+	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
 </script>
 
 {#if $page.status === 404}
 	<div class="flex h-screen flex-col items-center justify-center space-y-4">
 		<div class="mx-auto flex w-[350px] flex-col justify-center space-y-6">
 			<div class="px-16">
-				<img src={Logo} alt="AniFlix Logo" width={941} height={313} />
+				<enhanced:img src={Logo} alt="AniFlix Logo" />
 			</div>
 		</div>
 		<h1 class="mb-4 text-4xl font-bold">404 - Page Not Found</h1>

@@ -1,6 +1,6 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp';
-	import LoginBackground from '$lib/assets/images/aniflix-login.webp';
+	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+	import LoginBackground from '$lib/assets/images/aniflix-login.webp?enhanced';
 	import LoginCard from '$lib/components/login/login-card.svelte';
 	import RegisterCard from '$lib/components/login/register-card.svelte';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
@@ -10,14 +10,7 @@
 <div class="container relative grid h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
 	<div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
 		<div class="absolute inset-0 min-h-screen min-w-full">
-			<img
-				src={LoginBackground}
-				alt={'Authentication'}
-				width={7680}
-				height={4320}
-				class="h-full overflow-hidden object-cover brightness-[0.35]"
-				priority
-			/>
+			<enhanced:img src={LoginBackground} alt={'Authentication'} class="h-full overflow-hidden object-cover brightness-[0.35]" />
 		</div>
 
 		<div class="relative z-20 flex items-center space-x-2 text-lg font-medium">
@@ -54,7 +47,7 @@
 	<div class="lg:p-8">
 		<div class="mx-auto flex w-[350px] flex-col justify-center space-y-6">
 			<div class="px-16">
-				<img src={Logo} alt="AniFlix Logo" width={941} height={313} priority />
+				<enhanced:img src={Logo} alt="AniFlix Logo" fetchpriority="high" loading="eager" />
 			</div>
 			<Tabs defaultValue="login">
 				<TabsList class="w-full">

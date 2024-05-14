@@ -17,13 +17,7 @@
 
 <div class={'m-[0.1em] h-[100%] min-h-[18em] overflow-hidden rounded bg-card-accent shadow-lg'}>
 	<div class={'relative overflow-hidden transition-opacity duration-200 hover:opacity-75'}>
-		<img
-			src={recommendation.image}
-			alt={recommendation.title}
-			class={'aspect-[460/650] object-cover brightness-75'}
-			width={460}
-			height={650}
-		/>
+		<img src={recommendation.image} alt={recommendation.title} class={'aspect-[460/650] object-cover brightness-75'} />
 		<div
 			class="align-center absolute bottom-0 left-0 right-0 top-0 flex h-full items-center justify-center opacity-0 hover:opacity-100 hover:transition-opacity hover:duration-200 hover:ease-in"
 		>

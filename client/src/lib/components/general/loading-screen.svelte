@@ -1,12 +1,12 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp';
+	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
 </script>
 
-<div class="fixed inset-0 !z-[1000] flex h-screen w-screen items-center justify-center bg-black">
+<div class="fixed inset-0 !z-[1000] flex h-screen w-screen items-center justify-center overflow-hidden bg-black">
 	<div class="flex h-screen flex-col items-center justify-center space-y-4">
 		<div class="mx-auto flex w-[350px] flex-col justify-center space-y-6">
 			<div class="px-16">
-				<img src={Logo} alt="AniFlix Logo" width={941} height={313} />
+				<enhanced:img src={Logo} alt="AniFlix Logo" />
 			</div>
 		</div>
 		<p class="text-center text-lg font-bold">Loading...</p>
