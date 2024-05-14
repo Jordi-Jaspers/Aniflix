@@ -34,7 +34,7 @@
 	let playbackRate: number = 1.0;
 	let showVolume: boolean = false;
 
-	let isMobile: boolean = false;
+	let isPhone: boolean = false;
 	let isSafari: boolean = false;
 
 	onMount(async () => {
@@ -44,9 +44,9 @@
 			return;
 		}
 
-		isMobile = Device.isMobile;
+		isPhone = Device.isPhone;
 		isSafari = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
-		toast('Loading HLS on ' + isMobile ? 'Mobile' : 'Desktop' + ' device with ' + isSafari ? 'Safari' : 'Chrome' + ' browser.');
+		toast('Loading HLS on ' + isPhone ? 'Mobile' : 'Desktop' + ' device with ' + isSafari ? 'Safari' : 'Chrome' + ' browser.');
 
 		const anilistId: string = $page.params.anilistId.toString();
 		const episodeNumber: string = $page.params.episodeNumber.toString();
@@ -138,7 +138,7 @@
 
 {#if !isReady && !episode}
 	<LoadingScreen />
-{:else if !isMobile}
+{:else if !isPhone}
 	<MediaControlOverlay
 		bind:pip
 		bind:playing
@@ -169,8 +169,8 @@
 	{light}
 	config={{
 		file: {
-			forceHLS: isMobile,
-			forceVideo: isMobile || isSafari,
+			forceHLS: isPhone,
+			forceVideo: isPhone || isSafari,
 			hlsVersion: '0.12.4',
 			forceSafariHLS: isSafari
 		}

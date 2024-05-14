@@ -10,7 +10,7 @@
 <div class="container relative grid h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
 	<div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
 		<div class="absolute inset-0 min-h-screen min-w-full">
-			<enhanced:img src={LoginBackground} alt={'Authentication'} class="h-full overflow-hidden object-cover brightness-[0.35]" />
+			<enhanced:img src={LoginBackground} alt="Login Background" class="h-full overflow-hidden object-cover brightness-[0.35]" />
 		</div>
 
 		<div class="relative z-20 flex items-center space-x-2 text-lg font-medium">
