@@ -1,6 +1,6 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.png';
-	import LoginBackground from '$lib/assets/images/aniflix-login.png';
+	import Logo from '$lib/assets/icons/aniflix-logo-large.webp';
+	import LoginBackground from '$lib/assets/images/aniflix-login.webp';
 	import LoginCard from '$lib/components/login/login-card.svelte';
 	import RegisterCard from '$lib/components/login/register-card.svelte';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';

@@ -76,7 +76,6 @@
 * Add advanced search implementation (filters)
 * Implement library function
 * Fix video player on mobile (https://www.reddit.com/r/sveltejs/comments/10aec85/anyone_knows_of_a_good_responsive_video_player/)
-* Convert all assets from png to webp
 * Better sizing images (https://kit.svelte.dev/docs/images)
 * Add SEO (https://kit.svelte.dev/docs/seo)
 * Add Native Compilation

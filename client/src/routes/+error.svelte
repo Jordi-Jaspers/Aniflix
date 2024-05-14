@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Logo from '$lib/assets/icons/aniflix-logo-large.png';
+	import Logo from '$lib/assets/icons/aniflix-logo-large.webp';
 </script>
 
 {#if $page.status === 404}
