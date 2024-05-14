@@ -17,7 +17,10 @@
 
 	let errorMessage: string | undefined;
 	let registerResponse: RegisterResponse | undefined;
+	let isLoading = false;
+
 	async function handleSubmit() {
+		isLoading = true;
 		const response: AuthorizeResponse | string = await register(formData);
 		if (typeof response === 'string') {
 			registerResponse = undefined;
@@ -26,6 +29,7 @@
 			registerResponse = response;
 			errorMessage = undefined;
 		}
+		loading = false;
 	}
 </script>
 
@@ -87,7 +91,15 @@
 			<Socials />
 		</CardContent>
 		<CardFooter>
-			<Button form="register" type="submit" class="w-full">Create account</Button>
+			<Button form="register" type="submit" class="w-full" disabled={isLoading}>
+				{#if isLoading}
+					<div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-muted-foreground motion-reduce:animate-[spin_1.5s_linear_infinite]"
+						 role="status"
+					/>
+				{:else}
+					<span>Create Account</span>
+				{/if}
+			</Button>
 		</CardFooter>
 	</Card>
 </form>
