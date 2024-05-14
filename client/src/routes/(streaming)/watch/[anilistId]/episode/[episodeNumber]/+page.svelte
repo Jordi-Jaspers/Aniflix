@@ -44,7 +44,7 @@
 			return;
 		}
 
-		isMobile = Device.isMobile();
+		isMobile = Device.isMobile;
 		isSafari = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
 
 		const anilistId: string = $page.params.anilistId.toString();
