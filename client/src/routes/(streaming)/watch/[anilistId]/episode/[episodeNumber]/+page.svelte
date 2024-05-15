@@ -66,7 +66,7 @@
 	<LoadingScreen />
 {/if}
 
-{#if !isIOSDevice}
+{#if isIOSDevice}
 	<IOSPlayer {episode} bind:isReady />
 {:else}
 	<DefaultPlayer {episode} bind:isReady />
