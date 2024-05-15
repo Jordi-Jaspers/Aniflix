@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import SveltePlayer from 'svelte-player';
 	import type { OnProgressProps, PlayerUrl } from 'svelte-player/dist/players/types';
 	import type { SveltePlayerRef } from 'svelte-player/dist/types';
@@ -56,7 +55,7 @@
 	// We only want to update time slider if we are not currently seeking
 	function handleProgress(event: CustomEvent<OnProgressProps>) {
 		const state = event.detail;
-		if (!seeking && state.loaded !== undefined && state.played !== undefined) {
+		if (!seeking && state.loaded !== undefined) {
 			loaded = state.loaded;
 			played = state.played;
 		}

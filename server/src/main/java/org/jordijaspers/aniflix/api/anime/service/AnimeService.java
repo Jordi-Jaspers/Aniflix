@@ -82,6 +82,7 @@ public class AnimeService {
     public Anime findDetailsByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime details with Anilist ID '{}'", anilistId);
         final Anime anime = animeRepository.findDetailsByAnilistId(anilistId)
+                .filter(entry -> !entry.getEpisodes().isEmpty())
                 .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
 
         userInteractionEnhancer.applyAnime(anime);

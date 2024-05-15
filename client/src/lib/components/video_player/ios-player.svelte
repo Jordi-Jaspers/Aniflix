@@ -5,7 +5,6 @@
 	import { ArrowLeft } from 'lucide-svelte';
 
 	export let episode: EpisodeResponse;
-	export let isReady: boolean;
 
 	let currentResolution: string = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
@@ -56,5 +55,5 @@
 
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<!-- Ignoring this because the video element is not meant to have a caption -->
-	<video id="video" bind:this={video} controls on:play={() => (isReady = true)} />
+	<video id="video" bind:this={video} controls />
 </div>

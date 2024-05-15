@@ -13,6 +13,7 @@
 
 	let episode: EpisodeResponse;
 	let isReady: boolean = false;
+	let isLoading: boolean = true;
 	let isIOSDevice = false;
 
 	onMount(async () => {
@@ -30,6 +31,7 @@
 		const response: Response = await curl(url, { method: 'GET' });
 		if (response.ok) {
 			episode = await response.json();
+			isLoading = false;
 		} else {
 			episode = {
 				anilistId: 0,
@@ -50,16 +52,17 @@
 					]
 				}
 			};
+			isLoading = false;
 		}
 	});
 </script>
 
-{#if !isReady && !episode}
+{#if !isReady && !episode && isLoading }
 	<LoadingScreen />
 {/if}
 
 {#if isIOSDevice}
-	<IOSPlayer {episode} bind:isReady />
+	<IOSPlayer {episode} />
 {:else}
 	<DefaultPlayer {episode} bind:isReady />
 {/if}
