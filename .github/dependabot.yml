@@ -8,6 +8,9 @@ updates:
       - "dependencies"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "[Actions] bump: "
+      include: "scope"
 
   # Update dependencies for Client using NPM.
   - package-ecosystem: "npm"
@@ -17,6 +20,9 @@ updates:
       - "dependencies"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "[npm] bump: "
+      include: "scope"
 
   # Update dependencies for Server using Gradle.
   - package-ecosystem: "gradle"
@@ -26,3 +32,6 @@ updates:
       - "dependencies"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "[spring] bump: "
+      include: "scope"
