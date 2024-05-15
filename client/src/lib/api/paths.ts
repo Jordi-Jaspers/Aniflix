@@ -5,6 +5,7 @@ export const SERVER_URLS = {
 	SERVER_BASE_URL,
 	AUTH_PATH: `${SERVER_BASE_URL}/auth`,
 	REGISTER_PATH: `${SERVER_BASE_URL}/auth/register`,
+	VALIDATE_PATH: `${SERVER_BASE_URL}/auth/validate`,
 	AUTHORIZE_PATH: `${SERVER_BASE_URL}/auth/authorize`,
 	REFRESH_PATH: `${SERVER_BASE_URL}/auth/token`,
 	USER_PATH: `${SERVER_BASE_URL}/user`,

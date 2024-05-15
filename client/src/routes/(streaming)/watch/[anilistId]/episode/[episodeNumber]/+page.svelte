@@ -23,14 +23,6 @@
 		}
 
 		isIOSDevice = isIOS(navigator.userAgent);
-		toast.success('HLS is supported on this device');
-
-		if (isIOSDevice) {
-			toast.success('This is an iOS device');
-		} else {
-			toast.success('This is not an iOS device');
-		}
-
 		const anilistId: string = $page.params.anilistId.toString();
 		const episodeNumber: string = $page.params.episodeNumber.toString();
 		const url: string = SERVER_URLS.ANIME_EPISODE_PATH.replace('{id}', anilistId).replace('{episodeNumber}', episodeNumber);

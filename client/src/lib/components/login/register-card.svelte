@@ -29,7 +29,7 @@
 			registerResponse = response;
 			errorMessage = undefined;
 		}
-		loading = false;
+		isLoading = false;
 	}
 </script>
 

@@ -46,7 +46,6 @@
                 image               TEXT         NOT NULL,
                 duration            INTEGER      NOT NULL,
                 air_date            TIMESTAMP,
-                UNIQUE (url_id),
                 FOREIGN KEY (anime_anilist_id) REFERENCES anime (anilist_id) ON DELETE CASCADE,
                 CONSTRAINT episode_id CHECK (gogoanime_id IS NOT NULL OR zoro_id IS NOT NULL)
             );

@@ -47,6 +47,40 @@ export async function logout(): Promise<void> {
 }
 
 /**
+ * Function to validate the account of a user.
+ *
+ * @param token The validation token.
+ * @returns A promise which resolves to void.
+ */
+export async function validateAccount(token: string): Promise<void> {
+	const response: Response = await fetch(SERVER_URLS.VALIDATE_PATH + '?token=' + token, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' }
+	});
+
+	if (response.ok) {
+		toast.success('Account successfully activated! Have fun streaming.', {
+			duration: 5000,
+			position: 'bottom-center',
+			style: 'background: #262626; color: #ffffff;'
+		});
+
+		const data: AuthorizeResponse = await response.json();
+		updateTokens(data);
+
+		await goto(CLIENT_URLS.BROWSE_URL);
+	} else {
+		toast.error(await getErrorMessage(response), {
+			duration: 5000,
+			position: 'bottom-center',
+			style: 'background: #262626; color: #ffffff;'
+		});
+
+		await goto(CLIENT_URLS.LOGIN_URL);
+	}
+}
+
+/**
  * Function which automatically adds the access token to the request headers.
  * If the access token is expired or not available, it will attempt to refresh the token and retry the request.
  *

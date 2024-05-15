@@ -65,22 +65,6 @@
 
 ---
 
-### TODO List
-
-* Re-use of refresh token detection.
-* Implementing User management
-* Bug Support email
-* Data sync between API and database
-* Implement Bug Fix page
-* Add advanced search implementation (filters)
-* Implement library function
-* Better sizing images (https://kit.svelte.dev/docs/images)
-* Add SEO (https://kit.svelte.dev/docs/seo)
-* Add Native Compilation
-* ... 
-
----
-
 ### Regexing with Asian Characters
 
 The ranges of Unicode characters which are routinely used for Chinese and Japanese text are:

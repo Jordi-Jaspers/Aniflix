@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.repository.EpisodeRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
+import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.service.InteractionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,13 @@ public class EpisodeService {
     }
 
     private Episode getInteractedEpisode(final int anilistId, final int episodeNumber) {
-        interactionService.getInteractedAnime(anilistId);
+        setLastSeenEpisode(anilistId, episodeNumber);
         return episodeRepository.findEpisodeByEpisodeAndAnilistId(anilistId, episodeNumber).orElse(null);
+    }
+
+    private void setLastSeenEpisode(final int anilistId, final int episodeNumber) {
+        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
+        interaction.setLastSeenEpisode(episodeNumber);
+        interactionService.updateInteraction(interaction);
     }
 }
