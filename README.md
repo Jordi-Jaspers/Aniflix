@@ -71,11 +71,9 @@
 * Implementing User management
 * Bug Support email
 * Data sync between API and database
-* Create video player for mobile
 * Implement Bug Fix page
 * Add advanced search implementation (filters)
 * Implement library function
-* Fix video player on mobile (https://www.reddit.com/r/sveltejs/comments/10aec85/anyone_knows_of_a_good_responsive_video_player/)
 * Better sizing images (https://kit.svelte.dev/docs/images)
 * Add SEO (https://kit.svelte.dev/docs/seo)
 * Add Native Compilation
@@ -128,6 +126,15 @@ tasks.named<JavaCompile>("compileAotTestJava").configure {
 
 Videos can only be auto played in the client whenever the videos are muted. This is a policy that is enforced by the browser. The following
 link will provide more information on this policy: https://developer.chrome.com/blog/autoplay/
+
+---
+
+### HSL Issue on IOS
+
+IOS devices do not support HLS streaming because they have built-in HLS functionlity and should be triggered by the use of the <video> tag.
+
+https://stackoverflow.com/questions/43287226/hls-video-streaming-on-ios-safari
+https://stackoverflow.com/questions/66776643/how-can-i-stream-video-with-hls-js-in-iphone
 
 ---
 
