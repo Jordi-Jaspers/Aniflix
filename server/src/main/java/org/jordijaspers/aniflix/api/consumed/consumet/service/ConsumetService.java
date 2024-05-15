@@ -83,6 +83,8 @@ public class ConsumetService {
         return provisionDataFromJikan(anime);
     }
 
+
+
     public Anime getAnimeDetails(final String title) {
         LOGGER.info("[Consumet API] Fetching anime details for title '{}'.", title);
         final Map<String, String> filters = applyDefaultFilters(title, new ConcurrentHashMap<>());
@@ -94,6 +96,14 @@ public class ConsumetService {
                 .map(consumetRepository::getAnimeDetails)
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+    }
+
+    public Anime getAnimeInfo(final Integer anilistId) {
+        LOGGER.info("[Consumet API] Fetching anime info for Anilist ID '{}'.", anilistId);
+        final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
+                .map(animeMapper::toAnime)
+                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+        return provisionTrailerFromJikan(anime);
     }
 
     @Cacheable(value = "animeRecommendations", key = "#anilistId")
@@ -192,12 +202,16 @@ public class ConsumetService {
         return foundResult;
     }
 
-    private Anime provisionDataFromJikan(final Anime anime) {
+    private Anime provisionTrailerFromJikan(final Anime anime) {
         if (isBlank(anime.getTrailerUrl())) {
             final String trailerUrl = jikanRepository.getAnimeTrailer(anime.getMalId()).getYoutubeId();
             anime.setTrailerUrl(trailerUrl);
         }
+        return anime;
+    }
 
+    private Anime provisionDataFromJikan(final Anime anime) {
+        provisionTrailerFromJikan(anime);
         final Map<Integer, AnimeEpisode> jikanEpisodes = jikanRepository.getAnimeEpisodes(anime.getMalId(), anime.getTotalEpisodes());
         anime.getEpisodes().forEach(episode -> {
             final AnimeEpisode jikanEpisode = jikanEpisodes.get(episode.getNumber());

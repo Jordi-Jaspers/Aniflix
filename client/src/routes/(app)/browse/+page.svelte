@@ -17,10 +17,7 @@
 
 	let isLoading = true;
 	let areEpisodesLoading = true;
-	let areTrendingAnimeLoading = true;
-	let arePopularAnimeLoading = true;
-	let areGenreAnimeLoading = true;
-	$: isLoading = areEpisodesLoading || areTrendingAnimeLoading || arePopularAnimeLoading || areGenreAnimeLoading;
+	$: isLoading = areEpisodesLoading;
 </script>
 
 <head>
@@ -42,12 +39,15 @@
 		<EpisodeCards bind:isLoading={areEpisodesLoading} />
 	</Carousel>
 	<Carousel title="Trending Anime">
-		<AnimeCards url={SERVER_URLS.ANIME_TRENDING_PATH} bind:isLoading={areTrendingAnimeLoading} />
+		<AnimeCards url={SERVER_URLS.ANIME_TRENDING_PATH} />
 	</Carousel>
 	<Carousel title="Popular Anime">
-		<AnimeCards url={SERVER_URLS.ANIME_POPULAR_PATH} bind:isLoading={arePopularAnimeLoading} />
+		<AnimeCards url={SERVER_URLS.ANIME_POPULAR_PATH} />
 	</Carousel>
 	<Carousel genre={genres[0]} title="Anime">
-		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} bind:isLoading={areGenreAnimeLoading} />
+		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} />
+	</Carousel>
+	<Carousel genre={genres[1]} title="Anime">
+		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} />
 	</Carousel>
 {/if}

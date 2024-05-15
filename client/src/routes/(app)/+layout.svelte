@@ -25,7 +25,7 @@
 		<div class="relative flex h-full w-full flex-col">
 			<Header />
 			<SearchResults />
-			<div class={$useShowSearchResults ? 'hidden' : ''}>
+			<div class={$useShowSearchResults ? 'hidden' : 'no-scrollbar'}>
 				<slot />
 				<Footer />
 			</div>

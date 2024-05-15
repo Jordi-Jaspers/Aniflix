@@ -6,10 +6,10 @@
 	import { RecommendationCard } from '$lib/components/browse';
 	import { writable } from 'svelte/store';
 
-	export let anime: AnimeResponse;
+	export let anilistId: number;
 	let recommendations: RecommendationResponse[];
 	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_RECOMMENDATION_PATH.replace('{id}', anime.anilistId.toString()), {
+		const response: Response = await curl(SERVER_URLS.ANIME_RECOMMENDATION_PATH.replace('{id}', anilistId.toString()), {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

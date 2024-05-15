@@ -12,7 +12,7 @@ export function getRandomValues(array: any[], count: number) {
 }
 
 export async function openModal(anilistId: number): Promise<void> {
-	const response: Response = await curl(SERVER_URLS.ANIME_DETAILS_PATH.replace('{id}', anilistId.toString()), {
+	const response: Response = await curl(SERVER_URLS.ANIME_INFO_PATH.replace('{id}', anilistId.toString()), {
 		method: 'GET'
 	});
 

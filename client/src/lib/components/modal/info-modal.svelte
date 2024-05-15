@@ -182,10 +182,10 @@
 					</Trigger>
 				</List>
 				<Content value="Episodes">
-					<EpisodeList episodes={$useModalInfo.episodes} />
+					<EpisodeList anilistId={$useModalInfo.anilistId} />
 				</Content>
 				<Content value="Recommended">
-					<RecommendationCards anime={$useModalInfo} />
+					<RecommendationCards anilistId={$useModalInfo.anilistId} />
 				</Content>
 			</Root>
 		</div>

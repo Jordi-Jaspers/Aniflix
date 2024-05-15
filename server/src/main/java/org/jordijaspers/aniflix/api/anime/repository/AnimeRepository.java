@@ -28,5 +28,12 @@ public interface AnimeRepository extends JpaRepository<Anime, Integer> {
             + "LEFT JOIN FETCH a.episodes episodes "
             + "LEFT JOIN FETCH a.interactions interactions "
             + "WHERE a.anilistId = ?1")
-    Optional<Anime> findByAnilistId(int anilistId);
+    Optional<Anime> findDetailsByAnilistId(int anilistId);
+
+    @LogExecutionTime
+    @Query("FROM Anime a "
+            + "LEFT JOIN FETCH a.genres genres "
+            + "LEFT JOIN FETCH a.interactions interactions "
+            + "WHERE a.anilistId = ?1")
+    Optional<Anime> findInfoByAnilistId(int anilistId);
 }

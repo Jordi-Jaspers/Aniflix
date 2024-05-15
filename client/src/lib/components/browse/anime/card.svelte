@@ -7,7 +7,7 @@
 	setAnime(anime);
 </script>
 
-<div class="flex h-full w-48 md:w-56 flex-col overflow-hidden rounded-t-[0.75rem]">
+<div class="flex h-full w-48 flex-col overflow-hidden rounded-t-[0.75rem] md:w-56">
 	<div class="relative aspect-[420/600] h-full w-auto bg-card-accent opacity-100 transition-all hover:opacity-75">
 		<button
 			class="absolute flex h-full w-full items-center justify-center bg-gradient-to-b dark:from-transparent dark:to-card-accent dark:lg:to-[99%]"

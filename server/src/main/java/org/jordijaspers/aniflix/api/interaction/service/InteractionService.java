@@ -36,7 +36,7 @@ public class InteractionService {
                     LOGGER.info("User '{}' has not interacted with anime ('{}') yet.", user.getUsername(), anilistId);
                     return animeService.isAnimeInDatabase(anilistId)
                             ? new Interaction(user, anilistId)
-                            : new Interaction(user, animeService.findByAnilistId(anilistId));
+                            : new Interaction(user, animeService.findDetailsByAnilistId(anilistId));
                 });
     }
 

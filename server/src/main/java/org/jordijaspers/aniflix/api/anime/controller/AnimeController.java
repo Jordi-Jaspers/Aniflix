@@ -51,7 +51,15 @@ public class AnimeController {
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = ANIME_DETAILS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<DetailedAnimeResponse> getAnimeDetails(@PathVariable("id") final int anilistId) {
-        final Anime anime = animeService.findByAnilistId(anilistId);
+        final Anime anime = animeService.findDetailsByAnilistId(anilistId);
+        return ResponseEntity.status(OK).body(animeMapper.toResponseWithEpisodes(anime));
+    }
+
+    @ResponseStatus(OK)
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping(path = ANIME_INFO, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<DetailedAnimeResponse> getAnimeInfo(@PathVariable("id") final int anilistId) {
+        final Anime anime = animeService.findInfoByAnilistId(anilistId);
         return ResponseEntity.status(OK).body(animeMapper.toResponseWithEpisodes(anime));
     }
 

@@ -79,13 +79,22 @@ public class AnimeService {
         return animeRepository.existsById(anilistId);
     }
 
-    public Anime findByAnilistId(final int anilistId) {
-        LOGGER.info("Attempting to look up anime with Anilist ID '{}'", anilistId);
-        final Anime anime = animeRepository.findByAnilistId(anilistId)
+    public Anime findDetailsByAnilistId(final int anilistId) {
+        LOGGER.info("Attempting to look up anime details with Anilist ID '{}'", anilistId);
+        final Anime anime = animeRepository.findDetailsByAnilistId(anilistId)
                 .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
 
         userInteractionEnhancer.applyAnime(anime);
         synchronizationService.synchronizeData(anime);
+        return anime;
+    }
+
+    public Anime findInfoByAnilistId(final int anilistId) {
+        LOGGER.info("Attempting to look up anime info with Anilist ID '{}'", anilistId);
+        final Anime anime = animeRepository.findInfoByAnilistId(anilistId)
+                .orElseGet(() -> consumetService.getAnimeInfo(anilistId));
+
+        userInteractionEnhancer.applyAnime(anime);
         return anime;
     }
 

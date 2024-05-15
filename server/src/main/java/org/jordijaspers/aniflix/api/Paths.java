@@ -65,7 +65,9 @@ public final class Paths {
 
     public static final String ANIME_SEARCH = ANIME_PATH + SEARCH_PART;
 
-    public static final String ANIME_DETAILS = ANIME_PATH + ID_PART;
+    public static final String ANIME_DETAILS = ANIME_PATH + ID_PART + "/details";
+
+    public static final String ANIME_INFO = ANIME_PATH + ID_PART + "/info";
 
     public static final String ANIME_GENRE = ANIME_PATH + "/genre";
 

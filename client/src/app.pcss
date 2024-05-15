@@ -85,6 +85,18 @@
 	[&::-webkit-slider-thumb]:ring-primary;
 }
 
+@layer utilities {
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+}
+
 h1 {
 	@apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
 }

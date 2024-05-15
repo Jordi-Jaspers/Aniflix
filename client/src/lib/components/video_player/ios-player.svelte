@@ -24,13 +24,11 @@
 			hls.on(Hls.Events.MANIFEST_PARSED, function () {
 				video.play();
 			});
-			isReady = true;
 		} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 			video.src = currentResolution;
 			video.addEventListener('loadedmetadata', function () {
 				video.play();
 			});
-			isReady = true;
 		}
 	}
 
@@ -58,5 +56,5 @@
 
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<!-- Ignoring this because the video element is not meant to have a caption -->
-	<video id="video" bind:this={video} controls />
+	<video id="video" bind:this={video} controls on:play={() => (isReady = true)} />
 </div>

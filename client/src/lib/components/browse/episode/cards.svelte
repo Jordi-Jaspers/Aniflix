@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Item } from '$lib/components/ui/carousel/index.ts';
+	import { Item } from '$lib/components/ui/carousel/index';
 	import { onMount } from 'svelte';
 	import { curl } from '$lib/api/client';
 	import { Skeleton } from '$lib/components/ui/skeleton';
@@ -43,7 +43,7 @@
 {:else}
 	{#each Array(20) as i}
 		<Item class="basis-auto">
-			<Skeleton class="aspect-[420/600] h-full w-48 rounded-t-[0.75rem]" />
+			<Skeleton class="aspect-[420/600] h-full w-48 rounded-t-[0.75rem] md:w-56" />
 		</Item>
 	{/each}
 {/if}

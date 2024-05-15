@@ -2,23 +2,38 @@
 	import { Content, Item, Root, Trigger, Value } from '$lib/components/ui/select';
 	import { EpisodeListCard } from '$lib/components/browse';
 	import type { Selected } from 'bits-ui';
+	import { onMount } from 'svelte';
+	import { curl } from '$lib/api/client';
+	import { SERVER_URLS } from '$lib/api/paths';
+	import { closeModal } from '$lib/api/util';
 
-	export let episodes: EpisodeResponse[];
+	export let anilistId: number;
 
+	let isLoading: boolean = true;
+	let episodes: EpisodeResponse[] = [];
+	let totalPages: number = 0;
 	const pageSize = 12;
-	const totalPages = Math.ceil(episodes.length / pageSize);
-	const lowerBound = (page: number) => {
-		return page === 1 ? 1 : (page - 1) * pageSize + 1;
-	};
-	const upperBound = (page: number) => {
-		if (episodes.length < page * pageSize) {
-			return episodes.length;
-		} else {
-			return page * pageSize;
-		}
-	};
+	let currentPage: Selected<number> = { value: 1, label: `Episodes 1 - ${pageSize}` };
 
-	let currentPage: Selected<number> = { value: 1, label: 'Episodes ' + lowerBound(1) + ' - ' + upperBound(1) };
+	onMount(async () => {
+		const response: Response = await curl(SERVER_URLS.ANIME_DETAILS_PATH.replace('{id}', anilistId.toString()), {
+			method: 'GET'
+		});
+
+		if (response.ok) {
+			const anime: AnimeResponse = await response.json();
+			episodes = anime.episodes;
+			totalPages = Math.ceil(episodes.length / pageSize);
+			isLoading = false;
+		} else {
+			closeModal();
+		}
+	});
+
+	$: lowerBound = (page: number) => (page === 1 ? 1 : (page - 1) * pageSize + 1);
+	$: upperBound = (page: number) => (page * pageSize < episodes.length ? page * pageSize : episodes.length);
+	$: currentPage.label = `Episodes ${lowerBound(currentPage.value)} - ${upperBound(currentPage.value)}`;
+
 	function setCurrentPage(selectedPage: Selected<number> | undefined) {
 		if (selectedPage) {
 			currentPage = selectedPage;
@@ -26,9 +41,16 @@
 	}
 </script>
 
-{#if episodes && episodes.length > 0}
+{#if isLoading}
+	<div class="flex h-96 items-center justify-center">
+		<div
+			class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-muted-foreground motion-reduce:animate-[spin_1.5s_linear_infinite]"
+			role="status"
+		/>
+	</div>
+{:else if episodes.length > 0}
 	<div class="items-center rounded-b-md py-4">
-		<Root onSelectedChange={(selectedPage) => setCurrentPage(selectedPage)} selected={currentPage}>
+		<Root onSelectedChange={setCurrentPage} selected={currentPage}>
 			<Trigger class="w-fit min-w-[25%] space-x-2">
 				<Value placeholder="{episodes.length} Episodes" />
 			</Trigger>
@@ -45,4 +67,8 @@
 			<EpisodeListCard {episode} />
 		{/if}
 	{/each}
+{:else}
+	<div class="flex h-96 items-center justify-center">
+		<p class="text-lg font-semibold text-gray-500">No episodes found</p>
+	</div>
 {/if}
