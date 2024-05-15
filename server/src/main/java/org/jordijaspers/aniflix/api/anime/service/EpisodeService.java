@@ -38,9 +38,8 @@ public class EpisodeService {
         LOGGER.info("Retrieving episode '{}' of anime with anilist id '{}'", episodeNumber, anilistId);
         final AnilistProviders provider = getActiveProvider();
         final Episode episode = getInteractedEpisode(anilistId, episodeNumber);
-        final String episodeId = episode.getActiveEpisodeId();
-        final StreamingLinks streamingLinks = nonNull(episodeId)
-                ? consumetService.getStreamingsLinks(episodeId, provider.getProvider())
+        final StreamingLinks streamingLinks = nonNull(episode.getActiveEpisodeId())
+                ? consumetService.getStreamingsLinks(episode.getActiveEpisodeId(), provider.getProvider())
                 : getEpisodeIdFromAPI(anilistId, episodeNumber, provider)
                 .map(id -> consumetService.getStreamingsLinks(id, provider.getProvider()))
                 .orElseGet(() -> {
