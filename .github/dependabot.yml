@@ -3,17 +3,26 @@ updates:
   # Update dependencies for github actions.
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: develop
+    labels:
+      - "dependencies"
     schedule:
       interval: "daily"
 
   # Update dependencies for Client using NPM.
   - package-ecosystem: "npm"
     directory: "/client"
+    target-branch: develop
+    labels:
+      - "dependencies"
     schedule:
       interval: "daily"
 
   # Update dependencies for Server using Gradle.
   - package-ecosystem: "gradle"
     directory: "/server"
+    target-branch: develop
+    labels:
+      - "dependencies"
     schedule:
       interval: "daily"
