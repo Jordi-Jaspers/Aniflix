@@ -1,6 +1,6 @@
-import {curl} from '$lib/api/client';
-import {SERVER_URLS} from '$lib/api/paths';
-import {useModalInfo, useShowInfoModal} from '$lib/components/store/store';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { useModalInfo, useShowInfoModal } from '$lib/components/store/store';
 
 export function getRandomValues(array: any[], count: number) {
 	for (let i = array.length - 1; i > 0; i--) {

@@ -3,9 +3,9 @@
 	import { InfoIcon, PlayIcon, StarIcon } from 'lucide-svelte';
 	import { openModal } from '$lib/api/util';
 	import { goto } from '$app/navigation';
-	import {onMount} from "svelte";
-	import {curl} from "$lib/api/client";
-	import {SERVER_URLS} from "$lib/api/paths";
+	import { onMount } from 'svelte';
+	import { curl } from '$lib/api/client';
+	import { SERVER_URLS } from '$lib/api/paths';
 
 	let anime: AnimeResponse;
 	let genres: string[];
@@ -39,8 +39,8 @@
 
 {#if anime}
 	<div
-			class="absolute left-0 right-0 !-z-20 h-[56rem] w-full bg-cover bg-center bg-no-repeat opacity-[15%]"
-			style="background-image: url({anime.cover});"
+		class="absolute left-0 right-0 !-z-20 h-[56rem] w-full bg-cover bg-center bg-no-repeat opacity-[15%]"
+		style="background-image: url({anime.cover});"
 	/>
 
 	<div class="w-80% mx-[4%] my-4 hidden h-[48vw] max-h-[650px] items-center px-[4%] md:flex">
