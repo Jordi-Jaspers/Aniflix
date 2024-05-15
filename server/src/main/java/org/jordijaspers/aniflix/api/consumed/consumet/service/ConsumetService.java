@@ -21,6 +21,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -107,8 +108,21 @@ public class ConsumetService {
     public StreamingLinks getStreamingsLinks(final String id, final String provider) {
         LOGGER.info("[Consumet API] Fetching streaming links for episode ID '{}' from '{}'.", id, provider);
         final AnilistStreamingLinks anilistLinks = consumetRepository.getEpisodeLinks(id, provider);
+
+        final Map<String, Integer> qualityOrder = Map.of(
+                "1080p", 0,
+                "720p", 1,
+                "480p", 2,
+                "360p", 3,
+                "default", 4,
+                "backup", 5,
+                "unknown", 6
+
+        );
+
         final List<StreamingSource> sources = anilistLinks.getSources().stream()
                 .map(source -> new StreamingSource(source.getUrl(), source.getQuality()))
+                .sorted(Comparator.comparingInt(source -> qualityOrder.getOrDefault(source.getQuality(), 6)))
                 .toList();
 
         return new StreamingLinks(anilistLinks.getHeaders().get("Referer"), sources);
