@@ -47,7 +47,4 @@
 	<Carousel genre={genres[0]} title="Anime">
 		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} />
 	</Carousel>
-	<Carousel genre={genres[1]} title="Anime">
-		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} />
-	</Carousel>
 {/if}

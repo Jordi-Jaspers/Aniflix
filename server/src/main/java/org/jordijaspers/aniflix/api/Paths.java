@@ -59,29 +59,31 @@ public final class Paths {
 
     /* ------------------------------- ANIME ENDPOINTS ------------------------------- */
 
-    public static final String ANIME_PATH = BASE_PATH + ANIME_PART;
+    public static final String ANIME_BASE_PATH = BASE_PATH + ANIME_PART;
 
     public static final String ANIME_CONSTANT = BASE_PATH + "/constant";
 
-    public static final String ANIME_SEARCH = ANIME_PATH + SEARCH_PART;
+    public static final String ANIME_SEARCH = ANIME_BASE_PATH + SEARCH_PART;
 
-    public static final String ANIME_DETAILS = ANIME_PATH + ID_PART + "/details";
+    public static final String ANIME_PATH = ANIME_BASE_PATH + ID_PART;
 
-    public static final String ANIME_INFO = ANIME_PATH + ID_PART + "/info";
+    public static final String ANIME_DETAILS = ANIME_BASE_PATH + ID_PART + "/details";
 
-    public static final String ANIME_GENRE = ANIME_PATH + "/genre";
+    public static final String ANIME_INFO = ANIME_BASE_PATH + ID_PART + "/info";
 
-    public static final String ANIME_RECENT = ANIME_PATH + "/recent";
+    public static final String ANIME_GENRE = ANIME_BASE_PATH + "/genre";
 
-    public static final String ANIME_POPULAR = ANIME_PATH + "/popular";
+    public static final String ANIME_RECENT = ANIME_BASE_PATH + "/recent";
 
-    public static final String ANIME_TRENDING = ANIME_PATH + "/trending";
+    public static final String ANIME_POPULAR = ANIME_BASE_PATH + "/popular";
 
-    public static final String ANIME_BANNER = ANIME_PATH + "/banner";
+    public static final String ANIME_TRENDING = ANIME_BASE_PATH + "/trending";
+
+    public static final String ANIME_BANNER = ANIME_BASE_PATH + "/banner";
 
     /* ------------------------------- EPISODE ENDPOINTS ------------------------------- */
 
-    public static final String EPISODES_PATH = ANIME_DETAILS + "/episode";
+    public static final String EPISODES_PATH = ANIME_PATH + "/episode";
 
     public static final String EPISODE_PATH = EPISODES_PATH + "/{episodeNumber}";
 
@@ -93,15 +95,15 @@ public final class Paths {
 
     /* ------------------------------- INTERACTION ENDPOINTS ------------------------------- */
 
-    public static final String LIKE_ANIME_PATH = ANIME_DETAILS + "/like";
+    public static final String LIKE_ANIME_PATH = ANIME_PATH + "/like";
 
-    public static final String UNLIKE_ANIME_PATH = ANIME_DETAILS + "/dislike";
+    public static final String UNLIKE_ANIME_PATH = ANIME_PATH + "/dislike";
 
-    public static final String ADD_TO_LIBRARY_PATH = ANIME_DETAILS + "/library/add";
+    public static final String ADD_TO_LIBRARY_PATH = ANIME_PATH + "/library/add";
 
-    public static final String REMOVE_FROM_LIBRARY_PATH = ANIME_DETAILS + "/library/remove";
+    public static final String REMOVE_FROM_LIBRARY_PATH = ANIME_PATH + "/library/remove";
 
-    public static final String ANIME_RECOMMENDATIONS = ANIME_DETAILS + "/recommendations";
+    public static final String ANIME_RECOMMENDATIONS = ANIME_PATH + "/recommendations";
 
     /* ------------------------------- LIBRARY ENDPOINTS ------------------------------- */
 

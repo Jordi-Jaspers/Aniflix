@@ -32,8 +32,6 @@
 			window.removeEventListener('resize', updateWidth);
 		};
 	});
-
-	$: console.log(width);
 </script>
 
 <div class="grid gap-4 py-4" style="grid-template-columns: repeat(auto-fill, minmax({$width}, 1fr))">
