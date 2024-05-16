@@ -57,9 +57,9 @@
 			<X class="h-6 w-6" />
 		</button>
 		<div class="relative !z-[-100] aspect-video w-full">
-			<div class="absolute right-0 aspect-video h-full bg-gradient-to-b from-transparent to-background" />
+			<div class="absolute right-0 aspect-video h-[100%] bg-gradient-to-b from-transparent to-background" />
 			<img
-				class="brightness-85 aspect-video w-full object-cover object-center {isPlaying && 'hidden'}"
+				class="brightness-85 aspect-video w-full h-auto object-cover object-center {isPlaying && 'hidden'}"
 				src={$useModalInfo.cover}
 				alt="thumbnail"
 			/>
@@ -133,7 +133,7 @@
 			</div>
 
 			<div class="flex w-full flex-col gap-x-10 gap-y-4 font-light md:flex-row">
-				<article class="prose w-[85%] text-justify text-sm font-extralight leading-7">
+				<article class="prose md:w-[85%] text-justify text-sm font-extralight leading-4 md:leading-7">
 					{@html $useModalInfo.description.replace(/\(Source:.*\)/, '')}
 				</article>
 				<div class="flex flex-col space-y-4 text-sm">
