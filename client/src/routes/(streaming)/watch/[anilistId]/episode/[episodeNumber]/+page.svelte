@@ -57,7 +57,7 @@
 	});
 </script>
 
-{#if !isReady && !episode && isLoading }
+{#if !isReady && !episode && isLoading}
 	<LoadingScreen />
 {/if}
 
