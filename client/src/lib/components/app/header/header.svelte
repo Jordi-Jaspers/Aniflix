@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FullLogo from '$lib/assets/icons/aniflix-logo-small.webp?enhanced';
-	import SmallLogo from '$lib/assets/icons/aniflix-icon-small.webp';
+	import SmallLogo from '$lib/assets/icons/aniflix-icon-small.webp?enhanced';
 	import SearchBar from '$lib/components/app/header/search-bar.svelte';
 	import UserButton from '$lib/components/app/header/user-button.svelte';
 	import { onMount } from 'svelte';
