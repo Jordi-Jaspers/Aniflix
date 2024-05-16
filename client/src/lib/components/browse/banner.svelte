@@ -96,22 +96,22 @@
 		>
 			<div class="flex h-full w-full flex-col justify-end bg-gradient-to-b from-transparent to-black/90">
 				<div class="flex flex-col items-center justify-center px-8 text-center">
-					<h4 class="font-bold uppercase sm:text-lg">{anime.title}</h4>
-					<p class="flex space-x-4 pb-4 pt-2 text-xs font-extralight opacity-75">
+					<h4 class="font-bold uppercase text-white sm:text-lg">{anime.title}</h4>
+					<p class="flex space-x-4 pb-4 pt-2 text-xs font-extralight text-white/75 opacity-75">
 						{genres.join(' • ')}
 					</p>
 				</div>
 
 				<div class="flex justify-center space-x-4 px-4 pb-8">
 					<Button
-						class="h-8 w-[50%] space-x-2 border border-primary/75 py-4 text-sm transition hover:bg-primary/75"
+						class="h-8 w-[50%] space-x-2 rounded-[0.75rem] border border-primary/75 py-4 text-sm transition hover:bg-primary/75"
 						on:click={() => goto('/watch/' + anime.anilistId + '/episode/' + lastEpisode)}
 					>
 						<PlayIcon class="h-4 w-4" />
 						<p>Watch</p>
 					</Button>
 					<Button
-						class="h-8 w-[50%] space-x-2 border bg-black/80 py-4 opacity-100 transition hover:bg-black/80 hover:opacity-75"
+						class="h-8 w-[50%] space-x-2 rounded-[0.75rem] border bg-black/80 py-4 opacity-100 transition hover:bg-black/80 hover:opacity-75"
 						on:click={() => openModal(anime.anilistId)}
 					>
 						<InfoIcon class="h-4 w-4" />

@@ -37,16 +37,18 @@
 	}
 </script>
 
-{#if $anime && $anime.liked}
-	<button on:click={handleLike}>
-		<Heart
-			class="aspect-square h-full w-auto rounded-full border-2 border-primary bg-card/60 fill-primary p-1.5 text-primary transition hover:opacity-75"
-		/>
-	</button>
-{:else}
-	<button on:click={handleLike}>
-		<Heart
-			class="aspect-square h-full w-auto rounded-full border-2 border-card-foreground bg-card/60 p-1.5 transition hover:border-primary/60 hover:text-primary/60 dark:border-[gray] dark:hover:border-primary/60"
-		/>
-	</button>
+{#if $anime}
+	{#if $anime.liked}
+		<button on:click={handleLike}>
+			<Heart
+				class="aspect-square h-full w-auto rounded-full border-2 border-primary bg-card/60 fill-primary p-1.5 text-primary transition hover:opacity-75"
+			/>
+		</button>
+	{:else}
+		<button on:click={handleLike}>
+			<Heart
+				class="aspect-square h-full w-auto rounded-full border-2 border-card-foreground bg-card/60 p-1.5 transition hover:border-primary/60 hover:text-primary/60 dark:border-[gray] dark:hover:border-primary/60"
+			/>
+		</button>
+	{/if}
 {/if}

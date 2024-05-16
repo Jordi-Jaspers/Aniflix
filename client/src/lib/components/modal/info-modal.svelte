@@ -14,9 +14,8 @@
 	import { goto } from '$app/navigation';
 
 	let isPlaying: boolean = false;
-	let isMuted: boolean = false;
+	let isMuted: boolean = true;
 
-	let lastEpisode: number = $useModalInfo.lastSeenEpisode !== 0 ? $useModalInfo.lastSeenEpisode : 1;
 	const opts: RecursivePartial<PlayerConfig> = {
 		youtube: {
 			playerVars: {
@@ -24,7 +23,8 @@
 				controls: 0,
 				https: 1,
 				wmode: 'opaque',
-				disablekb: 1
+				disablekb: 1,
+				muted: isMuted
 			}
 		}
 	};
@@ -35,11 +35,24 @@
 		}
 	}
 
+	let anime: AnimeResponse;
+	let hasNextEpisode: boolean = false;
+	let nextEpisode: number = 1;
 	useModalInfo.subscribe((value) => {
 		if (value) {
-			setAnime(value);
+			anime = value;
 		}
 	});
+
+	$: if (anime) {
+		setAnime(anime);
+		let lastSeenEpisode: number = anime.lastSeenEpisode !== 0 ? anime.lastSeenEpisode : 1;
+
+		if (lastSeenEpisode !== anime.totalEpisodes) {
+			hasNextEpisode = true;
+			nextEpisode = lastSeenEpisode + 1;
+		}
+	}
 </script>
 
 {#if $useShowInfoModal}
@@ -57,16 +70,16 @@
 			<X class="h-6 w-6" />
 		</button>
 		<div class="relative !z-[-100] aspect-video w-full">
-			<div class="absolute right-0 aspect-video h-full bg-gradient-to-b from-transparent to-background" />
+			<div class="absolute right-0 aspect-video h-[100%] bg-gradient-to-b from-transparent to-background" />
 			<img
-				class="brightness-85 aspect-video w-full object-cover object-center {isPlaying && 'hidden'}"
-				src={$useModalInfo.cover}
+				class="brightness-85 aspect-video h-auto w-full object-cover object-center {isPlaying && 'hidden'}"
+				src={anime.cover}
 				alt="thumbnail"
 			/>
 			{#if import.meta.env.VITE_ENV !== 'development'}
 				<div class="brightness-85 h-full {isPlaying ? '' : 'hidden'}">
 					<SveltePlayer
-						url="https://www.youtube.com/watch?v={$useModalInfo.trailer}"
+						url="https://www.youtube.com/watch?v={anime.trailer}"
 						config={opts}
 						height="100%"
 						width="100%"
@@ -83,7 +96,8 @@
 				<div class="flex items-center space-x-2">
 					<Button
 						class="space-x-4 rounded-full pl-4 pr-1 opacity-80 transition hover:opacity-100"
-						on:click={() => goto('/watch/' + $useModalInfo.anilistId + '/episode/' + lastEpisode)}
+						on:click={() => goto('/watch/' + anime.anilistId + '/episode/' + nextEpisode)}
+						disabled={!hasNextEpisode}
 					>
 						<p>Watch Now</p>
 						<div class="flex w-12 justify-center rounded-full bg-secondary/50 p-1">
@@ -104,7 +118,7 @@
 		<div class="z-10 w-full flex-col items-center justify-center space-y-6 px-10 text-lg">
 			<div class="space-y-2">
 				<h3 class="flex items-center">
-					{$useModalInfo.title
+					{anime.title
 						.split(' ')
 						.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 						.join(' ')
@@ -112,56 +126,58 @@
 						.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 						.join('-')}
 					<Badge variant="outline" class="ml-4 bg-blue-500">
-						{#if $useModalInfo.subbed}
-							SUB{:else}
-							DUB{/if}
+						{#if anime.subbed}
+							SUB
+						{:else}
+							DUB
+						{/if}
 					</Badge>
 				</h3>
 
 				<div class="flex h-[1.2vw] w-[1.2] items-center text-[1.1vw] text-sm text-muted-foreground">
 					<div class="flex items-center space-x-1">
-						<p>{$useModalInfo.rating / 10}</p>
+						<p>{anime.rating / 10}</p>
 						<StarIcon class="ml-0.5 h-3 w-fit fill-amber-300 text-amber-300" />
 					</div>
 
 					<span class="mx-2"> | </span>
-					<span> {$useModalInfo.releaseYear} </span>
+					<span> {anime.releaseYear} </span>
 					<span class="mx-2"> | </span>
-					<span> {$useModalInfo.totalEpisodes} Episodes </span>
+					<span> {anime.totalEpisodes} Episodes </span>
 					<p class="mx-2 flex h-4 items-center justify-center rounded border px-1.5 text-xs">HD</p>
 				</div>
 			</div>
 
 			<div class="flex w-full flex-col gap-x-10 gap-y-4 font-light md:flex-row">
-				<article class="prose w-[85%] text-justify text-sm font-extralight leading-7">
-					{@html $useModalInfo.description.replace(/\(Source:.*\)/, '')}
+				<article class="prose text-justify text-sm font-extralight leading-4 md:w-[85%] md:leading-7">
+					{@html anime.description.replace(/\(Source:.*\)/, '')}
 				</article>
 				<div class="flex flex-col space-y-4 text-sm">
 					<p>
 						<span class="text-muted-foreground">Genres:</span>{' '}
-						{$useModalInfo.genres
+						{anime.genres
 							.filter((genre) => genre !== 'UNKNOWN')
 							.map((genre) => genre.charAt(0) + genre.slice(1).toLowerCase())
 							.join(', ')}
 					</p>
 					<p>
 						<span class="text-muted-foreground">Media:</span>{' '}
-						{$useModalInfo.mediaType}
+						{anime.mediaType}
 					</p>
 					<p>
 						<span class="text-muted-foreground">Status:</span>{' '}
-						{$useModalInfo.status.charAt(0) + $useModalInfo.status.slice(1).toLowerCase()}
+						{anime.status.charAt(0) + anime.status.slice(1).toLowerCase()}
 					</p>
 					<p>
 						<span class="text-muted-foreground">Watch Status:</span>{' '}
-						{$useModalInfo.watchStatus}
+						{anime.watchStatus}
 					</p>
 					<p>
 						<span class="text-muted-foreground">Last Seen:</span>{' '}
-						{#if $useModalInfo.lastSeenEpisode === 0}
+						{#if anime.lastSeenEpisode === 0}
 							-
 						{:else}
-							Episode {$useModalInfo.lastSeenEpisode}
+							Episode {anime.lastSeenEpisode}
 						{/if}
 					</p>
 				</div>
@@ -182,10 +198,10 @@
 					</Trigger>
 				</List>
 				<Content value="Episodes">
-					<EpisodeList anilistId={$useModalInfo.anilistId} />
+					<EpisodeList anilistId={anime.anilistId} />
 				</Content>
 				<Content value="Recommended">
-					<RecommendationCards anilistId={$useModalInfo.anilistId} />
+					<RecommendationCards anilistId={anime.anilistId} />
 				</Content>
 			</Root>
 		</div>

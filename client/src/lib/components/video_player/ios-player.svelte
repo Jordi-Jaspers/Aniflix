@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { CLIENT_URLS } from '$lib/api/paths';
 	import { ArrowLeft } from 'lucide-svelte';
+	import { NextEpisode, PreviousEpisode } from '$lib/components/video_player/index';
 
 	export let episode: EpisodeResponse;
 
@@ -39,7 +40,7 @@
 </script>
 
 <div class="flex h-screen w-screen items-center justify-center overflow-hidden">
-	<div class="flex-grow-1 absolute inset-0 !z-[1000] flex h-[4vw] max-h-12 min-h-6 items-center justify-between px-4 py-8">
+	<div class="flex-grow-1 absolute left-0 top-0 !z-[10] flex h-[4vw] max-h-12 min-h-6 w-full items-center justify-between px-4 py-8">
 		<button
 			aria-label="Back to Browse"
 			class="relative aspect-square h-full w-auto hover:scale-125"
@@ -56,4 +57,9 @@
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<!-- Ignoring this because the video element is not meant to have a caption -->
 	<video id="video" bind:this={video} controls />
+
+	<div class="flex-grow-1 absolute bottom-0 left-0 !z-[10] flex h-[4vw] max-h-12 min-h-6 w-full items-center justify-between px-4 py-8">
+		<PreviousEpisode bind:episode />
+		<NextEpisode bind:episode />
+	</div>
 </div>
