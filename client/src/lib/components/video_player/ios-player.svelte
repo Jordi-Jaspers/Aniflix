@@ -39,7 +39,7 @@
 </script>
 
 <div class="flex h-screen w-screen items-center justify-center overflow-hidden">
-	<div class="flex-grow-1 absolute inset-0 !z-[1000] flex h-[4vw] max-h-12 min-h-6 items-center justify-between px-4 py-8">
+	<div class="flex-grow-1 absolute inset-0 !z-[10] flex h-[4vw] max-h-12 min-h-6 items-center justify-between px-4 py-8">
 		<button
 			aria-label="Back to Browse"
 			class="relative aspect-square h-full w-auto hover:scale-125"
