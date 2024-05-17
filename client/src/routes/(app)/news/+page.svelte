@@ -3,10 +3,12 @@
 	import { curl } from '$lib/api/client';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { NewsFeedCard, NewsFeedItem } from '$lib/components/newsfeed/index';
+	import {LoadingScreen} from "$lib/components/general";
 
 	let bannerCards: NewsPostResponse[] = [];
 	let listCards: NewsPostResponse[] = [];
 	let isMobile: boolean = false;
+
 
 	// Function to set news feed based on window width
 	function setNewsFeed(newsFeed: NewsPostResponse[]) {
@@ -28,6 +30,7 @@
 	}
 
 	// Call setNewsFeed on mount and resize
+	let isLoading: boolean = true;
 	onMount(async () => {
 		const response: Response = await curl(SERVER_URLS.NEWS_PATH, { method: 'GET' });
 		if (response.ok) {
@@ -35,6 +38,7 @@
 		}
 
 		window.addEventListener('resize', handleResize);
+		isLoading = false;
 	});
 
 	// Remove event listener on component destroy
@@ -43,11 +47,15 @@
 	});
 </script>
 
-<head>
+<svelte:head>
 	<title>News - Aniflix</title>
 	<meta name="description" content="The latest news and updates from the Aniflix team." />
 	<meta name="keywords" content="Aniflix, news, updates, anime, manga, community" />
-</head>
+</svelte:head>
+
+{#if isLoading}
+	<LoadingScreen />
+{/if}
 
 <div class="mx-auto w-full max-w-[1096px] px-[4%]">
 	<h1 class="my-4 border-l-2 border-primary px-4 text-3xl font-bold">Recent News</h1>

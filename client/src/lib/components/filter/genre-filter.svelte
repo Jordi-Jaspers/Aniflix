@@ -7,6 +7,7 @@
 	import { Check } from 'lucide-svelte';
 
 	export let genre: string[] = [];
+	export let possibleGenres: string[] = [];
 	function handleCheckboxChange(event: Event, selected: string) {
 		const isChecked = (event.target as HTMLInputElement).checked;
 		if (isChecked) {
@@ -15,15 +16,6 @@
 			genre = genre.filter((s) => s !== selected);
 		}
 	}
-
-	let possibleGenres: string[] = [];
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_CONSTANT_PATH, { method: 'GET' });
-		if (response.ok) {
-			const constants: ConstantResponse = await response.json();
-			possibleGenres = constants.genres;
-		}
-	});
 
 	let isActive = false;
 	$: {

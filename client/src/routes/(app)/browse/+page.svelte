@@ -20,11 +20,11 @@
 	$: isLoading = areEpisodesLoading;
 </script>
 
-<head>
+<svelte:head>
 	<title>Browse - Aniflix</title>
 	<meta name="description" content="Browse through the latest anime episodes and trending anime on Aniflix." />
 	<meta name="keywords" content="anime, browse, episodes, trending, popular, genres" />
-</head>
+</svelte:head>
 
 {#if isLoading}
 	<LoadingScreen />

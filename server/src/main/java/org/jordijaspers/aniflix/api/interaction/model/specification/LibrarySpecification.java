@@ -42,6 +42,29 @@ public class LibrarySpecification implements Specification<Anime> {
                                  @NonNull final CriteriaBuilder criteriaBuilder) {
         final List<Predicate> predicates = new ArrayList<>();
 
+        // Join with Interaction table and filter by inLibrary and userId
+        final Join<Anime, Interaction> interactionJoin = root.join("interactions");
+        predicates.add(criteriaBuilder.equal(interactionJoin.get("inLibrary"), true));
+        predicates.add(criteriaBuilder.equal(interactionJoin.get("user"), user));
+
+        // Configure The Watch Status filter
+        if (isNotEmpty(request.getWatchStatus())) {
+            predicates.add(interactionJoin.get("watchStatus").in(request.getWatchStatus()));
+        }
+
+        // Configure The Genre filter
+        if (isNotEmpty(request.getGenre())) {
+            final List<Genre> genreList = request.getGenre().stream()
+                    .map(Genre::new)
+                    .toList();
+            predicates.add(root.join("genres").in(genreList));
+        }
+
+        // Configure The Status filter
+        if (isNotEmpty(request.getStatus())) {
+            predicates.add(root.get("status").in(request.getStatus()));
+        }
+
         // Configure The Query filter
         if (request.getQuery() != null && !request.getQuery().isEmpty()) {
             predicates.add(criteriaBuilder.like(root.get("title"), "%" + request.getQuery() + "%"));
@@ -62,29 +85,6 @@ public class LibrarySpecification implements Specification<Anime> {
         if (request.getAfterYear() > 0 && request.getAfterYear() <= now().getYear()) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("releaseYear"), request.getAfterYear()));
         }
-
-        // Configure The Genre filter
-        if (isNotEmpty(request.getGenre())) {
-            final List<Genre> genreList = request.getGenre().stream()
-                    .map(Genre::new)
-                    .toList();
-            predicates.add(root.join("genres").in(genreList));
-        }
-
-        // Configure The Watch Status filter
-        if (isNotEmpty(request.getWatchStatus())) {
-            predicates.add(root.get("watchStatus").in(request.getWatchStatus()));
-        }
-
-        // Configure The Status filter
-        if (isNotEmpty(request.getStatus())) {
-            predicates.add(root.get("status").in(request.getStatus()));
-        }
-
-        // Join with Interaction table and filter by inLibrary and userId
-        final Join<Anime, Interaction> interactionJoin = root.join("interactions");
-        predicates.add(criteriaBuilder.equal(interactionJoin.get("inLibrary"), true));
-        predicates.add(criteriaBuilder.equal(interactionJoin.get("user"), user));
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

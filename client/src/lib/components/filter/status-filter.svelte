@@ -7,6 +7,7 @@
 	import { Check } from 'lucide-svelte';
 
 	export let status: string[] = [];
+	export let possibleStatus: string[] = [];
 	function handleCheckboxChange(event: Event, selected: string) {
 		const isChecked = (event.target as HTMLInputElement).checked;
 		if (isChecked) {
@@ -15,15 +16,6 @@
 			status = status.filter((s) => s !== selected);
 		}
 	}
-
-	let possibleStatuses: string[] = [];
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_CONSTANT_PATH, { method: 'GET' });
-		if (response.ok) {
-			const constants: ConstantResponse = await response.json();
-			possibleStatuses = constants.status;
-		}
-	});
 
 	let isActive = false;
 	$: {
@@ -36,7 +28,7 @@
 		<Button variant="outline" class={isActive ? 'border-primary' : ''} builders={[builder]}>Status</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="max-h-48 w-56 overflow-y-auto scroll-smooth">
-		{#each possibleStatuses as item}
+		{#each possibleStatus as item}
 			<div class="flex cursor-pointer items-center space-x-2 rounded-md p-2 hover:bg-muted">
 				<Check class={status.includes(item) ? 'text-foreground' : 'text-transparent'} />
 				<label class="relative flex w-full items-center text-sm">
