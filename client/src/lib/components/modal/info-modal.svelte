@@ -1,9 +1,7 @@
 <script lang="ts">
     import {useModalInfo, useShowInfoModal} from '$lib/components/store/localstorage';
     import {PlayIcon, StarIcon, X} from 'lucide-svelte';
-    import SveltePlayer from 'svelte-player';
-    import type {RecursivePartial} from 'svelte-player/dist/players/utility.types';
-    import type {PlayerConfig, PlayerUrl} from 'svelte-player/dist/players/types';
+    import type {PlayerUrl} from 'svelte-player/dist/players/types';
     import {Button} from '$lib/components/ui/button';
     import {LibraryButton, LikeButton, SpeakerButton} from '$lib/components/general/index.js';
     import {Badge} from '$lib/components/ui/badge';
@@ -13,23 +11,10 @@
     import {setAnime} from '$lib/components/store/anime-context-store';
     import {goto} from '$app/navigation';
     import {Separator} from '$lib/components/ui/separator/index.js';
-    import {NextAiringEpisodeTimer} from '$lib/components/modal/index.js';
+    import {NextAiringEpisodeTimer, YoutubePlayer} from '$lib/components/modal/index.js';
 
-    let isPlaying: boolean = false;
-    let isMuted: boolean = true;
-
-    const opts: RecursivePartial<PlayerConfig> = {
-        youtube: {
-            playerVars: {
-                autoplay: 1,
-                controls: 0,
-                https: 1,
-                wmode: 'opaque',
-                disablekb: 1,
-                muted: isMuted
-            }
-        }
-    };
+    let isPlaying: boolean;
+    let isMuted: boolean;
 
     function handleEscape(e: KeyboardEvent) {
         if (e.key === 'Escape') {
@@ -82,22 +67,7 @@
                     src={anime.cover}
                     alt="thumbnail"
             />
-            {#if import.meta.env.VITE_ENV !== 'development'}
-                <div class="brightness-85 h-full {isPlaying ? '' : 'hidden'}">
-                    <SveltePlayer
-                            {url}
-                            config={opts}
-                            height="100%"
-                            width="100%"
-                            bind:muted={isMuted}
-                            on:play={() => (isPlaying = true)}
-                            on:pause={() => (isPlaying = false)}
-                            on:ended={() => (isPlaying = false)}
-                    >
-                        <div slot="play-icon"/>
-                    </SveltePlayer>
-                </div>
-            {/if}
+            <YoutubePlayer {url} bind:muted={isMuted} bind:playing={isPlaying}/>
             <div class="absolute bottom-10 flex w-full items-center justify-between px-10">
                 <div class="flex items-center space-x-2">
                     <Button
