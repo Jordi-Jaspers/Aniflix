@@ -50,3 +50,6 @@ export const useShowInfoModal: Writable<boolean> = useShowInfoModalStore.get();
 
 const useModalInfoStore: LocalStorage<AnimeResponse> = new LocalStorage('modalInfo', {});
 export const useModalInfo: Writable<AnimeResponse> = useModalInfoStore.get();
+
+const useRefreshTokenStore: LocalStorage<string> = new LocalStorage('ANIFLIX_REFRESH_TOKEN', '');
+export const refreshToken: Writable<string> = useRefreshTokenStore.get();

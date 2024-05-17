@@ -35,7 +35,8 @@ import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProvid
  */
 @Service
 @RequiredArgsConstructor
-public class SynchronizationService {
+public class
+SynchronizationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SynchronizationService.class);
 
