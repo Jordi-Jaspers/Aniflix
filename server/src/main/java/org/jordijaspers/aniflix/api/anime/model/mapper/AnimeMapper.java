@@ -16,6 +16,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecen
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
+import org.jordijaspers.aniflix.common.mappers.PageMapper;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
@@ -41,7 +42,7 @@ import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Q
  * The mapper for the anime.
  */
 @Mapper(config = SharedMapperConfiguration.class, imports = {AnilistProviders.class, DomainHealthChecker.class})
-public abstract class AnimeMapper {
+public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
 
     @Mapping(target = "anilistId", source = "id")
     @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
@@ -89,16 +90,16 @@ public abstract class AnimeMapper {
     @IterableMapping(qualifiedByName = "toRecentEpisodesResponse")
     public abstract List<EpisodeResponse> toRecentEpisodesResponse(List<AnilistRecentEpisode> source);
 
-    @Named("toResponseWithoutEpisodes")
+    @Named("toResourceObject")
     @Mapping(source = "imageUrl", target = "image")
     @Mapping(source = "coverUrl", target = "cover")
     @Mapping(source = "trailerUrl", target = "trailer")
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
     @Mapping(target = "watchStatus", expression = "java(anime.getWatchStatus().getValue())")
-    public abstract AnimeResponse toResponseWithoutEpisodes(Anime anime);
+    public abstract AnimeResponse toResourceObject(Anime anime);
 
-    @IterableMapping(qualifiedByName = "toResponseWithoutEpisodes")
-    public abstract List<AnimeResponse> toResponseWithoutEpisodes(List<Anime> anime);
+    @IterableMapping(qualifiedByName = "toResourceObject")
+    public abstract List<AnimeResponse> toResourceObject(List<Anime> anime);
 
     @Named("toResponseWithEpisodes")
     @Mapping(source = "imageUrl", target = "image")
@@ -156,7 +157,7 @@ public abstract class AnimeMapper {
         return animeByGenre.entrySet().stream()
                 .collect(Collectors.toMap(
                         entry -> entry.getKey().getName().toString(),
-                        entry -> toResponseWithoutEpisodes(entry.getValue())
+                        entry -> toResourceObject(entry.getValue())
                 ));
     }
 

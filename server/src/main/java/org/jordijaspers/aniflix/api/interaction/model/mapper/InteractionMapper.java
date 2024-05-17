@@ -27,7 +27,7 @@ public abstract class InteractionMapper {
     public abstract InteractionResponse toDetailedResponse(Interaction interaction);
 
     @Named("toBasicResponse")
-    @Mapping(target = "anime", expression = "java(animeMapper.toResponseWithoutEpisodes(interaction.getAnime()))")
+    @Mapping(target = "anime", expression = "java(animeMapper.toResourceObject(interaction.getAnime()))")
     public abstract InteractionResponse toBasicResponse(Interaction interaction);
 
     @IterableMapping(qualifiedByName = "toBasicResponse")

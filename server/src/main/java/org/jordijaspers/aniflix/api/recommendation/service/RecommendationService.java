@@ -26,7 +26,7 @@ public class RecommendationService {
     public List<Recommendation> getAnimeRecommendations(final int anilistId) {
         LOGGER.info("Getting recommendations for anime with Anilist ID '{}'.", anilistId);
         final List<Recommendation> recommendations = consumetService.getRecommendationsForAnime(anilistId);
-        userInteractionEnhancer.applyRecommendation(recommendations);
+        userInteractionEnhancer.applyRecommendations(recommendations);
         return recommendations;
     }
 }

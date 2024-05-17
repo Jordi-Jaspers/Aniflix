@@ -3,7 +3,7 @@ application:
   properties:
     name: aniflix
     version: 0.0.1-SNAPSHOT
-    url: ${APPLICATION_URL:https://localhost:8080}
+    url: ${APPLICATION_URL:http://localhost:8080}
 
   email:
     host: ${EMAIL_HOST:localhost}
@@ -30,6 +30,7 @@ management:
     web:
       base-path: /api/actuator
     health:
+      enabled: true
       show-details: "always"
 
 # ====== SERVER CONFIG ======
@@ -87,7 +88,7 @@ spring:
     use-legacy-processing: true
 
   jpa:
-    show-sql: ${SHOW_SQL:false}
+    show-sql: ${SHOW_SQL:true}
     open-in-view: false
     properties:
       hibernate:

@@ -7,6 +7,7 @@ import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,9 +32,12 @@ public class UserInteractionEnhancer {
         applyAnime(List.of(anime));
     }
 
+    public void applyAnime(final Page<Anime> animePage) {
+        applyAnime(animePage.getContent());
+    }
+
     public void applyAnime(final List<Anime> collection) {
         if (isEmpty(collection)) {
-            LOGGER.info("No anime to apply user interactions to.");
             return;
         }
 
@@ -54,13 +58,8 @@ public class UserInteractionEnhancer {
         });
     }
 
-    public void applyRecommendation(final Recommendation anime) {
-        applyRecommendation(List.of(anime));
-    }
-
-    public void applyRecommendation(final List<Recommendation> collection) {
+    public void applyRecommendations(final List<Recommendation> collection) {
         if (isEmpty(collection)) {
-            LOGGER.info("No anime to apply user interactions to.");
             return;
         }
 

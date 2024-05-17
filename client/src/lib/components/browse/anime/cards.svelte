@@ -38,7 +38,9 @@
 {#if collection}
 	{#each collection as anime}
 		<Item class="basis-auto">
-			<AnimeCard {anime} />
+			<div class="flex h-full w-48 flex-col overflow-hidden rounded-t-[0.75rem] md:w-56">
+				<AnimeCard {anime} />
+			</div>
 		</Item>
 	{/each}
 {:else}
