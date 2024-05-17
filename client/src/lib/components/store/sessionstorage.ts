@@ -1,6 +1,6 @@
 import { type Writable, writable } from 'svelte/store';
 import { browser } from '$app/environment';
-import toast from "svelte-french-toast";
+import toast from 'svelte-french-toast';
 
 class SessionStorage<T> {
 	key: string;

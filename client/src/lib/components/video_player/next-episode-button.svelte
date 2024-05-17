@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { SkipForward } from 'lucide-svelte';
 
 	export let episode: EpisodeResponse;
-
 	function hasNextEpisode(): boolean {
 		return episode.episodeNumber < episode.totalEpisodes;
 	}
+
+	function navigate() {
+		if (episode) {
+			window.location.href = `/watch/${episode.anilistId}/episode/${episode.episodeNumber + 1}`;
+		}
+	}
 </script>
 
-<button
-	aria-label="Next Episode"
-	class="h-full w-full"
-	disabled={!hasNextEpisode()}
-	on:click={() => goto('/watch/' + episode.anilistId + '/episode/' + (episode.episodeNumber + 1))}
->
-	<SkipForward class="aspect-square h-full w-auto hover:scale-125" />
-</button>
+{#if episode && hasNextEpisode()}
+	<button class="h-full w-full" aria-label="Next Episode" disabled={!hasNextEpisode()} on:click={navigate}>
+		<SkipForward class="aspect-square h-full w-auto hover:scale-125" />
+	</button>
+{/if}

@@ -58,8 +58,8 @@
 	<!-- Ignoring this because the video element is not meant to have a caption -->
 	<video id="video" bind:this={video} controls />
 
-<!--	<div class="flex-grow-1 absolute bottom-0 left-0 !z-[10] flex h-[4vw] max-h-12 min-h-6 w-full items-center justify-between px-4 py-8">-->
-<!--		<PreviousEpisode bind:episode />-->
-<!--		<NextEpisode bind:episode />-->
-<!--	</div>-->
+	<div class="flex-grow-1 absolute bottom-0 left-0 !z-[10] flex h-[4vw] max-h-12 min-h-6 w-full items-center justify-between px-4 py-8">
+		<PreviousEpisode bind:episode />
+		<NextEpisode bind:episode />
+	</div>
 </div>

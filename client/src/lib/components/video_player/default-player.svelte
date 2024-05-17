@@ -9,7 +9,6 @@
 	export let isReady: boolean;
 
 	let playerRef: SveltePlayerRef;
-	let currentResolution: Selected<string>;
 	let prevUrl: PlayerUrl = '';
 	let currentUrl: PlayerUrl = '';
 	let pip: boolean = false;
@@ -66,15 +65,7 @@
 	}
 
 	$: onPrevURLStateChange(prevUrl);
-
-	$: if (episode) {
-		currentResolution = {
-			value: episode.streamingLinks.sources[0].src,
-			label: episode.streamingLinks.sources[0].quality
-		};
-	}
-
-	$: if (currentResolution) load(currentResolution.value);
+	$: if (currentUrl) load(currentUrl);
 </script>
 
 {#if episode}
@@ -91,11 +82,11 @@
 		bind:loaded
 		bind:duration
 		bind:seeking
-		bind:currentResolution
+		bind:currentUrl
 	/>
 
 	<SveltePlayer
-		url={currentUrl}
+		bind:url={currentUrl}
 		bind:this={playerRef}
 		{muted}
 		{playing}

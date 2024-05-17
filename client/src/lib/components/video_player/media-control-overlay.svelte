@@ -5,6 +5,7 @@
 		NavigationSlider,
 		PictureInPicture,
 		PlaybackRate,
+		PreviousEpisode,
 		Resolution,
 		VolumeSlider
 	} from '$lib/components/video_player/index';
@@ -15,11 +16,12 @@
 	import type { SveltePlayerRef } from 'svelte-player/dist/types';
 	import { goto } from '$app/navigation';
 	import { CLIENT_URLS } from '$lib/api/paths';
+	import type { PlayerUrl } from 'svelte-player/dist/players/types';
 
 	export let pip: boolean;
 	export let playing: boolean;
 	export let episode: EpisodeResponse;
-	export let currentResolution: Selected<string> | undefined;
+	export let currentUrl: PlayerUrl;
 	export let playerRef: SveltePlayerRef;
 	export let volume: number;
 	export let muted: boolean;
@@ -52,6 +54,8 @@
 	onDestroy(() => {
 		clearTimeout(mouseMoveTimer);
 	});
+
+	$: console.log('currentUrl', currentUrl);
 </script>
 
 <div
@@ -84,8 +88,9 @@
 
 			<!-- Right Side  -->
 			<div class="flex h-full space-x-4 md:space-x-8">
+				<PreviousEpisode bind:episode />
 				<NextEpisode bind:episode />
-				<Resolution bind:episode bind:currentResolution />
+				<Resolution bind:episode bind:currentUrl />
 				<PictureInPicture bind:pip />
 				<PlaybackRate bind:playbackRate />
 				<Fullscreen />
