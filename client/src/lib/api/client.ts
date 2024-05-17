@@ -5,6 +5,7 @@ import toast from 'svelte-french-toast';
 import {accessToken} from "$lib/components/store/sessionstorage";
 import {refreshToken} from "$lib/components/store/localstorage";
 import {get} from "svelte/store";
+import {closeModal} from "$lib/api/util";
 
 const ISSUER: string = import.meta.env.VITE_SERVER_ISSUER;
 
@@ -45,6 +46,7 @@ export async function register(input: RegisterRequest) {
 }
 
 export async function logout(): Promise<void> {
+    closeModal();
     removeTokens();
     await goto(CLIENT_URLS.LOGIN_URL);
 }
@@ -170,7 +172,7 @@ async function refreshTokens(): Promise<AuthorizeResponse | string> {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({refreshToken})
+        body: JSON.stringify({refreshToken: get(refreshToken)})
     });
 
     if (!response.ok) {

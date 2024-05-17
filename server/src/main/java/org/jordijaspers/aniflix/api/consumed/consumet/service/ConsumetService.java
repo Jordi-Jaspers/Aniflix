@@ -8,6 +8,7 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
@@ -32,6 +33,8 @@ import java.util.regex.Pattern;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
+import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.getProviderByProvider;
+import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
 
@@ -80,15 +83,15 @@ public class ConsumetService {
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+
+        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
         return provisionDataFromJikan(anime);
     }
-
-
 
     public Anime getAnimeDetails(final String title) {
         LOGGER.info("[Consumet API] Fetching anime details for title '{}'.", title);
         final Map<String, String> filters = applyDefaultFilters(title, new ConcurrentHashMap<>());
-        return consumetRepository.searchAnime(filters).getResults().stream()
+        final Anime anime = consumetRepository.searchAnime(filters).getResults().stream()
                 .filter(result -> filterResults(result, title))
                 .findFirst()
                 .map(AnilistSearchResult::getId)
@@ -96,6 +99,9 @@ public class ConsumetService {
                 .map(consumetRepository::getAnimeDetails)
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+
+        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
+        return provisionDataFromJikan(anime);
     }
 
     public Anime getAnimeInfo(final Integer anilistId) {
@@ -103,6 +109,7 @@ public class ConsumetService {
         final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
         return provisionTrailerFromJikan(anime);
     }
 
@@ -143,6 +150,8 @@ public class ConsumetService {
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId, provider))
                 .map(animeMapper::toAnime)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+
+        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getProviderByProvider(provider)));
         return provisionDataFromJikan(anime);
     }
 

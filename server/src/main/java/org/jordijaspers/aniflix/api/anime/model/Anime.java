@@ -108,6 +108,9 @@ public class Anime implements Serializable, PageableItem {
     @Column(name = "updated")
     private LocalDateTime updated;
 
+    @Column(name = "is_synchronizing")
+    private boolean isSynchronizing;
+
     @OneToMany(mappedBy = "anime", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Interaction> interactions = new HashSet<>();
 
@@ -139,10 +142,9 @@ public class Anime implements Serializable, PageableItem {
      */
     public boolean isCompleted() {
         final boolean isRecentlyUpdated = nonNull(updated) && updated.isAfter(LocalDateTime.now().minusMinutes(15));
-        final boolean hasAiringDate = episodes.stream().allMatch(episode -> nonNull(episode.getAirDate()));
         return status.equals(COMPLETED)
                 && episodes.size() == totalEpisodes
-                && hasAiringDate
+                && areEpisodesCompleted()
                 || isRecentlyUpdated;
     }
 
@@ -155,5 +157,13 @@ public class Anime implements Serializable, PageableItem {
                 .toList()
                 .size();
     }
+
+    /**
+     * Indicates if all the episodes do have all the information.
+     */
+    private boolean areEpisodesCompleted() {
+        return episodes.stream().allMatch(Episode::isCompleted);
+    }
+
 }
 

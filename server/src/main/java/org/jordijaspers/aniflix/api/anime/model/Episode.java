@@ -12,12 +12,14 @@ import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Constants.SLASH;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
@@ -65,6 +67,9 @@ public class Episode implements Serializable {
     private Anime anime;
 
     @Transient
+    private String episodeId;
+
+    @Transient
     private StreamingLinks streamingLinks;
 
     /**
@@ -90,5 +95,25 @@ public class Episode implements Serializable {
             case ZORO -> getZoroId();
             default -> null;
         };
+    }
+
+    /**
+     * Set the episode id to the correct provider.
+     */
+    public void setActiveEpisodeId(final AnilistProviders provider) {
+        switch (provider) {
+            case GOGOANIME -> setGogoanimeId(episodeId);
+            case ZORO -> setZoroId(episodeId);
+        }
+    }
+
+    /**
+     * Check if the episode is completed and contains all the necessary information.
+     */
+    public boolean isCompleted() {
+        return nonNull(airDate)
+                && isNotBlank(gogoanimeId)
+                && isNotBlank(zoroId)
+                && isNotBlank(title);
     }
 }

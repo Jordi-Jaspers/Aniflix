@@ -5,6 +5,7 @@ import org.hawaiiframework.exception.ApiException;
 import java.io.Serial;
 
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.USER_ALREADY_EXISTS_ERROR;
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * Exception thrown when a user already exists.
@@ -12,7 +13,7 @@ import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.USER_ALREAD
 public class UserAlreadyExistsException extends ApiException {
 
     @Serial
-    private static final long serialVersionUID = -5774469489966165358L;
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     public UserAlreadyExistsException() {
         super(USER_ALREADY_EXISTS_ERROR);

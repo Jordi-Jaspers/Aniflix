@@ -148,7 +148,7 @@
 			</div>
 
 			<div class="flex w-full flex-col gap-x-10 gap-y-4 font-light md:flex-row">
-				<article class="prose text-justify text-sm font-extralight leading-4 md:w-[85%] md:leading-7">
+				<article class="prose text-justify text-sm font-extralight leading-5 md:w-[85%] md:leading-7">
 					{@html anime.description.replace(/\(Source:.*\)/, '')}
 				</article>
 				<div class="flex flex-col space-y-4 text-sm">

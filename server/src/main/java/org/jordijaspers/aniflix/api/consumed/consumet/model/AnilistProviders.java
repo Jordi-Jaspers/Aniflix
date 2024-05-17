@@ -43,4 +43,14 @@ public enum AnilistProviders {
                 .findFirst()
                 .orElse(null);
     }
+
+    /**
+     * Retrieve the provider based on the given provider.
+     */
+    public static AnilistProviders getProviderByProvider(final String provider) {
+        return Arrays.stream(values())
+                .filter(providers -> providers.getProvider().equalsIgnoreCase(provider))
+                .findFirst()
+                .orElse(null);
+    }
 }

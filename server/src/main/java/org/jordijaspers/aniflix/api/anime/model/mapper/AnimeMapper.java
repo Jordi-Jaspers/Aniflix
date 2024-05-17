@@ -71,14 +71,7 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
     @Mapping(target = "mediaType", source = "type")
     public abstract Anime toAnime(AnilistInfoResult result);
 
-    @Mapping(
-            target = "gogoanimeId",
-            expression = "java(DomainHealthChecker.getActiveProvider() == AnilistProviders.GOGOANIME ? source.getId() : null)"
-    )
-    @Mapping(
-            target = "zoroId",
-            expression = "java(DomainHealthChecker.getActiveProvider() == AnilistProviders.ZORO ? source.getId() : null)"
-    )
+    @Mapping(target = "episodeId", source = "id")
     @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
     @Mapping(target = "id", ignore = true)
     public abstract Episode toEpisode(AnilistEpisode source);

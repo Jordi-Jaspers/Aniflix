@@ -88,7 +88,7 @@ spring:
     use-legacy-processing: true
 
   jpa:
-    show-sql: ${SHOW_SQL:true}
+    show-sql: ${SHOW_SQL:false}
     open-in-view: false
     properties:
       hibernate:

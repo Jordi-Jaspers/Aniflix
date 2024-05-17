@@ -18,20 +18,21 @@
 
             CREATE TABLE IF NOT EXISTS anime
             (
-                anilist_id     INTEGER AUTO_INCREMENT PRIMARY KEY,
-                mal_id         INTEGER      NOT NULL,
-                title          VARCHAR(255) NOT NULL,
-                description    TEXT,
-                total_episodes INTEGER      NOT NULL,
-                rating         INTEGER      NOT NULL,
-                status         VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
-                cover_url      TEXT         NOT NULL,
-                image_url      TEXT         NOT NULL,
-                trailer_url    TEXT,
-                release_year   INTEGER      NOT NULL,
-                subbed         BOOLEAN      NOT NULL DEFAULT FALSE,
-                media_type     VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
-                updated        TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                anilist_id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+                mal_id              INTEGER      NOT NULL,
+                title               VARCHAR(255) NOT NULL,
+                description         TEXT,
+                total_episodes      INTEGER      NOT NULL,
+                rating              INTEGER      NOT NULL,
+                status              VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
+                cover_url           TEXT         NOT NULL,
+                image_url           TEXT         NOT NULL,
+                trailer_url         TEXT,
+                release_year        INTEGER      NOT NULL,
+                subbed              BOOLEAN      NOT NULL DEFAULT FALSE,
+                media_type          VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
+                updated             TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                is_synchronizing    BOOLEAN      NOT NULL DEFAULT FALSE,
                 UNIQUE (anilist_id, title)
             );
 

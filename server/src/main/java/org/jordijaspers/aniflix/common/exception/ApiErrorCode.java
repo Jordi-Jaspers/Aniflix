@@ -73,7 +73,10 @@ public enum ApiErrorCode implements ApiError {
             "All Anilist providers are currently down. Please try again later."),
     STREAMING_LINKS_NOT_FOUND_ERROR(
             "ANI-0022",
-            "Could not find the streaming links for the requested episode.");
+            "Could not find the streaming links for the requested episode."),
+    SYNCHRONIZATION_ERROR(
+            "ANI-0023",
+            "Something went wrong while synchronizing the data to the database.");
 
     /**
      * The error code.
