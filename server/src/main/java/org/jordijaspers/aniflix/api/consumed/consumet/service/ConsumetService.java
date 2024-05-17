@@ -8,6 +8,7 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
@@ -15,6 +16,8 @@ import org.jordijaspers.aniflix.api.consumed.consumet.repository.ConsumetReposit
 import org.jordijaspers.aniflix.api.consumed.jikan.repository.JikanRepository;
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
 import org.jordijaspers.aniflix.api.recommendation.model.mapper.RecommendationMapper;
+import org.jordijaspers.aniflix.api.schedule.model.NextAiringEpisode;
+import org.jordijaspers.aniflix.api.schedule.model.mapper.ScheduleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -53,6 +56,8 @@ public class ConsumetService {
     private final AnimeMapper animeMapper;
 
     private final RecommendationMapper recommendationMapper;
+
+    private final ScheduleMapper scheduleMapper;
 
     @Cacheable(value = "recentEpisodes", unless = "#result.size() == 0")
     public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
@@ -118,6 +123,13 @@ public class ConsumetService {
         return consumetRepository.getAnimeRecommendations(anilistId).stream()
                 .map(recommendationMapper::toRecommendation)
                 .toList();
+    }
+
+    @Cacheable(value = "animeNextAiring", key = "#anilistId")
+    public NextAiringEpisode getNextAiringEpisode(final int anilistId) {
+        LOGGER.info("[Consumet API] Fetching next airing episode for Anilist ID '{}'.", anilistId);
+        final AnilistNextAiringEpisode anilistInfo = consumetRepository.getNextAiringEpisode(anilistId);
+        return scheduleMapper.toNextAiringEpisode(anilistInfo);
     }
 
     @Cacheable(value = "streamingLinks", key = "#id + #provider")

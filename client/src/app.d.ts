@@ -107,6 +107,13 @@ class PageResponse<T> {
 	pageSize: number;
 }
 
+class NextAiringEpisodeResponse {
+	hasNextEpisode: boolean;
+	airingTime: Date;
+	timeUntilAiring: number;
+	episode: number;
+}
+
 class RegisterResponse {
 	email: string;
 	authorities: string[];

@@ -12,6 +12,8 @@
 	import { Content, List, Root, Trigger } from '$lib/components/ui/tabs';
 	import { setAnime } from '$lib/components/store/anime-context-store';
 	import { goto } from '$app/navigation';
+	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { NextAiringEpisodeTimer } from '$lib/components/modal/index.js';
 
 	let isPlaying: boolean = false;
 	let isMuted: boolean = true;
@@ -62,6 +64,7 @@
 		on:keypress={handleEscape}
 		class="fixed inset-0 !z-[1000] mx-auto h-auto w-full overflow-y-scroll overscroll-auto bg-background md:top-8 md:max-w-[90%] md:rounded-t-md lg:max-w-4xl"
 	>
+		<NextAiringEpisodeTimer anilistId={anime.anilistId} />
 		<button
 			class="onclick absolute right-0 top-0 !z-40 m-[1em] flex h-9 w-9 items-center justify-center rounded-full bg-[#1a1920]/80 text-white hover:bg-[#1a1920]"
 			on:click={() => closeModal()}
@@ -203,6 +206,13 @@
 					<RecommendationCards anilistId={anime.anilistId} />
 				</Content>
 			</Root>
+
+			<Separator />
+
+			<div class="pb-8">
+				<h3>About {anime.title}</h3>
+				<p class="text-sm text-muted-foreground">More information coming soon.</p>
+			</div>
 		</div>
 	</div>
 {/if}

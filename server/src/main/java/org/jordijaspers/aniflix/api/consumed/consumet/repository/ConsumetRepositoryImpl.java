@@ -6,6 +6,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsFeed;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
@@ -151,6 +152,21 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
                 : result.getRecommendations().stream()
                 .filter(recommendation -> nonNull(recommendation.getId()))
                 .toList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @LogExecutionTime
+    public AnilistNextAiringEpisode getNextAiringEpisode(final int id) {
+        AnilistInfoResult result;
+        try {
+            result = getAnimeInfo(id);
+        } catch (final Exception exception) {
+            result = getAnimeDetails(id);
+        }
+        return isNull(result) ? null : result.getNextAiringEpisode();
     }
 
     /**

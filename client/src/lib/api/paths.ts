@@ -12,6 +12,7 @@ export const SERVER_URLS = {
 	USER_DETAILS_PATH: `${SERVER_BASE_URL}/user/details`,
 	ANIME_PATH: `${SERVER_BASE_URL}/anime`,
 	ANIME_DETAILS_PATH: `${SERVER_BASE_URL}/anime/{id}/details`,
+	ANIME_NEXT_AIRING_EPISODE_PATH: `${SERVER_BASE_URL}/anime/{id}/next_airing_episode`,
 	ANIME_INFO_PATH: `${SERVER_BASE_URL}/anime/{id}/info`,
 	ANIME_LIKE_PATH: `${SERVER_BASE_URL}/anime/{id}/like`,
 	ANIME_DISLIKE_PATH: `${SERVER_BASE_URL}/anime/{id}/dislike`,

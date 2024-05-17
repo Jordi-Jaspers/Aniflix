@@ -10,12 +10,12 @@ import lombok.Data;
 public class AnilistNextAiringEpisode {
 
     @JsonProperty("airingTime")
-    private Long airingTime;
+    private int airingTime;
     
     @JsonProperty("timeUntilAiring")
-    private Long timeUntilAiring;
+    private int timeUntilAiring;
     
     @JsonProperty("episode")
-    private Long episode;
+    private int episode;
 
 }

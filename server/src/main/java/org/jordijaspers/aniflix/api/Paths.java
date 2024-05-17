@@ -81,6 +81,8 @@ public final class Paths {
 
     public static final String ANIME_BANNER = ANIME_BASE_PATH + "/banner";
 
+    public static final String ANIME_NEXT_EPISODE = ANIME_BASE_PATH + ID_PART + "/next_airing_episode";
+
     /* ------------------------------- EPISODE ENDPOINTS ------------------------------- */
 
     public static final String EPISODES_PATH = ANIME_PATH + "/episode";
