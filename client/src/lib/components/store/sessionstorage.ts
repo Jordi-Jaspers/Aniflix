@@ -1,5 +1,6 @@
 import { type Writable, writable } from 'svelte/store';
 import { browser } from '$app/environment';
+import toast from "svelte-french-toast";
 
 class SessionStorage<T> {
 	key: string;
@@ -10,16 +11,53 @@ class SessionStorage<T> {
 		this.value = writable(initialValue);
 
 		if (browser) {
-			// Load the initial value from localStorage
-			const storedValue = sessionStorage.getItem(this.key);
+			// Load the initial value from sessionStorage
+			const storedValue: string | null = sessionStorage.getItem(this.key);
 			if (storedValue) {
-				this.value.set(JSON.parse(storedValue));
+				try {
+					const parsedValue = this.parseValue(storedValue);
+					this.value.set(parsedValue);
+				} catch (e) {
+					toast.error('Failed to parse stored value', {
+						duration: 5000,
+						position: 'bottom-center',
+						style: 'background: #262626; color: #ffffff;'
+					});
+				}
 			}
 
-			// Subscribe to store updates and sync with localStorage
+			// Subscribe to store updates and sync with sessionStorage
 			this.value.subscribe((value) => {
-				sessionStorage.setItem(this.key, JSON.stringify(value));
+				sessionStorage.setItem(this.key, this.stringifyValue(value));
 			});
+		}
+	}
+
+	// Determine if value needs to be parsed as JSON or used as-is
+	private parseValue(value: string): T {
+		// Check if the initialValue is a string type
+		if (typeof this.value === 'string' || this.isJSONString(value)) {
+			return JSON.parse(value);
+		}
+		return value as unknown as T;
+	}
+
+	// Convert the value to a string for storage in sessionStorage
+	private stringifyValue(value: T): string {
+		// Check if the value is a string type
+		if (typeof value === 'string') {
+			return value;
+		}
+		return JSON.stringify(value);
+	}
+
+	// Check if a string is a valid JSON string
+	private isJSONString(value: string): boolean {
+		try {
+			JSON.parse(value);
+			return true;
+		} catch {
+			return false;
 		}
 	}
 
