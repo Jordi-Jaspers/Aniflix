@@ -1,6 +1,8 @@
 package org.jordijaspers.aniflix.api.anime.model.response;
 
 import lombok.Data;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItemResource;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
  * The response for the anime.
  */
 @Data
-public class AnimeResponse {
+public class AnimeResponse implements PageableItemResource {
 
     private int anilistId;
 

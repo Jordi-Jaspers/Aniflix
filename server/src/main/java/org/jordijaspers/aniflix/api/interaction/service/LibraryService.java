@@ -3,19 +3,24 @@ package org.jordijaspers.aniflix.api.interaction.service;
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
+import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
+import org.jordijaspers.aniflix.api.interaction.model.request.LibrarySearchRequest;
+import org.jordijaspers.aniflix.api.interaction.model.specification.LibrarySpecification;
 import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 
 /**
@@ -29,22 +34,21 @@ public class LibraryService {
 
     private final AnimeService animeService;
 
+    private final AnimeRepository animeRepository;
+
     private final InteractionService interactionService;
 
     private final InteractionRepository interactionRepository;
 
-    public List<Interaction> getFullLibraryForUser() {
-        final User user = getLoggedInUser();
-        LOGGER.info("Getting library for user '{}'", user.getUsername());
-        return interactionRepository.findAllLibraryForUser(user);
-    }
+    private final UserInteractionEnhancer userInteractionEnhancer;
 
-    public List<Interaction> searchInLibraryOfUser(final String title) {
+    public Page<Anime> searchInLibraryOfUser(final LibrarySearchRequest request) {
         final User user = getLoggedInUser();
-        LOGGER.info("Searching library for user '{}' with title '{}'", user.getUsername(), title);
-        return isBlank(title)
-                ? interactionRepository.findAllLibraryForUser(user)
-                : interactionRepository.searchLibraryByTitleForUser(title, user);
+        LOGGER.info("Searching library for user '{}' with the following params '{}'", user.getUsername(), request);
+        final Pageable pageable = PageRequest.of(request.getPage(), request.getPageSize());
+        final Page<Anime> page = animeRepository.findAll(new LibrarySpecification(request, user), pageable);
+        userInteractionEnhancer.applyAnime(page);
+        return page;
     }
 
     public void removeFromLibrary(final Integer anilistId) {

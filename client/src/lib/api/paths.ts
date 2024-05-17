@@ -17,6 +17,7 @@ export const SERVER_URLS = {
 	ANIME_DISLIKE_PATH: `${SERVER_BASE_URL}/anime/{id}/dislike`,
 	ANIME_ADD_LIBRARY_PATH: `${SERVER_BASE_URL}/anime/{id}/library/add`,
 	ANIME_REMOVE_LIBRARY_PATH: `${SERVER_BASE_URL}/anime/{id}/library/remove`,
+	ANIME_LIBRARY_SEARCH_PATH: `${SERVER_BASE_URL}/library/anime/search`,
 	ANIME_CONSTANT_PATH: `${SERVER_BASE_URL}/constant`,
 	ANIME_SEARCH_PATH: `${SERVER_BASE_URL}/anime/search`,
 	ANIME_BANNER_PATH: `${SERVER_BASE_URL}/anime/banner`,

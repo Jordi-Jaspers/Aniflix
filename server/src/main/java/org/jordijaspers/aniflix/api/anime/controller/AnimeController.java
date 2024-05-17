@@ -44,7 +44,7 @@ public class AnimeController {
     public ResponseEntity<List<AnimeResponse>> searchAnime(@RequestBody final AnimeRequest request) {
         final Map<String, String> filters = animeMapper.toFilters(request);
         final List<Anime> anime = animeService.searchAnime(filters);
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(anime));
+        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(anime));
     }
 
     @ResponseStatus(OK)
@@ -70,7 +70,7 @@ public class AnimeController {
     @GetMapping(path = ANIME_BANNER, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AnimeResponse> getAnimeBanner() {
         final Anime anime = animeService.getAnimeBanner();
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(anime));
+        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(anime));
     }
 
     @ResponseStatus(OK)
@@ -86,7 +86,7 @@ public class AnimeController {
     @PostMapping(path = ANIME_POPULAR, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AnimeResponse>> getPopularAnime(@RequestBody final PageRequest request) {
         final List<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(popularAnime));
+        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(popularAnime));
     }
 
     @ResponseStatus(OK)
@@ -94,7 +94,7 @@ public class AnimeController {
     @PostMapping(path = ANIME_TRENDING, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AnimeResponse>> getTrendingAnime(@RequestBody final PageRequest request) {
         final List<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(trendingAnime));
+        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(trendingAnime));
     }
 
     @ResponseStatus(OK)
@@ -102,6 +102,6 @@ public class AnimeController {
     @PostMapping(path = ANIME_GENRE, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AnimeResponse>> getAnimeByGenre(@RequestBody final GenreRequest request) {
         final List<Anime> animeByGenre = animeService.getAnimeByGenre(request.getGenre(), request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResponseWithoutEpisodes(animeByGenre));
+        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(animeByGenre));
     }
 }

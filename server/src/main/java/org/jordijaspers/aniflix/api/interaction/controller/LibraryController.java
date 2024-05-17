@@ -1,18 +1,19 @@
 package org.jordijaspers.aniflix.api.interaction.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.interaction.model.Interaction;
-import org.jordijaspers.aniflix.api.interaction.model.mapper.InteractionMapper;
+import org.jordijaspers.aniflix.api.anime.model.Anime;
+import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
-import org.jordijaspers.aniflix.api.interaction.model.response.InteractionResponse;
+import org.jordijaspers.aniflix.api.interaction.model.request.LibrarySearchRequest;
 import org.jordijaspers.aniflix.api.interaction.service.LibraryService;
+import org.jordijaspers.aniflix.common.mappers.model.PageResource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,15 @@ public class LibraryController {
 
     private final LibraryService libraryService;
 
-    private final InteractionMapper interactionMapper;
+    private final AnimeMapper animeMapper;
+
+    @ResponseStatus(OK)
+    @PreAuthorize("hasAuthority('USER')")
+    @PostMapping(path = ANIME_LIBRARY_SEARCH_PATH, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<PageResource<AnimeResponse>> searchLibrary(@RequestBody final LibrarySearchRequest request) {
+        final Page<Anime> library = libraryService.searchInLibraryOfUser(request);
+        return ResponseEntity.status(OK).body(animeMapper.toPageResource(library));
+    }
 
     @ResponseStatus(NO_CONTENT)
     @PreAuthorize("hasAuthority('USER')")
@@ -48,22 +57,6 @@ public class LibraryController {
     public ResponseEntity<Void> addToLibrary(@PathVariable("id") final int anilistId) {
         libraryService.addToLibrary(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
-    }
-
-    @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = ANIME_LIBRARY_PATH, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<InteractionResponse>> getFullLibrary() {
-        final List<Interaction> library = libraryService.getFullLibraryForUser();
-        return ResponseEntity.status(OK).body(interactionMapper.toBasicResponse(library));
-    }
-
-    @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = ANIME_LIBRARY_SEARCH_PATH, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<InteractionResponse>> searchLibrary(@RequestParam("q") final String title) {
-        final List<Interaction> library = libraryService.searchInLibraryOfUser(title);
-        return ResponseEntity.status(OK).body(interactionMapper.toBasicResponse(library));
     }
 
     @PreAuthorize("hasAuthority('USER')")

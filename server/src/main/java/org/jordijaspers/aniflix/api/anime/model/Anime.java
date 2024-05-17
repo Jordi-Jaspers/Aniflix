@@ -24,6 +24,8 @@ import org.jordijaspers.aniflix.api.anime.model.constant.MediaTypes;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItemResource;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -45,7 +47,7 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 @Table(name = "anime")
 @ToString(exclude = "interactions")
 @EqualsAndHashCode(of = "anilistId")
-public class Anime implements Serializable {
+public class Anime implements Serializable, PageableItem {
 
     @Serial
     private static final long serialVersionUID = SERIAL_VERSION_UID;

@@ -84,7 +84,28 @@ class AnimeRequest {
 	season: string | null;
 }
 
+class LibrarySearchRequest {
+	page: number;
+	pageSize: number;
+	query: string;
+	watchStatus: string[];
+	genre: string[];
+	status: string[];
+	minRating: number;
+	maxRating: number;
+	afterYear: number;
+	beforeYear: number;
+}
+
 // ======================== RESPONSE ========================
+
+class PageResponse<T> {
+	content: T[];
+	totalElements: number;
+	totalPages: number;
+	pageNumber: number;
+	pageSize: number;
+}
 
 class RegisterResponse {
 	email: string;

@@ -3,6 +3,7 @@ package org.jordijaspers.aniflix.api.anime.repository;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
  * The repository for the anime.
  */
 @Repository
-public interface AnimeRepository extends JpaRepository<Anime, Integer> {
+public interface AnimeRepository extends JpaRepository<Anime, Integer>, JpaSpecificationExecutor<Anime> {
 
     @LogExecutionTime
     @Query("FROM Anime a "
