@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button/index.js";
-	import { Input } from "$lib/components/ui/input/index.js";
-	import { Label } from "$lib/components/ui/label/index.js";
-	import * as Popover from "$lib/components/ui/popover/index.js";
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import * as Popover from '$lib/components/ui/popover/index.js';
 
 	export let beforeYear: number = 0;
 	export let afterYear: number = 0;
@@ -15,15 +15,13 @@
 
 <Popover.Root portal={null}>
 	<Popover.Trigger asChild let:builder>
-		<Button builders={[builder]} class="{isActive ? 'border-primary' : ''}" variant="outline">Release Year</Button>
+		<Button builders={[builder]} class={isActive ? 'border-primary' : ''} variant="outline">Release Year</Button>
 	</Popover.Trigger>
 	<Popover.Content class="w-80">
 		<div class="grid gap-4">
 			<div class="space-y-2">
 				<h4 class="font-medium leading-none">Release Year</h4>
-				<p class="text-sm text-muted-foreground">
-					Set the release year to find anime released in a specific year.
-				</p>
+				<p class="text-sm text-muted-foreground">Set the release year to find anime released in a specific year.</p>
 			</div>
 			<div class="grid gap-2">
 				<div class="grid grid-cols-3 items-center gap-4">
