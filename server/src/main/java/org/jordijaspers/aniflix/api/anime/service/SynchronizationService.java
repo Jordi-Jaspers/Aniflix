@@ -148,8 +148,8 @@ SynchronizationService {
      * @param isSynchronizing The new synchronization flag.
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    protected void updateSynchronizationFlag(final int anilistId, boolean isSynchronizing) {
-        Anime anime = animeRepository.findById(anilistId).orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+    protected void updateSynchronizationFlag(final int anilistId, final boolean isSynchronizing) {
+        final Anime anime = animeRepository.findById(anilistId).orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
         anime.setSynchronizing(isSynchronizing);
         animeRepository.save(anime);
     }

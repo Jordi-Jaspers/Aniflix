@@ -8,7 +8,6 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;

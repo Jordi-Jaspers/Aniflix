@@ -104,6 +104,7 @@ public class Episode implements Serializable {
         switch (provider) {
             case GOGOANIME -> setGogoanimeId(episodeId);
             case ZORO -> setZoroId(episodeId);
+            default -> throw new IllegalArgumentException("The provider is not supported.");
         }
     }
 
