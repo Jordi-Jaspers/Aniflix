@@ -25,7 +25,6 @@ import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
-import org.jordijaspers.aniflix.common.mappers.model.PageableItemResource;
 
 import java.io.Serial;
 import java.io.Serializable;

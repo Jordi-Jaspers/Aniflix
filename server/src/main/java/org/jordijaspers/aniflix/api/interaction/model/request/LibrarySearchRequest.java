@@ -6,15 +6,21 @@ import org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * A request model for searching in the library.
  */
 @Data
 @ToString
-public class LibrarySearchRequest {
+public class LibrarySearchRequest implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     private int page;
 

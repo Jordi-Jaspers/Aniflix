@@ -7,7 +7,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
-import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
@@ -23,6 +22,10 @@ import static java.time.LocalDate.now;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
+/**
+ * The specification for the library search. Which will filter the anime based on the request.
+ */
+@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity"})
 @RequiredArgsConstructor
 public class LibrarySpecification implements Specification<Anime> {
 
@@ -36,28 +39,28 @@ public class LibrarySpecification implements Specification<Anime> {
     @Override
     public Predicate toPredicate(@NonNull final Root<Anime> root,
                                  @NonNull final CriteriaQuery<?> query,
-                                 @NonNull final CriteriaBuilder cb) {
-        List<Predicate> predicates = new ArrayList<>();
+                                 @NonNull final CriteriaBuilder criteriaBuilder) {
+        final List<Predicate> predicates = new ArrayList<>();
 
         // Configure The Query filter
         if (request.getQuery() != null && !request.getQuery().isEmpty()) {
-            predicates.add(cb.like(root.get("title"), "%" + request.getQuery() + "%"));
+            predicates.add(criteriaBuilder.like(root.get("title"), "%" + request.getQuery() + "%"));
         }
 
         // Configure The Rating filter
         if (request.getMinRating() > 0) {
-            predicates.add(cb.greaterThanOrEqualTo(root.get("rating"), request.getMinRating()));
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("rating"), request.getMinRating()));
         }
         if (request.getMaxRating() > 0) {
-            predicates.add(cb.lessThanOrEqualTo(root.get("rating"), request.getMaxRating()));
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("rating"), request.getMaxRating()));
         }
 
         // Configure The Release Year filter
         if (request.getBeforeYear() > 0 && request.getBeforeYear() <= now().getYear()) {
-            predicates.add(cb.lessThanOrEqualTo(root.get("releaseYear"), request.getBeforeYear()));
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("releaseYear"), request.getBeforeYear()));
         }
         if (request.getAfterYear() > 0 && request.getAfterYear() <= now().getYear()) {
-            predicates.add(cb.greaterThanOrEqualTo(root.get("releaseYear"), request.getAfterYear()));
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("releaseYear"), request.getAfterYear()));
         }
 
         // Configure The Genre filter
@@ -79,10 +82,10 @@ public class LibrarySpecification implements Specification<Anime> {
         }
 
         // Join with Interaction table and filter by inLibrary and userId
-        Join<Anime, Interaction> interactionJoin = root.join("interactions");
-        predicates.add(cb.equal(interactionJoin.get("inLibrary"), true));
-        predicates.add(cb.equal(interactionJoin.get("user"), user));
+        final Join<Anime, Interaction> interactionJoin = root.join("interactions");
+        predicates.add(criteriaBuilder.equal(interactionJoin.get("inLibrary"), true));
+        predicates.add(criteriaBuilder.equal(interactionJoin.get("user"), user));
 
-        return cb.and(predicates.toArray(new Predicate[0]));
+        return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }

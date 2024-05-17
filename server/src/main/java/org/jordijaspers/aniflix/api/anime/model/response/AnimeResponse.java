@@ -1,7 +1,6 @@
 package org.jordijaspers.aniflix.api.anime.model.response;
 
 import lombok.Data;
-import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
 import org.jordijaspers.aniflix.common.mappers.model.PageableItemResource;
 
 import java.time.ZonedDateTime;
