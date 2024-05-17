@@ -3,7 +3,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
-	import {round} from "$lib/utils";
+	import { round } from '$lib/utils';
 
 	export let minRating: number = 0;
 	export let maxRating: number = 0;

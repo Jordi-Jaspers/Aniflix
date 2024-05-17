@@ -3,12 +3,11 @@
 	import { curl } from '$lib/api/client';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { NewsFeedCard, NewsFeedItem } from '$lib/components/newsfeed/index';
-	import {LoadingScreen} from "$lib/components/general";
+	import { LoadingScreen } from '$lib/components/general';
 
 	let bannerCards: NewsPostResponse[] = [];
 	let listCards: NewsPostResponse[] = [];
 	let isMobile: boolean = false;
-
 
 	// Function to set news feed based on window width
 	function setNewsFeed(newsFeed: NewsPostResponse[]) {

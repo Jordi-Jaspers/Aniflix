@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { useShowInfoModal } from '$lib/components/store/store';
 	import { goto } from '$app/navigation';
 	import { CalendarDays } from 'lucide-svelte';
 
 	export let episode: EpisodeResponse;
 
 	async function handleClickedEpisode() {
-		$useShowInfoModal = false;
 		await goto('/watch/' + episode.anilistId + '/episode/' + episode.episodeNumber);
 	}
 </script>

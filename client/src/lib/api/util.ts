@@ -1,6 +1,6 @@
 import { curl } from '$lib/api/client';
 import { SERVER_URLS } from '$lib/api/paths';
-import { useModalInfo, useShowInfoModal } from '$lib/components/store/store';
+import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
 
 export function getRandomValues(array: any[], count: number) {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -9,6 +9,11 @@ export function getRandomValues(array: any[], count: number) {
 	}
 
 	return array.slice(0, count);
+}
+
+export function isIOS(userAgent: string): boolean {
+	const platform = navigator?.platform || '';
+	return /iPad|iPhone|iPod/.test(userAgent) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
 export async function openModal(anilistId: number): Promise<void> {
@@ -26,9 +31,4 @@ export async function openModal(anilistId: number): Promise<void> {
 export function closeModal(): void {
 	useModalInfo.set({} as AnimeResponse);
 	useShowInfoModal.set(false);
-}
-
-export function isIOS(userAgent: string): boolean {
-	const platform = navigator?.platform || '';
-	return /iPad|iPhone|iPod/.test(userAgent) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }

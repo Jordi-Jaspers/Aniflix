@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useModalInfo, useShowInfoModal } from '$lib/components/store/store';
+	import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
 	import { PlayIcon, StarIcon, X } from 'lucide-svelte';
 	import SveltePlayer from 'svelte-player';
 	import type { RecursivePartial } from 'svelte-player/dist/players/utility.types';
@@ -59,7 +59,6 @@
 	<button on:click={() => closeModal()} class="fixed inset-0 !z-[100] h-full w-full overflow-y-auto scroll-smooth backdrop-brightness-50" />
 	<div
 		role="presentation"
-		on:close={() => closeModal()}
 		on:keypress={handleEscape}
 		class="fixed inset-0 !z-[1000] mx-auto h-auto w-full overflow-y-scroll overscroll-auto bg-background md:top-8 md:max-w-[90%] md:rounded-t-md lg:max-w-4xl"
 	>

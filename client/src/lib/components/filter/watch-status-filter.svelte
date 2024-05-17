@@ -1,9 +1,9 @@
 <script lang="ts">
-    import {Button} from '$lib/components/ui/button/index.js';
-    import {Check} from 'lucide-svelte';
-    import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { Check } from 'lucide-svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
-    export let watchStatus: string[] = [];
+	export let watchStatus: string[] = [];
 	export let possibleWatchStatus: string[];
 	function handleCheckboxChange(event: Event, status: string) {
 		const isChecked = (event.target as HTMLInputElement).checked;
@@ -36,11 +36,11 @@
 						on:change={(event) => handleCheckboxChange(event, item)}
 					/>
 					<span>
-                        {item
+						{item
 							.replace(/_/g, ' ')
 							.toLowerCase()
 							.replace(/\b\w/g, (l) => l.toUpperCase())}
-                    </span>
+					</span>
 				</label>
 			</div>
 		{/each}
