@@ -9,7 +9,6 @@
 
 	let currentUrl: PlayerUrl = '';
 	let prevUrl: PlayerUrl = '';
-	let pip: boolean = false;
 	let controls: boolean = false;
 	let light: boolean = false;
 	let loop: boolean = false;
@@ -20,9 +19,9 @@
 	function load(requestUrl: PlayerUrl) {
 		prevUrl = currentUrl;
 		currentUrl = requestUrl;
+		volume = 1;
 		played = 0;
 		loaded = 0;
-		pip = false;
 		muted = false;
 	}
 
@@ -41,15 +40,16 @@
 	onMount(() => {
 		if (anime) {
 			load('https://www.youtube.com/watch?v=' + anime.trailer);
+			load('https://www.youtube.com/watch?v=' + anime.trailer);
+			load('https://www.youtube.com/watch?v=' + anime.trailer);
 		}
 	});
 
 	$: onPrevURLStateChange(prevUrl);
-
 	$: if (currentUrl) load(currentUrl);
 </script>
 
-{#if import.meta.env.VITE_ENV !== 'development'}
+{#if import.meta.env.VITE_ENV !== ''}
 	<div class="brightness-85 h-full {playing ? '' : 'hidden'}">
 		<SveltePlayer
 			url={currentUrl}
@@ -58,8 +58,8 @@
 			{volume}
 			{controls}
 			{loop}
-			{pip}
 			{light}
+			pip={false}
 			height="100%"
 			width="100%"
 			playsinline
