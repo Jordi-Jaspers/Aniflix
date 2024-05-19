@@ -64,6 +64,11 @@ class LoginRequest {
 	password: string;
 }
 
+class PageRequest {
+	page: number;
+	perPage: number;
+}
+
 class RefreshTokenRequest {
 	refreshToken: string;
 }
@@ -76,9 +81,7 @@ class RegisterRequest {
 	passwordConfirmation: string;
 }
 
-class AnimeRequest {
-	page: number;
-	perPage: number;
+class AnimeRequest extends PageRequest {
 	title: string;
 	genre: string | null;
 	season: string | null;

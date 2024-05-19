@@ -11,6 +11,8 @@ import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
+import org.jordijaspers.aniflix.common.mappers.model.PageResource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,24 +86,24 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_POPULAR, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getPopularAnime(@RequestBody final PageRequest request) {
-        final List<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(popularAnime));
+    public ResponseEntity<PageResource<AnimeResponse>> getPopularAnime(@RequestBody final PageRequest request) {
+        final Page<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
+        return ResponseEntity.status(OK).body(animeMapper.toPageResource(popularAnime));
     }
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_TRENDING, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getTrendingAnime(@RequestBody final PageRequest request) {
-        final List<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(trendingAnime));
+    public ResponseEntity<PageResource<AnimeResponse>> getTrendingAnime(@RequestBody final PageRequest request) {
+        final Page<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
+        return ResponseEntity.status(OK).body(animeMapper.toPageResource(trendingAnime));
     }
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_GENRE, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AnimeResponse>> getAnimeByGenre(@RequestBody final GenreRequest request) {
-        final List<Anime> animeByGenre = animeService.getAnimeByGenre(request.getGenre(), request.getPerPage(), request.getPage());
-        return ResponseEntity.status(OK).body(animeMapper.toResourceObject(animeByGenre));
+    public ResponseEntity<PageResource<AnimeResponse>> getAnimeByGenre(@RequestBody final GenreRequest request) {
+        final Page<Anime> animeByGenre = animeService.getAnimeByGenre(request.getGenre(), request.getPerPage(), request.getPage());
+        return ResponseEntity.status(OK).body(animeMapper.toPageResource(animeByGenre));
     }
 }

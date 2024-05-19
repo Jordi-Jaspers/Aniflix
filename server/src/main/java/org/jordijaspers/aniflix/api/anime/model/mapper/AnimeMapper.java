@@ -9,6 +9,7 @@ import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
@@ -22,6 +23,10 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.ZonedDateTime;
 import java.util.AbstractMap;
@@ -44,44 +49,7 @@ import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Q
 @Mapper(config = SharedMapperConfiguration.class, imports = {AnilistProviders.class, DomainHealthChecker.class})
 public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
 
-    @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
-    @Mapping(target = "imageUrl", source = "image")
-    @Mapping(target = "coverUrl", source = "cover")
-    @Mapping(target = "releaseYear", source = "releaseDate")
-    @Mapping(target = "mediaType", source = "type")
-    public abstract Anime toAnime(AnilistSearchResult result);
-
-    @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
-    @Mapping(target = "imageUrl", source = "image")
-    @Mapping(target = "coverUrl", source = "cover")
-    @Mapping(target = "trailerUrl", source = "trailer.id")
-    @Mapping(target = "releaseYear", source = "releaseDate")
-    @Mapping(target = "mediaType", source = "type")
-    @Mapping(target = "status", expression = "java(toStatus(result.getStatus()))")
-    public abstract Anime toAnime(AnilistOverview result);
-
-    @Mapping(target = "anilistId", source = "id")
-    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
-    @Mapping(target = "imageUrl", source = "image")
-    @Mapping(target = "coverUrl", source = "cover")
-    @Mapping(target = "trailerUrl", source = "trailer.id")
-    @Mapping(target = "releaseYear", source = "releaseDate")
-    @Mapping(target = "mediaType", source = "type")
-    public abstract Anime toAnime(AnilistInfoResult result);
-
-    @Mapping(target = "episodeId", source = "id")
-    @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
-    @Mapping(target = "id", ignore = true)
-    public abstract Episode toEpisode(AnilistEpisode source);
-
-    @Named("toRecentEpisodesResponse")
-    @Mapping(target = "title", expression = "java(source.getTitle().getPreferredTitle())")
-    public abstract EpisodeResponse toRecentEpisodesResponse(AnilistRecentEpisode source);
-
-    @IterableMapping(qualifiedByName = "toRecentEpisodesResponse")
-    public abstract List<EpisodeResponse> toRecentEpisodesResponse(List<AnilistRecentEpisode> source);
+    // #################### Resource Mapping ####################
 
     @Named("toResourceObject")
     @Mapping(source = "imageUrl", target = "image")
@@ -105,6 +73,69 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
 
     @IterableMapping(qualifiedByName = "toResponseWithEpisodes")
     public abstract List<DetailedAnimeResponse> toResponseWithEpisodes(List<Anime> anime);
+
+    // #################### Domain Mapping ####################
+
+    @Mapping(target = "anilistId", source = "id")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
+    @Mapping(target = "imageUrl", source = "image")
+    @Mapping(target = "coverUrl", source = "cover")
+    @Mapping(target = "releaseYear", source = "releaseDate")
+    @Mapping(target = "mediaType", source = "type")
+    public abstract Anime toDomainObject(AnilistSearchResult result);
+
+    @Mapping(target = "anilistId", source = "id")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
+    @Mapping(target = "imageUrl", source = "image")
+    @Mapping(target = "coverUrl", source = "cover")
+    @Mapping(target = "trailerUrl", source = "trailer.id")
+    @Mapping(target = "releaseYear", source = "releaseDate")
+    @Mapping(target = "mediaType", source = "type")
+    @Mapping(target = "status", expression = "java(toStatus(result.getStatus()))")
+    public abstract Anime toDomainObject(AnilistOverview result);
+
+    @Mapping(target = "anilistId", source = "id")
+    @Mapping(target = "title", expression = "java(result.getTitle().getPreferredTitle())")
+    @Mapping(target = "imageUrl", source = "image")
+    @Mapping(target = "coverUrl", source = "cover")
+    @Mapping(target = "trailerUrl", source = "trailer.id")
+    @Mapping(target = "releaseYear", source = "releaseDate")
+    @Mapping(target = "mediaType", source = "type")
+    public abstract Anime toDomainObject(AnilistInfoResult result);
+
+    // #################### Page Mapping ####################
+
+    public Page<Anime> toOverviewPage(final ResultPage<AnilistOverview> source) {
+        final List<Anime> content = source.getResults().stream().map(this::toDomainObject).toList();
+        final Pageable pageable = PageRequest.of(source.getCurrentPage(), source.getResults().size());
+        return new PageImpl<>(content, pageable, source.getTotalResults());
+    }
+
+    public Page<Anime> toSearchResultPage(final ResultPage<AnilistSearchResult> source) {
+        final List<Anime> content = source.getResults().stream().map(this::toDomainObject).toList();
+        final Pageable pageable = PageRequest.of(source.getCurrentPage(), source.getResults().size());
+        return new PageImpl<>(content, pageable, source.getTotalResults());
+    }
+
+    public Page<Anime> toInfoPage(final ResultPage<AnilistInfoResult> source) {
+        final List<Anime> content = source.getResults().stream().map(this::toDomainObject).toList();
+        final Pageable pageable = PageRequest.of(source.getCurrentPage(), source.getResults().size());
+        return new PageImpl<>(content, pageable, source.getTotalResults());
+    }
+
+    // #################### Anilist Episodes ####################
+
+    @Mapping(target = "episodeId", source = "id")
+    @Mapping(target = "title", defaultExpression = "java(\"Episode \" + source.getNumber())")
+    @Mapping(target = "id", ignore = true)
+    public abstract Episode toEpisode(AnilistEpisode source);
+
+    @Named("toRecentEpisodesResponse")
+    @Mapping(target = "title", expression = "java(source.getTitle().getPreferredTitle())")
+    public abstract EpisodeResponse toRecentEpisodesResponse(AnilistRecentEpisode source);
+
+    @IterableMapping(qualifiedByName = "toRecentEpisodesResponse")
+    public abstract List<EpisodeResponse> toRecentEpisodesResponse(List<AnilistRecentEpisode> source);
 
     /**
      * Converts a list of anime to a list of anime responses.

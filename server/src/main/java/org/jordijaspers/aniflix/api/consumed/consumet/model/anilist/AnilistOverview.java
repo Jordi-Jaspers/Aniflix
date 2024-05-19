@@ -2,6 +2,7 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.jordijaspers.aniflix.common.mappers.model.PageableApiResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * The search result of an anime.
  */
 @Data
-public class AnilistOverview {
+public class AnilistOverview implements PageableApiResponse {
 
     @JsonProperty("id")
     private String id;

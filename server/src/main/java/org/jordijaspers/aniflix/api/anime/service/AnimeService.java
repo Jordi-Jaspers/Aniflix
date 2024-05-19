@@ -11,6 +11,7 @@ import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.jordijaspers.aniflix.api.interaction.service.UserInteractionEnhancer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -38,16 +39,6 @@ public class AnimeService {
 
     private final SynchronizationService synchronizationService;
 
-    public List<AnilistRecentEpisode> getAnimeOfRecentEpisodes(final int perPage, final int page) {
-        return consumetService.getRecentEpisodes(perPage, page);
-    }
-
-    public List<Anime> searchAnime(final Map<String, String> filters) {
-        final List<Anime> anime = consumetService.searchAnime(filters);
-        userInteractionEnhancer.applyAnime(anime);
-        return anime;
-    }
-
     public Anime getAnimeBanner() {
         final List<Anime> animeTrailers = getPopularAnime(50, 1)
                 .stream()
@@ -57,26 +48,32 @@ public class AnimeService {
         return animeTrailers.get((int) (Math.random() * animeTrailers.size()));
     }
 
-    public List<Anime> getPopularAnime(final int perPage, final int page) {
-        final List<Anime> anime = consumetService.getPopular(perPage, page);
+    public List<Anime> searchAnime(final Map<String, String> filters) {
+        final List<Anime> anime = consumetService.searchAnime(filters);
         userInteractionEnhancer.applyAnime(anime);
         return anime;
     }
 
-    public List<Anime> getTrendingAnime(final int perPage, final int page) {
-        final List<Anime> anime = consumetService.getTrending(perPage, page);
+    public List<AnilistRecentEpisode> getAnimeOfRecentEpisodes(final int perPage, final int page) {
+        return consumetService.getRecentEpisodes(perPage, page);
+    }
+
+    public Page<Anime> getPopularAnime(final int perPage, final int page) {
+        final Page<Anime> anime = consumetService.getPopular(perPage, page);
         userInteractionEnhancer.applyAnime(anime);
         return anime;
     }
 
-    public List<Anime> getAnimeByGenre(final Genres genre, final int perPage, final int page) {
-        final List<Anime> anime = consumetService.getByGenre(genre, perPage, page);
+    public Page<Anime> getTrendingAnime(final int perPage, final int page) {
+        final Page<Anime> anime = consumetService.getTrending(perPage, page);
         userInteractionEnhancer.applyAnime(anime);
         return anime;
     }
 
-    public boolean isAnimeInDatabase(final int anilistId) {
-        return animeRepository.existsById(anilistId);
+    public Page<Anime> getAnimeByGenre(final Genres genre, final int perPage, final int page) {
+        final Page<Anime> anime = consumetService.getByGenre(genre, perPage, page);
+        userInteractionEnhancer.applyAnime(anime);
+        return anime;
     }
 
     public Anime findDetailsByAnilistId(final int anilistId) {
@@ -119,6 +116,10 @@ public class AnimeService {
         userInteractionEnhancer.applyAnime(anime);
         synchronizationService.synchronizeData(anime);
         return anime;
+    }
+
+    public boolean isAnimeInDatabase(final int anilistId) {
+        return animeRepository.existsById(anilistId);
     }
 
     private Anime saveAnime(final Anime anime) {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.jordijaspers.aniflix.common.mappers.model.PageableApiResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(exclude = "status")
-public class AnilistInfoResult {
+public class AnilistInfoResult implements PageableApiResponse {
 
     @JsonProperty("id")
     private String id;
