@@ -40,7 +40,7 @@
 			paginatedAnime = await response.json();
 			isRequesting = false;
 		}
-		window.scrollTo({top: 0, behavior: 'smooth'});
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
 	onMount(fetchAnime);
@@ -80,11 +80,7 @@
 				</div>
 			{/each}
 		</div>
-		<PaginationBar
-			bind:totalElements={paginatedAnime.totalElements}
-			bind:pageNumber
-			bind:pageSize={paginatedAnime.pageSize}
-		/>
+		<PaginationBar bind:totalElements={paginatedAnime.totalElements} bind:pageNumber bind:pageSize={paginatedAnime.pageSize} />
 	{:else}
 		<div class="grid gap-2 pb-8" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each Array(10) as _}

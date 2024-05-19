@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Content, Next, Previous, Root } from '$lib/components/ui/carousel';
 	import { ChevronRight } from 'lucide-svelte';
-	import {goto} from "$app/navigation";
+	import { goto } from '$app/navigation';
 
 	export let type: string = '';
 	export let showAll: boolean = true;
