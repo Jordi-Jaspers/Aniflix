@@ -37,9 +37,9 @@ java {
 dependencies {
     // Load the dependencies needed for liquibase to run (changelog parsers and JDBC drivers)
     liquibaseRuntime(group = "org.liquibase", name = "liquibase-core", version = "4.27.0")
-    liquibaseRuntime(group = "info.picocli", name = "picocli", version = "4.7.5")
+    liquibaseRuntime(group = "info.picocli", name = "picocli", version = "4.7.6")
     liquibaseRuntime(group = "org.yaml", name = "snakeyaml", version = "2.2")
-    liquibaseRuntime(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.3.3")
+    liquibaseRuntime(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
 }
 
 /**
