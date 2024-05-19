@@ -5,5 +5,6 @@ import InfoButton from './info-button.svelte';
 import LightSwitch from './light-switch.svelte';
 import Duration from './duration.svelte';
 import LoadingScreen from './loading-screen.svelte';
+import PlayButton from './play-button.svelte';
 
-export { LikeButton, LibraryButton, SpeakerButton, InfoButton, LightSwitch, Duration, LoadingScreen };
+export { LikeButton, LibraryButton, SpeakerButton, InfoButton, LightSwitch, Duration, LoadingScreen, PlayButton };

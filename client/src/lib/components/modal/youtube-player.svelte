@@ -37,10 +37,13 @@
 		playing = true;
 	}
 
+	function handlePlay() {
+		playing = true;
+		load('https://www.youtube.com/watch?v=' + anime.trailer);
+	}
+
 	onMount(() => {
 		if (anime) {
-			load('https://www.youtube.com/watch?v=' + anime.trailer);
-			load('https://www.youtube.com/watch?v=' + anime.trailer);
 			load('https://www.youtube.com/watch?v=' + anime.trailer);
 		}
 	});
@@ -64,7 +67,7 @@
 			width="100%"
 			playsinline
 			on:ready={handleReady}
-			on:play={() => (playing = true)}
+			on:play={handlePlay}
 			on:pause={() => (playing = false)}
 			on:ended={() => (playing = loop)}
 		>
