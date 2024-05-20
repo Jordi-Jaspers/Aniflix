@@ -12,7 +12,7 @@
 		<h1 class="py-1 text-lg font-bold">{type} Anime</h1>
 		<div>
 			{#if showAll}
-				<button class="hidden md:flex" on:click={() => goto('/browse/' + type.toLowerCase())}>
+				<button class="flex" on:click={() => goto('/browse/' + type.toLowerCase())}>
 					See All
 					<ChevronRight />
 				</button>

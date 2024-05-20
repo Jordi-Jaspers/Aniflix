@@ -49,7 +49,7 @@
 	</Carousel>
 
 	{#each genres as genre}
-		<Carousel {genre} type={genre}>
+		<Carousel type={genre}>
 			<AnimeCards {genre} url={SERVER_URLS.ANIME_GENRE_PATH} />
 		</Carousel>
 	{/each}

@@ -18,6 +18,10 @@
 	}
 </script>
 
+<button aria-label="rewind" class="h-full w-full" on:click={rewind}>
+	<RotateCcw class="aspect-square h-full w-auto hover:scale-125" />
+</button>
+
 <button aria-label="play" class="h-full w-full hover:scale-125" on:click={togglePlay}>
 	{#if playing}
 		<Pause class="aspect-square h-full w-auto fill-white stroke-[1px]" />
@@ -26,10 +30,6 @@
 	{/if}
 </button>
 
-<button aria-label="rewind" class="hidden h-full w-full" on:click={rewind}>
-	<RotateCcw class="aspect-square h-full w-auto stroke-[1px] hover:scale-125" />
-</button>
-
-<button aria-label="forward" class="hidden h-full w-full" on:click={forward}>
-	<RotateCw class="aspect-square h-full w-auto stroke-[1px] hover:scale-125" />
+<button aria-label="forward" class="h-full w-full" on:click={forward}>
+	<RotateCw class="aspect-square h-full w-auto hover:scale-125" />
 </button>
