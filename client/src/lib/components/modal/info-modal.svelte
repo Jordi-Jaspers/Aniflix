@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
 	import { PlayIcon, StarIcon, X } from 'lucide-svelte';
-	import type { PlayerUrl } from 'svelte-player/dist/players/types';
 	import { Button } from '$lib/components/ui/button';
-	import { LibraryButton, LikeButton, SpeakerButton } from '$lib/components/general/index.js';
+	import { LibraryButton, LikeButton, PlayButton, SpeakerButton } from '$lib/components/general/index.js';
 	import { Badge } from '$lib/components/ui/badge';
 	import { closeModal } from '$lib/api/util';
 	import { EpisodeList, RecommendationCards } from '$lib/components/browse';
@@ -12,6 +11,7 @@
 	import { goto } from '$app/navigation';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { NextAiringEpisodeTimer, YoutubePlayer } from '$lib/components/modal/index.js';
+	import Device from 'svelte-device-info';
 
 	let isPlaying: boolean;
 	let isMuted: boolean;
@@ -83,7 +83,9 @@
 					</div>
 				</div>
 				{#if isPlaying}
-					<SpeakerButton {isMuted} on:click={() => (isMuted = !isMuted)} />
+					<SpeakerButton bind:isMuted />
+				{:else if Device.isMobile || Device.isPhone}
+					<PlayButton bind:isPlaying />
 				{/if}
 			</div>
 		</div>

@@ -8,7 +8,9 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
@@ -21,6 +23,7 @@ import org.jordijaspers.aniflix.api.schedule.model.mapper.ScheduleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -59,33 +62,38 @@ public class ConsumetService {
 
     private final ScheduleMapper scheduleMapper;
 
-    @Cacheable(value = "recentEpisodes", unless = "#result.size() == 0")
+    @Cacheable(value = "recentEpisodes", key = "#perPage + #page", unless = "#result.size() == 0")
     public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
         LOGGER.info("[Consumet API] Fetching recent episodes from Anilist.");
         return consumetRepository.getRecentEpisodes(perPage, page).getResults();
     }
 
-    @Cacheable(value = "popularAnime", unless = "#result.size() == 0")
-    public List<Anime> getPopular(final int perPage, final int page) {
+    @Cacheable(value = "popularAnime", key = "#perPage + #page", unless = "#result.getTotalElements() == 0")
+    public Page<Anime> getPopular(final int perPage, final int page) {
         LOGGER.info("[Consumet API] Fetching popular anime from Anilist.");
-        return consumetRepository.getPopularAnime(perPage, page).getResults().stream()
-                .map(animeMapper::toAnime)
-                .toList();
+        final ResultPage<AnilistOverview> popularAnime = consumetRepository.getPopularAnime(perPage, page);
+        return animeMapper.toOverviewPage(popularAnime);
     }
 
-    @Cacheable(value = "trendingAnime", unless = "#result.size() == 0")
-    public List<Anime> getTrending(final int perPage, final int page) {
+    @Cacheable(value = "trendingAnime", key = "#perPage + #page", unless = "#result.getTotalElements() == 0")
+    public Page<Anime> getTrending(final int perPage, final int page) {
         LOGGER.info("[Consumet API] Fetching trending anime from Anilist.");
-        return consumetRepository.getTrendingAnime(perPage, page).getResults().stream()
-                .map(animeMapper::toAnime)
-                .toList();
+        final ResultPage<AnilistOverview> trendingAnime = consumetRepository.getTrendingAnime(perPage, page);
+        return animeMapper.toOverviewPage(trendingAnime);
+    }
+
+    @Cacheable(value = "animeByGenre", key = "#genre.getName() + #perPage + #page", unless = "#result.getTotalElements() == 0")
+    public Page<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
+        LOGGER.info("[Consumet API] Fetching anime by genre '{}' from Anilist.", genre.getName());
+        final ResultPage<AnilistOverview> animeByGenre = consumetRepository.getAnimeByGenre(genre.getName(), perPage, page);
+        return animeMapper.toOverviewPage(animeByGenre);
     }
 
     @Cacheable(value = "animeDetails", key = "#anilistId")
     public Anime getAnimeDetails(final Integer anilistId) {
         LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}'.", anilistId);
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
-                .map(animeMapper::toAnime)
+                .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
         anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
@@ -101,7 +109,7 @@ public class ConsumetService {
                 .map(AnilistSearchResult::getId)
                 .map(Integer::parseInt)
                 .map(consumetRepository::getAnimeDetails)
-                .map(animeMapper::toAnime)
+                .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
         anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
@@ -111,7 +119,7 @@ public class ConsumetService {
     public Anime getAnimeInfo(final Integer anilistId) {
         LOGGER.info("[Consumet API] Fetching anime info for Anilist ID '{}'.", anilistId);
         final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
-                .map(animeMapper::toAnime)
+                .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
         anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
         return provisionTrailerFromJikan(anime);
@@ -159,27 +167,19 @@ public class ConsumetService {
     public Anime getAnimeDetailsForProvider(final Integer anilistId, final String provider) {
         LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}' from '{}'.", anilistId, provider);
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId, provider))
-                .map(animeMapper::toAnime)
+                .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
         anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getProviderByProvider(provider)));
         return provisionDataFromJikan(anime);
     }
 
-    public List<Anime> getByGenre(final Genres genre, final int perPage, final int page) {
-        LOGGER.info("[Consumet API] Fetching anime by genre '{}' from Anilist.", genre.getName());
-        return consumetRepository.getAnimeByGenre(genre.getName(), perPage, page).getResults().stream()
-                .map(animeMapper::toAnime)
-                .toList();
-    }
-
     public List<Anime> searchAnime(final Map<String, String> filters) {
         LOGGER.info("[Consumet API] Searching anime with filters '{}'.", filters);
         return consumetRepository.searchAnime(filters).getResults().stream()
-                .map(animeMapper::toAnime)
+                .map(animeMapper::toDomainObject)
                 .toList();
     }
-
     // ======================================== PRIVATE METHODS ========================================
 
     private static Map<String, String> applyDefaultFilters(final String input, final Map<String, String> filters) {
@@ -188,7 +188,7 @@ public class ConsumetService {
         final Matcher matcher = Pattern.compile(regex).matcher(input.toUpperCase());
 
         filters.put(FORMAT_PARAM, "TV");
-        filters.put(SORT_PARAM, "[\"POPULARITY_DESC\",\"TITLE_ROMAJI_DESC\"]");
+        filters.put(SORT_PARAM, "[\"POPULARITY_DESC\",\"TITLE_ROMAIN_DESC\"]");
         if (matcher.find()) {
             filters.put(PER_PAGE_PARAM, "1");
             filters.put(PAGE_PARAM, toInteger(matcher.group(0).trim()));

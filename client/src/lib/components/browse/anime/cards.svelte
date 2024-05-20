@@ -9,7 +9,7 @@
 	export let url: string;
 	export let isLoading = true;
 
-	let collection: AnimeResponse[];
+	let collection: AnimeResponse[] = [];
 	onMount(async () => {
 		const body: AnimeRequest = {
 			page: 1,
@@ -28,7 +28,8 @@
 		});
 
 		if (response.ok) {
-			collection = await response.json();
+			let page: PageResponse<AnimeResponse> = await response.json();
+			collection = page.content;
 		}
 	});
 

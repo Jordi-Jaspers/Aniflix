@@ -6,11 +6,9 @@
 	export let totalElements: number;
 	export let pageNumber: number;
 	export let pageSize: number;
-
-	let page = pageNumber + 1;
 </script>
 
-<Pagination.Root bind:count={totalElements} bind:perPage={pageSize} bind:page let:pages let:currentPage>
+<Pagination.Root bind:count={totalElements} bind:perPage={pageSize} bind:page={pageNumber} let:pages let:currentPage>
 	<Pagination.Content>
 		<Pagination.Item>
 			<Pagination.PrevButton>

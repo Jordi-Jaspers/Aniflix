@@ -3,6 +3,7 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.jordijaspers.aniflix.common.mappers.model.PageableApiResponse;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(exclude = "status")
-public class AnilistSearchResult {
+public class AnilistSearchResult implements PageableApiResponse {
 
     @JsonProperty("id")
     private String id;

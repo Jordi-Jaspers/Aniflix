@@ -167,12 +167,13 @@ export async function isUserAuthenticated(): Promise<boolean> {
  * Function which refreshes the access token using the refresh token by sending a request to the server.
  */
 async function refreshTokens(): Promise<AuthorizeResponse | string> {
+	const request: RefreshTokenRequest = { refreshToken: get(refreshToken) };
 	const response: Response = await fetch(SERVER_URLS.REFRESH_PATH, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ refreshToken: get(refreshToken) })
+		body: JSON.stringify(request)
 	});
 
 	if (!response.ok) {

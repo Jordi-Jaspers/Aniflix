@@ -7,12 +7,15 @@
 	import { AnimeCard } from '$lib/components/browse';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 
-	let isLoading: boolean = false;
-	let isRequesting = true;
 	let paginatedAnime: PageResponse<AnimeResponse>;
+
+	let isLoading: boolean = false;
+	let isRequesting: boolean = true;
+
+	let pageNumber: number = 1;
 	let request: LibrarySearchRequest = {
 		page: 0,
-		pageSize: 20,
+		pageSize: 25,
 		query: '',
 		afterYear: 0,
 		beforeYear: 0,
@@ -35,13 +38,15 @@
 
 		if (response.ok) {
 			paginatedAnime = await response.json();
+			isRequesting = false;
 		}
-		isRequesting = false;
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
 	onMount(fetchAnime);
 
 	$: if (request) fetchAnime();
+	$: request.page = pageNumber - 1;
 	$: isLoading = isRequesting || !paginatedAnime;
 </script>
 
@@ -75,11 +80,7 @@
 				</div>
 			{/each}
 		</div>
-		<PaginationBar
-			bind:totalElements={paginatedAnime.totalElements}
-			bind:pageNumber={request.page}
-			bind:pageSize={paginatedAnime.pageSize}
-		/>
+		<PaginationBar bind:totalElements={paginatedAnime.totalElements} bind:pageNumber bind:pageSize={paginatedAnime.pageSize} />
 	{:else}
 		<div class="grid gap-2 pb-8" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each Array(10) as _}
@@ -88,6 +89,6 @@
 				</div>
 			{/each}
 		</div>
-		<PaginationBar totalElements={100} pageNumber={1} pageSize={10} />
+		<PaginationBar totalElements={request.pageSize} pageNumber={request.page} pageSize={request.pageSize} />
 	{/if}
 </div>

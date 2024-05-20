@@ -35,16 +35,22 @@
 	<div class="absolute left-0 right-0 !-z-10 h-[56rem] w-full bg-gradient-to-b from-transparent from-50% to-background" />
 
 	<Banner />
-	<Carousel title="Recent Episodes">
+
+	<Carousel type="Recent" showAll={false}>
 		<EpisodeCards bind:isLoading={areEpisodesLoading} />
 	</Carousel>
-	<Carousel title="Trending Anime">
+
+	<Carousel type="Trending">
 		<AnimeCards url={SERVER_URLS.ANIME_TRENDING_PATH} />
 	</Carousel>
-	<Carousel title="Popular Anime">
+
+	<Carousel type="Popular">
 		<AnimeCards url={SERVER_URLS.ANIME_POPULAR_PATH} />
 	</Carousel>
-	<Carousel genre={genres[0]} title="Anime">
-		<AnimeCards genre={genres[0]} url={SERVER_URLS.ANIME_GENRE_PATH} />
-	</Carousel>
+
+	{#each genres as genre}
+		<Carousel {genre} type={genre}>
+			<AnimeCards {genre} url={SERVER_URLS.ANIME_GENRE_PATH} />
+		</Carousel>
+	{/each}
 {/if}
