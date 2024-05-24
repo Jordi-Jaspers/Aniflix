@@ -3,6 +3,7 @@
     import type {PlayerUrl} from 'svelte-player/dist/players/types';
     import {onMount} from 'svelte';
     import {isIOS} from "$lib/api/util";
+    import Device from "svelte-device-info";
 
     export let anime: AnimeResponse;
     export let muted: boolean;
@@ -54,7 +55,7 @@
     $: if (currentUrl) load(currentUrl);
 </script>
 
-{#if import.meta.env.VITE_ENV !== 'development' || !isIOSDevice}
+{#if import.meta.env.VITE_ENV !== 'development' && !isIOSDevice && !Device.isPhone}
     <div class="brightness-85 h-full {playing ? '' : 'hidden'}">
         <SveltePlayer
                 url={currentUrl}
