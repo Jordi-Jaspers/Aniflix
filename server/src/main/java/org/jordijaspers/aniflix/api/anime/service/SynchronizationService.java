@@ -39,8 +39,7 @@ import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_F
  */
 @Service
 @RequiredArgsConstructor
-public class
-SynchronizationService {
+public class SynchronizationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SynchronizationService.class);
 
@@ -74,8 +73,14 @@ SynchronizationService {
                     newsPost.setIntro(anilistPost.getIntro());
                     newsPost.setDescription(anilistPost.getDescription());
                     newsPost.setThumbnail(anilistPost.getThumbnail());
-                    newsPost.setTopic(NewsGenre.ofName(anilistFeed.getTopics().get(0)));
                     newsPost.setUrl(anilistPost.getUrl());
+
+                    final NewsGenre topic = anilistFeed.getTopics().stream()
+                            .map(NewsGenre::ofName)
+                            .findFirst()
+                            .orElse(NewsGenre.GENERAL);
+                    newsPost.setTopic(topic);
+
                     return newsPost;
                 })
                 .toList();
