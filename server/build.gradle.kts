@@ -125,7 +125,7 @@ dependencies {
 
     // Hibernate's core ORM functionality
     implementation(group = "org.hibernate", name = "hibernate-validator", version = "8.0.1.Final")
-    implementation(group = "org.hibernate", name = "hibernate-core", version = "6.5.0.CR1")
+    implementation(group = "org.hibernate", name = "hibernate-core", version = "7.0.0.Alpha2")
 
     // Java utility classes for the classes that are in java.lang's hierarchy
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
