@@ -46,7 +46,7 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.5"
+    id("org.springframework.boot") version "3.3.0"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.5"
@@ -114,7 +114,7 @@ dependencies {
     implementation(group = "org.passay", name = "passay", version = "1.6.4")
 
     // Used to validate entities and beans
-    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0-M2")
+    implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0")
     implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M2")
 
     // Mail service provider that supports thymeleaf templating.
@@ -149,7 +149,7 @@ dependencies {
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.4")
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.3.0")
 }
 
 // ============== PLUGIN CONFIGURATION ================
@@ -212,7 +212,7 @@ tasks.withType<Test> {
 }
 
 tasks.named<DefaultTask>("build") {
-    finalizedBy("cyclonedxBom", "dependencyUpdates")
+    finalizedBy("dependencyUpdates")
 }
 
 tasks.withType<CycloneDxTask> {
