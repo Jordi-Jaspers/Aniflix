@@ -212,7 +212,7 @@ tasks.withType<Test> {
 }
 
 tasks.named<DefaultTask>("build") {
-    finalizedBy("cyclonedxBom", "dependencyUpdates")
+    finalizedBy("dependencyUpdates")
 }
 
 tasks.withType<CycloneDxTask> {
