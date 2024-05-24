@@ -1,0 +1,55 @@
+name: Aniflix Pull Request Pipeline
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build-client:
+    name: Build Aniflix Client
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          version: latest
+
+      - name: Install Bun version manager
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: build project
+        run: bun install --frozen-lockfile && bun build
+
+  build-server:
+    name: Build Aniflix Server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+    env:
+      SEGMENT_DOWNLOAD_TIMEOUT_MINS: '5'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          version: latest
+
+      - name: Set up JDK 17 Temurin
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+          cache-dependency-path: |
+            server/*.gradle*
+            server/**/gradle-wrapper.properties
+
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-daemon --stacktrace
