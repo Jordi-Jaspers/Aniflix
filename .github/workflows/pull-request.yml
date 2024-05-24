@@ -24,7 +24,7 @@ jobs:
           bun-version: latest
 
       - name: build project
-        run: bun install --frozen-lockfile && bun build
+        run: bun install --frozen-lockfile && bun run build
 
   build-server:
     name: Build Aniflix Server
