@@ -1,6 +1,6 @@
-package org.jordijaspers.aniflix.api.authentication.repository;
+package org.jordijaspers.aniflix.api.user.repository;
 
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;

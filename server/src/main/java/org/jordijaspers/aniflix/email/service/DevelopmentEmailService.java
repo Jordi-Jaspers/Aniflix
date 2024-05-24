@@ -1,7 +1,7 @@
 package org.jordijaspers.aniflix.email.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.model.TokenType;
 import org.jordijaspers.aniflix.api.token.service.TokenService;

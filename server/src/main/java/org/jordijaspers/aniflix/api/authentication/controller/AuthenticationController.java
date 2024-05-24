@@ -1,8 +1,8 @@
 package org.jordijaspers.aniflix.api.authentication.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.authentication.model.User;
-import org.jordijaspers.aniflix.api.authentication.model.mapper.UserMapper;
+import org.jordijaspers.aniflix.api.user.model.User;
+import org.jordijaspers.aniflix.api.user.mapper.UserMapper;
 import org.jordijaspers.aniflix.api.authentication.model.request.LoginRequest;
 import org.jordijaspers.aniflix.api.authentication.model.request.RefreshTokenRequest;
 import org.jordijaspers.aniflix.api.authentication.model.request.RegisterUserRequest;

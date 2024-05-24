@@ -2,7 +2,7 @@ package org.jordijaspers.aniflix.email.service;
 
 import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.exception.HawaiiException;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.email.model.MailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

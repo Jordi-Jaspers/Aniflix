@@ -1,6 +1,6 @@
 package org.jordijaspers.aniflix.email.service;
 
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.email.model.MailMessage;
 
 /**

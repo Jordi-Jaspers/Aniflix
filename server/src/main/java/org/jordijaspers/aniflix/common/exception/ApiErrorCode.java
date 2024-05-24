@@ -76,7 +76,10 @@ public enum ApiErrorCode implements ApiError {
             "Could not find the streaming links for the requested episode."),
     SYNCHRONIZATION_ERROR(
             "ANI-0023",
-            "Something went wrong while synchronizing the data to the database.");
+            "Something went wrong while synchronizing the data to the database."),
+    EMAIL_ALREADY_EXISTS_ERROR(
+            "ANI-0024",
+            "The provided email address is already in use.");
 
     /**
      * The error code.

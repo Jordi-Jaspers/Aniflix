@@ -5,7 +5,7 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
 import org.jordijaspers.aniflix.api.interaction.model.request.LibrarySearchRequest;

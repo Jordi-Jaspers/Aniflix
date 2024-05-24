@@ -1,10 +1,12 @@
-package org.jordijaspers.aniflix.api.authentication.service;
+package org.jordijaspers.aniflix.api.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.authentication.model.User;
 import org.jordijaspers.aniflix.api.authentication.repository.RoleRepository;
-import org.jordijaspers.aniflix.api.authentication.repository.UserRepository;
+import org.jordijaspers.aniflix.api.user.model.User;
+import org.jordijaspers.aniflix.api.user.model.request.UpdateUserDetailsRequest;
+import org.jordijaspers.aniflix.api.user.repository.UserRepository;
 import org.jordijaspers.aniflix.common.exception.AuthorizationException;
+import org.jordijaspers.aniflix.common.exception.EmailAlreadyExistsException;
 import org.jordijaspers.aniflix.common.exception.UserAlreadyExistsException;
 import org.jordijaspers.aniflix.email.service.EmailService;
 import org.slf4j.Logger;
@@ -54,8 +56,32 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
     }
 
+    public User updateUserDetails(final User user, final UpdateUserDetailsRequest request) {
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        return updateUserDetails(user);
+    }
+
     public User updateUserDetails(final User user) {
         return userRepository.save(user);
+    }
+
+    public User UpdateEmail(final User user, final String email) {
+        LOGGER.info("Attempting to update email for '{}'", user.getEmail());
+        if (isEmailInAlreadyUse(email)) {
+            throw new EmailAlreadyExistsException();
+        }
+
+        user.setEmail(email);
+        user.setValidated(false);
+
+        LOGGER.info("Email has been updated to '{}', sending email to validate account.", email);
+        emailService.sendUserValidationEmail(user);
+        return userRepository.save(user);
+    }
+
+    public boolean isEmailInAlreadyUse(final String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 
     public void resendValidationEmail(final String email) {

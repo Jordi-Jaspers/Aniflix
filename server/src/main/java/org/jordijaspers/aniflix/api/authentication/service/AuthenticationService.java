@@ -1,9 +1,10 @@
 package org.jordijaspers.aniflix.api.authentication.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.service.TokenService;
+import org.jordijaspers.aniflix.api.user.service.UserService;
 import org.jordijaspers.aniflix.common.exception.AuthorizationException;
 import org.jordijaspers.aniflix.common.exception.InvalidJwtException;
 import org.slf4j.Logger;

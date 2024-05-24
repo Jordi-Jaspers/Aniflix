@@ -2,7 +2,7 @@ package org.jordijaspers.aniflix.api.interaction.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.service.AnimeService;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
 import org.slf4j.Logger;

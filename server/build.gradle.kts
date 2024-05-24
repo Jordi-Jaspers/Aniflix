@@ -133,6 +133,9 @@ dependencies {
     // Contain types that extend and augment the Java Collections Framework.
     implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M1")
 
+    // Provide a datasource proxy that can inject your own logic into all queries.
+    implementation(group = "net.ttddyy", name = "datasource-proxy", version = "1.10")
+
     // HTTPClient provides an efficient, up-to-date, and feature-rich package implementing the client side of the most recent HTTP standards and recommendations.
     implementation(group = "org.apache.httpcomponents", name = "httpclient", version = "4.5.14")
 

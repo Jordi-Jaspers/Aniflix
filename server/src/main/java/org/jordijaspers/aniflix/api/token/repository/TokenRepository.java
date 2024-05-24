@@ -1,6 +1,6 @@
 package org.jordijaspers.aniflix.api.token.repository;
 
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.model.TokenType;
 import org.springframework.data.jpa.repository.JpaRepository;
