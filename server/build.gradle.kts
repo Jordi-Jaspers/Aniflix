@@ -46,7 +46,7 @@ plugins {
     id("idea")
 
     // Spring boot
-    id("org.springframework.boot") version "3.2.5"
+    id("org.springframework.boot") version "3.3.0"
 
     // A Gradle plugin that provides Maven-like dependency management functionality, which is used to set the versions of the dependencies.
     id("io.spring.dependency-management") version "1.1.5"
@@ -149,7 +149,7 @@ dependencies {
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.2.4")
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.3.0")
 }
 
 // ============== PLUGIN CONFIGURATION ================
