@@ -22,4 +22,5 @@ public enum TokenType {
     public boolean isAccessToken() {
         return this == ACCESS_TOKEN;
     }
+
 }

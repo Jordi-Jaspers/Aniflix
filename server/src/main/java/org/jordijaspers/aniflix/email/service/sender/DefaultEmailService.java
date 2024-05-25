@@ -1,9 +1,13 @@
-package org.jordijaspers.aniflix.email.service;
+package org.jordijaspers.aniflix.email.service.sender;
 
 import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.exception.HawaiiException;
+import org.jordijaspers.aniflix.api.token.model.Token;
+import org.jordijaspers.aniflix.api.token.model.TokenType;
+import org.jordijaspers.aniflix.api.token.service.TokenService;
 import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.email.model.MailMessage;
+import org.jordijaspers.aniflix.email.service.message.MailMessageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -12,6 +16,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * Service (infrastructure) to send emails with.
@@ -23,11 +29,28 @@ public class DefaultEmailService implements EmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
 
+    private final TokenService tokenService;
+
     private final JavaMailSender mailSender;
+
+    private final MailMessageFactory mailMessageFactory;
 
     @Override
     public void sendUserValidationEmail(final User recipient) {
-        LOGGER.error("This feature is not implemented yet.");
+        LOGGER.info("Sending user validation email to '{}'.", recipient.getEmail());
+        final Token token = tokenService.generateToken(recipient, TokenType.USER_VALIDATION_TOKEN);
+        final MailMessage message = mailMessageFactory.createUserValidationMessage(Map.of("token", token.getValue()));
+
+        sendEmail(recipient, message);
+    }
+
+    @Override
+    public void sendPasswordResetEmail(final User recipient) {
+        LOGGER.info("Sending password reset email to '{}'.", recipient.getEmail());
+        final Token resetToken = tokenService.generateToken(recipient, TokenType.RESET_PASSWORD_TOKEN);
+        final MailMessage message = mailMessageFactory.createPasswordResetMessage(Map.of("token", resetToken.getValue()));
+
+        sendEmail(recipient, message);
     }
 
     @Override

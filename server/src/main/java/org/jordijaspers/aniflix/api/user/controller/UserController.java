@@ -57,7 +57,7 @@ public class UserController {
     public ResponseEntity<UserDetailsResponse> updateUserEmail(@RequestBody final UpdateEmailRequest request,
                                                                @AuthenticationPrincipal final UserTokenPrincipal principal) {
         emailValidator.validateAndThrow(request);
-        final User user = userService.UpdateEmail(principal.getUser(), request.getEmail());
+        final User user = userService.updateEmail(principal.getUser(), request.getEmail());
         return ResponseEntity.status(OK).body(userMapper.toUserDetailsResponse(user));
     }
 

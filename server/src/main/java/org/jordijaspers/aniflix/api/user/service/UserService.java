@@ -8,7 +8,7 @@ import org.jordijaspers.aniflix.api.user.repository.UserRepository;
 import org.jordijaspers.aniflix.common.exception.AuthorizationException;
 import org.jordijaspers.aniflix.common.exception.EmailAlreadyExistsException;
 import org.jordijaspers.aniflix.common.exception.UserAlreadyExistsException;
-import org.jordijaspers.aniflix.email.service.EmailService;
+import org.jordijaspers.aniflix.email.service.sender.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -66,7 +66,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User UpdateEmail(final User user, final String email) {
+    public User updateEmail(final User user, final String email) {
         LOGGER.info("Attempting to update email for '{}'", user.getEmail());
         if (isEmailInAlreadyUse(email)) {
             throw new EmailAlreadyExistsException();

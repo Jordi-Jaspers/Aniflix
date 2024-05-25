@@ -1,7 +1,3 @@
-/*
- * Copyright (C) ilionx Group BV 2021
- */
-
 package org.jordijaspers.aniflix.api.consumed.consumet.client;
 
 import lombok.RequiredArgsConstructor;

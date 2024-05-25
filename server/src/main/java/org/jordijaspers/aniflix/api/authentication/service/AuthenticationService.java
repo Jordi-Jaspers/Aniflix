@@ -62,7 +62,7 @@ public class AuthenticationService {
     }
 
     public User refresh(final String refreshToken) {
-        final Token token = tokenService.findByValue(refreshToken);
+        final Token token = tokenService.findAuthorizationTokenByValue(refreshToken);
         if (nonNull(token)) {
             final User user = token.getUser();
             LOGGER.info("Refreshing tokens for user '{}'", user.getUsername());

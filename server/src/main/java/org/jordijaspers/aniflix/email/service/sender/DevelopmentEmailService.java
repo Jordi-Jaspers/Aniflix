@@ -1,4 +1,4 @@
-package org.jordijaspers.aniflix.email.service;
+package org.jordijaspers.aniflix.email.service.sender;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.user.model.User;
@@ -23,19 +23,29 @@ public class DevelopmentEmailService implements EmailService {
 
     private final TokenService tokenService;
 
-    @Override
-    public void sendEmail(final User recipient, final MailMessage mailMessage) {
-        LOGGER.info("Sending email to user '{}' with content: \n{}", recipient.getEmail(), mailMessage);
-    }
-
     /**
-     * Send an email as defined in {@code mailMessage}.
-     * <p>
-     * See {@link MailMessage}.
+     * {@inheritDoc}
      */
     @Override
     public void sendUserValidationEmail(final User recipient) {
         final Token token = tokenService.generateToken(recipient, TokenType.USER_VALIDATION_TOKEN);
         LOGGER.info("Sending validation code '{}' to user with email address '{}'", token.getValue(), recipient.getEmail());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPasswordResetEmail(final User recipient) {
+        final Token resetToken = tokenService.generateToken(recipient, TokenType.RESET_PASSWORD_TOKEN);
+        LOGGER.info("Sending password reset token '{}' to user with email address '{}'", resetToken.getValue(), recipient.getEmail());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendEmail(final User recipient, final MailMessage mailMessage) {
+        LOGGER.info("Sending email to user '{}' with content: \n{}", recipient.getEmail(), mailMessage);
     }
 }

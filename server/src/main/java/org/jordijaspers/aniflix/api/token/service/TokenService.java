@@ -2,10 +2,10 @@ package org.jordijaspers.aniflix.api.token.service;
 
 import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.repository.DataNotFoundException;
-import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.model.TokenType;
 import org.jordijaspers.aniflix.api.token.repository.TokenRepository;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static java.util.Objects.nonNull;
-import static org.jordijaspers.aniflix.api.token.model.TokenType.ACCESS_TOKEN;
-import static org.jordijaspers.aniflix.api.token.model.TokenType.REFRESH_TOKEN;
+import static org.jordijaspers.aniflix.api.token.model.TokenType.*;
 import static org.jordijaspers.aniflix.common.constant.Constants.Time.MILLIS_PER_SECOND;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.TOKEN_NOT_FOUND_ERROR;
 
@@ -107,17 +106,27 @@ public class TokenService {
     public Token findValidationTokenByValue(final String token) {
         LOGGER.info("Searching validation token with value '{}'", token);
         return tokenRepository.findByValue(token)
-                .filter(entry -> entry.getType().equals(TokenType.USER_VALIDATION_TOKEN))
+                .filter(entry -> entry.getType().equals(USER_VALIDATION_TOKEN))
                 .orElseThrow(() -> new DataNotFoundException(TOKEN_NOT_FOUND_ERROR));
     }
 
     /**
      * Returns token details for the given token value if it exists.
      */
-    public Token findByValue(final String token) {
+    public Token findAuthorizationTokenByValue(final String token) {
         LOGGER.info("Searching jwt token with value '{}'", token);
         return tokenRepository.findByValue(token)
                 .filter(entry -> entry.getType().isAccessToken() || entry.getType().isRefreshToken())
                 .orElse(null);
+    }
+
+    /**
+     * Find a password reset token by its value.
+     */
+    public Token findPasswordResetTokenByValue(final String token) {
+        LOGGER.info("Searching token with value '{}'", token);
+        return tokenRepository.findByValue(token)
+                .filter(entry -> entry.getType().equals(ACCESS_TOKEN) || entry.getType().equals(RESET_PASSWORD_TOKEN))
+                .orElseThrow(() -> new DataNotFoundException(TOKEN_NOT_FOUND_ERROR));
     }
 }

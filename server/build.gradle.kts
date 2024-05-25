@@ -98,6 +98,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-security")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-validation")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.

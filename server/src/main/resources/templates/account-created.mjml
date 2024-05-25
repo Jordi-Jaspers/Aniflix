@@ -1,0 +1,44 @@
+<!--
+  Try to edit it here: https://mjml.io/try-it-live/k9g21Lgza5
+-->
+<mjml>
+  <mj-head>
+    <mj-title>Your account has been created</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section background-color="#f5f5f5">
+      <mj-column>
+        <mj-text font-size="20px" color="#E60000">Aniflix.stream</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f5f5f5">
+      <mj-column>
+        <mj-text align="center" color="#000" font-size="32px">
+          Account Created
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f5f5f5">
+      <mj-column padding="12px" width="500px" background-color="#fff" border-radius="8px">
+        <mj-text align="center" color="#000" font-weight="300" font-size="14px">
+          You have created an account on Aniflix. The only thing left before you can enjoy your anime to the fullest is to verify your account. Click the button to proceed.
+        </mj-text>
+
+        <mj-button padding-top="16px" padding-bottom="16px" background-color="#E60000">
+          <a th:href="${applicationUrl} + '/validate/' + ${token}">Click Here</a>
+        </mj-button>
+
+        <mj-text color="#000" font-size="12px" padding-top="32px" padding-bottom="16px">
+          The Aniflix Team
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f5f5f5">
+      <mj-column width="600px">
+        <mj-text font-size="10px" align="center">
+          Copyright © Aniflix 2024, All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
