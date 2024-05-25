@@ -41,6 +41,10 @@ public final class Paths {
 
     public static final String PUBLIC_REQUEST_PASSWORD_RESET_PATH = PUBLIC_RESET_PASSWORD_PATH + "/request";
 
+    /* ------------------------------- PASSWORD MANAGEMENT ENDPOINTS ------------------------------- */
+
+    public static final String UPDATE_PASSWORD_PATH = BASE_PATH + "/password";
+
     /* ------------------------------- AUTH ENDPOINTS ------------------------------- */
 
     public static final String REGISTER_PATH = AUTH_PATH + "/register";
@@ -61,11 +65,9 @@ public final class Paths {
 
     public static final String USER_DETAILS = USER_PATH + "/details";
 
-    public static final String USER_UPDATE_EMAIL_PATH = USER_PATH + "/email";
+    public static final String USER_UPDATE_EMAIL_PATH = USER_DETAILS + "/email";
 
-    /* ------------------------------- PASSWORD MANAGEMENT ENDPOINTS ------------------------------- */
-
-    public static final String CHANGE_PASSWORD = USER_PATH + "/password";
+    public static final String VALIDATE_EMAIL_PATH = USER_UPDATE_EMAIL_PATH + "/validate";
 
     /* ------------------------------- ANIME ENDPOINTS ------------------------------- */
 

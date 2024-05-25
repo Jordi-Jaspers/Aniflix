@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.jordijaspers.aniflix.api.Paths.USER_DETAILS;
-import static org.jordijaspers.aniflix.api.Paths.USER_UPDATE_EMAIL_PATH;
+import static org.jordijaspers.aniflix.api.Paths.*;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -64,8 +63,8 @@ public class UserController {
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = USER_UPDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> updateUserEmail(@RequestBody final UpdateEmailRequest request) {
+    @GetMapping(path = VALIDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> validateEmail(@RequestBody final UpdateEmailRequest request) {
         return ResponseEntity.status(OK).body(userService.isEmailInAlreadyUse(request.getEmail()));
     }
 }
