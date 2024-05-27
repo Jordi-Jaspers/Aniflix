@@ -1,6 +1,6 @@
 package org.jordijaspers.aniflix.common.util;
 
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.common.exception.AuthorizationException;
 import org.jordijaspers.aniflix.security.principal.UserTokenPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;

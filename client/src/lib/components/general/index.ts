@@ -6,5 +6,6 @@ import LightSwitch from './light-switch.svelte';
 import Duration from './duration.svelte';
 import LoadingScreen from './loading-screen.svelte';
 import PlayButton from './play-button.svelte';
+import PasswordMeter from './password-meter.svelte';
 
-export { LikeButton, LibraryButton, SpeakerButton, InfoButton, LightSwitch, Duration, LoadingScreen, PlayButton };
+export { LikeButton, LibraryButton, SpeakerButton, InfoButton, LightSwitch, Duration, LoadingScreen, PlayButton, PasswordMeter };

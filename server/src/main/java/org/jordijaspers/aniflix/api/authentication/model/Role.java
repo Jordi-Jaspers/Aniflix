@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serial;

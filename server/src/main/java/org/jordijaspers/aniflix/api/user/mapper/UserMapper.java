@@ -1,7 +1,7 @@
-package org.jordijaspers.aniflix.api.authentication.model.mapper;
+package org.jordijaspers.aniflix.api.user.mapper;
 
 import org.jordijaspers.aniflix.api.authentication.model.Role;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.authentication.model.request.RegisterUserRequest;
 import org.jordijaspers.aniflix.api.authentication.model.response.RegisterResponse;
 import org.jordijaspers.aniflix.api.authentication.model.response.UserDetailsResponse;

@@ -1,4 +1,4 @@
-package org.jordijaspers.aniflix.api.authentication.model;
+package org.jordijaspers.aniflix.api.user.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NaturalId;
+import org.jordijaspers.aniflix.api.authentication.model.Role;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

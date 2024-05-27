@@ -2,6 +2,7 @@
 	import { Content, Next, Previous, Root } from '$lib/components/ui/carousel';
 	import { ChevronRight } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
+	import { CLIENT_URLS } from '$lib/api/paths';
 
 	export let type: string = '';
 	export let showAll: boolean = true;
@@ -12,7 +13,7 @@
 		<h1 class="py-1 text-lg font-bold">{type} Anime</h1>
 		<div>
 			{#if showAll}
-				<button class="flex" on:click={() => goto('/browse/' + type.toLowerCase())}>
+				<button class="flex" on:click={() => goto(CLIENT_URLS.BROWSE_URL + '/' + type.toLowerCase())}>
 					See All
 					<ChevronRight />
 				</button>

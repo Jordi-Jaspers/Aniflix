@@ -98,10 +98,13 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-security")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-validation")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.
     implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.5.0")
+
+    implementation(group = "com.github.gavlyukovskiy", name = "datasource-proxy-spring-boot-starter", version = "1.9.1")
 
     // Provides the core of hawaii framework such as the response entity exception handling.
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-async", version = hawaiiVersion)
@@ -132,6 +135,9 @@ dependencies {
 
     // Contain types that extend and augment the Java Collections Framework.
     implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M1")
+
+    // Provide a datasource proxy that can inject your own logic into all queries.
+    implementation(group = "net.ttddyy", name = "datasource-proxy", version = "1.10")
 
     // HTTPClient provides an efficient, up-to-date, and feature-rich package implementing the client side of the most recent HTTP standards and recommendations.
     implementation(group = "org.apache.httpcomponents", name = "httpclient", version = "4.5.14")

@@ -5,7 +5,7 @@ import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.anime.model.request.AnimeRequest;
 import org.jordijaspers.aniflix.api.anime.model.request.GenreRequest;
-import org.jordijaspers.aniflix.api.anime.model.request.PageRequest;
+import org.jordijaspers.aniflix.api.anime.model.request.PageableRequest;
 import org.jordijaspers.aniflix.api.anime.model.response.AnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.DetailedAnimeResponse;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
@@ -78,7 +78,7 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_RECENT, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<EpisodeResponse>> getRecentAnime(@RequestBody final PageRequest request) {
+    public ResponseEntity<List<EpisodeResponse>> getRecentAnime(@RequestBody final PageableRequest request) {
         final List<AnilistRecentEpisode> recentEpisodes = animeService.getAnimeOfRecentEpisodes(request.getPerPage(), request.getPage());
         return ResponseEntity.status(OK).body(animeMapper.toRecentEpisodesResponse(recentEpisodes));
     }
@@ -86,7 +86,7 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_POPULAR, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PageResource<AnimeResponse>> getPopularAnime(@RequestBody final PageRequest request) {
+    public ResponseEntity<PageResource<AnimeResponse>> getPopularAnime(@RequestBody final PageableRequest request) {
         final Page<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
         return ResponseEntity.status(OK).body(animeMapper.toPageResource(popularAnime));
     }
@@ -94,7 +94,7 @@ public class AnimeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = ANIME_TRENDING, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PageResource<AnimeResponse>> getTrendingAnime(@RequestBody final PageRequest request) {
+    public ResponseEntity<PageResource<AnimeResponse>> getTrendingAnime(@RequestBody final PageableRequest request) {
         final Page<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
         return ResponseEntity.status(OK).body(animeMapper.toPageResource(trendingAnime));
     }

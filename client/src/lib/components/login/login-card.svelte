@@ -46,7 +46,10 @@
 				<Input type="email" placeholder="johndoe@example.com" autocomplete="username" required bind:value={formData.email} />
 			</div>
 			<div class="grid gap-2">
-				<Label>Password</Label>
+				<div class="flex flex-row items-center justify-between">
+					<Label>Password</Label>
+					<a href={CLIENT_URLS.FORGOT_PASSWORD_URL} class="text-sm text-blue-500 hover:underline">Forgot password?</a>
+				</div>
 				<Input type="password" placeholder="Password" autocomplete="current-password" required bind:value={formData.password} />
 			</div>
 

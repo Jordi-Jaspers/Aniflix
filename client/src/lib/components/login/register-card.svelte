@@ -6,6 +6,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { ShieldAlert, ShieldCheck } from 'lucide-svelte';
 	import { register } from '$lib/api/client';
+	import { PasswordMeter } from '$lib/components/general';
 
 	let formData: RegisterRequest = {
 		email: '',
@@ -54,12 +55,21 @@
 			</div>
 			<div class="grid gap-2">
 				<Label>Password</Label>
-				<Input id="password" type="password" autocomplete="new-password" required bind:value={formData.password} />
+				<Input id="password" type="password" autocomplete="new-password" placeholder="*****" required bind:value={formData.password} />
 			</div>
 			<div class="grid gap-2">
 				<Label>Confirm Password</Label>
-				<Input id="passwordConfirmation" type="password" autocomplete="new-password" required bind:value={formData.passwordConfirmation} />
+				<Input
+					id="passwordConfirmation"
+					type="password"
+					autocomplete="new-password"
+					placeholder="*****"
+					required
+					bind:value={formData.passwordConfirmation}
+				/>
 			</div>
+
+			<PasswordMeter bind:password={formData.password} />
 
 			{#if errorMessage && registerResponse === undefined}
 				<div class="mx-1 flex flex-row content-center justify-center space-x-2 text-sm text-red-500">
@@ -80,7 +90,7 @@
 				</div>
 			{/if}
 
-			<div class="relative">
+			<div class="relative my-2">
 				<div class="absolute inset-0 flex items-center">
 					<span class="w-full border-t" />
 				</div>

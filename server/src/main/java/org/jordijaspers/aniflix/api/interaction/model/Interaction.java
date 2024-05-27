@@ -16,7 +16,7 @@ import lombok.ToString;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 
 import java.io.Serial;
 import java.io.Serializable;

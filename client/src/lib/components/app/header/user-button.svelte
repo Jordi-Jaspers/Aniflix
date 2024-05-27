@@ -1,28 +1,14 @@
 <script lang="ts">
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Bug, ChevronRight, CircleUserRound, Coffee, Compass, Library, LogOut, Menu, Newspaper, User } from 'lucide-svelte';
 	import { curl, logout } from '$lib/api/client';
 	import { onMount } from 'svelte';
-	import { SERVER_URLS } from '$lib/api/paths';
+	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
 	import { Button } from '$lib/components/ui/button';
 	import { goto } from '$app/navigation';
-
-	let user: UserDetailsResponse;
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.USER_DETAILS_PATH, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-
-		if (response.ok) {
-			user = await response.json();
-		}
-	});
+	import { useUserDetails } from '$lib/components/store/store';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 
 	let isOpen: boolean = false;
-
 	function handleClick() {
 		isOpen = !isOpen;
 	}
@@ -39,6 +25,27 @@
 			return 'Good evening, ' + username;
 		}
 	}
+
+	let user: UserDetailsResponse = {} as UserDetailsResponse;
+	async function getUserDetails() {
+		const response: Response = await curl(SERVER_URLS.USER_DETAILS_PATH, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (response.ok) {
+			user = await response.json();
+			$useUserDetails = user;
+		}
+	}
+
+	onMount(async () => {
+		await getUserDetails();
+	});
+
+	$: $useUserDetails = user;
 </script>
 
 {#if user}
@@ -62,7 +69,7 @@
 				<DropdownMenu.Item
 					data-sveltekit-preload-data="hover"
 					on:click={() => {
-						goto('/browse');
+						goto(CLIENT_URLS.BROWSE_URL);
 					}}
 				>
 					<Compass class="mr-2 h-4 w-4" />
@@ -71,7 +78,7 @@
 				<DropdownMenu.Item
 					data-sveltekit-preload-data="hover"
 					on:click={() => {
-						goto('/library');
+						goto(CLIENT_URLS.LIBRARY_URL);
 					}}
 				>
 					<Library class="mr-2 h-4 w-4" />
@@ -80,7 +87,7 @@
 				<DropdownMenu.Item
 					data-sveltekit-preload-data="hover"
 					on:click={() => {
-						goto('/news');
+						goto(CLIENT_URLS.NEWS_URL);
 					}}
 				>
 					<Newspaper class="mr-2 h-4 w-4" />
@@ -89,7 +96,12 @@
 			</DropdownMenu.Group>
 			<DropdownMenu.Separator />
 			<DropdownMenu.Group>
-				<DropdownMenu.Item>
+				<DropdownMenu.Item
+					data-sveltekit-preload-data="hover"
+					on:click={() => {
+						goto(CLIENT_URLS.ACCOUNT_URL);
+					}}
+				>
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</DropdownMenu.Item>

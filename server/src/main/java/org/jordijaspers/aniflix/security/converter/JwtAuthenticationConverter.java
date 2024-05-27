@@ -1,8 +1,8 @@
 package org.jordijaspers.aniflix.security.converter;
 
 import lombok.Data;
-import org.jordijaspers.aniflix.api.authentication.model.User;
-import org.jordijaspers.aniflix.api.authentication.service.UserService;
+import org.jordijaspers.aniflix.api.user.model.User;
+import org.jordijaspers.aniflix.api.user.service.UserService;
 import org.jordijaspers.aniflix.security.principal.JwtUserPrincipalAuthenticationToken;
 import org.jordijaspers.aniflix.security.principal.UserTokenPrincipal;
 import org.springframework.core.convert.converter.Converter;

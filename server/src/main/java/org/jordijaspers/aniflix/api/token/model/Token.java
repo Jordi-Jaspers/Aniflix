@@ -15,7 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 
 import java.io.Serial;
 import java.io.Serializable;

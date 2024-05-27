@@ -1,6 +1,6 @@
 package org.jordijaspers.aniflix.api.token.repository;
 
-import org.jordijaspers.aniflix.api.authentication.model.User;
+import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.jordijaspers.aniflix.api.token.model.TokenType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +30,6 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
     void deleteExpiredTokens();
 
     @Transactional
-    @Query("SELECT t FROM Token t LEFT JOIN FETCH t.user u WHERE t.expiresAt > CURRENT_TIMESTAMP AND t.value = :token")
+    @Query("FROM Token t LEFT JOIN FETCH t.user u WHERE t.expiresAt > CURRENT_TIMESTAMP AND t.value = :token")
     Optional<Token> findByValue(String token);
 }
