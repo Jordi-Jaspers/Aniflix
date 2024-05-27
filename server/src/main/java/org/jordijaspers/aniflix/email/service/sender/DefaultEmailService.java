@@ -18,6 +18,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Service (infrastructure) to send emails with.
@@ -38,18 +39,22 @@ public class DefaultEmailService implements EmailService {
     @Override
     public void sendUserValidationEmail(final User recipient) {
         LOGGER.info("Sending user validation email to '{}'.", recipient.getEmail());
-        final Token token = tokenService.generateToken(recipient, TokenType.USER_VALIDATION_TOKEN);
-        final MailMessage message = mailMessageFactory.createUserValidationMessage(Map.of("token", token.getValue()));
+        final Map<String, Object> variables = new ConcurrentHashMap<>();
 
+        final Token token = tokenService.generateToken(recipient, TokenType.USER_VALIDATION_TOKEN);
+        variables.put("token", token.getValue());
+        final MailMessage message = mailMessageFactory.createUserValidationMessage(variables);
         sendEmail(recipient, message);
     }
 
     @Override
     public void sendPasswordResetEmail(final User recipient) {
         LOGGER.info("Sending password reset email to '{}'.", recipient.getEmail());
-        final Token resetToken = tokenService.generateToken(recipient, TokenType.RESET_PASSWORD_TOKEN);
-        final MailMessage message = mailMessageFactory.createPasswordResetMessage(Map.of("token", resetToken.getValue()));
+        final Map<String, Object> variables = new ConcurrentHashMap<>();
 
+        final Token resetToken = tokenService.generateToken(recipient, TokenType.RESET_PASSWORD_TOKEN);
+        variables.put("token", resetToken.getValue());
+        final MailMessage message = mailMessageFactory.createPasswordResetMessage(variables);
         sendEmail(recipient, message);
     }
 
@@ -63,7 +68,7 @@ public class DefaultEmailService implements EmailService {
             messageHelper.setText(mailMessage.getBody(), mailMessage.isHtml());
         };
         try {
-            LOGGER.debug("Sending email to '{}' with subject '{}'.", recipient, mailMessage.getSubject());
+            LOGGER.debug("Sending email to '{}' with subject '{}'.", recipient.getEmail(), mailMessage.getSubject());
             mailSender.send(messagePreparator);
         } catch (MailException e) {
             throw new HawaiiException("Error sending email.", e);

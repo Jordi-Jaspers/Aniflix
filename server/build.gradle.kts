@@ -104,6 +104,8 @@ dependencies {
     // Open API documentation generation.
     implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.5.0")
 
+    implementation(group = "com.github.gavlyukovskiy", name = "datasource-proxy-spring-boot-starter", version = "1.9.1")
+
     // Provides the core of hawaii framework such as the response entity exception handling.
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-async", version = hawaiiVersion)
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-rest", version = hawaiiVersion)

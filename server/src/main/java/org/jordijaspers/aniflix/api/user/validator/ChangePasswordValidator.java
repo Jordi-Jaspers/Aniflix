@@ -7,9 +7,10 @@ import org.hawaiiframework.validation.Validator;
 import org.jordijaspers.aniflix.api.authentication.validator.CustomPasswordValidator;
 import org.jordijaspers.aniflix.api.user.model.request.UpdatePasswordRequest;
 import org.passay.RuleResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 /**
@@ -19,6 +20,8 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 @SuppressWarnings("MultipleStringLiterals")
 public class ChangePasswordValidator implements Validator<UpdatePasswordRequest> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChangePasswordValidator.class);
 
     private final CustomPasswordValidator passwordValidator;
 
@@ -47,13 +50,12 @@ public class ChangePasswordValidator implements Validator<UpdatePasswordRequest>
 
         final RuleResult passwordValidationResult = passwordValidator.validatePassword(request.getNewPassword());
         result.rejectField("password", request.getNewPassword())
-                .when(password -> !passwordValidationResult.isValid(),
-                        format("Password is not strong enough: %s", passwordValidationResult.getDetails())
-                );
+                .when(password -> !passwordValidationResult.isValid(), "Password is not strong enough");
 
         if (result.hasErrors()) {
+            LOGGER.debug("Password validation failed for user with email '{}' with errors: {}",
+                    request.getNewPassword(), passwordValidationResult.getDetails());
             throw new ValidationException(result);
         }
-
     }
 }

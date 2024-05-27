@@ -1,6 +1,7 @@
 package org.jordijaspers.aniflix.api.news.model.response;
 
 import lombok.Data;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItemResource;
 
 import java.time.ZonedDateTime;
 
@@ -8,7 +9,7 @@ import java.time.ZonedDateTime;
  * The response for the news posts.
  */
 @Data
-public class NewsPostResponse {
+public class NewsPostResponse implements PageableItemResource {
     
     private Integer id;
 

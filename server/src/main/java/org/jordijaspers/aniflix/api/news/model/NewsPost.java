@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -24,7 +25,7 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 @Entity
 @Table(name = "news_post")
 @EqualsAndHashCode(of = "id")
-public class NewsPost implements Serializable {
+public class NewsPost implements Serializable, PageableItem {
 
     @Serial
     private static final long serialVersionUID = SERIAL_VERSION_UID;

@@ -6,7 +6,7 @@
 	import { Clock, Link } from 'lucide-svelte';
 	import { Badge } from '$lib/components/ui/badge';
 	import { getNewsTopicColor } from '$lib/api/constants';
-	import { Root, Trigger, Content } from '$lib/components/ui/tooltip/index.js';
+	import { Content, Root, Trigger } from '$lib/components/ui/tooltip/index.js';
 	import toast from 'svelte-french-toast';
 
 	let post: NewsPostResponse;

@@ -113,6 +113,19 @@ export async function curl(endpoint: string, options: RequestInit = {}): Promise
 }
 
 /**
+ * Function which automatically adds the access token to the request headers.
+ * If the access token is expired or not available, it will attempt to refresh the token and retry the request.
+ *
+ * @param endpoint The API endpoint to call.
+ * @param options The request options.
+ */
+export async function curlNoAuth(endpoint: string, options: RequestInit = {}): Promise<Response> {
+	const headers = new Headers(options.headers);
+	console.log('fetching', endpoint);
+	return await fetchWithRetry(endpoint, options, headers);
+}
+
+/**
  * Function which fetches the data from the server and retries the request if it fails.
  * @param endpoint The API endpoint to call.
  * @param options The request options.
@@ -192,17 +205,20 @@ async function refreshTokens(): Promise<AuthorizeResponse | string> {
  */
 async function getErrorMessage(response: Response): Promise<string> {
 	const exception: Exception | ValidationException = await response.json();
+
 	if ('apiErrorReason' in exception) {
-		return exception.statusMessage + ': ' + exception.apiErrorReason;
-	} else if ('errorMessage' in exception) {
-		return exception.statusMessage + ': ' + exception.errorMessage;
-	} else if ('errors' in exception) {
-		let errorMessages: string = 'The following fields contain errors:\n';
-		exception.errors.forEach((error: ValidationField) => {
-			errorMessages += `${error.field}: ${error.code}\n`;
-		});
-		return errorMessages;
+		return `${exception.statusMessage}: ${exception.apiErrorReason}`;
 	}
+
+	if ('errorMessage' in exception && exception.errorMessage !== null) {
+		return `${exception.statusMessage}: ${exception.errorMessage}`;
+	}
+
+	if ('errors' in exception) {
+		const errorMessages = exception.errors.map((error: ValidationField) => `${error.code}`).join('\n');
+		return `${errorMessages}`;
+	}
+
 	return 'An unknown error occurred.';
 }
 

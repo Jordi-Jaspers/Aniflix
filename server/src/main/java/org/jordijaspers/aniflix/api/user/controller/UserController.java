@@ -63,8 +63,10 @@ public class UserController {
 
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = VALIDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(path = VALIDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> validateEmail(@RequestBody final UpdateEmailRequest request) {
-        return ResponseEntity.status(OK).body(userService.isEmailInAlreadyUse(request.getEmail()));
+        return emailValidator.validate(request).hasErrors()
+                ? ResponseEntity.status(OK).body(true)
+                : ResponseEntity.status(OK).body(userService.isEmailInAlreadyUse(request.getEmail()));
     }
 }

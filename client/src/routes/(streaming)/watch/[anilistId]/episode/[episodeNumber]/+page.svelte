@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { SERVER_URLS } from '$lib/api/paths';
+	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
 	import { page } from '$app/stores';
 	import { curl } from '$lib/api/client';
 	import { LoadingScreen } from '$lib/components/general';
@@ -19,7 +19,7 @@
 	onMount(async () => {
 		if (!Hls.isSupported()) {
 			toast.error('HLS is not supported on this device');
-			goto('/browse');
+			goto(CLIENT_URLS.BROWSE_URL);
 			return;
 		}
 

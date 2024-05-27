@@ -2,6 +2,8 @@ package org.jordijaspers.aniflix.api.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.authentication.repository.RoleRepository;
+import org.jordijaspers.aniflix.api.token.model.TokenType;
+import org.jordijaspers.aniflix.api.token.service.TokenService;
 import org.jordijaspers.aniflix.api.user.model.User;
 import org.jordijaspers.aniflix.api.user.model.request.UpdateUserDetailsRequest;
 import org.jordijaspers.aniflix.api.user.repository.UserRepository;
@@ -36,6 +38,8 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     private final RoleRepository roleRepository;
+
+    private final TokenService tokenService;
 
     private final UserRepository userRepository;
 
@@ -74,6 +78,7 @@ public class UserService implements UserDetailsService {
 
         user.setEmail(email);
         user.setValidated(false);
+        tokenService.invalidateTokensForUser(user, TokenType.values());
 
         LOGGER.info("Email has been updated to '{}', sending email to validate account.", email);
         emailService.sendUserValidationEmail(user);

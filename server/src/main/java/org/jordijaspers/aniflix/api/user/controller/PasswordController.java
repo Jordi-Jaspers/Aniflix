@@ -31,27 +31,27 @@ public class PasswordController {
     private final ChangePasswordValidator passwordValidator;
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
-    @PostMapping(path = UPDATE_PASSWORD_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updatePassword(@RequestBody final UpdatePasswordRequest request,
-                                            @AuthenticationPrincipal final UserTokenPrincipal principal) {
-        passwordValidator.validateAndThrow(request);
-        passwordService.changePassword(request.getNewPassword(), principal.getTokenValue());
-        return ResponseEntity.status(NO_CONTENT).build();
-    }
-
-    @ResponseStatus(NO_CONTENT)
-    @GetMapping(path = PUBLIC_REQUEST_PASSWORD_RESET_PATH, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(path = PUBLIC_REQUEST_PASSWORD_RESET_PATH)
     public ResponseEntity<Void> requestPasswordReset(@RequestParam(name = "email") final String email) {
         passwordService.requestPasswordReset(email);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @ResponseStatus(NO_CONTENT)
-    @PostMapping(path = PUBLIC_RESET_PASSWORD_PATH, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = PUBLIC_RESET_PASSWORD_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> resetPassword(@RequestBody final UpdatePasswordRequest request) {
         passwordValidator.validateAndThrow(request);
         passwordService.changePassword(request.getNewPassword(), request.getToken());
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('USER')")
+    @PostMapping(path = UPDATE_PASSWORD_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updatePassword(@RequestBody final UpdatePasswordRequest request,
+                                            @AuthenticationPrincipal final UserTokenPrincipal principal) {
+        passwordValidator.validateAndThrow(request);
+        passwordService.updatePassword(request, principal.getUser());
         return ResponseEntity.status(NO_CONTENT).build();
     }
 }

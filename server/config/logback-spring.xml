@@ -39,6 +39,8 @@
     <logger name="com.zaxxer" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
     <logger name="org.apache" level="${APPLICATION_LOG_LEVEL:-ERROR}"/>
 
+    <logger name="net.ttddyy.dsproxy.listener" level="${SQL_LOG_LEVEL:-INFO}"/>
+
     <logger name="org.springframework" level="${SPRING_LOG_LEVEL:-INFO}"/>
     <logger name="org.springframework.web" level="${SPRING_LOG_LEVEL:-ERROR}"/>
     <logger name="org.springframework.jpa" level="${SPRING_LOG_LEVEL:-ERROR}"/>

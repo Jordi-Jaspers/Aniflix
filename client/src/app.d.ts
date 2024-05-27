@@ -11,23 +11,6 @@ class AnimeInfo {
 	liked: boolean;
 }
 
-class SveltePlayerConfig {
-	url: string = '';
-	pip: boolean = false;
-	playing: boolean = true;
-	controls: boolean = false;
-	light: boolean = false;
-	volume: number = 1.0;
-	muted: boolean = false;
-	played: number = 0;
-	loaded: number = 0;
-	duration: number = 0;
-	playbackRate: number = 1.0;
-	loop: boolean = false;
-	urlInput: string = '';
-	seeking: boolean = false;
-}
-
 // ======================== EXCEPTION ========================
 class Exception {
 	method: string;
@@ -58,6 +41,18 @@ class ValidationField {
 }
 
 // ======================== REQUESTS ========================
+class UpdatePasswordRequest {
+	oldPassword: string;
+	newPassword: string;
+	confirmPassword: string;
+	token: string;
+}
+
+class ForgotPasswordRequest {
+	newPassword: string;
+	confirmPassword: string;
+	token: string;
+}
 
 class LoginRequest {
 	email: string;
@@ -100,6 +95,15 @@ class LibrarySearchRequest {
 	beforeYear: number;
 }
 
+class UpdateUserDetailsRequest {
+	firstName: string;
+	lastName: string;
+}
+
+class UpdateEmailRequest {
+	email: string;
+}
+
 // ======================== RESPONSE ========================
 
 class PageResponse<T> {
@@ -125,9 +129,9 @@ class RegisterResponse {
 }
 
 class UserDetailsResponse {
+	email: string;
 	firstName: string;
 	lastName: string;
-	email: string;
 	authorities: string[];
 	lastLogin: Date;
 	enabled: boolean;
