@@ -104,6 +104,7 @@ dependencies {
     // Open API documentation generation.
     implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.5.0")
 
+    // Adds logging for the hibernate queries.
     implementation(group = "com.github.gavlyukovskiy", name = "datasource-proxy-spring-boot-starter", version = "1.9.1")
 
     // Provides the core of hawaii framework such as the response entity exception handling.

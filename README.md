@@ -2,7 +2,7 @@
   ANIFLIX
 </h1>
 <p align="center">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" >
+    <img src="https://img.shields.io/badge/license-GPL_3.0-blue.svg" alt="License" >
     <img src="https://img.shields.io/github/package-json/v/Jordi-Jaspers/aniflix?filename=client%2Fpackage.json" alt="application version">
     <img src="https://img.shields.io/github/commit-activity/m/Jordi-Jaspers/aniflix" alt="Commit Activity" >
     <img src="https://img.shields.io/github/last-commit/Jordi-Jaspers/aniflix" alt="Last Commit" >
@@ -34,15 +34,15 @@
          <img alt="total stars" title="Total stars on GitHub" src="https://custom-icon-badges.demolab.com/github/stars/Jordi-Jaspers?color=55960c&style=for-the-badge&labelColor=488207&logo=star"/></a>
    </p>
 
-**Website Preview:** https://aniflix.stream/
-**Website Health endpoint:** https://aniflix.stream/actuator/health
-**Server API description:** https://aniflix.stream/api/public/docs/openapi.html
-
 **Description:**
 
-> An enterprise level streaming project with a dedicated spring boot server which will interact with mulitple external API's and it's own
-> database. The client will be build with SvelteKit and TailwindCSS. The application is an anime streamings website with quality of life
+> An enterprise level streaming project with a dedicated spring boot server which will interact with multiple external API's and it's own
+> database. The client will be built with SvelteKit and TailwindCSS. The application is an anime streaming website with quality of life
 > features like bookmarks, watch history, news, recommendations, etc.
+
+**Website Preview:** https://aniflix.stream/  
+**Website Health endpoint:** https://aniflix.stream/actuator/health  
+**Server API description:** https://aniflix.stream/api/public/docs/openapi.html
 
 ## 📝 Learning Goals <a name = "learning-goals"></a>
 
@@ -51,20 +51,21 @@
 - [x] Learn how to handle API Calls in a frontend application
 - [x] Learn how to use the multiple external API's
 - [x] Learn how to use Docker
-- [x] Learn how to use Cache with Redit
+- [x] Learn how to use Cache with Redis using `@Cacheable` and `@CacheEvict`
 - [x] Learn how to use Liquibase
-- [x] Apply the correct way of MVC pattern for more interchangable code
-- [x] Dockerize Spring Boot application
+- [x] Apply the correct way of MVC pattern for more interchangeable code
+- [x] Dockerized Spring Boot application
 - [x] Deploy on a server with Docker Compose
 - [x] Use Cloudflare for SSL
 - [x] Use Traefik as a reverse proxy
-- [x] CI/CD with Github Actions
-- [x] ...
+- [x] CI/CD with GitHub Actions
+- [x] Use of MariaDB
+- [ ] ...
 
 ## 📝 Notes <a name = "notes"></a>
 
 ---
-
+  
 ### Regexing with Asian Characters
 
 The ranges of Unicode characters which are routinely used for Chinese and Japanese text are:
@@ -77,8 +78,9 @@ U+FF66 - U+FF9F: half-width katakana (Japanese only)
 
 to check if a character contains a japanese/roman character you can use the following regex:
 `/[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[a-zA-Z0-9]+|[ａ-ｚＡ-Ｚ０-９]+|[々〆〤ヶ]+/u`
----
 
+---
+  
 ### Native Compilation with spring boot.
 
 Native compilation is still a weird thing.. need to figure this stuff out. but that will take some time.
@@ -105,7 +107,7 @@ tasks.named<JavaCompile>("compileAotTestJava").configure {
 ```
 
 ---
-
+  
 ### Autoplaying Videos
 
 Videos can only be auto played in the client whenever the videos are muted. This is a policy that is enforced by the browser. The following
@@ -136,6 +138,7 @@ If you go over the rate limit you'll receive a 1-minute timeout, any further req
 ```
 
 more info: https://anilist.gitbook.io/anilist-apiv2-docs/overview/rate-limiting
+  
 ---
 
 ### Docker Builds
@@ -210,7 +213,7 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 ## 🚀 References <a name = "references"></a>
 
 * Troubleshooting: <https://stackoverflow.com/>
-* Next.js: <https://nextjs.org/docs/getting-started>
+* Sveltkit: <https://kit.svelte.dev/docs>
 * TailwindCSS: <https://tailwindcss.com/docs>
 * Consumet Documentation: <https://docs.consumet.org/>
 * Svelte Motion: <https://www.npmjs.com/package/svelte-motion>
@@ -220,8 +223,7 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Svelte Player example: <https://github.com/fikryfahrezy/svelte-player/blob/main/src/routes/%2Bpage.svelte>
 * Lucide: <https://lucide.dev/>
 * Shadcn Svelte: <https://www.shadcn-svelte.com/>
-* Spring Boot Redis
-  Properties: <https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values>
+* Spring Boot Redis Properties: <https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.cache.spring.cache.redis.cache-null-values>
 * Jikan API: <https://jikan.moe/>
 * Jikan API Docs: <https://docs.api.jikan.moe/>
 * Reactive Jikan For Spring Boot: <https://github.com/SandroHc/reactive-jikan>
