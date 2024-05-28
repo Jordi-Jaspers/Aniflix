@@ -15,7 +15,7 @@
 
 	let isLoading: boolean = writable(false);
 	let isFormValid: boolean = writable(false);
-	let form = writable<UpdatePasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
+	let form = writable<ForgotPasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
 
 	async function handleSubmit() {
 		isLoading = true;

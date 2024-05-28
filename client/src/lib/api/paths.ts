@@ -29,7 +29,7 @@ export const SERVER_URLS = {
 	ANIME_TRENDING_PATH: `${SERVER_BASE_URL}/anime/trending`,
 	ANIME_GENRE_PATH: `${SERVER_BASE_URL}/anime/genre`,
 	ANIME_RECOMMENDATION_PATH: `${SERVER_BASE_URL}/anime/{id}/recommendations`,
-	ANIME_EPISODE_DETAILS_PATH: `${SERVER_BASE_URL}/anime/{id}/episode`,
+	ANIME_EPISODES_PATH: `${SERVER_BASE_URL}/anime/{id}/episode`,
 	ANIME_EPISODE_PATH: `${SERVER_BASE_URL}/anime/{id}/episode/{episodeNumber}`,
 	NEWS_PATH: `${SERVER_BASE_URL}/news`,
 	NEWS_DETAILS_PATH: `${SERVER_BASE_URL}/news/{id}`,

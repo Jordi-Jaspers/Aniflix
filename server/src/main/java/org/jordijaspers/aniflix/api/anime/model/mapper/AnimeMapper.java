@@ -156,7 +156,7 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
                     return response;
                 })
                 .sorted(Comparator.comparingInt(EpisodeResponse::getEpisodeNumber))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

@@ -31,7 +31,7 @@
                 release_year        INTEGER      NOT NULL,
                 subbed              BOOLEAN      NOT NULL DEFAULT FALSE,
                 media_type          VARCHAR(255) NOT NULL DEFAULT 'UNKNOWN',
-                updated             TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                updated             TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP,
                 is_synchronizing    BOOLEAN      NOT NULL DEFAULT FALSE,
                 UNIQUE (anilist_id, title)
             );
@@ -43,7 +43,7 @@
                 gogoanime_id        TEXT         NULL,
                 zoro_id             TEXT         NULL,
                 number              INTEGER      NOT NULL,
-                title               VARCHAR(255) NOT NULL,
+                title               TEXT         NOT NULL,
                 image               TEXT         NOT NULL,
                 duration            INTEGER      NOT NULL,
                 air_date            TIMESTAMP,

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.hawaiiframework.repository.DataNotFoundException;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
+import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.anime.repository.EpisodeRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
@@ -14,10 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.STREAMING_LINKS_NOT_FOUND_ERROR;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The service which handles the episode data.
@@ -28,11 +31,21 @@ public class EpisodeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EpisodeService.class);
 
+    private final AnimeRepository animeRepository;
+
     private final EpisodeRepository episodeRepository;
 
     private final InteractionService interactionService;
 
     private final ConsumetService consumetService;
+
+    public Set<Episode> getEpisodesOfAnime(final int anilistId) {
+        LOGGER.info("Retrieving episodes of anime with anilist id '{}'", anilistId);
+        return animeRepository.findDetailsByAnilistId(anilistId)
+                .filter(entry -> !isEmpty(entry.getEpisodes()) && entry.getEpisodes().size() == entry.getTotalEpisodes())
+                .orElseGet(() -> consumetService.getAnimeDetails(anilistId))
+                .getEpisodes();
+    }
 
     public Episode getEpisodeOfAnime(final int anilistId, final int episodeNumber) {
         LOGGER.info("Retrieving episode '{}' of anime with anilist id '{}'", episodeNumber, anilistId);

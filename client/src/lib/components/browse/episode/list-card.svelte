@@ -3,7 +3,6 @@
 	import { CalendarDays } from 'lucide-svelte';
 
 	export let episode: EpisodeResponse;
-
 	async function handleClickedEpisode() {
 		await goto('/watch/' + episode.anilistId + '/episode/' + episode.episodeNumber);
 	}

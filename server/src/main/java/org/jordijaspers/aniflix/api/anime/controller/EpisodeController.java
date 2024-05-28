@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Set;
+
+import static org.jordijaspers.aniflix.api.Paths.EPISODES_PATH;
 import static org.jordijaspers.aniflix.api.Paths.EPISODE_PATH;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -30,10 +34,19 @@ public class EpisodeController {
     @ResponseStatus(OK)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = EPISODE_PATH, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<EpisodeResponse> retrieveEpisodes(@PathVariable("id") final int anilistId,
-                                                            @PathVariable("episodeNumber") final int number) {
+    public ResponseEntity<EpisodeResponse> getEpisodeStreamingsLink(@PathVariable("id") final int anilistId,
+                                                                    @PathVariable("episodeNumber") final int number) {
         final Episode episode = episodeService.getEpisodeOfAnime(anilistId, number);
         final EpisodeResponse episodeResponse = episodeMapper.toEpisodeResponse(episode);
+        return ResponseEntity.status(OK).body(episodeResponse);
+    }
+
+    @ResponseStatus(OK)
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping(path = EPISODES_PATH, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<EpisodeResponse>> getEpisodesOfAnime(@PathVariable("id") final int anilistId) {
+        final Set<Episode> episodes = episodeService.getEpisodesOfAnime(anilistId);
+        final List<EpisodeResponse> episodeResponse = episodeMapper.toEpisodeResponse(episodes);
         return ResponseEntity.status(OK).body(episodeResponse);
     }
 }

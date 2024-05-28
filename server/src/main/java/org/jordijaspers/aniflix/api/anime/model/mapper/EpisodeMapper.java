@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * The mapper for the episodes.
@@ -29,4 +30,7 @@ public abstract class EpisodeMapper {
 
     @IterableMapping(qualifiedByName = "toEpisodeResponse")
     public abstract List<EpisodeResponse> toEpisodeResponse(List<Episode> episodes);
+
+    @IterableMapping(qualifiedByName = "toEpisodeResponse")
+    public abstract List<EpisodeResponse> toEpisodeResponse(Set<Episode> episodes);
 }

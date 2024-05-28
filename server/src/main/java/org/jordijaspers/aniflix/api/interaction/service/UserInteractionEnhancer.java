@@ -48,7 +48,7 @@ public class UserInteractionEnhancer {
                     .filter(anime -> Objects.equals(anime.getAnilistId(), interaction.getAnime().getAnilistId()))
                     .findFirst()
                     .ifPresent(anime -> {
-                        LOGGER.info("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
+                        LOGGER.debug("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
                         anime.setLiked(interaction.isLiked());
                         anime.setInLibrary(interaction.isInLibrary());
                         anime.setWatchStatus(interaction.getWatchStatus());
@@ -70,7 +70,7 @@ public class UserInteractionEnhancer {
                     .filter(anime -> Objects.equals(anime.getAnilistId(), interaction.getAnime().getAnilistId()))
                     .findFirst()
                     .ifPresent(anime -> {
-                        LOGGER.info("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
+                        LOGGER.debug("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
                         anime.setLiked(interaction.isLiked());
                         anime.setInLibrary(interaction.isInLibrary());
                         anime.setWatchStatus(interaction.getWatchStatus());
