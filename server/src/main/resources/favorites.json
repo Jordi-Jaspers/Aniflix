@@ -1,5 +1,626 @@
 [
   {
+    "urlIdentifier": "https://anitaku.to/category/tensei-shitara-slime-datta-ken-3rd-season",
+    "type": "Video",
+    "title": "TENSEI SHITARA SLIME DATTA KEN 3RD SEASON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "method": "get",
+      "url": "https:\/\/anitaku.to\/category\/tensei-shitara-slime-datta-ken-3rd-season"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken-3rd-season.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/mushoku-tensei-ii-isekai-ittara-honki-dasu-part-2",
+    "type": "Video",
+    "title": "MUSHOKU TENSEI II: ISEKAI ITTARA HONKI DASU PART 2",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "method": "get",
+      "url": "https:\/\/anitaku.to\/category\/mushoku-tensei-ii-isekai-ittara-honki-dasu-part-2"
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/mushoku-tensei-ii-isekai-ittara-honki-dasu-part-2.png",
+      "headers": [],
+      "method": "get"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/kimetsu-no-yaiba-hashira-geiko-hen",
+    "type": "Video",
+    "title": "KIMETSU NO YAIBA: HASHIRA GEIKO-HEN",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/kimetsu-no-yaiba-hashira-geiko-hen",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ],
+      "method": "get"
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-hashira-geiko-hen.png",
+      "headers": [],
+      "method": "get"
+    },
+    "categories": [
+      "WATCHING"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/shangri-la-frontier-kusoge-hunter-kamige-ni-idoman-to-su",
+    "type": "Video",
+    "title": "SHANGRI-LA FRONTIER: KUSOGE HUNTER, KAMIGE NI IDOMAN TO SU",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/shangri-la-frontier-kusoge-hunter-kamige-ni-idoman-to-su"
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/shangri-la-frontier-kusoge-hunter-kamige-ni-idoman-to-su-1698288586.png",
+      "headers": [],
+      "method": "get"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/tsuki-ga-michibiku-isekai-douchuu",
+    "type": "Video",
+    "title": "TSUKI GA MICHIBIKU ISEKAI DOUCHUU",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/tsuki-ga-michibiku-isekai-douchuu"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/tsuki-ga-michibiku-isekai-douchuu.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/tsuki-ga-michibiku-isekai-douchuu-2nd-season",
+    "type": "Video",
+    "title": "TSUKI GA MICHIBIKU ISEKAI DOUCHUU 2ND SEASON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/tsuki-ga-michibiku-isekai-douchuu-2nd-season",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ],
+      "method": "get"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/tsuki-ga-michibiku-isekai-douchuu-2nd-season-1704251043.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/sousou-no-frieren",
+    "type": "Video",
+    "title": "SOUSOU NO FRIEREN",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/sousou-no-frieren"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/sousou-no-frieren-1696000134.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/saikyou-tank-no-meikyuu-kouryaku-tairyoku-9999-no-rare-skill-mochi-tank-yuusha-party-wo-tsuihou-sareru",
+    "type": "Video",
+    "title": "SAIKYOU TANK NO MEIKYUU KOURYAKU: TAIRYOKU 9999 NO RARE SKILL-MOCHI TANK, YUUSHA PARTY WO TSUIHOU SARERU",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "method": "get",
+      "url": "https:\/\/anitaku.to\/category\/saikyou-tank-no-meikyuu-kouryaku-tairyoku-9999-no-rare-skill-mochi-tank-yuusha-party-wo-tsuihou-sareru"
+    },
+    "image": {
+      "headers": [],
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/saikyou-tank-no-meikyuu-kouryaku-tairyoku-9999-no-rare-skill-mochi-tank-yuusha-party-wo-tsuihou-sareru-1704248612.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/nanatsu-no-taizai-mokushiroku-no-yonkishi",
+    "type": "Video",
+    "title": "NANATSU NO TAIZAI: MOKUSHIROKU NO YONKISHI",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/nanatsu-no-taizai-mokushiroku-no-yonkishi"
+    },
+    "image": {
+      "headers": [],
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/nanatsu-no-taizai-mokushiroku-no-yonkishi-1696010923.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/high-card-season-2",
+    "type": "Video",
+    "title": "HIGH CARD SEASON 2",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "method": "get",
+      "url": "https:\/\/anitaku.to\/category\/high-card-season-2"
+    },
+    "image": {
+      "headers": [],
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/high-card-season-2.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/shaman-king-flowers",
+    "type": "Video",
+    "title": "SHAMAN KING: FLOWERS",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/shaman-king-flowers",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ],
+      "method": "get"
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/shaman-king-flowers-1704249868.png",
+      "headers": [],
+      "method": "get"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/ragna-crimson",
+    "type": "Video",
+    "title": "RAGNA CRIMSON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/ragna-crimson"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/ragna-crimson-1698304218.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/ao-no-exorcist-kyoto-fujouou-hen",
+    "type": "Video",
+    "title": "AO NO EXORCIST: KYOTO FUJOUOU-HEN",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 11,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/ao-no-exorcist-kyoto-fujouou-hen"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/ao-no-exorcist-kyoto-fujouou-hen.png"
+    },
+    "categories": [
+      "SEEN"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/undead-unluck",
+    "type": "Video",
+    "title": "UNDEAD UNLUCK",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 19,
+    "percentageSeen": 1.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/undead-unluck"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/undead-unluck-1696013292.png"
+    },
+    "categories": [
+      "SEEN"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-3rd-season",
+    "type": "Video",
+    "title": "YOUKOSO JITSURYOKU SHIJOU SHUGI NO KYOUSHITSU E 3RD SEASON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-3rd-season"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-3rd-season-1704252258.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/ao-no-exorcist-",
+    "type": "Video",
+    "title": "AO NO EXORCIST",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 24,
+    "percentageSeen": 1.0,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/ao-no-exorcist-"
+    },
+    "image": {
+      "method": "get",
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/images\/anime\/ao-no-exorcist.jpg"
+    },
+    "categories": [
+      "SEEN"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/ao-no-exorcist-shimane-illuminati-hen",
+    "type": "Video",
+    "title": "AO NO EXORCIST: SHIMANE ILLUMINATI-HEN",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 0,
+    "percentageSeen": 0.0257066,
+    "request": {
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "url": "https:\/\/anitaku.to\/category\/ao-no-exorcist-shimane-illuminati-hen"
+    },
+    "image": {
+      "headers": [],
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/ao-no-exorcist-shimane-illuminati-hen-1704168077.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/mashle-2nd-season",
+    "type": "Video",
+    "title": "MASHLE 2ND SEASON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ],
+      "method": "get",
+      "url": "https:\/\/anitaku.to\/category\/mashle-2nd-season"
+    },
+    "image": {
+      "headers": [],
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/mashle-2nd-season-1704187272.png"
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/ore-dake-level-up-na-ken",
+    "type": "Video",
+    "title": "ORE DAKE LEVEL UP NA KEN",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 7,
+    "percentageSeen": 1.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/ore-dake-level-up-na-ken",
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ]
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/ore-dake-level-up-na-ken-1704247746.png",
+      "method": "get",
+      "headers": []
+    },
+    "categories": [
+      "SEEN"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/tate-no-yuusha-no-nariagari-season-3",
+    "type": "Video",
+    "title": "TATE NO YUUSHA NO NARIAGARI SEASON 3",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 0,
+    "percentageSeen": 1.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/tate-no-yuusha-no-nariagari-season-3",
+      "method": "get",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ]
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari-season-3-1698302959.png",
+      "method": "get",
+      "headers": []
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://anitaku.to/category/spy-x-family-season-2",
+    "type": "Video",
+    "title": "SPY X FAMILY SEASON 2",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "url": "https:\/\/anitaku.to\/category\/spy-x-family-season-2",
+      "method": "get",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ]
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/spy-x-family-season-2-1696012743.png",
+      "method": "get",
+      "headers": []
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
+    "urlIdentifier": "https://gogoanimehd.to/category/tengoku-daimakyou",
+    "type": "Video",
+    "title": "TENGOKU DAIMAKYOU",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": 4,
+    "percentageSeen": 1.0,
+    "request": {
+      "url": "https:\/\/gogoanimehd.to\/category\/tengoku-daimakyou",
+      "method": "get",
+      "headers": [
+        {
+          "key": "key",
+          "value": "value"
+        }
+      ]
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/tengoku-daimakyou-1680203233.png",
+      "method": "get",
+      "headers": []
+    },
+    "categories": [
+      "SEEN"
+    ]
+  },
+  {
+    "urlIdentifier": "https://gogoanimehd.to/category/ragna-crimson",
+    "type": "Video",
+    "title": "RAGNA CRIMSON",
+    "moduleName": "GoGoAnime",
+    "moduleID": "28932498734237987329",
+    "lastSeen": -1,
+    "percentageSeen": 0.0,
+    "request": {
+      "url": "https:\/\/gogoanimehd.to\/category\/ragna-crimson",
+      "headers": [
+        {
+          "value": "value",
+          "key": "key"
+        }
+      ],
+      "method": "get"
+    },
+    "image": {
+      "url": "https:\/\/gogocdn.net\/cover\/ragna-crimson-1696011308.png",
+      "method": "get",
+      "headers": []
+    },
+    "categories": [
+      "NOT_STARTED"
+    ]
+  },
+  {
     "urlIdentifier": "https://gogoanimehd.to/category/dead-mount-death-play-part-2",
     "type": "Video",
     "title": "DEAD MOUNT DEATH PLAY PART 2",
@@ -9,18 +630,18 @@
     "percentageSeen": 0.0,
     "request": {
       "method": "get",
-      "url": "https:\/\/gogoanimehd.to\/category\/dead-mount-death-play-part-2",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/category\/dead-mount-death-play-part-2"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/dead-mount-death-play-part-2-1696007198.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/dead-mount-death-play-part-2-1696007198.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -32,22 +653,22 @@
     "title": "ZOM 100: ZOMBIE NI NARU MADE NI SHITAI 100 NO KOTO",
     "moduleName": "GoGoAnime",
     "moduleID": "28932498734237987329",
-    "lastSeen": -1,
-    "percentageSeen": 0.0,
+    "lastSeen": 0,
+    "percentageSeen": 0.044186577,
     "request": {
       "url": "https:\/\/gogoanimehd.to\/\/category\/zom-100-zombie-ni-naru-made-ni-shitai-100-no-koto",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "method": "get"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/zom-100-zombie-ni-naru-made-ni-shitai-100-no-koto-1686557998.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/zom-100-zombie-ni-naru-made-ni-shitai-100-no-koto-1686557998.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -63,18 +684,18 @@
     "percentageSeen": 0.0,
     "request": {
       "method": "get",
-      "url": "https:\/\/gogoanimehd.to\/\/category\/dr-stone-new-world-part-2",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/\/category\/dr-stone-new-world-part-2"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/dr-stone-new-world-part-2-1696007370.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/dr-stone-new-world-part-2-1696007370.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -90,18 +711,18 @@
     "percentageSeen": 0.0,
     "request": {
       "method": "get",
-      "url": "https:\/\/gogoanimehd.to\/\/category\/goblin-slayer-ii",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/\/category\/goblin-slayer-ii"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/goblin-slayer-ii-1696007515.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/goblin-slayer-ii-1696007515.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -119,16 +740,16 @@
       "url": "https:\/\/gogoanimehd.to\/\/category\/kage-no-jitsuryokusha-ni-naritakute-2nd-season",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "method": "get"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/kage-no-jitsuryokusha-ni-naritakute-2nd-season-1696008348.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/kage-no-jitsuryokusha-ni-naritakute-2nd-season-1696008348.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -144,18 +765,18 @@
     "percentageSeen": 0.0,
     "request": {
       "method": "get",
-      "url": "https:\/\/gogoanimehd.to\/\/category\/spy-x-family-season-2",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/\/category\/spy-x-family-season-2"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/spy-x-family-season-2-1696012743.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/spy-x-family-season-2-1696012743.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -170,19 +791,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
       "url": "https:\/\/gogoanimehd.to\/\/category\/tate-no-yuusha-no-nariagari-season-3",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari-season-3-1696012848.png",
-      "headers": []
+      "headers": [],
+      "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari-season-3-1696012848.png"
     },
     "categories": [
       "NOT_STARTED"
@@ -197,19 +818,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
       "url": "https:\/\/gogoanimehd.to\/\/category\/tokyo-revengers-tenjiku-hen",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
-      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/tokyo-revengers-tenjiku-hen-1696013171.png",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -224,19 +845,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
       "url": "https:\/\/gogoanimehd.to\/\/category\/undead-unluck",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
-      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/undead-unluck-1696013292.png",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -251,19 +872,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanimehd.to\/category\/bungou-stray-dogs-5th-season",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/category\/bungou-stray-dogs-5th-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/bungou-stray-dogs-5th-season.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -278,19 +899,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanimehd.to\/category\/dark-gathering",
-      "method": "get",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanimehd.to\/category\/dark-gathering",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/dark-gathering-1688153412.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -305,22 +926,22 @@
     "lastSeen": 0,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.vet\/category\/bleach-sennen-kessen-hen-ketsubetsu-tan",
-      "method": "get",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.vet\/category\/bleach-sennen-kessen-hen-ketsubetsu-tan",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/bleach-sennen-kessen-hen-ketsubetsu-tan-1688151974.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "WATCHING"
+      "SEEN"
     ]
   },
   {
@@ -332,22 +953,22 @@
     "lastSeen": 2,
     "percentageSeen": 1.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/jujutsu-kaisen-tv-2nd-season",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/jujutsu-kaisen-tv-2nd-season",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/jujutsu-kaisen-tv-2nd-season-1688154932.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "WATCHING"
+      "SEEN"
     ]
   },
   {
@@ -361,17 +982,17 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta"
+      "url": "https:\/\/gogoanime.gg\/category\/isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta-1680122056.png"
+      "url": "https:\/\/gogocdn.net\/cover\/isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta-1680122056.png",
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -387,21 +1008,21 @@
     "percentageSeen": 0.6157659,
     "request": {
       "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/c-the-money-of-soul-and-possibility-control",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/c-the-money-of-soul-and-possibility-control"
+      ]
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/images\/anime\/C\/c-the-money-of-soul-and-possibility-control.jpg"
+      "url": "https:\/\/gogocdn.net\/images\/anime\/C\/c-the-money-of-soul-and-possibility-control.jpg",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -415,8 +1036,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.gg\/category\/kimetsu-no-yaiba-movie-mugen-ressha-hen",
@@ -424,11 +1045,11 @@
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-movie-mugen-ressha-hen-camrip.png"
+      "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-movie-mugen-ressha-hen-camrip.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -442,8 +1063,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.gg\/category\/kimetsu-no-yaiba-yuukaku-hen",
@@ -455,7 +1076,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -482,7 +1103,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -509,7 +1130,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -521,22 +1142,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/yamada-kun-to-lv999-no-koi-wo-suru",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/yamada-kun-to-lv999-no-koi-wo-suru",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/yamada-kun-to-lv999-no-koi-wo-suru-1680203993.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -548,19 +1169,19 @@
     "lastSeen": 9,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.gg\/category\/dead-mount-death-play",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.gg\/category\/dead-mount-death-play",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/dead-mount-death-play-1680121773.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -585,12 +1206,12 @@
       "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-katanakaji-no-sato-hen-1680122874.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -602,19 +1223,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/kono-subarashii-sekai-ni-bakuen-wo",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/kono-subarashii-sekai-ni-bakuen-wo",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/kono-subarashii-sekai-ni-bakuen-wo.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -629,22 +1250,22 @@
     "lastSeen": 7,
     "percentageSeen": 0.6087292,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/mashle",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/mashle",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/mashle-1680202211.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -656,19 +1277,19 @@
     "lastSeen": 2,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/dr-stone-3rd-season",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/dr-stone-3rd-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/dr-stone-3rd-season-1680121906.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -683,19 +1304,19 @@
     "lastSeen": 0,
     "percentageSeen": 0.5614317,
     "request": {
-      "url": "https:\/\/gogoanime.gg\/category\/jigokuraku",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.gg\/category\/jigokuraku",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/jigokuraku-1680122271.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -710,22 +1331,22 @@
     "lastSeen": 10,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.gg\/category\/bungou-stray-dogs-dub",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.gg\/category\/bungou-stray-dogs-dub",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/bungou-stray-dogs-dub.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -737,22 +1358,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/blue-lock",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/blue-lock",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/blue-lock-1664387634.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -774,9 +1395,9 @@
       "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/maou-gakuin-no-futekigousha-shijou-saikyou-no-maou-no-shiso-tensei-shite-shison-tachi-no-gakkou-e-kayou-2nd-season-part-2-1672331388.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -806,7 +1427,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -847,8 +1468,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.gg\/category\/majutsushi-orphen-hagure-tabi-urbanrama-hen",
@@ -901,8 +1522,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.film\/category\/spy-kyoushitsu",
@@ -926,19 +1547,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/nierautomata-ver1-1a",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/nierautomata-ver1-1a"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/nierautomata-ver1-1a-1672331611.png"
+      "url": "https:\/\/gogocdn.net\/cover\/nierautomata-ver1-1a-1672331611.png",
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -953,19 +1574,19 @@
     "lastSeen": 0,
     "percentageSeen": 0.36138752,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/tokyo-revengers-seiya-kessen-hen",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.film\/category\/tokyo-revengers-seiya-kessen-hen",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/tokyo-revengers-seiya-kessen-hen-1672332928.png"
+      "url": "https:\/\/gogocdn.net\/cover\/tokyo-revengers-seiya-kessen-hen-1672332928.png",
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -980,22 +1601,22 @@
     "lastSeen": 22,
     "percentageSeen": 1.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/vinland-saga-season-2",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.film\/category\/vinland-saga-season-2",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/vinland-saga-season-2-1672333695.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1007,22 +1628,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/bungou-stray-dogs-4th-season",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.film\/category\/bungou-stray-dogs-4th-season",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/bungou-stray-dogs-4th-season.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1034,22 +1655,22 @@
     "lastSeen": 6,
     "percentageSeen": 0.015799608,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/ningen-fushin-no-boukensha-tachi-ga-sekai-wo-sukuu-you-desu",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/ningen-fushin-no-boukensha-tachi-ga-sekai-wo-sukuu-you-desu",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/ningen-fushin-no-boukensha-tachi-ga-sekai-wo-sukuu-you-desu-1672331809.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1196,19 +1817,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/isekai-ojisan",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/isekai-ojisan"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/isekai-ojisan.png"
+      "url": "https:\/\/gogocdn.net\/cover\/isekai-ojisan.png",
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -1265,7 +1886,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1319,7 +1940,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1346,7 +1967,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1373,7 +1994,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1400,7 +2021,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1412,22 +2033,22 @@
     "lastSeen": 8,
     "percentageSeen": 1.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/bleach-sennen-kessen-hen",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/bleach-sennen-kessen-hen"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/bleach-sennen-kessen-hen-1664387572.png"
+      "url": "https:\/\/gogocdn.net\/cover\/bleach-sennen-kessen-hen-1664387572.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1439,22 +2060,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/bleach",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/bleach"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/images\/anime\/B\/bleach.jpg"
+      "url": "https:\/\/gogocdn.net\/images\/anime\/B\/bleach.jpg",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1466,22 +2087,22 @@
     "lastSeen": 17,
     "percentageSeen": 1.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/blue-lock",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/blue-lock"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/blue-lock-1664387634.png"
+      "url": "https:\/\/gogocdn.net\/cover\/blue-lock-1664387634.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1493,22 +2114,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/spy-x-family-part-2",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/spy-x-family-part-2"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/spy-x-family-part-2-1664394580.png"
+      "url": "https:\/\/gogocdn.net\/cover\/spy-x-family-part-2-1664394580.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1520,22 +2141,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/orient-awajishima-gekitou-hen",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/orient-awajishima-gekitou-hen"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/orient-awajishima-gekitou-hen.png"
+      "url": "https:\/\/gogocdn.net\/cover\/orient-awajishima-gekitou-hen.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1547,22 +2168,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/orient",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/orient"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/orient.png"
+      "url": "https:\/\/gogocdn.net\/cover\/orient.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1574,22 +2195,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/jujutsu-kaisen-0",
       "headers": [
         {
           "key": "key",
           "value": "value"
         }
-      ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/jujutsu-kaisen-0"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/jujutsu-kaisen-0.png"
+      "url": "https:\/\/gogocdn.net\/cover\/jujutsu-kaisen-0.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1719,12 +2340,12 @@
       "method": "get"
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken-2nd-season-part-2.png"
+      "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken-2nd-season-part-2.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1736,22 +2357,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/tensei-shitara-slime-datta-ken-2nd-season",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/tensei-shitara-slime-datta-ken-2nd-season",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
       "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken-2nd-season.png"
+      "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken-2nd-season.png",
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1763,22 +2384,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/tensei-shitara-slime-datta-ken",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/tensei-shitara-slime-datta-ken",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/tensei-shitara-slime-datta-ken.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1792,17 +2413,17 @@
     "request": {
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
       "url": "https:\/\/gogoanime.film\/category\/dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv",
       "method": "get"
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/dungeon-ni-deai-wo-motomeru-no-wa-machigatteiru-darou-ka-iv.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -1817,22 +2438,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/plunderer",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/plunderer",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/plunderer.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1844,19 +2465,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.gg\/category\/kuro-no-shoukanshi",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.gg\/category\/kuro-no-shoukanshi",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/kuro-no-shoukanshi.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -1877,13 +2498,13 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.gg\/category\/katekyo-hitman-reborn"
+      "url": "https:\/\/gogoanime.gg\/category\/katekyo-hitman-reborn",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/images\/anime\/K\/Katekyo-Hitman-Reborn.jpg"
+      "url": "https:\/\/gogocdn.net\/images\/anime\/K\/Katekyo-Hitman-Reborn.jpg",
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -1898,22 +2519,22 @@
     "lastSeen": 6,
     "percentageSeen": 0.039418414,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/isekai-meikyuu-de-harem-wo-uncensored",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/isekai-meikyuu-de-harem-wo-uncensored",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/isekai-meikyuu-de-harem-wo-uncensored.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1925,19 +2546,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/overlord-iv",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/overlord-iv",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/overlord-iv.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -1952,22 +2573,22 @@
     "lastSeen": 12,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/overlord-iii",
       "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/overlord-iii",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ]
     },
     "image": {
-      "url": "https:\/\/gogocdn.net\/cover\/overlord-iii.png",
       "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/overlord-iii.png",
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -1979,22 +2600,22 @@
     "lastSeen": 12,
     "percentageSeen": 0.38580677,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/overlord-ii",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/overlord-ii",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/overlord-ii.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2006,22 +2627,22 @@
     "lastSeen": 9,
     "percentageSeen": 1.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/overlord",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/overlord",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/upload\/overlord.jpg",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2033,22 +2654,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2060,22 +2681,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-2nd-season",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-2nd-season",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv-2nd-season.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2087,19 +2708,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/dr-stone-ryuusui",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/dr-stone-ryuusui",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/dr-stone-ryuusui.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -2114,22 +2735,22 @@
     "lastSeen": 18,
     "percentageSeen": 0.8477157,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/summertime-render",
       "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/summertime-render",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ]
     },
     "image": {
-      "url": "https:\/\/gogocdn.net\/cover\/summertime-render.png",
       "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/summertime-render.png",
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2141,22 +2762,22 @@
     "lastSeen": 5,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.film\/category\/tomodachi-game",
       "method": "get",
+      "url": "https:\/\/gogoanime.film\/category\/tomodachi-game",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ]
     },
     "image": {
-      "url": "https:\/\/gogocdn.net\/cover\/tomodachi-game.png",
       "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/tomodachi-game.png",
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2168,22 +2789,22 @@
     "lastSeen": 10,
     "percentageSeen": 1.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.film\/category\/yingxiong-zai-lin",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.film\/category\/yingxiong-zai-lin",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/yingxiong-zai-lin.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2195,22 +2816,22 @@
     "lastSeen": 1,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/arifureta-shokugyou-de-sekai-saikyou-dub",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.cm\/category\/arifureta-shokugyou-de-sekai-saikyou-dub",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/arifureta-shokugyou-de-sekai-saikyou-dub.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2222,22 +2843,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.cm\/category\/arifureta-shokugyou-de-sekai-saikyou-2nd-season-dub",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.cm\/category\/arifureta-shokugyou-de-sekai-saikyou-2nd-season-dub",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/arifureta-shokugyou-de-sekai-saikyou-2nd-season-dub.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2249,19 +2870,19 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/kyokou-suiri",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.cm\/category\/kyokou-suiri",
+      "method": "get"
     },
     "image": {
-      "method": "get",
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/kyokou-suiri.png",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -2276,8 +2897,8 @@
     "lastSeen": 11,
     "percentageSeen": 1.0,
     "request": {
-      "url": "https:\/\/gogoanime.cm\/category\/sabikui-bisco",
       "method": "get",
+      "url": "https:\/\/gogoanime.cm\/category\/sabikui-bisco",
       "headers": [
         {
           "value": "value",
@@ -2286,12 +2907,12 @@
       ]
     },
     "image": {
-      "url": "https:\/\/gogocdn.net\/cover\/sabikui-bisco.png",
       "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/sabikui-bisco.png",
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2309,16 +2930,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/mahoutsukai-reimeiki"
+      "url": "https:\/\/gogoanime.cm\/category\/mahoutsukai-reimeiki",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/mahoutsukai-reimeiki.png"
+      "url": "https:\/\/gogocdn.net\/cover\/mahoutsukai-reimeiki.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2341,11 +2962,11 @@
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/arifureta-shokugyou-de-sekai-saikyou-2nd-season.png"
+      "url": "https:\/\/gogocdn.net\/cover\/arifureta-shokugyou-de-sekai-saikyou-2nd-season.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2372,7 +2993,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2386,12 +3007,12 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/rezero-kara-hajimeru-isekai-seikatsu-shin-henshuu-ban"
+      "url": "https:\/\/gogoanime.cm\/category\/rezero-kara-hajimeru-isekai-seikatsu-shin-henshuu-ban",
+      "method": "get"
     },
     "image": {
       "headers": [],
@@ -2399,7 +3020,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2426,7 +3047,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2440,8 +3061,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.cm\/category\/spy-x-family",
@@ -2453,7 +3074,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2467,20 +3088,20 @@
     "request": {
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/tate-no-yuusha-no-nariagari-2nd-season"
+      "url": "https:\/\/gogoanime.cm\/category\/tate-no-yuusha-no-nariagari-2nd-season",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari-2nd-season.png"
+      "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari-2nd-season.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2494,8 +3115,8 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
       "url": "https:\/\/gogoanime.cm\/category\/haikyuu-karasuno-koukou-vs-shiratorizawa-gakuen-koukou",
@@ -2503,11 +3124,11 @@
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-karasuno-koukou-vs-shiratorizawa-gakuen-koukou.png"
+      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-karasuno-koukou-vs-shiratorizawa-gakuen-koukou.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2521,20 +3142,20 @@
     "request": {
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/haikyuu-to-the-top-2nd-season"
+      "url": "https:\/\/gogoanime.cm\/category\/haikyuu-to-the-top-2nd-season",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-to-the-top-2nd-season.png"
+      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-to-the-top-2nd-season.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2552,16 +3173,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/haikyuu-to-the-top"
+      "url": "https:\/\/gogoanime.cm\/category\/haikyuu-to-the-top",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-to-the-top.png"
+      "url": "https:\/\/gogocdn.net\/cover\/haikyuu-to-the-top.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2588,7 +3209,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2615,7 +3236,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2642,7 +3263,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2669,7 +3290,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2696,7 +3317,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2723,7 +3344,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2750,7 +3371,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2777,7 +3398,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2804,7 +3425,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2831,7 +3452,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2854,11 +3475,11 @@
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv.png"
+      "url": "https:\/\/gogocdn.net\/cover\/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2876,16 +3497,16 @@
           "value": "value"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/nande-koko-ni-sensei-ga"
+      "url": "https:\/\/gogoanime.cm\/category\/nande-koko-ni-sensei-ga",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/nande-koko-ni-sensei-ga.png"
+      "url": "https:\/\/gogocdn.net\/cover\/nande-koko-ni-sensei-ga.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2899,20 +3520,20 @@
     "request": {
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/shikkakumon-no-saikyou-kenja"
+      "url": "https:\/\/gogoanime.cm\/category\/shikkakumon-no-saikyou-kenja",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/shikkakumon-no-saikyou-kenja.png"
+      "url": "https:\/\/gogocdn.net\/cover\/shikkakumon-no-saikyou-kenja.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2930,13 +3551,13 @@
           "value": "value"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/ghost-stories-dub"
+      "url": "https:\/\/gogoanime.cm\/category\/ghost-stories-dub",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/ghost-stories-dub.png"
+      "url": "https:\/\/gogocdn.net\/cover\/ghost-stories-dub.png",
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -2951,22 +3572,22 @@
     "lastSeen": 8,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.cm\/category\/kimetsu-no-yaiba-yuukaku-hen",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.cm\/category\/kimetsu-no-yaiba-yuukaku-hen",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-yuukaku-hen.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -2978,22 +3599,22 @@
     "lastSeen": 9,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.cm\/category\/cannon-busters-dub",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ],
-      "url": "https:\/\/gogoanime.cm\/category\/cannon-busters-dub",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/cannon-busters-dub.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3011,16 +3632,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/fategrand-order-shinsei-entaku-ryouiki-camelot-2-paladin-agateram"
+      "url": "https:\/\/gogoanime.cm\/category\/fategrand-order-shinsei-entaku-ryouiki-camelot-2-paladin-agateram",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/fategrand-order-shinsei-entaku-ryouiki-camelot-2-paladin-agateram.png"
+      "url": "https:\/\/gogocdn.net\/cover\/fategrand-order-shinsei-entaku-ryouiki-camelot-2-paladin-agateram.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3038,16 +3659,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/xian-wang-de-richang-shenghuo-2nd-season"
+      "url": "https:\/\/gogoanime.cm\/category\/xian-wang-de-richang-shenghuo-2nd-season",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/xian-wang-de-richang-shenghuo-2nd-season.png"
+      "url": "https:\/\/gogocdn.net\/cover\/xian-wang-de-richang-shenghuo-2nd-season.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3065,16 +3686,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.cm\/category\/xian-wang-de-richang-shenghuo"
+      "url": "https:\/\/gogoanime.cm\/category\/xian-wang-de-richang-shenghuo",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/xian-wang-de-richang-shenghuo.png"
+      "url": "https:\/\/gogocdn.net\/cover\/xian-wang-de-richang-shenghuo.png",
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3092,13 +3713,13 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.pe\/category\/takt-op-destiny"
+      "url": "https:\/\/gogoanime.pe\/category\/takt-op-destiny",
+      "method": "get"
     },
     "image": {
       "headers": [],
-      "method": "get",
-      "url": "https:\/\/gogocdn.net\/cover\/takt-op-destiny.png"
+      "url": "https:\/\/gogocdn.net\/cover\/takt-op-destiny.png",
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3119,16 +3740,16 @@
           "key": "key"
         }
       ],
-      "method": "get",
-      "url": "https:\/\/gogoanime.pe\/category\/mushoku-tensei-isekai-ittara-honki-dasu-2nd-season"
-    },
-    "image": {
-      "headers": [],
-      "url": "https:\/\/gogocdn.net\/cover\/mushoku-tensei-isekai-ittara-honki-dasu-2nd-season.png",
+      "url": "https:\/\/gogoanime.pe\/category\/mushoku-tensei-isekai-ittara-honki-dasu-2nd-season",
       "method": "get"
     },
+    "image": {
+      "method": "get",
+      "url": "https:\/\/gogocdn.net\/cover\/mushoku-tensei-isekai-ittara-honki-dasu-2nd-season.png",
+      "headers": []
+    },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3140,22 +3761,22 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.pe\/category\/mushoku-tensei-isekai-ittara-honki-dasu",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.pe\/category\/mushoku-tensei-isekai-ittara-honki-dasu",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/mushoku-tensei-isekai-ittara-honki-dasu.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3167,19 +3788,19 @@
     "lastSeen": 1,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.pe\/category\/vivy-fluorite-eyes-song",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.pe\/category\/vivy-fluorite-eyes-song",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/vivy-fluorite-eyes-song.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
       "NOT_STARTED"
@@ -3194,22 +3815,22 @@
     "lastSeen": 11,
     "percentageSeen": 0.0,
     "request": {
+      "method": "get",
+      "url": "https:\/\/gogoanime.pe\/category\/vanitas-no-carte",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ],
-      "url": "https:\/\/gogoanime.pe\/category\/vanitas-no-carte",
-      "method": "get"
+      ]
     },
     "image": {
-      "headers": [],
+      "method": "get",
       "url": "https:\/\/gogocdn.net\/cover\/vanitas-no-carte.png",
-      "method": "get"
+      "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3221,22 +3842,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru",
       "method": "get",
+      "url": "https:\/\/gogoanime.pe\/category\/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ]
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3249,21 +3870,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/code-geass-lelouch-of-the-rebellion",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/anime\/C\/code-geass-lelouch-of-the-rebellion-r2.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3275,19 +3896,19 @@
     "lastSeen": 11,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/boku-dake-ga-inai-machi",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/boku-dake-ga-inai-machi",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/upload\/179004.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3302,22 +3923,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/black-clover-tv",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/black-clover-tv",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/black-clover-tv.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3330,21 +3951,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/deadman-wonderland",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/images\/anime\/D\/deadman-wonderland.jpg",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3371,7 +3992,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3383,22 +4004,22 @@
     "lastSeen": 64,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/naruto",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/naruto",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/anime\/N\/naruto.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3410,22 +4031,22 @@
     "lastSeen": 2,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/kimetsu-no-yaiba-mugen-ressha-hen",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/kimetsu-no-yaiba-mugen-ressha-hen",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/kimetsu-no-yaiba-mugen-ressha-hen.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3437,22 +4058,22 @@
     "lastSeen": 13,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/tate-no-yuusha-no-nariagari",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/tate-no-yuusha-no-nariagari",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/tate-no-yuusha-no-nariagari.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3464,22 +4085,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/world-trigger",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/world-trigger",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/upload\/161762.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3492,21 +4113,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/world-trigger-2nd-season",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/world-trigger-2nd-season.png",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3519,21 +4140,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/world-trigger-3rd-season",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/world-trigger-3rd-season.png",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3546,21 +4167,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/one-piece-movie-14-stampede",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/one-piece-movie-14-stampede.png",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3573,18 +4194,18 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/koutetsujou-no-kabaneri-unato-kessen",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/outetsujou-no-kabaneri-unato-kessen.png",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3600,18 +4221,18 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/koutetsujou-no-kabaneri",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/koutetsujou-no-kabaneri.jpg",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3627,21 +4248,21 @@
     "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.pe\/category\/mieruko-chan",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "method": "get"
     },
     "image": {
       "url": "https:\/\/gogocdn.net\/cover\/mieruko-chan.png",
-      "method": "get",
-      "headers": []
+      "headers": [],
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3668,7 +4289,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3680,22 +4301,22 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/yi-ren-zhi-xia-4th-season",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/yi-ren-zhi-xia-4th-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/yi-ren-zhi-xia-4th-season.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3707,22 +4328,22 @@
     "lastSeen": 11,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/genjitsu-shugi-yuusha-no-oukoku-saikenki",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/genjitsu-shugi-yuusha-no-oukoku-saikenki",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/genjitsu-shugi-yuusha-no-oukoku-saikenki.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3734,22 +4355,22 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3761,8 +4382,8 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season-part-2",
       "method": "get",
+      "url": "https:\/\/gogoanime.pe\/category\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season-part-2",
       "headers": [
         {
           "value": "value",
@@ -3771,12 +4392,12 @@
       ]
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/rezero-kara-hajimeru-isekai-seikatsu-2nd-season-part-2.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3788,19 +4409,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/gakusen-toshi-asterisk-2nd-season",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/gakusen-toshi-asterisk-2nd-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/gakusen-toshi-asterisk-2nd-season.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3815,19 +4436,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/gakusen-toshi-asterisk",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/gakusen-toshi-asterisk",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/upload\/76034.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -3842,22 +4463,22 @@
     "lastSeen": 0,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/cannon-busters",
-      "method": "get",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/cannon-busters",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/cannon-busters.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3884,7 +4505,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3896,22 +4517,22 @@
     "lastSeen": 11,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/btooom",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/btooom",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/images\/anime\/B\/btooom.jpg",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3933,12 +4554,12 @@
       ]
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/100-man-no-inochi-no-ue-ni-ore-wa-tatteiru-2nd-season.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3950,22 +4571,22 @@
     "lastSeen": 11,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/100-man-no-inochi-no-ue-ni-ore-wa-tatteiru",
-      "method": "get",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/100-man-no-inochi-no-ue-ni-ore-wa-tatteiru",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/100-man-no-inochi-no-ue-ni-ore-wa-tatteiru.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -3977,19 +4598,19 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/tantei-wa-mou-shindeiru",
-      "method": "get",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/tantei-wa-mou-shindeiru",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/tantei-wa-mou-shindeiru.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
       "NOT_STARTED"
@@ -4004,22 +4625,22 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/jojos-bizarre-adventure-2012-dub",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/jojos-bizarre-adventure-2012-dub",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/jojos-bizarre-adventure-2012-dub.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4031,22 +4652,22 @@
     "lastSeen": 24,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/boku-no-hero-academia-5th-season",
-      "method": "get",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/boku-no-hero-academia-5th-season",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/boku-no-hero-academia-5th-season.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4058,22 +4679,22 @@
     "lastSeen": 34,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/gogoanime.pe\/category\/shaman-king-2021",
-      "method": "get",
       "headers": [
         {
           "value": "value",
           "key": "key"
         }
-      ]
+      ],
+      "url": "https:\/\/gogoanime.pe\/category\/shaman-king-2021",
+      "method": "get"
     },
     "image": {
+      "headers": [],
       "url": "https:\/\/gogocdn.net\/cover\/shaman-king-2021.png",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4088,8 +4709,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/boku-no-hero-academia-the-movie-2-heroesrising",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
       "method": "get"
@@ -4100,7 +4721,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4109,14 +4730,14 @@
     "title": "ONE PIECE",
     "moduleName": "GoGoAnime",
     "moduleID": "28932498734237987329",
-    "lastSeen": 1068,
-    "percentageSeen": 1.0,
+    "lastSeen": 1066,
+    "percentageSeen": 0.0,
     "request": {
       "url": "https:\/\/gogoanime.ai\/category\/one-piece",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
       "method": "get"
@@ -4142,8 +4763,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/one-punch-man-2nd-season-commemorative-special",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
       "method": "get"
@@ -4154,7 +4775,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4169,8 +4790,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/boruto-naruto-next-generations",
       "headers": [
         {
-          "value": "value",
-          "key": "key"
+          "key": "key",
+          "value": "value"
         }
       ],
       "method": "get"
@@ -4181,7 +4802,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4197,8 +4818,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/kyuukyoku-shinka-shita-full-dive-rpg-ga-genjitsu-yori-mo-kusoge-dattara",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ]
     },
@@ -4208,7 +4829,7 @@
       "method": "get"
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4224,8 +4845,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/tokyo-revengers-uncensored",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ]
     },
@@ -4235,7 +4856,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4251,8 +4872,8 @@
       "url": "https:\/\/gogoanime.ai\/category\/dragon-quest-dai-no-daibouken-2020",
       "headers": [
         {
-          "key": "key",
-          "value": "value"
+          "value": "value",
+          "key": "key"
         }
       ]
     },
@@ -4284,7 +4905,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4306,7 +4927,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4328,7 +4949,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4350,7 +4971,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4372,7 +4993,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4394,7 +5015,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4416,7 +5037,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4438,7 +5059,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4460,7 +5081,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4482,7 +5103,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4504,7 +5125,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4526,7 +5147,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4548,7 +5169,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4570,7 +5191,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4636,7 +5257,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4658,7 +5279,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4702,7 +5323,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4724,7 +5345,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4812,7 +5433,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4834,7 +5455,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4856,7 +5477,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4878,7 +5499,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4900,7 +5521,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4922,7 +5543,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -4988,7 +5609,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5010,7 +5631,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5032,7 +5653,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5054,7 +5675,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5076,7 +5697,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5098,7 +5719,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5120,7 +5741,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5142,7 +5763,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5164,7 +5785,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5186,7 +5807,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5208,7 +5829,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5230,7 +5851,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5252,7 +5873,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5274,7 +5895,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5296,7 +5917,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5318,7 +5939,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5340,7 +5961,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5362,7 +5983,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5374,9 +5995,9 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "headers": [],
       "url": "https:\/\/tapi.shiro.is\/anime\/slug\/mahouka-koukou-no-rettousei-raihousha-hen?token=Yopgjtcustomer7NX1Oe",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "image": {
       "method": "get",
@@ -5384,7 +6005,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5396,8 +6017,8 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/fatestay-night-unlimited-blade-works-tv-dubbed?token=Yopgjtcustomer7NX1Oe",
       "headers": [],
+      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/fatestay-night-unlimited-blade-works-tv-dubbed?token=Yopgjtcustomer7NX1Oe",
       "method": "get"
     },
     "image": {
@@ -5406,7 +6027,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5428,7 +6049,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5450,7 +6071,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5462,8 +6083,8 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/fatestay-night-movie-heavens-feel-ii-lost-butterfly?token=Yopgjtcustomer7NX1Oe",
       "headers": [],
+      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/fatestay-night-movie-heavens-feel-ii-lost-butterfly?token=Yopgjtcustomer7NX1Oe",
       "method": "get"
     },
     "image": {
@@ -5472,7 +6093,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5494,7 +6115,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5516,7 +6137,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5560,7 +6181,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5582,7 +6203,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5604,7 +6225,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5626,7 +6247,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5648,7 +6269,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5670,7 +6291,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5682,8 +6303,8 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
-      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/hitori-no-shita-the-outcast-2nd-season?token=Yopgjtcustomer7NX1Oe",
       "headers": [],
+      "url": "https:\/\/tapi.shiro.is\/anime\/slug\/hitori-no-shita-the-outcast-2nd-season?token=Yopgjtcustomer7NX1Oe",
       "method": "get"
     },
     "image": {
@@ -5692,7 +6313,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5714,7 +6335,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5736,7 +6357,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5758,7 +6379,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5780,7 +6401,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5802,7 +6423,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5824,7 +6445,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5846,7 +6467,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5868,7 +6489,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5890,7 +6511,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5912,7 +6533,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5934,7 +6555,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5956,7 +6577,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5978,7 +6599,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -5990,9 +6611,9 @@
     "lastSeen": -1,
     "percentageSeen": 0.0,
     "request": {
+      "headers": [],
       "url": "https:\/\/tapi.shiro.is\/anime\/slug\/sword-art-online-alternative-gun-gale-online?token=Yopgjtcustomer7NX1Oe",
-      "method": "get",
-      "headers": []
+      "method": "get"
     },
     "image": {
       "method": "get",
@@ -6000,7 +6621,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6022,7 +6643,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6044,7 +6665,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6066,7 +6687,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6088,7 +6709,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6110,7 +6731,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   },
   {
@@ -6132,7 +6753,7 @@
       "headers": []
     },
     "categories": [
-      "COMPLETED"
+      "SEEN"
     ]
   }
 ]

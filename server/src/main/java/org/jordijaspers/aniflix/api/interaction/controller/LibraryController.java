@@ -8,9 +8,11 @@ import org.jordijaspers.aniflix.api.interaction.model.request.KetsuData;
 import org.jordijaspers.aniflix.api.interaction.model.request.LibrarySearchRequest;
 import org.jordijaspers.aniflix.api.interaction.service.LibraryService;
 import org.jordijaspers.aniflix.common.mappers.model.PageResource;
+import org.jordijaspers.aniflix.security.principal.UserTokenPrincipal;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,8 +63,9 @@ public class LibraryController {
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(path = LIBRARY_IMPORT_PATH, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> importLibrary(@RequestBody final List<KetsuData> library) {
-        libraryService.importLibrary(library);
+    public ResponseEntity<?> importLibrary(@RequestBody final List<KetsuData> library,
+                                           @AuthenticationPrincipal final UserTokenPrincipal principal) {
+        libraryService.importLibrary(library, principal.getUser());
         return ResponseEntity.status(OK).build();
     }
 }

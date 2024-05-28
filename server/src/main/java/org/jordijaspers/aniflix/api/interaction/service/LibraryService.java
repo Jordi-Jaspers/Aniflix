@@ -68,8 +68,7 @@ public class LibraryService {
     }
 
     @Async
-    public void importLibrary(final List<KetsuData> library) {
-        final User user = getLoggedInUser();
+    public void importLibrary(final List<KetsuData> library, final User user) {
         LOGGER.info("Attempting to import library with '{}' entries", library.size());
         int failed = 0;
         final long start = System.currentTimeMillis();
