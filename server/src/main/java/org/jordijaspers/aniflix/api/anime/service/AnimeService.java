@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The service which handles the anime data.
@@ -79,20 +80,21 @@ public class AnimeService {
     public Anime findDetailsByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime details with Anilist ID '{}'", anilistId);
         final Anime anime = animeRepository.findDetailsByAnilistId(anilistId)
-                .filter(entry -> !entry.getEpisodes().isEmpty())
+                .filter(entry -> !isEmpty(entry.getEpisodes()) && entry.getEpisodes().size() == entry.getTotalEpisodes())
                 .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
 
         userInteractionEnhancer.applyAnime(anime);
-        synchronizationService.synchronizeData(anime);
+        synchronizationService.synchronizeData(anilistId);
         return anime;
     }
 
     public Anime findInfoByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime info with Anilist ID '{}'", anilistId);
         final Anime anime = animeRepository.findInfoByAnilistId(anilistId)
-                .orElseGet(() -> consumetService.getAnimeInfo(anilistId));
+                .orElseGet(() -> saveAnime(consumetService.getAnimeInfo(anilistId)));
 
         userInteractionEnhancer.applyAnime(anime);
+        synchronizationService.synchronizeData(anilistId);
         return anime;
     }
 
@@ -114,7 +116,6 @@ public class AnimeService {
                 });
 
         userInteractionEnhancer.applyAnime(anime);
-        synchronizationService.synchronizeData(anime);
         return anime;
     }
 

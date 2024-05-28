@@ -54,7 +54,7 @@
     <logger name="org.hawaiiframework" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.hawaiiframework.async" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.hawaiiframework.security" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
-    <logger name="org.hawaiiframework.logging" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.hawaiiframework.logging" level="${HAWAII_LOG_LEVEL:-INFO}"/>
     <logger name="org.hawaiiframework.logging.config.RequestVoter" level="${HAWAII_LOG_LEVEL:-ERROR}"/>
     <logger name="org.hawaiiframework.logging.sql" level="${HAWAII_LOG_LEVEL:-ERROR}"/>
     <logger name="org.hawaiiframework.web.filter" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>

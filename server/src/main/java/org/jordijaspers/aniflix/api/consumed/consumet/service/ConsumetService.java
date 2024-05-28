@@ -8,6 +8,7 @@ import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
 import org.jordijaspers.aniflix.api.anime.model.StreamingSource;
 import org.jordijaspers.aniflix.api.anime.model.constant.Genres;
 import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
@@ -62,10 +63,10 @@ public class ConsumetService {
 
     private final ScheduleMapper scheduleMapper;
 
-    @Cacheable(value = "recentEpisodes", key = "#perPage + #page", unless = "#result.size() == 0")
     public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
         LOGGER.info("[Consumet API] Fetching recent episodes from Anilist.");
-        return consumetRepository.getRecentEpisodes(perPage, page).getResults();
+        final AnilistProviders provider = getActiveProvider();
+        return consumetRepository.getRecentEpisodes(perPage, page, provider.getProvider()).getResults();
     }
 
     @Cacheable(value = "popularAnime", key = "#perPage + #page", unless = "#result.getTotalElements() == 0")
@@ -89,14 +90,16 @@ public class ConsumetService {
         return animeMapper.toOverviewPage(animeByGenre);
     }
 
-    @Cacheable(value = "animeDetails", key = "#anilistId")
     public Anime getAnimeDetails(final Integer anilistId) {
         LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}'.", anilistId);
         final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
-        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
+        anime.getEpisodes().forEach(episode -> {
+            episode.setActiveEpisodeId(getActiveProvider());
+            episode.setAnime(anime);
+        });
         return provisionDataFromJikan(anime);
     }
 
@@ -116,6 +119,7 @@ public class ConsumetService {
         return provisionDataFromJikan(anime);
     }
 
+    @Cacheable(value = "animeInfo", key = "#anilistId")
     public Anime getAnimeInfo(final Integer anilistId) {
         LOGGER.info("[Consumet API] Fetching anime info for Anilist ID '{}'.", anilistId);
         final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))

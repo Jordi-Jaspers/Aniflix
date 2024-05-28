@@ -18,7 +18,7 @@
 
 		const body: AnimeRequest = {
 			page: page,
-			perPage: 8,
+			perPage: 15,
 			title: value,
 			genre: null,
 			season: null
@@ -53,7 +53,7 @@
 				<ChevronRight class="h-4 w-4" />
 			</button>
 		</div>
-		<div class="grid gap-4 px-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+		<div class="grid gap-4 px-4" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each searchResults as result}
 				<SearchResult {result} />
 			{/each}

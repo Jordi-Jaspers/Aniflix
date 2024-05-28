@@ -217,12 +217,13 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
-    public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page) {
+    public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page, final String provider) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(RECENT_EPISODES)
                         .queryParam(PAGE_PARAM, page)
                         .queryParam(PER_PAGE_PARAM, results)
+                        .queryParam(PROVIDER_PARAM, provider)
                         .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, this::handleConsumetError)

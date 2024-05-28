@@ -18,7 +18,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus;
 import org.jordijaspers.aniflix.api.anime.model.constant.MediaTypes;
 import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
@@ -36,6 +35,7 @@ import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
 import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The anime model which contains all the information about the anime in the database.
@@ -104,7 +104,6 @@ public class Anime implements Serializable, PageableItem {
     @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Episode> episodes = new HashSet<>();
 
-    @UpdateTimestamp
     @Column(name = "updated")
     private LocalDateTime updated;
 
@@ -141,11 +140,17 @@ public class Anime implements Serializable, PageableItem {
      * recently updated (15 minutes) we consider it complete for now.
      */
     public boolean isCompleted() {
-        final boolean isRecentlyUpdated = nonNull(updated) && updated.isAfter(LocalDateTime.now().minusMinutes(15));
         return status.equals(COMPLETED)
+                && !isEmpty(episodes)
                 && episodes.size() == totalEpisodes
-                && areEpisodesCompleted()
-                || isRecentlyUpdated;
+                && areEpisodesCompleted();
+    }
+
+    /**
+     * Indicates if the anime is recently updated.
+     */
+    public boolean isRecentlyUpdated() {
+        return nonNull(updated) && updated.isAfter(LocalDateTime.now().minusMinutes(15));
     }
 
     /**
@@ -164,6 +169,5 @@ public class Anime implements Serializable, PageableItem {
     private boolean areEpisodesCompleted() {
         return episodes.stream().allMatch(Episode::isCompleted);
     }
-
 }
 

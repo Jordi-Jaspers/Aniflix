@@ -81,7 +81,7 @@ public interface ConsumetRepository {
      * @param results The number of results to return.
      * @param page    The page to return.
      */
-    ResultPage<AnilistRecentEpisode> getRecentEpisodes(int results, int page);
+    ResultPage<AnilistRecentEpisode> getRecentEpisodes(int results, int page, String provider);
 
     /**
      * Returns a list of Anime TV series that match the given genre.

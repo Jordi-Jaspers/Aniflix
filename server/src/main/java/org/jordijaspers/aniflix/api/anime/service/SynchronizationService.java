@@ -98,8 +98,9 @@ public class SynchronizationService {
     @Async
     @Transactional
     @LogExecutionTime
-    public void synchronizeData(final Anime anime) {
-        if (isNull(anime) || anime.isCompleted()) {
+    public void synchronizeData(final Integer anilistId) {
+        final Anime anime = animeRepository.findDetailsByAnilistId(anilistId).orElse(null);
+        if (isNull(anime) || anime.isRecentlyUpdated() || anime.isCompleted()) {
             LOGGER.info("Anime with id '{}' is already completed or null, skipping synchronization", anime.getAnilistId());
             return;
         }
@@ -134,6 +135,7 @@ public class SynchronizationService {
             gogoAnimeInfo.setEpisodes(episodeRepository.findAllByAnime_AnilistId(anime.getAnilistId()));
 
             // Save the updated anime with episode IDs transferred
+            gogoAnimeInfo.setUpdated(LocalDateTime.now());
             animeRepository.save(gogoAnimeInfo);
             LOGGER.info("Synchronization completed for anime with id '{}'", anime.getAnilistId());
         } catch (final Exception exception) {

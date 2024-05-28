@@ -16,13 +16,12 @@
 	let currentPage: Selected<number> = { value: 1, label: `Episodes 1 - ${pageSize}` };
 
 	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_DETAILS_PATH.replace('{id}', anilistId.toString()), {
+		const response: Response = await curl(SERVER_URLS.ANIME_EPISODES_PATH.replace('{id}', anilistId.toString()), {
 			method: 'GET'
 		});
 
 		if (response.ok) {
-			const anime: AnimeResponse = await response.json();
-			episodes = anime.episodes;
+			episodes = await response.json();
 			totalPages = Math.ceil(episodes.length / pageSize);
 			isLoading = false;
 		} else {
