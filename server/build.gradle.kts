@@ -147,7 +147,7 @@ dependencies {
     implementation(group = "commons-io", name = "commons-io", version = "2.16.1")
 
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
-    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.39.1")
+    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.39.2")
 
     // Hawaii-framework must-have logging dependencies.
     implementation(group = "org.slf4j", name = "jcl-over-slf4j", version = "2.1.0-alpha1")
