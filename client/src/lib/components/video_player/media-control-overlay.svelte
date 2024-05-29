@@ -54,8 +54,6 @@
 	onDestroy(() => {
 		clearTimeout(mouseMoveTimer);
 	});
-
-	$: console.log('currentUrl', currentUrl);
 </script>
 
 <div

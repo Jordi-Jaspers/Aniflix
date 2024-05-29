@@ -7,16 +7,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
+import org.jordijaspers.aniflix.api.progress.model.EpisodeProgress;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -51,6 +56,7 @@ public class Episode implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @OrderBy("number ASC")
     @Column(name = "number")
     private int number;
 
@@ -65,6 +71,12 @@ public class Episode implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Anime anime;
+
+    @OneToMany(mappedBy = "episode", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<EpisodeProgress> episodeProgresses = new ArrayList<>();
+
+    @Transient
+    private int lastSeen;
 
     @Transient
     private String episodeId;

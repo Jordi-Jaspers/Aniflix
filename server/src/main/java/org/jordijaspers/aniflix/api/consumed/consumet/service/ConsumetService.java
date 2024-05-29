@@ -36,12 +36,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.getProviderByProvider;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
+import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.STREAMING_LINKS_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
 
 /**
@@ -115,7 +117,10 @@ public class ConsumetService {
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
-        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
+        anime.getEpisodes().forEach(episode -> {
+            episode.setActiveEpisodeId(getActiveProvider());
+            episode.setAnime(anime);
+        });
         return provisionDataFromJikan(anime);
     }
 
@@ -144,10 +149,13 @@ public class ConsumetService {
         return scheduleMapper.toNextAiringEpisode(anilistInfo);
     }
 
-    @Cacheable(value = "streamingLinks", key = "#id + #provider")
+    @Cacheable(value = "streamingLinks", key = "#id + #provider", unless = "#result.sources.isEmpty()")
     public StreamingLinks getStreamingsLinks(final String id, final String provider) {
         LOGGER.info("[Consumet API] Fetching streaming links for episode ID '{}' from '{}'.", id, provider);
         final AnilistStreamingLinks anilistLinks = consumetRepository.getEpisodeLinks(id, provider);
+        if (isNull(anilistLinks) || isNull(anilistLinks.getSources())) {
+            throw new DataNotFoundException(STREAMING_LINKS_NOT_FOUND_ERROR);
+        }
 
         final Map<String, Integer> qualityOrder = Map.of(
                 "1080p", 0,
@@ -174,7 +182,10 @@ public class ConsumetService {
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
 
-        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getProviderByProvider(provider)));
+        anime.getEpisodes().forEach(episode -> {
+            episode.setActiveEpisodeId(getProviderByProvider(provider));
+            episode.setAnime(anime);
+        });
         return provisionDataFromJikan(anime);
     }
 

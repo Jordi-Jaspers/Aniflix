@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Hls from 'hls.js';
 	import { goto } from '$app/navigation';
-	import { CLIENT_URLS } from '$lib/api/paths';
+	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
 	import { ArrowLeft } from 'lucide-svelte';
 	import { NextEpisode, PreviousEpisode } from '$lib/components/video_player/index';
+	import { curl } from '$lib/api/client';
+	import { onMount } from 'svelte';
 
 	export let episode: EpisodeResponse;
 
@@ -23,14 +25,44 @@
 			hls.attachMedia(video);
 			hls.on(Hls.Events.MANIFEST_PARSED, function () {
 				video.play();
+				video.currentTime = episode.progress * video.duration;
 			});
 		} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 			video.src = currentResolution;
 			video.addEventListener('loadedmetadata', function () {
 				video.play();
+				video.currentTime = episode.progress * video.duration;
 			});
 		}
 	}
+
+	function savePlaybackProgress(percentageSeen: number) {
+		if (episode && episode.anilistId !== 0) {
+			const request: UpdateEpisodeProgressRequest = {
+				anilistId: episode?.anilistId,
+				episode: episode?.episodeNumber,
+				lastSeen: Math.round(percentageSeen * 100)
+			};
+
+			curl(SERVER_URLS.EPISODE_PROGRESS_PATH, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(request)
+			});
+		}
+	}
+
+	function handleTimeUpdate() {
+		if (video.currentTime % 10 === 0) {
+			savePlaybackProgress(video.currentTime / video.duration);
+		}
+	}
+
+	onMount(() => {
+		video.addEventListener('timeupdate', handleTimeUpdate);
+	});
 
 	$: if (episode) {
 		currentResolution = episode.streamingLinks.sources[0].src;

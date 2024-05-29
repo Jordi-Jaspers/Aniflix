@@ -101,6 +101,10 @@ public final class Paths {
 
     public static final String EPISODE_PATH = EPISODES_PATH + "/{episodeNumber}";
 
+    /* ------------------------------- PROGRESS ENDPOINTS ------------------------------- */
+
+    public static final String PROGRESS_PATH = BASE_PATH + "/episode/progress";
+
     /* ------------------------------- NEWS ENDPOINTS ------------------------------- */
 
     public static final String NEWS_PATH = BASE_PATH + "/news";

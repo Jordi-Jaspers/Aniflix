@@ -17,11 +17,22 @@ import java.util.Set;
 public interface EpisodeRepository extends JpaRepository<Episode, Integer> {
 
     @LogExecutionTime
+    boolean existsByAnime_AnilistIdAndNumber(int anilistId, int number);
+
+    @LogExecutionTime
     @Query("FROM Episode episode "
             + "LEFT JOIN FETCH episode.anime anime "
-            + "WHERE anime.anilistId = ?1 AND episode.number = ?2")
+            + "LEFT JOIN FETCH episode.episodeProgresses episodeProgresses "
+            + "LEFT JOIN FETCH episodeProgresses.user user "
+            + "WHERE anime.anilistId = ?1 AND episode.number = ?2 ")
     Optional<Episode> findEpisodeByEpisodeAndAnilistId(int anilistId, int episodeNumber);
 
     @LogExecutionTime
-    Set<Episode> findAllByAnime_AnilistId(Integer anilistId);
+    @Query("FROM Episode episode "
+            + "LEFT JOIN FETCH episode.anime anime "
+            + "LEFT JOIN FETCH episode.episodeProgresses episodeProgresses "
+            + "LEFT JOIN FETCH episodeProgresses.user user "
+            + "WHERE anime.anilistId = ?1 "
+            + "ORDER BY episode.number")
+    Set<Episode> findAllByAnilistId(Integer anilistId);
 }

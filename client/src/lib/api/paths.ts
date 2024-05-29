@@ -1,6 +1,5 @@
 // Base URL for the API
-const SERVER_BASE_URL: string = import.meta.env.VITE_SERVER_BASE_URL + '/api';
-
+export const SERVER_BASE_URL: string = import.meta.env.VITE_SERVER_BASE_URL + '/api';
 export const SERVER_URLS = {
 	SERVER_BASE_URL,
 	AUTH_PATH: `${SERVER_BASE_URL}/auth`,
@@ -35,7 +34,9 @@ export const SERVER_URLS = {
 	NEWS_DETAILS_PATH: `${SERVER_BASE_URL}/news/{id}`,
 	REQUEST_PASSWORD_RESET_PATH: `${SERVER_BASE_URL}/public/reset_password/request`,
 	PUBLIC_PASSWORD_RESET_PATH: `${SERVER_BASE_URL}/public/reset_password`,
-	UPDATE_PASSWORD_PATH: `${SERVER_BASE_URL}/password`
+	UPDATE_PASSWORD_PATH: `${SERVER_BASE_URL}/password`,
+	LIBRARY_IMPORT_PATH: `${SERVER_BASE_URL}/library/import`,
+	EPISODE_PROGRESS_PATH: `${SERVER_BASE_URL}/episode/progress`
 };
 
 export const CLIENT_URLS = {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { LoadingScreen } from '$lib/components/general';
-	import { EmailSettings, PasswordSettings, ProfileSettings } from '$lib/components/account/index.js';
+	import { EmailSettings, LibrarySettings, PasswordSettings, ProfileSettings } from '$lib/components/account/index.js';
 
 	let isLoading: boolean;
 </script>
@@ -21,5 +21,6 @@
 		<ProfileSettings />
 		<EmailSettings />
 		<PasswordSettings />
+		<LibrarySettings />
 	</div>
 </div>

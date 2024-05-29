@@ -29,4 +29,6 @@ public class EpisodeResponse {
     private long duration;
 
     private StreamingLinksResponse streamingLinks;
+
+    private int lastSeen;
 }

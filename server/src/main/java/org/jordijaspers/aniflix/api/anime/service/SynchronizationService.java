@@ -132,7 +132,7 @@ public class SynchronizationService {
 
             // Update the anime with the updated data
             gogoAnimeInfo.setGenres(anime.getGenres());
-            gogoAnimeInfo.setEpisodes(episodeRepository.findAllByAnime_AnilistId(anime.getAnilistId()));
+            gogoAnimeInfo.setEpisodes(episodeRepository.findAllByAnilistId(anime.getAnilistId()));
 
             // Save the updated anime with episode IDs transferred
             gogoAnimeInfo.setUpdated(LocalDateTime.now());

@@ -41,6 +41,12 @@ class ValidationField {
 }
 
 // ======================== REQUESTS ========================
+class UpdateEpisodeProgressRequest {
+	anilistId: number;
+	episode: number;
+	lastSeen: number;
+}
+
 class UpdatePasswordRequest {
 	oldPassword: string;
 	newPassword: string;
@@ -208,6 +214,7 @@ class EpisodeResponse {
 	airDate: Date;
 	duration: number;
 	streamingLinks: StreamingLinksResponse;
+	lastSeen: number;
 }
 
 class StreamingLinksResponse {

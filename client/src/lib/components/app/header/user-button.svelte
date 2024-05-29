@@ -7,6 +7,9 @@
 	import { goto } from '$app/navigation';
 	import { useUserDetails } from '$lib/components/store/store';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { toggleMode } from 'mode-watcher';
+	import Sun from 'lucide-svelte/icons/sun';
+	import Moon from 'lucide-svelte/icons/moon';
 
 	let isOpen: boolean = false;
 	function handleClick() {
@@ -59,7 +62,6 @@
 				<span class="text-xs font-bold">{user.firstName} {user.lastName}</span>
 				<span class="text-[0.5em] font-extralight">{user.authorities}</span>
 			</div>
-
 			<ChevronRight class="hidden h-4 w-4 duration-200 md:flex {isOpen && 'rotate-90'}" />
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content class="mt-4 w-fit min-w-[20%]">
@@ -96,14 +98,17 @@
 			</DropdownMenu.Group>
 			<DropdownMenu.Separator />
 			<DropdownMenu.Group>
-				<DropdownMenu.Item
-					data-sveltekit-preload-data="hover"
-					on:click={() => {
-						goto(CLIENT_URLS.ACCOUNT_URL);
-					}}
-				>
+				<DropdownMenu.Item data-sveltekit-preload-data="hover" on:click={() => goto(CLIENT_URLS.ACCOUNT_URL)}>
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
+				</DropdownMenu.Item>
+			</DropdownMenu.Group>
+			<DropdownMenu.Separator />
+			<DropdownMenu.Group>
+				<DropdownMenu.Item on:click={toggleMode}>
+					<Sun class="mr-2 h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+					<Moon class="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+					<span>Toggle Mode</span>
 				</DropdownMenu.Item>
 				<DropdownMenu.Item href={import.meta.env.VITE_STRIPE_DONATION_URL}>
 					<Coffee class="mr-2 h-4 w-4" />
@@ -113,7 +118,7 @@
 			<DropdownMenu.Separator />
 			<DropdownMenu.Item class="data-[highlighted]:bg-primary/75" href="{import.meta.env.VITE_PROJECT_REPOSITORY}/issues">
 				<Bug class="mr-2 h-4 w-4" />
-				<span>Report Bug/Features</span>
+				<span>Bug Report</span>
 			</DropdownMenu.Item>
 			<DropdownMenu.Item on:click={() => logout()} class="data-[highlighted]:bg-primary/75">
 				<LogOut class="mr-2 h-4 w-4" />

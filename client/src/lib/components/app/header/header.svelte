@@ -5,7 +5,7 @@
 	import UserButton from '$lib/components/app/header/user-button.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { LightSwitch } from '$lib/components/general/index.js';
+	import { ProviderStatusButton } from '$lib/components/general/index.js';
 	import { Badge } from '$lib/components/ui/badge';
 
 	let currentPath = '';
@@ -50,7 +50,7 @@
 
 	<div class="flex h-full flex-row items-center md:space-x-2">
 		<SearchBar />
-		<LightSwitch />
+		<ProviderStatusButton />
 		<UserButton />
 	</div>
 </header>
