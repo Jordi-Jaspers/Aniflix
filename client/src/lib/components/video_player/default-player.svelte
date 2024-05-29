@@ -4,10 +4,14 @@
 	import type { SveltePlayerRef } from 'svelte-player/dist/types';
 	import type { Selected } from 'bits-ui';
 	import { MediaControlOverlay } from '$lib/components/video_player';
+	import { curl } from '$lib/api/client';
+	import { SERVER_URLS } from '$lib/api/paths';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let episode: EpisodeResponse;
-	export let isReady: boolean;
+	export let isReady: boolean = false;
 
+	let interval: Timer;
 	let playerRef: SveltePlayerRef;
 	let prevUrl: PlayerUrl = '';
 	let currentUrl: PlayerUrl = '';
@@ -24,6 +28,24 @@
 	let duration: number = 0;
 	let playbackRate: number = 1.0;
 	let showVolume: boolean = false;
+
+	function savePlaybackProgress(percentageSeen: number) {
+		if (episode && episode.anilistId !== 0) {
+			const request: UpdateEpisodeProgressRequest = {
+				anilistId: episode?.anilistId,
+				episode: episode?.episodeNumber,
+				lastSeen: Math.round(percentageSeen * 100)
+			};
+
+			curl(SERVER_URLS.EPISODE_PROGRESS_PATH, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(request)
+			});
+		}
+	}
 
 	function load(requestUrl: PlayerUrl) {
 		prevUrl = currentUrl;
@@ -48,7 +70,6 @@
 
 	function handleReady() {
 		playing = true;
-		isReady = true;
 	}
 
 	// We only want to update time slider if we are not currently seeking
@@ -63,6 +84,23 @@
 	function handleDuration(event: CustomEvent<number | null>) {
 		duration = event.detail ?? 0;
 	}
+
+	$: if (played) {
+		console.log('Played:', played);
+		isReady = true;
+	}
+
+	$: if (playerRef && isReady) {
+		playerRef.seekTo(parseFloat(String(episode.lastSeen / 100)));
+	}
+
+	onMount(() => {
+		interval = setInterval(() => savePlaybackProgress(played), 5000);
+	});
+
+	onDestroy(() => {
+		clearInterval(interval);
+	});
 
 	$: onPrevURLStateChange(prevUrl);
 	$: if (currentUrl) load(currentUrl);

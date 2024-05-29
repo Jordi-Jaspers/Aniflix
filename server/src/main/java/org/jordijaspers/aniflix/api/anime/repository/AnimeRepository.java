@@ -20,7 +20,8 @@ public interface AnimeRepository extends JpaRepository<Anime, Integer>, JpaSpeci
             + "LEFT JOIN FETCH a.genres genres "
             + "LEFT JOIN FETCH a.episodes episodes "
             + "LEFT JOIN FETCH a.interactions interactions "
-            + "WHERE SOUNDEX(a.title) = SOUNDEX(?1)")
+            + "WHERE SOUNDEX(a.title) = SOUNDEX(?1)"
+            + "ORDER BY episodes.number")
     Optional<Anime> findByTitle(String title);
 
     @LogExecutionTime
@@ -28,7 +29,8 @@ public interface AnimeRepository extends JpaRepository<Anime, Integer>, JpaSpeci
             + "LEFT JOIN FETCH a.genres genres "
             + "LEFT JOIN FETCH a.episodes episodes "
             + "LEFT JOIN FETCH a.interactions interactions "
-            + "WHERE a.anilistId = ?1")
+            + "WHERE a.anilistId = ?1 "
+            + "ORDER BY episodes.number")
     Optional<Anime> findDetailsByAnilistId(int anilistId);
 
     @LogExecutionTime

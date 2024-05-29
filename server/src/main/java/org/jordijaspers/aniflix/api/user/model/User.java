@@ -14,11 +14,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NaturalId;
 import org.jordijaspers.aniflix.api.authentication.model.Role;
+import org.jordijaspers.aniflix.api.interaction.model.Interaction;
+import org.jordijaspers.aniflix.api.progress.model.EpisodeProgress;
 import org.jordijaspers.aniflix.api.token.model.Token;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,6 +42,7 @@ import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION
 @Entity
 @NoArgsConstructor
 @Table(name = "user")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = {"password", "roles"})
 public class User implements UserDetails {
 
@@ -46,6 +50,7 @@ public class User implements UserDetails {
     private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -83,6 +88,12 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Token> tokens = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<EpisodeProgress> episodeProgresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Interaction> interactions = new ArrayList<>();
 
     @Transient
     private Token accessToken;

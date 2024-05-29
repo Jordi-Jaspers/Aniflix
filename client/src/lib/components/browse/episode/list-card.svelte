@@ -33,6 +33,14 @@
 									TBD
 								{/if}
 							</p>
+							{#if episode.lastSeen !== 0}
+								<span class="text-muted-foreground">•</span>
+								<p class="">
+									Continue at {Math.floor((episode.duration * (episode.lastSeen / 100)) / 60)}:{Math.floor(
+										(episode.duration * (episode.lastSeen / 100)) % 60
+									)}
+								</p>
+							{/if}
 						</div>
 					</div>
 				</div>

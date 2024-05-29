@@ -36,7 +36,7 @@
 	$: isLoading = !collection || collection.length === 0;
 </script>
 
-{#if collection}
+{#if collection && collection.length > 0}
 	{#each collection as anime}
 		<Item class="basis-auto">
 			<div class="flex h-full w-48 flex-col overflow-hidden rounded-t-[0.75rem] md:w-56">
