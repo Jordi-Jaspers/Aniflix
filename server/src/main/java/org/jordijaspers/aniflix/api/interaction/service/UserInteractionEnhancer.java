@@ -2,6 +2,7 @@ package org.jordijaspers.aniflix.api.interaction.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
+import org.jordijaspers.aniflix.api.anime.model.InteractionProperty;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
 import org.jordijaspers.aniflix.api.interaction.repository.InteractionRepository;
 import org.jordijaspers.aniflix.api.recommendation.model.Recommendation;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -29,48 +31,35 @@ public class UserInteractionEnhancer {
     private final InteractionRepository interactionRepository;
 
     public void applyAnime(final Anime anime) {
-        applyAnime(List.of(anime));
+        applyInteractions(List.of(anime), Anime::getAnilistId);
     }
 
     public void applyAnime(final Page<Anime> animePage) {
-        applyAnime(animePage.getContent());
+        applyInteractions(animePage.getContent(), Anime::getAnilistId);
     }
 
     public void applyAnime(final List<Anime> collection) {
-        if (isEmpty(collection)) {
-            return;
-        }
-
-        final List<Integer> anilistIds = collection.stream().map(Anime::getAnilistId).toList();
-        final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(anilistIds, getLoggedInUser());
-        interactions.forEach(interaction -> {
-            collection.stream()
-                    .filter(anime -> Objects.equals(anime.getAnilistId(), interaction.getAnime().getAnilistId()))
-                    .findFirst()
-                    .ifPresent(anime -> {
-                        LOGGER.debug("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
-                        anime.setLiked(interaction.isLiked());
-                        anime.setInLibrary(interaction.isInLibrary());
-                        anime.setWatchStatus(interaction.getWatchStatus());
-                        anime.setLastSeenEpisode(interaction.getLastSeenEpisode());
-                        anime.setLastInteraction(interaction.getLastInteraction());
-                    });
-        });
+        applyInteractions(collection, Anime::getAnilistId);
     }
 
     public void applyRecommendations(final List<Recommendation> collection) {
+        applyInteractions(collection, Recommendation::getAnilistId);
+    }
+
+    private <T extends InteractionProperty> void applyInteractions(final List<T> collection, final Function<T, Integer> getAnilistId) {
         if (isEmpty(collection)) {
             return;
         }
 
-        final List<Integer> anilistIds = collection.stream().map(Recommendation::getAnilistId).toList();
+        final List<Integer> anilistIds = collection.stream().map(getAnilistId).toList();
         final List<Interaction> interactions = interactionRepository.findAllByAnilistIdIn(anilistIds, getLoggedInUser());
+
         interactions.forEach(interaction -> {
             collection.stream()
-                    .filter(anime -> Objects.equals(anime.getAnilistId(), interaction.getAnime().getAnilistId()))
+                    .filter(anime -> Objects.equals(getAnilistId.apply(anime), interaction.getAnime().getAnilistId()))
                     .findFirst()
                     .ifPresent(anime -> {
-                        LOGGER.debug("Applying user interactions to anime with ID '{}'.", anime.getAnilistId());
+                        LOGGER.debug("Applying user interactions to anime with ID '{}'.", getAnilistId.apply(anime));
                         anime.setLiked(interaction.isLiked());
                         anime.setInLibrary(interaction.isInLibrary());
                         anime.setWatchStatus(interaction.getWatchStatus());

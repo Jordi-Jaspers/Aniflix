@@ -13,27 +13,22 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus;
 import org.jordijaspers.aniflix.api.anime.model.constant.MediaTypes;
-import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
 import org.jordijaspers.aniflix.api.genre.model.Genre;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
-import org.jordijaspers.aniflix.common.mappers.model.PageableItem;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
-import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -45,8 +40,8 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 @NoArgsConstructor
 @Table(name = "anime")
 @ToString(exclude = "interactions")
-@EqualsAndHashCode(of = "anilistId")
-public class Anime implements Serializable, PageableItem {
+@EqualsAndHashCode(of = "anilistId", callSuper = false)
+public class Anime extends InteractionProperty {
 
     @Serial
     private static final long serialVersionUID = SERIAL_VERSION_UID;
@@ -113,25 +108,11 @@ public class Anime implements Serializable, PageableItem {
     @OneToMany(mappedBy = "anime", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Interaction> interactions = new HashSet<>();
 
-    @Transient
-    private boolean liked;
-
-    @Transient
-    private boolean inLibrary;
-
-    @Transient
-    private int lastSeenEpisode;
-
-    @Transient
-    private WatchStatus watchStatus = NOT_STARTED;
-
-    @Transient
-    private LocalDateTime lastInteraction;
-
     /**
      * Constructor for JPA.
      */
     public Anime(final int anilistId) {
+        this();
         this.anilistId = anilistId;
     }
 

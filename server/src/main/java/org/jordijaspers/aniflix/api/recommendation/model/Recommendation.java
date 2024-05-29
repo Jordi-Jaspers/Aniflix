@@ -1,21 +1,23 @@
 package org.jordijaspers.aniflix.api.recommendation.model;
 
-import jakarta.persistence.Transient;
 import lombok.Data;
-import org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.jordijaspers.aniflix.api.anime.model.InteractionProperty;
 
 import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
-import static org.jordijaspers.aniflix.api.anime.model.constant.WatchStatus.NOT_STARTED;
 import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * The recommendation model which represents a recommendation.
  */
 @Data
-public class Recommendation implements Serializable {
+@ToString
+@NoArgsConstructor
+@EqualsAndHashCode(of = "anilistId", callSuper = false)
+public class Recommendation extends InteractionProperty {
 
     @Serial
     private static final long serialVersionUID = SERIAL_VERSION_UID;
@@ -38,18 +40,8 @@ public class Recommendation implements Serializable {
 
     private String type;
 
-    @Transient
-    private boolean liked;
-
-    @Transient
-    private boolean inLibrary;
-
-    @Transient
-    private int lastSeenEpisode;
-
-    @Transient
-    private WatchStatus watchStatus = NOT_STARTED;
-
-    @Transient
-    private LocalDateTime lastInteraction;
+    public Recommendation(final Integer anilistId) {
+        this();
+        this.anilistId = anilistId;
+    }
 }
