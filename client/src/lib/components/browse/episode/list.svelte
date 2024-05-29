@@ -55,7 +55,7 @@
 			</Trigger>
 			<Content class="z-[1000] max-h-[25%] w-full overflow-y-auto scroll-smooth">
 				{#each Array.from({ length: totalPages }, (_, i) => i + 1) as i}
-					<Item class="min-w-fit w-full" value={i} label="Episodes {lowerBound(i)} - {upperBound(i)}" />
+					<Item class="w-full min-w-fit" value={i} label="Episodes {lowerBound(i)} - {upperBound(i)}" />
 				{/each}
 			</Content>
 		</Root>
