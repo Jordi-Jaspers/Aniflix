@@ -44,6 +44,8 @@ public class EpisodeService {
 
     private final InteractionService interactionService;
 
+    private final SynchronizationService synchronizationService;
+
     private final ConsumetService consumetService;
 
     public Set<Episode> getEpisodesOfAnime(final int anilistId) {
@@ -102,12 +104,15 @@ public class EpisodeService {
     private Episode getEpisodeFromAPI(final int anilistId, final int episodeNumber, final AnilistProviders provider) {
         LOGGER.info("Episode not found in database, retrieving episode from API");
         final Anime anime = consumetService.getAnimeDetailsForProvider(anilistId, provider.getProvider());
-        animeRepository.save(anime);
-        return anime.getEpisodes()
+        final Episode episode = anime.getEpisodes()
                 .stream()
                 .filter(consumetEpisode -> consumetEpisode.getNumber() == episodeNumber)
                 .findFirst()
                 .orElseThrow(() -> new DataNotFoundException(ANIME_EPISODE_NOT_FOUND_ERROR));
+
+        episodeRepository.save(episode);
+        synchronizationService.synchronizeData(anilistId);
+        return episode;
     }
 
     private Episode getInteractedEpisode(final int anilistId, final int episodeNumber, final AnilistProviders provider) {

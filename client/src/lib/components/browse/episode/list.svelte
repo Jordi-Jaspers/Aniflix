@@ -50,12 +50,12 @@
 {:else if episodes.length > 0}
 	<div class="items-center rounded-b-md py-4">
 		<Root onSelectedChange={setCurrentPage} selected={currentPage}>
-			<Trigger class="w-fit min-w-[25%] space-x-2">
+			<Trigger class="w-fit min-w-[200px] space-x-2 px-4">
 				<Value placeholder="{episodes.length} Episodes" />
 			</Trigger>
 			<Content class="z-[1000] max-h-[25%] w-full overflow-y-auto scroll-smooth">
 				{#each Array.from({ length: totalPages }, (_, i) => i + 1) as i}
-					<Item value={i} label="Episodes {lowerBound(i)} - {upperBound(i)}" />
+					<Item class="w-full min-w-fit" value={i} label="Episodes {lowerBound(i)} - {upperBound(i)}" />
 				{/each}
 			</Content>
 		</Root>
