@@ -43,6 +43,7 @@ public class DefaultEmailService implements EmailService {
 
         final Token token = tokenService.generateToken(recipient, TokenType.USER_VALIDATION_TOKEN);
         variables.put("token", token.getValue());
+
         final MailMessage message = mailMessageFactory.createUserValidationMessage(variables);
         sendEmail(recipient, message);
     }
@@ -54,6 +55,7 @@ public class DefaultEmailService implements EmailService {
 
         final Token resetToken = tokenService.generateToken(recipient, TokenType.RESET_PASSWORD_TOKEN);
         variables.put("token", resetToken.getValue());
+
         final MailMessage message = mailMessageFactory.createPasswordResetMessage(variables);
         sendEmail(recipient, message);
     }

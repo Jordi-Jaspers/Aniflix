@@ -163,29 +163,34 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 
 #### Server Environment Variables
 
-| Variable Name                | Default Value                    | Description                                      |
-|------------------------------|----------------------------------|--------------------------------------------------|
-| `EMAIL_HOST`                 | localhost                        | Hostname for the email server                    |
-| `EMAIL_PORT`                 | 2500                             | Port number for the email server                 |
-| `EMAIL_ADDRESS`              | no-reply@localhost               | Sender email address                             |
-| `EMAIL_USERNAME`             | no-login@localhost               | The username of the mail server                  |
-| `EMAIL_PASSWORD`             | password                         | Path to the asynchronous configuration file      |
-| `JWT_LIFETIME_SECONDS`       | 900                              | Lifetime of JWT tokens in seconds                |
-| `CORS_ALLOWED_ORIGINS`       | *                                | Comma-separated list of allowed origins for CORS |
-| `CONSUMET_URL`               | https://localhost.com            | URL for the CONSUMET service                     |
-| `TOMCAT_AJP_ENABLED`         | true                             | Whether AJP connector is enabled for Tomcat      |
-| `TOMCAT_AJP_PORT`            | 8009                             | Port number for AJP connector                    |
-| `TOMCAT_AJP_SECRET_REQUIRED` | false                            | Whether secret is required for AJP connector     |
-| `TOMCAT_AJP_SECRET`          | 6qyuET3rNuzYRBtrBQjh8zCe         | Secret for AJP connector                         |
-| `LOGGING_CONFIG`             | ./config/logback-spring.xml      | Path to the logging configuration file           |
-| `SPRING_PROFILES_INCLUDE`    | development                      | Comma-separated list of profiles to include      |
-| `SPRING_REDIS_HOST`          | 100.72.31.107                    | Hostname for the Redis server                    |
-| `SPRING_REDIS_PORT`          | 6379                             | Port number for the Redis server                 |
-| `SPRING_DATASOURCE_URL`      | jdbc:mariadb://mariadb:3306/test | URL for the MariaDB datasource                   |
-| `SPRING_DATASOURCE_USERNAME` | username                         | Username for the MariaDB datasource              |
-| `SPRING_DATASOURCE_PASSWORD` | password                         | Password for the MariaDB datasource              |
-| `SHOW_SQL`                   | false                            | Whether to show SQL queries in logs              |
-| `ASYNC_CONFIG`               | ./config/async-config.yml        | Path to the asynchronous configuration file      |
+| Variable Name                | Default Value                    | Description                                               |
+|------------------------------|----------------------------------|-----------------------------------------------------------|
+| `EMAIL_HOST`                 | localhost                        | Hostname for the email server                             |
+| `EMAIL_PORT`                 | 2500                             | Port number for the email server                          |
+| `EMAIL_ADDRESS`              | no-reply@localhost               | Sender email address                                      |
+| `EMAIL_USERNAME`             | no-login@localhost               | The username of the mail server                           |
+| `EMAIL_PASSWORD`             | password                         | Path to the asynchronous configuration file               |
+| `JWT_LIFETIME_SECONDS`       | 900                              | Lifetime of JWT tokens in seconds                         |
+| `CORS_ALLOWED_ORIGINS`       | *                                | Comma-separated list of allowed origins for CORS          |
+| `CONSUMET_URL`               | https://localhost.com            | URL for the CONSUMET service                              |
+| `TOMCAT_AJP_ENABLED`         | true                             | Whether AJP connector is enabled for Tomcat               |
+| `TOMCAT_AJP_PORT`            | 8009                             | Port number for AJP connector                             |
+| `TOMCAT_AJP_SECRET_REQUIRED` | false                            | Whether secret is required for AJP connector              |
+| `TOMCAT_AJP_SECRET`          | 6qyuET3rNuzYRBtrBQjh8zCe         | Secret for AJP connector                                  |
+| `LOGGING_CONFIG`             | ./config/logback-spring.xml      | Path to the logging configuration file                    |
+| `SPRING_PROFILES_INCLUDE`    | development                      | Comma-separated list of profiles to include               |
+| `SPRING_REDIS_HOST`          | 100.72.31.107                    | Hostname for the Redis server                             |
+| `SPRING_REDIS_PORT`          | 6379                             | Port number for the Redis server                          |
+| `SPRING_DATASOURCE_URL`      | jdbc:mariadb://mariadb:3306/test | URL for the MariaDB datasource                            |
+| `SPRING_DATASOURCE_USERNAME` | username                         | Username for the MariaDB datasource                       |
+| `SPRING_DATASOURCE_PASSWORD` | password                         | Password for the MariaDB datasource                       |
+| `SHOW_SQL`                   | false                            | Whether to show SQL queries in logs                       |
+| `ASYNC_CONFIG`               | ./config/async-config.yml        | Path to the asynchronous configuration file               |
+| `SPRING_APPLICATION_NAME`    | aniflix-development              | The name of the service                                   |
+| `SPRING_APPLICATION_URL`     | http://localhost:8080            | The URL of the service                                    |
+| `OTLP_METRICS_EXPORT_URL`    | http://localhost:4317/v1/metrics | The URL of the OTLP metrics exporter                      |
+| `OTLP_TRACING_ENDPOINT`      | http://localhost:4317/v1/traces  | The URL of the OTLP tracing endpoint                      |
+| `LOG_APPENDER`               | HUMANREADABLE                    | The log appender to use (HUMANDREADABLE, LOGSTASHENCODER) |
 
 #### Client Environment Variables
 

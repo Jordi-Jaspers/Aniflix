@@ -83,7 +83,7 @@ public class User implements UserDetails {
     private LocalDateTime lastLogin;
 
     @CreationTimestamp
-    @Column(name = "created", updatable = false)
+    @Column(name = "created")
     private LocalDateTime created;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

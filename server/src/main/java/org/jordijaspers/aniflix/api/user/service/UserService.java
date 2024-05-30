@@ -13,6 +13,7 @@ import org.jordijaspers.aniflix.common.exception.UserAlreadyExistsException;
 import org.jordijaspers.aniflix.email.service.sender.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.authentication.model.Authority.USER;
+import static org.jordijaspers.aniflix.common.constant.Constants.Time.MILLIS_PER_SECOND;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.*;
 
 /**
@@ -60,6 +62,14 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
     }
 
+    /**
+     * Remove all expired tokens from the database.
+     */
+    @Scheduled(fixedDelay = 30 * MILLIS_PER_SECOND)
+    public void deleteUnvalidatedAccounts() {
+        userRepository.deleteUnvalidatedAccounts(LocalDateTime.now().minusMonths(1));
+    }
+
     public User updateUserDetails(final User user, final UpdateUserDetailsRequest request) {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
@@ -78,6 +88,7 @@ public class UserService implements UserDetailsService {
 
         user.setEmail(email);
         user.setValidated(false);
+        user.setCreated(LocalDateTime.now());
         tokenService.invalidateTokensForUser(user, TokenType.values());
 
         LOGGER.info("Email has been updated to '{}', sending email to validate account.", email);

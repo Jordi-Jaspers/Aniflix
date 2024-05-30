@@ -4,7 +4,7 @@
     <appender name="HUMANREADABLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TX:%X{tx_id})/%yellow(REQ:%X{req_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{traceId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
                 \n%msg%n\n
             </pattern>
         </encoder>
@@ -50,6 +50,7 @@
     <logger name="org.springframework.web.socket" level="${SPRING_LOG_LEVEL:-INFO}"/>
     <logger name="org.springframework.web.socket.handler" level="${SPRING_LOG_LEVEL:-INFO}"/>
     <logger name="org.springframework.security.web.FilterChainProxy" level="${SPRING_LOG_LEVEL:-INFO}"/>
+    <logger name="org.springframework.data.repository.config.*" level="${SPRING_LOG_LEVEL:-ERROR}"/>
 
     <logger name="org.hawaiiframework" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.hawaiiframework.async" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>

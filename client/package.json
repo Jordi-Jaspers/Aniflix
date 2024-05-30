@@ -21,7 +21,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-svelte": "^8.0.4",
     "hls.js": "^1.5.8",
-    "lucide-svelte": "^0.379.0",
+    "lucide-svelte": "^0.381.0",
     "mode-watcher": "^0.3.0",
     "screenfull": "^6.0.2",
     "svelte-adapter-bun": "^0.5.2",

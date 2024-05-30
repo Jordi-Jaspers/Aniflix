@@ -86,6 +86,10 @@ dependencies {
     // Jdbc driver to connect with the MariaDB database.
     runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
 
+    // Open telemetry for tracing and metrics.
+    runtimeOnly(group = "io.micrometer", name = "micrometer-tracing-bridge-otel")
+    runtimeOnly(group = "io.opentelemetry", name = "opentelemetry-exporter-otlp")
+
     // ======= IMPLEMENTATION DEPENDENCIES ======= "
     // Spring Boot necessary dependencies.
     implementation(group = "org.springframework.boot", name = "spring-boot-starter")

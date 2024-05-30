@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "application.properties")
+@ConfigurationProperties(prefix = "spring.application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
     /**
@@ -26,10 +26,5 @@ public class ApplicationProperties {
      * The default url of the application.
      */
     private String url;
-
-    /**
-     * The description of the application.
-     */
-    private String description;
 
 }
