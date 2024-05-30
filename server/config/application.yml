@@ -1,10 +1,5 @@
 # ======= APPLICATION CONFIGURATION =======
 application:
-  properties:
-    name: aniflix
-    version: 0.0.1-SNAPSHOT
-    url: ${APPLICATION_URL:http://localhost:8080}
-
   email:
     host: ${EMAIL_HOST:localhost}
     port: ${EMAIL_PORT:2500}
@@ -28,10 +23,18 @@ consumet:
 management:
   endpoints:
     web:
+      exposure.include: health,metrics,prometheus
       base-path: /api/actuator
-    health:
-      enabled: true
-      show-details: "always"
+  otlp:
+    metrics:
+      export:
+        url: ${OTLP_METRICS_EXPORT_URL:http://0.0.0.0:4318/v1/metrics}
+        step: 10s
+    tracing:
+      endpoint: ${OTLP_TRACING_ENDPOINT:http://0.0.0.0:4318/v1/traces}
+  tracing:
+    sampling:
+      probability: 1.0
 
 # ====== SERVER CONFIG ======
 server:
@@ -63,6 +66,12 @@ springdoc:
 # ======= SPRING CONFIGURATION =======
 spring:
   profiles.include: ${SPRING_PROFILES_INCLUDE:development}
+
+  application:
+    version: 0.0.1-SNAPSHOT
+    name: ${SPRING_APPLICATION_NAME:aniflix-development}
+    url: ${SPRING_APPLICATION_URL:http://localhost:8080}
+
   cache:
     type: redis
     redis:
@@ -72,6 +81,7 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST:redis}
       port: ${SPRING_REDIS_PORT:6379}
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://mariadb:3306/test}
