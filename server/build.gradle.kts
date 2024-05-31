@@ -8,7 +8,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 // Both "group" and "version" are default Gradle properties, so they need to be set here
 group = "org.jordijaspers"
-version = "0.1.1]"
+version = "0.1.2"
 
 // Other, non-default Gradle, properties need to be defined here
 val author = "Jordi Jaspers"
@@ -85,10 +85,6 @@ dependencies {
     // ======= RUNTIME DEPENDENCIES =======
     // Jdbc driver to connect with the MariaDB database.
     runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
-
-    // Open telemetry for tracing and metrics.
-    runtimeOnly(group = "io.micrometer", name = "micrometer-tracing-bridge-otel")
-    runtimeOnly(group = "io.opentelemetry", name = "opentelemetry-exporter-otlp")
 
     // ======= IMPLEMENTATION DEPENDENCIES ======= "
     // Spring Boot necessary dependencies.
@@ -177,7 +173,7 @@ quality {
     pmdVersion = "6.55.0"
     pmd = true
 
-    checkstyleVersion = "10.16.0"
+    checkstyleVersion = "10.17.0"
     checkstyle = true
 
     codenarcVersion = "3.3.0"
@@ -247,8 +243,9 @@ tasks.named<BootRun>("bootRun") {
         arrayOf(
             "-Xms512m",
             "-Xmx4096m",
-            "-XX:MetaspaceSize=128m",
-            "-XX:MaxMetaspaceSize=256m",
+            "-XX:MetaspaceSize=512m",
+            "-XX:MaxMetaspaceSize=1024m",
+            "-XX:MaxMetaspaceFreeRatio=60",
             "-XX:+UseG1GC",
             "-Djava.awt.headless=true"
         )

@@ -54,7 +54,11 @@ public class EpisodeService {
         if (isEmpty(episodes)) {
             LOGGER.debug("Episodes not found in the database, retrieving episodes from API");
             final Anime anime = consumetService.getAnimeDetails(anilistId);
-            animeRepository.save(anime);
+            try {
+                animeRepository.save(anime);
+            } catch (final Exception exception) {
+                LOGGER.error("Could not save anime with anilist id '{}'", anilistId, exception);
+            }
             return anime.getEpisodes();
         }
 
@@ -110,7 +114,12 @@ public class EpisodeService {
                 .findFirst()
                 .orElseThrow(() -> new DataNotFoundException(ANIME_EPISODE_NOT_FOUND_ERROR));
 
-        episodeRepository.save(episode);
+        try {
+            episodeRepository.save(episode);
+        } catch (final Exception exception) {
+            LOGGER.error("Could not save episode with anilist id '{}' and episode number '{}'", anilistId, episodeNumber, exception);
+        }
+
         synchronizationService.synchronizeData(anilistId);
         return episode;
     }

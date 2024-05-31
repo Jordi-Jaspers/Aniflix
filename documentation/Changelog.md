@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.1.2] - 2024-06-01
+### ANI-134:
+* Try-catch to not break the application when the database is down.
+* Removing first-name and last-name requirement from the user registration form.
+* Increase the default metaspace size and heap size for the JVM.
+* Fixing the forgot password link in the login page.
+* Partly implemented import and export from the library.
+
 ## [0.1.1] - 2024-06-01
 ### ANI-133:
 * Adding generic exception handler for all database operations.

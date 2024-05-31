@@ -2,7 +2,6 @@
 # The first step depends on a create build image first by executing the following command: `./gradlew clean build`.
 FROM eclipse-temurin:17-jdk-jammy AS create-slimjre
 
-LABEL version="0.0.1-SNAPSHOT"
 LABEL description="Aniflix Server Docker Image"
 LABEL maintainer="Jordi Jaspers"
 
@@ -60,12 +59,13 @@ ARG SPRING_PROFILES_INCLUDE="development"
 ENV SPRING_PROFILES_INCLUDE=$SPRING_PROFILES_INCLUDE \
     TZ="Europe/Amsterdam" \
     JAVA_TOOL_OPTIONS="-XX:+IgnoreUnrecognizedVMOptions -XX:+UseContainerSupport -XX:+IdleTuningCompactOnIdle -XX:+IdleTuningGcOnIdle" \
-    HEAP_SIZE_MIN="64m" \
-    HEAP_SIZE="512m" \
-    METASPACE_SIZE_MIN="32m" \
-    METASPACE_SIZE="128m" \
-    SHARE_CLASSES_SIZE="128m" \
-    SHARE_CLASSES_AOT_SIZE="100m"
+    HEAP_SIZE_MIN="512m" \
+    HEAP_SIZE="4096m" \
+    METASPACE_SIZE_MIN="512m" \
+    METASPACE_SIZE="1024m" \
+    SHARE_CLASSES_SIZE="256m" \
+    SHARE_CLASSES_AOT_SIZE="256m" \
+    METASPACE_FREE_RATIO="60"
 
 # Container health check
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /bin/sh -c "/usr/bin/wget -Y off -nv -t1 --spider -O - http://localhost:8080/api/actuator/health || exit 1"
@@ -89,7 +89,7 @@ CMD /opt/workspace/slimjre/bin/java \
 # Java heap size
 -Xms${HEAP_SIZE_MIN} -Xmx${HEAP_SIZE} \
 # Java metaspace size
--XX:MetaspaceSize=${METASPACE_SIZE_MIN} -XX:MaxMetaspaceSize=${METASPACE_SIZE} \
+-XX:MetaspaceSize=${METASPACE_SIZE_MIN} -XX:MaxMetaspaceSize=${METASPACE_SIZE} -XX:MaxMetaspaceFreeRatio=${METASPACE_FREE_RATIO} \
 # Garbage collection flags
 -XX:+AlwaysPreTouch \
 -XX:TieredStopAtLevel=1 \

@@ -55,7 +55,7 @@
 					</div>
 				</CardContent>
 				<CardFooter class="my-4 space-x-2">
-					<Button form="forgot-password" type="submit" class="w-full" disabled={isLoading || email !== ''}>
+					<Button form="forgot-password" type="submit" class="w-full" disabled={isLoading || email === ''}>
 						{#if isLoading}
 							<div
 								class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-muted-foreground motion-reduce:animate-[spin_1.5s_linear_infinite]"
