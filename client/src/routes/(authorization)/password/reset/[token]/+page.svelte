@@ -10,22 +10,23 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { PasswordMeter } from '$lib/components/general/index.js';
-	import { writable } from 'svelte/store';
+	import {writable} from 'svelte/store';
+	import type {Writable} from 'svelte/store';
 	import toast from 'svelte-french-toast';
 
-	let isLoading: boolean = writable(false);
-	let isFormValid: boolean = writable(false);
-	let form = writable<ForgotPasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
+	let isLoading: Writable<boolean> = writable(false);
+	let isFormValid: Writable<boolean> = writable(false);
+	let form: Writable<ForgotPasswordRequest> = writable<ForgotPasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
 
 	async function handleSubmit() {
-		isLoading = true;
-		form.token = $page.params.token.toString();
+		$isLoading = true;
+		$form.token = $page.params.token.toString();
 		const response = await curlNoAuth(SERVER_URLS.PUBLIC_PASSWORD_RESET_PATH, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(request)
+			body: JSON.stringify($form)
 		});
 
 		if (response.ok) {
@@ -38,7 +39,7 @@
 
 			await goto(CLIENT_URLS.LOGIN_URL);
 		}
-		isLoading = false;
+		$isLoading = false;
 	}
 </script>
 
@@ -62,13 +63,13 @@
 				<CardContent class="my-4 space-y-4">
 					<div class="grid gap-2">
 						<Label>New Password</Label>
-						<Input type="password" required bind:value={form.newPassword} />
+						<Input type="password" required bind:value={$form.newPassword} />
 					</div>
 					<div class="grid gap-2">
 						<Label>Confirm New Password</Label>
-						<Input type="password" required bind:value={form.confirmPassword} />
+						<Input type="password" required bind:value={$form.confirmPassword} />
 					</div>
-					<PasswordMeter bind:password={form.newPassword} bind:isValidPassword={isFormValid} />
+					<PasswordMeter bind:password={$form.newPassword} bind:isValidPassword={$isFormValid} />
 				</CardContent>
 				<CardFooter class="my-4 space-x-2">
 					<Button form="change-password" type="submit" class="w-full" disabled={$isLoading || !$isFormValid}>
