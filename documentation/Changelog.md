@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.1.1] - 2024-06-01
+### ANI-133:
+* Adding generic exception handler for all database operations.
+* Fixing the stripe link in the header.
+* Updated the readme for a more professional look.
+
 ## [0.1.0] - 2024-06-01
 *Initial Release*
 
