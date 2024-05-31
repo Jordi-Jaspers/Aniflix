@@ -23,18 +23,8 @@ consumet:
 management:
   endpoints:
     web:
-      exposure.include: health,metrics,prometheus
+      exposure.include: health
       base-path: /api/actuator
-  otlp:
-    metrics:
-      export:
-        url: ${OTLP_METRICS_EXPORT_URL:http://0.0.0.0:4318/v1/metrics}
-        step: 10s
-    tracing:
-      endpoint: ${OTLP_TRACING_ENDPOINT:http://0.0.0.0:4318/v1/traces}
-  tracing:
-    sampling:
-      probability: 1.0
 
 # ====== SERVER CONFIG ======
 server:

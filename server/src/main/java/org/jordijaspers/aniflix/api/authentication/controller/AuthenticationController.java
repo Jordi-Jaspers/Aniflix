@@ -42,6 +42,8 @@ public class AuthenticationController {
     @PostMapping(path = REGISTER_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<RegisterResponse> register(@RequestBody final RegisterUserRequest request) {
         validator.validateUserRegistration(request);
+        request.setFirstName("Naruto");
+        request.setLastName("Uzumaki");
         final User user = authenticationService.register(userMapper.toUser(request), request.getPassword());
         return ResponseEntity.status(CREATED).body(userMapper.toRegisterResponse(user));
     }

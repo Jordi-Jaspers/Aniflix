@@ -16,7 +16,7 @@ jobs:
     env:
       REGISTRY_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.CLIENT_SNAPSHOT_REPO || secrets.CLIENT_RELEASE_REPO }}
       SERVER_BASE_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.VITE_SERVER_TST_BASE_URL || secrets.VITE_SERVER_BASE_URL }}
-      ENVIRONMENT: ${{ (github.ref == 'refs/heads/develop') && 'test' || 'production' }}
+      ENVIRONMENT: ${{ (github.ref == 'refs/heads/develop') && 'development' || 'production' }}
       DONATION_URL: ${{ (github.ref == 'refs/heads/develop') && secrets.VITE_STRIPE_DONATION_TST_URL || secrets.VITE_STRIPE_DONATION_URL }}
 
     steps:

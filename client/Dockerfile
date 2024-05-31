@@ -2,8 +2,7 @@
 # The first step build the application so it can copy over the necessary files to the final image.
 FROM oven/bun AS builder
 
-LABEL version="0.0.1-SNAPSHOT"
-LABEL description="Aniflix Server Docker Image"
+LABEL description="Aniflix Client Docker Image"
 LABEL maintainer="Jordi Jaspers"
 
 # Copy the generated jar file in a temporary directory

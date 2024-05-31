@@ -48,14 +48,6 @@ public class AuthenticationValidator implements Validator<Object> {
                 .orWhen(email -> !email.contains("@"), "email must contain an @")
                 .orWhen(email -> !email.matches(OWASP_EMAIL_REGEX), "email must be a valid email address");
 
-        result.rejectField("firstName", request.getFirstName())
-                .whenNull("first name must be specified")
-                .orWhen(String::isEmpty, "first name must not be empty");
-
-        result.rejectField("lastName", request.getLastName())
-                .whenNull("last name must be specified")
-                .orWhen(String::isEmpty, "last name must not be empty");
-
         result.rejectField("password", request.getPassword())
                 .whenNull("password must be specified")
                 .orWhen(String::isEmpty, "password must not be empty");
