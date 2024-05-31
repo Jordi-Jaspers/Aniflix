@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="150px" src="https://github.com/Jordi-Jaspers/Aniflix/blob/develop/documentation/assets/img.png" alt="logo"/>
+    <img width="150px" src="https://github.com/Jordi-Jaspers/Aniflix/blob/develop/documentation/assets/aniflix-logo-large.png" alt="logo"/>
     <h1 align="center">Aniflix (Development)</h1>
 </p>
 <p align="center">Add-free anime streaming website with a modern UI and QoL features.</p>
@@ -36,7 +36,7 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 
 ## 📝 Introduction
 
-<img title="img" alt="preview" src="https://github.com/jordi-jaspers/aniflix/documentation/assets/aniflix-logo-large.png">
+<img title="img" alt="preview" src="https://github.com/Jordi-Jaspers/Aniflix/blob/develop/documentation/assets/img.png">
 
 **Website Preview:** https://aniflix.stream/  
 **Website Health endpoint:** https://aniflix.stream/actuator/health  
