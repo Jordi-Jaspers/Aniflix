@@ -17,6 +17,8 @@ import org.jordijaspers.aniflix.api.progress.repository.ProgressRepository;
 import org.jordijaspers.aniflix.api.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +56,11 @@ public class EpisodeService {
         if (isEmpty(episodes)) {
             LOGGER.debug("Episodes not found in the database, retrieving episodes from API");
             final Anime anime = consumetService.getAnimeDetails(anilistId);
+                try {
+                    animeRepository.save(anime);
+                } catch (final Exception exception) {
+                    LOGGER.error("Error saving anime to database", exception);
+                }
             animeRepository.save(anime);
             return anime.getEpisodes();
         }

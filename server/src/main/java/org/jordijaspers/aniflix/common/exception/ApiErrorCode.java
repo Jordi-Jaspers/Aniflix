@@ -79,7 +79,10 @@ public enum ApiErrorCode implements ApiError {
             "Something went wrong while synchronizing the data to the database."),
     EMAIL_ALREADY_EXISTS_ERROR(
             "ANI-0024",
-            "The provided email address is already in use.");
+            "The provided email address is already in use."),
+    DATABASE_ERROR(
+            "ANI-0025",
+            "Could not perform the requested action on the database. Contact administrator.");
 
     /**
      * The error code.
