@@ -1,12 +1,12 @@
 <p align="center">
-    <img width="150px" src="https://github.com/jordijaspers/aniflix/documentation/assets/aniflix-logo-large.png" alt="logo"/>
+    <img width="150px" src="https://github.com/Jordi-Jaspers/Aniflix/blob/develop/documentation/assets/img.png" alt="logo"/>
     <h1 align="center">Aniflix (Development)</h1>
 </p>
 <p align="center">Add-free anime streaming website with a modern UI and QoL features.</p>
 <p align="center">
-    <img alt="license" src="https://img.shields.io/github/license/jordijaspers/aniflix"> 
-    <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/jordijaspers/aniflix">
-    <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/jordijaspers/aniflix?color=red">
+    <img alt="license" src="https://img.shields.io/github/license/jordi-jaspers/aniflix"> 
+    <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/jordi-jaspers/aniflix">
+    <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/jordi-jaspers/aniflix?color=red">
     <img src="https://img.shields.io/github/package-json/v/Jordi-Jaspers/aniflix?filename=client%2Fpackage.json" alt="application version">
     <img src="https://img.shields.io/github/commit-activity/m/Jordi-Jaspers/aniflix" alt="Commit Activity" >
     <img src="https://img.shields.io/github/last-commit/Jordi-Jaspers/aniflix" alt="Last Commit" >
@@ -36,7 +36,7 @@ Jaspers [[Github](https://github.com/Jordi-Jaspers "Github Page"), [Linkedin](ht
 
 ## 📝 Introduction
 
-<img title="img" alt="preview" src="https://github.com/jordijaspers/aniflix/documentation/assets/aniflix-logo-large.png">
+<img title="img" alt="preview" src="https://github.com/jordi-jaspers/aniflix/documentation/assets/aniflix-logo-large.png">
 
 **Website Preview:** https://aniflix.stream/  
 **Website Health endpoint:** https://aniflix.stream/actuator/health  
