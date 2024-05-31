@@ -4,7 +4,7 @@
     <appender name="HUMANREADABLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{traceId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{spanId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
                 \n%msg%n\n
             </pattern>
         </encoder>
@@ -18,7 +18,10 @@
     <appender name="KIBANA" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>./log/aniflix.log</file>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TX:%X{tx_id})/%yellow(REQ:%X{req_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] %msg%n</pattern>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{spanId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                \n%msg%n\n
+            </pattern>
         </encoder>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">

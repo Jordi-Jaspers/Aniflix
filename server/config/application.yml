@@ -13,7 +13,7 @@ application:
     jwt:
       lifetime: ${JWT_LIFETIME_SECONDS:900}
     cors:
-      allowedOrigins: ${CORS_ALLOWED_ORIGINS:*}
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:*}
 
 # ======= CONSUMET CONFIGURATION =======
 consumet:
@@ -94,8 +94,6 @@ spring:
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
-  config:
-    use-legacy-processing: true
 
   jpa:
     open-in-view: false
