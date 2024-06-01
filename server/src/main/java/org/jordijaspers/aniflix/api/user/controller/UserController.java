@@ -36,14 +36,14 @@ public class UserController {
     private final EmailValidator emailValidator;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = USER_DETAILS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDetailsResponse> getUserDetails(@AuthenticationPrincipal final UserTokenPrincipal principal) {
         return ResponseEntity.status(OK).body(userMapper.toUserDetailsResponse(principal.getUser()));
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = USER_DETAILS, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDetailsResponse> updateUserDetails(@RequestBody final UpdateUserDetailsRequest request,
                                                                  @AuthenticationPrincipal final UserTokenPrincipal principal) {
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = USER_UPDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDetailsResponse> updateUserEmail(@RequestBody final UpdateEmailRequest request,
                                                                @AuthenticationPrincipal final UserTokenPrincipal principal) {
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = VALIDATE_EMAIL_PATH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> validateEmail(@RequestBody final UpdateEmailRequest request) {
         return emailValidator.validate(request).hasErrors()

@@ -38,7 +38,7 @@ public class LibraryController {
     private final AnimeMapper animeMapper;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_LIBRARY_SEARCH_PATH, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<PageResource<AnimeResponse>> searchLibrary(@RequestBody final LibrarySearchRequest request) {
         final Page<Anime> library = libraryService.searchInLibraryOfUser(request);
@@ -46,7 +46,7 @@ public class LibraryController {
     }
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = REMOVE_FROM_LIBRARY_PATH)
     public ResponseEntity<Void> removeFromLibrary(@PathVariable("id") final int anilistId) {
         libraryService.removeFromLibrary(anilistId);
@@ -54,14 +54,14 @@ public class LibraryController {
     }
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ADD_TO_LIBRARY_PATH)
     public ResponseEntity<Void> addToLibrary(@PathVariable("id") final int anilistId) {
         libraryService.addToLibrary(anilistId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = LIBRARY_IMPORT_PATH, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> importLibrary(@RequestBody final List<KetsuData> library,
                                            @AuthenticationPrincipal final UserTokenPrincipal principal) {

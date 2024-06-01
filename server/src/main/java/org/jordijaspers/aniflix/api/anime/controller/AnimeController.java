@@ -41,7 +41,7 @@ public class AnimeController {
     private final AnimeMapper animeMapper;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_SEARCH, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AnimeResponse>> searchAnime(@RequestBody final AnimeRequest request) {
         final Map<String, String> filters = animeMapper.toFilters(request);
@@ -50,7 +50,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = ANIME_DETAILS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<DetailedAnimeResponse> getAnimeDetails(@PathVariable("id") final int anilistId) {
         final Anime anime = animeService.findDetailsByAnilistId(anilistId);
@@ -58,7 +58,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = ANIME_INFO, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<DetailedAnimeResponse> getAnimeInfo(@PathVariable("id") final int anilistId) {
         final Anime anime = animeService.findInfoByAnilistId(anilistId);
@@ -68,7 +68,7 @@ public class AnimeController {
     // ======================================== ANIME OVERVIEW ========================================
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = ANIME_BANNER, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AnimeResponse> getAnimeBanner() {
         final Anime anime = animeService.getAnimeBanner();
@@ -76,7 +76,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_RECENT, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<EpisodeResponse>> getRecentAnime(@RequestBody final PageableRequest request) {
         final List<AnilistRecentEpisode> recentEpisodes = animeService.getAnimeOfRecentEpisodes(request.getPerPage(), request.getPage());
@@ -84,7 +84,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_POPULAR, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<PageResource<AnimeResponse>> getPopularAnime(@RequestBody final PageableRequest request) {
         final Page<Anime> popularAnime = animeService.getPopularAnime(request.getPerPage(), request.getPage());
@@ -92,7 +92,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_TRENDING, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<PageResource<AnimeResponse>> getTrendingAnime(@RequestBody final PageableRequest request) {
         final Page<Anime> trendingAnime = animeService.getTrendingAnime(request.getPerPage(), request.getPage());
@@ -100,7 +100,7 @@ public class AnimeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = ANIME_GENRE, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<PageResource<AnimeResponse>> getAnimeByGenre(@RequestBody final GenreRequest request) {
         final Page<Anime> animeByGenre = animeService.getAnimeByGenre(request.getGenre(), request.getPerPage(), request.getPage());

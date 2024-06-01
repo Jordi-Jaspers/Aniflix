@@ -25,10 +25,11 @@ public class ProgressController {
     private final EpisodeService episodeService;
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = PROGRESS_PATH)
     public ResponseEntity<EpisodeResponse> updateProgress(@RequestBody final EpisodeProgressRequest request) {
         episodeService.updateProgress(request, getLoggedInUser());
         return ResponseEntity.status(NO_CONTENT).build();
     }
+
 }

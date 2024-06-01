@@ -28,7 +28,7 @@ public class ScheduleController {
     private final ScheduleMapper scheduleMapper;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = ANIME_NEXT_EPISODE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<NextAiringEpisodeResponse> getAnimeRecommendations(@PathVariable("id") final int anilistId) {
         final NextAiringEpisode nextAiringEpisode = scheduleService.getNextAiringEpisode(anilistId);
