@@ -2,7 +2,7 @@
     <img width="150px" src="https://github.com/Jordi-Jaspers/Aniflix/blob/develop/documentation/assets/aniflix-icon-medium.png" alt="logo"/>
     <h1 align="center">Aniflix (Development)</h1>
 </p>
-<p align="center">Add-free anime streaming website with a modern UI and QoL features.</p>
+<p align="center">ad-free anime streaming website with a modern UI and QoL features.</p>
 <p align="center">
     <img alt="license" src="https://img.shields.io/github/license/Jordi-Jaspers/aniflix"> 
     <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/Jordi-Jaspers/Aniflix?sort=semver">
@@ -39,7 +39,7 @@ Welcome to **Aniflix** - a modern anime streaming website with a focus on qualit
 
 The client is build with SvelteKit and TailwindCSS using bun as JS runtime for the fastest response times and smoothest user experience as you consume you daily amount of anime. 
 
-The server is built with Spring Boot for its security and robustness. This way you don't have to worry about any downtime or security issues. Not only that but it also comes with a lot of features like bookmarks, watch history, news, recommendations, watch history, etc. All this while keeping the website add-free and easy to use.
+The server is built with Spring Boot for its security and robustness. This way you don't have to worry about any downtime or security issues. Not only that but it also comes with a lot of features like bookmarks, watch history, news, recommendations, watch history, etc. All this while keeping the website ad-free and easy to use.
 
 **📦 Features**
 <details>
