@@ -19,6 +19,7 @@ import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Repository;
@@ -120,6 +121,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @Cacheable(value = "animeInfo", key = "#id")
     public AnilistInfoResult getAnimeInfo(final int id) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -302,24 +304,29 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
     @Override
     @LogExecutionTime
     public AnilistStreamingLinks getEpisodeLinks(final String episodeId, final String provider) {
-        return client.get()
-                .uri(uriBuilder -> {
-                            final UriBuilder builder = uriBuilder
-                                    .path(EPISODE_LINKS)
-                                    .queryParam(PROVIDER_PARAM, provider);
+        try {
+            return client.get()
+                    .uri(uriBuilder -> {
+                                final UriBuilder builder = uriBuilder
+                                        .path(EPISODE_LINKS)
+                                        .queryParam(PROVIDER_PARAM, provider);
 
-                            if (provider.equals(ZORO.getProvider())) {
-                                builder.queryParam(SERVER_PARAM, "vidstreaming");
+                                if (provider.equals(ZORO.getProvider())) {
+                                    builder.queryParam(SERVER_PARAM, "vidstreaming");
+                                }
+
+                                return builder.build(episodeId);
                             }
+                    )
+                    .retrieve()
+                    .onStatus(HttpStatusCode::isError, this::handleConsumetError)
+                    .bodyToMono(AnilistStreamingLinks.class)
+                    .doOnError(onObjectMappingErrorLog())
+                    .block();
+        } catch (final ConsumetAPIException exception) {
+            return null;
+        }
 
-                            return builder.build(episodeId);
-                        }
-                )
-                .retrieve()
-                .onStatus(HttpStatusCode::isError, this::handleConsumetError)
-                .bodyToMono(AnilistStreamingLinks.class)
-                .doOnError(onObjectMappingErrorLog())
-                .block();
     }
 
     // ======================== PRIVATE METHODS ========================

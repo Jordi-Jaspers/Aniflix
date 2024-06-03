@@ -22,7 +22,6 @@ public abstract class EpisodeMapper {
     @Mapping(target = "title", source = "episode.anime.title")
     @Mapping(target = "episodeTitle", source = "episode.title")
     @Mapping(target = "episodeNumber", source = "episode.number")
-    @Mapping(target = "image", source = "episode.image")
     @Mapping(target = "airDate", source = "episode.airDate")
     @Mapping(target = "duration", source = "episode.duration")
     @Mapping(target = "totalEpisodes", source = "episode.anime.totalEpisodes")

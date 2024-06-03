@@ -15,7 +15,7 @@ public class AnizipImage {
     @JsonProperty("url")
     private String url;
 
-    private AnizipCoverType setCoverType(final String coverType) {
-        return AnizipCoverType.ofName(coverType);
+    private void setCoverType(final String coverType) {
+        this.coverType = AnizipCoverType.ofName(coverType);
     }
 }

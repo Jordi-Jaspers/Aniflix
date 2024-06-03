@@ -15,7 +15,8 @@
                 ADD COLUMN IF NOT EXISTS fan_art_url TEXT;
 
             ALTER TABLE episode
-                ADD COLUMN IF NOT EXISTS summary TEXT;
+                ADD COLUMN IF NOT EXISTS summary TEXT,
+                DROP COLUMN IF EXISTS image;
         </sql>
     </changeSet>
 </databaseChangeLog>

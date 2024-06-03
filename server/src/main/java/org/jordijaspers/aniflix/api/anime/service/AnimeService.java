@@ -21,7 +21,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.springframework.util.CollectionUtils.isEmpty;
+import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
 
 /**
  * The service which handles the anime data.
@@ -108,11 +108,7 @@ public class AnimeService {
         return anime;
     }
 
-    public boolean isAnimeInDatabase(final int anilistId) {
-        return animeRepository.existsById(anilistId);
-    }
-
-    private Anime saveAnime(final Anime anime) {
+    public Anime saveAnime(final Anime anime) {
         LOGGER.info("Anime with title '{}' not yet in the database, attempting to save it.", anime.getTitle());
 
         // Detach episodes from the anime temporarily
@@ -128,5 +124,13 @@ public class AnimeService {
 
         // Save the anime with episodes
         return animeRepository.save(preSave);
+    }
+
+    public boolean isAnimeInDatabase(final int anilistId) {
+        return animeRepository.existsById(anilistId);
+    }
+
+    public boolean isAnimeStatusCompleted(final int anilistId) {
+        return animeRepository.existsByAnilistIdAndStatus(anilistId, COMPLETED);
     }
 }

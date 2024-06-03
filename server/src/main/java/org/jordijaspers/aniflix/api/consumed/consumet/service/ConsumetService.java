@@ -61,12 +61,6 @@ public class ConsumetService {
 
     private final AnizipService anizipService;
 
-    public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
-        LOGGER.info("[Consumet API] Fetching recent episodes from Anilist.");
-        final AnilistProviders provider = getActiveProvider();
-        return consumetRepository.getRecentEpisodes(perPage, page, provider.getProvider()).getResults();
-    }
-
     @Cacheable(value = "popularAnime", key = "#perPage + #page", unless = "#result.getTotalElements() == 0")
     public Page<Anime> getPopular(final int perPage, final int page) {
         LOGGER.info("[Consumet API] Fetching popular anime from Anilist.");
@@ -86,16 +80,6 @@ public class ConsumetService {
         LOGGER.info("[Consumet API] Fetching anime by genre '{}' from Anilist.", genre.getName());
         final ResultPage<AnilistOverview> animeByGenre = consumetRepository.getAnimeByGenre(genre.getName(), perPage, page);
         return animeMapper.toOverviewPage(animeByGenre);
-    }
-
-    @Cacheable(value = "animeInfo", key = "#anilistId")
-    public Anime getAnimeInfo(final Integer anilistId) {
-        LOGGER.info("[Consumet API] Fetching anime info for Anilist ID '{}'.", anilistId);
-        final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
-                .map(animeMapper::toDomainObject)
-                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
-        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getActiveProvider()));
-        return anizipService.applyAnimeInfo(anime);
     }
 
     @Cacheable(value = "animeRecommendations", key = "#anilistId")
@@ -140,17 +124,28 @@ public class ConsumetService {
         return new StreamingLinks(anilistLinks.getHeaders().get("Referer"), sources);
     }
 
-    public Anime getAnimeDetails(final Integer anilistId) {
-        LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}'.", anilistId);
-        final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId))
+    public List<AnilistRecentEpisode> getRecentEpisodes(final int perPage, final int page) {
+        LOGGER.info("[Consumet API] Fetching recent episodes from Anilist.");
+        final AnilistProviders provider = getActiveProvider();
+        return consumetRepository.getRecentEpisodes(perPage, page, provider.getProvider()).getResults();
+    }
+
+    public Anime getAnimeInfo(final Integer anilistId) {
+        LOGGER.info("[Consumet API] Fetching anime info for Anilist ID '{}'.", anilistId);
+        final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+        return anizipService.applyAnimeInfo(anime);
+    }
 
-        anime.getEpisodes().forEach(episode -> {
-            episode.setActiveEpisodeId(getActiveProvider());
-            episode.setAnime(anime);
-        });
-        return anizipService.applyAnimeDetails(anime);
+    public Anime getAnimeDetailsForProvider(final Integer anilistId, final String provider) {
+        LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}' from '{}'.", anilistId, provider);
+        final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId, provider))
+                .map(animeMapper::toDomainObject)
+                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
+        anizipService.applyAnimeDetails(anime);
+        anime.getEpisodes().forEach(episode -> episode.setActiveEpisodeId(getProviderByProvider(provider)));
+        return anime;
     }
 
     public Anime getAnimeDetails(final String title) {
@@ -164,11 +159,6 @@ public class ConsumetService {
                 .map(consumetRepository::getAnimeDetails)
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
-
-        anime.getEpisodes().forEach(episode -> {
-            episode.setActiveEpisodeId(getActiveProvider());
-            episode.setAnime(anime);
-        });
         return anizipService.applyAnimeDetails(anime);
     }
 
@@ -194,19 +184,6 @@ public class ConsumetService {
         }
 
         return filters;
-    }
-
-    public Anime getAnimeDetailsForProvider(final Integer anilistId, final String provider) {
-        LOGGER.info("[Consumet API] Fetching anime details for Anilist ID '{}' from '{}'.", anilistId, provider);
-        final Anime anime = Optional.of(consumetRepository.getAnimeDetails(anilistId, provider))
-                .map(animeMapper::toDomainObject)
-                .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
-
-        anime.getEpisodes().forEach(episode -> {
-            episode.setActiveEpisodeId(getProviderByProvider(provider));
-            episode.setAnime(anime);
-        });
-        return anizipService.applyAnimeDetails(anime);
     }
 
     private boolean filterResults(final AnilistSearchResult result, final String title) {

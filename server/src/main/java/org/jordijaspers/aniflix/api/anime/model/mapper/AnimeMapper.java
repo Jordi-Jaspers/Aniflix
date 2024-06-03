@@ -149,7 +149,6 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
                     response.setEpisodeTitle(episode.getTitle());
                     response.setEpisodeNumber(episode.getNumber());
                     response.setDuration(episode.getDuration());
-                    response.setImage(episode.getImage());
                     if (nonNull(episode.getAirDate())) {
                         response.setAirDate(ZonedDateTime.of(episode.getAirDate(), UTC));
                     }

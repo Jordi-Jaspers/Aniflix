@@ -12,14 +12,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
+import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 
+/**
+ * The service which handles the Anizip data.
+ */
 @Service
 @RequiredArgsConstructor
 public class AnizipService {
@@ -32,24 +36,23 @@ public class AnizipService {
 
     public Anime applyAnimeInfo(final Anime anime) {
         final AnizipInfo anizipInfo = anizipRepository.getAnizipInfoByAniListId(anime.getAnilistId());
-        applyAnimeInfo(anime, anizipInfo);
+        addAnimeDetails(anime, anizipInfo);
         return anime;
     }
 
     public Anime applyAnimeDetails(final Anime anime) {
         final AnizipInfo anizipInfo = anizipRepository.getAnizipInfoByAniListId(anime.getAnilistId());
-        applyAnimeInfo(anime, anizipInfo);
+        addAnimeDetails(anime, anizipInfo);
         if (isNotEmpty(anime.getEpisodes())) {
-            applyEpisodeInfo(anime, anizipInfo);
+            addEpisodeInfo(anime, anizipInfo);
         } else {
             setEpisodeInfo(anime, anizipInfo);
         }
         return anime;
     }
 
-    private static void applyEpisodeInfo(final Anime anime, final AnizipInfo anizipInfo) {
+    private static void addEpisodeInfo(final Anime anime, final AnizipInfo anizipInfo) {
         final Set<Episode> episodes = anime.getEpisodes();
-
         episodes.forEach(episode -> {
             final AnizipEpisode source = anizipInfo.getEpisodes().stream()
                     .filter(anizipEpisode -> anizipEpisode.getEpisode() == episode.getNumber())
@@ -61,12 +64,14 @@ public class AnizipService {
                 episode.setDuration(source.getLength());
                 episode.setTitle(source.getTitle());
                 episode.setSummary(source.getSummary());
+                episode.setActiveEpisodeId(getActiveProvider());
+                episode.setAnime(anime);
             }
         });
     }
 
     private static void setEpisodeInfo(final Anime anime, final AnizipInfo anizipInfo) {
-        final Set<Episode> episodes = anizipInfo.getEpisodes().stream()
+        final List<Episode> episodes = anizipInfo.getEpisodes().stream()
                 .map(anizipEpisode -> {
                     final Episode episode = new Episode();
                     episode.setAirDate(LocalDateTime.parse(anizipEpisode.getAirdate()));
@@ -74,15 +79,17 @@ public class AnizipService {
                     episode.setTitle(anizipEpisode.getTitle());
                     episode.setSummary(anizipEpisode.getSummary());
                     episode.setNumber(anizipEpisode.getEpisode());
+                    episode.setActiveEpisodeId(getActiveProvider());
                     episode.setAnime(anime);
                     return episode;
                 })
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparingInt(Episode::getNumber))
+                .toList();
 
-        anime.setEpisodes(episodes);
+        anime.setEpisodes(new HashSet<>(episodes));
     }
 
-    private void applyAnimeInfo(final Anime anime, final AnizipInfo anizipInfo) {
+    private void addAnimeDetails(final Anime anime, final AnizipInfo anizipInfo) {
         jikanService.provisionTrailer(anime);
         anime.setTotalEpisodes(anizipInfo.getEpisodeCount());
         anizipInfo.getImages().forEach(anizipImage -> {

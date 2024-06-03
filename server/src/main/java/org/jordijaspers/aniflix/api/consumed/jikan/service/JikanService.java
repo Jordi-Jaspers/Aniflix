@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+/**
+ * A service to interact with the Jikan API.
+ */
 @Service
 @RequiredArgsConstructor
 public class JikanService {

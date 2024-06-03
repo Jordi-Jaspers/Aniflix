@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.util.Map;
 
+/**
+ * The response object containing the information of an anime information from ani.zip.
+ */
 @Data
 public class AnizipEpisode {
 
