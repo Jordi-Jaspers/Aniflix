@@ -17,6 +17,11 @@
 			status: 'Online'
 		},
 		{
+			name: 'Ani.zip',
+			healthEndpoint: 'https://api.ani.zip/mappings?anilist_id=1',
+			status: 'Online'
+		},
+		{
 			name: 'MyAnimeList',
 			healthEndpoint: 'https://myanimelist.net/',
 			status: 'Online'
@@ -49,7 +54,7 @@
 
 <AlertDialog.Root closeOnOutsideClick={true}>
 	<AlertDialog.Trigger asChild let:builder>
-		<Button builders={[builder]} variant="ghost" size="icon" class="rounded-[0.75rem]" on:click={() => pingProviders()}>
+		<Button builders={[builder]} class="rounded-[0.75rem]" on:click={() => pingProviders()} size="icon" variant="ghost">
 			<HeartPulse />
 		</Button>
 	</AlertDialog.Trigger>

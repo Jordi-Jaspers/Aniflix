@@ -99,6 +99,9 @@ public class SynchronizationService {
     @Transactional
     @LogExecutionTime
     public void synchronizeData(final Integer anilistId) {
+
+        // TODO: Adjust with new implementation
+
         final Anime anime = animeRepository.findDetailsByAnilistId(anilistId).orElse(null);
         if (isNull(anime) || anime.isRecentlyUpdated() || anime.isCompleted()) {
             LOGGER.info("Anime with id '{}' is already completed or null, skipping synchronization", anime.getAnilistId());

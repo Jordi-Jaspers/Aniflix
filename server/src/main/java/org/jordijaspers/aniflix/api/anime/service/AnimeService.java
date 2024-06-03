@@ -77,17 +77,6 @@ public class AnimeService {
         return anime;
     }
 
-    public Anime findDetailsByAnilistId(final int anilistId) {
-        LOGGER.info("Attempting to look up anime details with Anilist ID '{}'", anilistId);
-        final Anime anime = animeRepository.findDetailsByAnilistId(anilistId)
-                .filter(entry -> !isEmpty(entry.getEpisodes()) && entry.getEpisodes().size() == entry.getTotalEpisodes())
-                .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
-
-        userInteractionEnhancer.applyAnime(anime);
-        synchronizationService.synchronizeData(anilistId);
-        return anime;
-    }
-
     public Anime findInfoByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime info with Anilist ID '{}'", anilistId);
         final Anime anime = animeRepository.findInfoByAnilistId(anilistId)

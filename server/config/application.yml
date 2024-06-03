@@ -15,9 +15,12 @@ application:
     cors:
       allowed-origins: ${CORS_ALLOWED_ORIGINS:*}
 
-# ======= CONSUMET CONFIGURATION =======
+# ======= CLIENT CONFIGURATION =======
 consumet:
   url: ${CONSUMET_URL:https://consumet.com}
+
+anizip:
+  url: ${ANIZIP_URL:https://api.ani.zip}
 
 # ======= MANAGEMENT ENDPOINTS =======
 management:

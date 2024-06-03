@@ -5,8 +5,10 @@ import org.hawaiiframework.repository.DataNotFoundException;
 import org.jordijaspers.aniflix.api.anime.model.Anime;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.StreamingLinks;
+import org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus;
 import org.jordijaspers.aniflix.api.anime.repository.AnimeRepository;
 import org.jordijaspers.aniflix.api.anime.repository.EpisodeRepository;
+import org.jordijaspers.aniflix.api.consumed.anizip.repository.AnizipRepository;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.service.ConsumetService;
 import org.jordijaspers.aniflix.api.interaction.model.Interaction;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
+import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
+import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.ONGOING;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_EPISODE_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
@@ -48,6 +52,8 @@ public class EpisodeService {
 
     private final ConsumetService consumetService;
 
+    private final AnizipRepository anizipRepository;
+
     public Set<Episode> getEpisodesOfAnime(final int anilistId) {
         LOGGER.info("Retrieving episodes of anime with anilist id '{}'", anilistId);
         final Set<Episode> episodes = episodeRepository.findAllByAnilistId(anilistId);
@@ -61,6 +67,15 @@ public class EpisodeService {
             }
             return anime.getEpisodes();
         }
+
+
+    }
+
+    public Set<Episode> getEpisodeOfAnilistId(final int anilistId) {
+        LOGGER.info("Retrieving episodes of anime with anilist id '{}'", anilistId);
+        final Set<Episode> episodes = animeRepository.existsByAnilistIdAndStatus(anilistId, COMPLETED)
+                ? episodeRepository.findAllByAnilistId(anilistId)
+                : anizipRepository.getAnizipInfoByAniListId(anilistId);
 
         episodes.forEach(episode -> episode.getEpisodeProgresses().stream()
                 .filter(episodeProgress -> episodeProgress.getUser().equals(getLoggedInUser()))
@@ -124,16 +139,16 @@ public class EpisodeService {
         return episode;
     }
 
+    private Set<Episode> getEpisodesFromAPI(final int anilistId) {
+
+        synchronizationService.synchronizeData(anilistId);
+        return anime.getEpisodes();
+    }
+
     private Episode getInteractedEpisode(final int anilistId, final int episodeNumber, final AnilistProviders provider) {
-        setLastSeenEpisode(anilistId, episodeNumber);
+        interactionService.setLastSeenEpisode(anilistId, episodeNumber);
         return episodeRepository.existsByAnime_AnilistIdAndNumber(anilistId, episodeNumber)
                 ? episodeRepository.findEpisodeByEpisodeAndAnilistId(anilistId, episodeNumber).orElse(null)
                 : getEpisodeFromAPI(anilistId, episodeNumber, provider);
-    }
-
-    private void setLastSeenEpisode(final int anilistId, final int episodeNumber) {
-        final Interaction interaction = interactionService.getInteractedAnime(anilistId);
-        interaction.setLastSeenEpisode(episodeNumber);
-        interactionService.updateInteraction(interaction);
     }
 }

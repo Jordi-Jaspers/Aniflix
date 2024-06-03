@@ -69,6 +69,9 @@ public class Episode implements Serializable {
     @Column(name = "air_date")
     private LocalDateTime airDate;
 
+    @Column(name = "summary")
+    private String summary;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Anime anime;
 

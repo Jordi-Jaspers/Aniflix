@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd"
+                   logicalFilePath="202309281617-additional-anime-data.xml">
+    <changeSet id="202309281617-additional-anime-data-1" author="jordi.jaspers">
+        <ext:documentation>
+            Adding additional anime data to the anime table.
+            Adding summary to the episode table.
+        </ext:documentation>
+        <sql>
+            ALTER TABLE anime
+                ADD COLUMN IF NOT EXISTS clear_logo_url TEXT,
+                ADD COLUMN IF NOT EXISTS fan_art_url TEXT;
+
+            ALTER TABLE episode
+                ADD COLUMN IF NOT EXISTS summary TEXT;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

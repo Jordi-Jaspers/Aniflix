@@ -75,6 +75,12 @@ public class Anime extends InteractionProperty {
     @Column(name = "cover_url")
     private String coverUrl;
 
+    @Column(name = "clear_logo_url")
+    private String clearLogoUrl;
+
+    @Column(name = "fan_art_url")
+    private String fanArtUrl;
+
     @Column(name = "trailer_url")
     private String trailerUrl;
 

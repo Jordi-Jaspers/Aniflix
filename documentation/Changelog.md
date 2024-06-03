@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+### ANI-140:
+* Removed the default shadcn logo from the login page.
+
+### ANI-142:
+* Adding tailwind prettier configuration.
+
+### ANI-141:
+* Removed overkill password requirements in the server.
+* Made the client component more interactive by indicating the password requirements.
+* Strength meter is synced with server requirements.
 
 ## [0.1.2] - 2024-06-01
 ### ANI-134:
