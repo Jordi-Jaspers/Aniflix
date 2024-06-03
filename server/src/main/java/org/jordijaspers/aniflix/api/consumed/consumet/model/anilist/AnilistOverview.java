@@ -4,14 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.jordijaspers.aniflix.common.mappers.model.PageableApiResponse;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * The search result of an anime.
  */
 @Data
-public class AnilistOverview implements PageableApiResponse {
+public class AnilistOverview implements PageableApiResponse, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @JsonProperty("id")
     private String id;

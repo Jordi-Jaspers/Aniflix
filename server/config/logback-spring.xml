@@ -4,7 +4,7 @@
     <appender name="HUMANREADABLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{spanId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%magenta(T:%thread)] [%yellow(TX:%X{tx_id})] [%cyan(L:%logger:%line)] -
                 \n%msg%n\n
             </pattern>
         </encoder>
@@ -19,7 +19,7 @@
         <file>./log/aniflix.log</file>
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%green(TRACE_ID:%X{spanId})/%yellow(SPAN_ID:%X{spanId})/%red(TX:%X{tx_id})] [%magenta(T:%thread)] [%cyan(L:%logger:%line)] -
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%level) [%magenta(T:%thread)] [%yellow(TX:%X{tx_id})] [%cyan(L:%logger:%line)] -
                 \n%msg%n\n
             </pattern>
         </encoder>
@@ -33,7 +33,6 @@
     </appender>
 
     <!-- Logging levels -->
-    <logger name="io.kahu" level="${APPLICATION_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.jordijaspers" level="${APPLICATION_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.hibernate.sql" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
 

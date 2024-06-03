@@ -5,14 +5,21 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.jordijaspers.aniflix.common.mappers.model.PageableApiResponse;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * The search result of an anime.
  */
 @Data
 @EqualsAndHashCode(exclude = "status")
-public class AnilistSearchResult implements PageableApiResponse {
+public class AnilistSearchResult implements PageableApiResponse, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @JsonProperty("id")
     private String id;

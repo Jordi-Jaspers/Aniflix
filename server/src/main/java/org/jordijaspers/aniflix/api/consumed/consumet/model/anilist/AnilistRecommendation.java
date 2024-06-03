@@ -4,12 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
+
 /**
  * The recommendation of an anime.
  */
 @Data
 @EqualsAndHashCode(exclude = "status")
-public class AnilistRecommendation {
+public class AnilistRecommendation implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @JsonProperty("id")
     private Long id;

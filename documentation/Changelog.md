@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ANI-133:
 * Retrieving the episodes from (api.ani.zip) because that api is more up-to-date, stable and faster.
+* Rerouted all the anime requests to the new api.
+* Removed Tracing from the application because it is unnecessary.
+* Database changes:
+  * Dropped image_url column from the episode table.
+  * Added a summary to the episode table.
+  * Added fan_art and clear_logo to the anime table.
 
 ## [0.1.4] - 2024-06-03
 ### ANI-140:

@@ -63,7 +63,7 @@ spring:
   application:
     version: 0.2.0-SNAPSHOT
     name: ${SPRING_APPLICATION_NAME:aniflix-development}
-    url: ${SPRING_APPLICATION_URL:http://localhost:8080}
+    url: ${SPRING_APPLICATION_URL:http://localhost:5173}
 
   cache:
     type: redis
