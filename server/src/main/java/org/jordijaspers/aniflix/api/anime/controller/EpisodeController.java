@@ -32,7 +32,7 @@ public class EpisodeController {
     private final EpisodeMapper episodeMapper;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = EPISODE_PATH, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<EpisodeResponse> getEpisodeStreamingsLink(@PathVariable("id") final int anilistId,
                                                                     @PathVariable("episodeNumber") final int number) {
@@ -42,7 +42,7 @@ public class EpisodeController {
     }
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = EPISODES_PATH, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<EpisodeResponse>> getEpisodesOfAnime(@PathVariable("id") final int anilistId) {
         final Set<Episode> episodes = episodeService.getEpisodesOfAnime(anilistId);

@@ -11,10 +11,12 @@ export function getRandomValues(array: any[], count: number) {
 	return array.slice(0, count);
 }
 
-export function calculatePasswordStrength(password: string): number {
+export function calculatePasswordStrength(password: string): { score: number; missing: string[] } {
 	let score = 0;
+	let missing = [];
 
-	const lengthRule = password.length >= 8 && password.length <= 16;
+	const lengthRule = password.length >= 8;
+	const tooLongRule = password.length <= 100;
 	const upperCaseRule = /[A-Z]/.test(password);
 	const lowerCaseRule = /[a-z]/.test(password);
 	const digitRule = /[0-9]/.test(password);
@@ -22,24 +24,32 @@ export function calculatePasswordStrength(password: string): number {
 	const whitespaceRule = !/\s/.test(password);
 
 	if (lengthRule) score += 1;
+	else missing.push('At least 8 characters');
+	if (tooLongRule) score += 1;
+	else missing.push('At most 100 characters');
 	if (upperCaseRule) score += 1;
+	else missing.push('At least one upper-case character');
 	if (lowerCaseRule) score += 1;
+	else missing.push('At least one lower-case character');
 	if (digitRule) score += 1;
+	else missing.push('At least one digit character');
 	if (specialCharRule) score += 1;
+	else missing.push('At least one special character');
 	if (whitespaceRule) score += 1;
+	else missing.push('No whitespace allowed');
 
-	return score;
+	return { score, missing };
 }
 
 export function getPasswordStrengthLabel(score: number): string {
 	switch (score) {
-		case 6:
+		case 7:
 			return 'Very Strong';
-		case 5:
+		case 6:
 			return 'Strong';
-		case 4:
+		case 5:
 			return 'Medium';
-		case 3:
+		case 4:
 			return 'Weak';
 		default:
 			return 'Very Weak';

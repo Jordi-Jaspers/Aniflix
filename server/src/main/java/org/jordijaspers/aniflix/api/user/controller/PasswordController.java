@@ -46,7 +46,7 @@ public class PasswordController {
     }
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = UPDATE_PASSWORD_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updatePassword(@RequestBody final UpdatePasswordRequest request,
                                             @AuthenticationPrincipal final UserTokenPrincipal principal) {

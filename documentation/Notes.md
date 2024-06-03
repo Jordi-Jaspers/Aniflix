@@ -207,3 +207,4 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Image resizing: <https://kit.svelte.dev/docs/images>
 * HLS Issue: <https://github.com/CookPete/react-player/issues/699>
 * Speed analysis: https://pagespeed.web.dev/analysis/>
+* Web audit: <https://stackoverflow.com/questions/10650107/spring-aop-best-way-to-implement-an-activities-log-in-the-database>

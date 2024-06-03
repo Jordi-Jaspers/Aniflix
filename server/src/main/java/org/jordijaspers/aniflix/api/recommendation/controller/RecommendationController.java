@@ -30,7 +30,7 @@ public class RecommendationController {
     private final RecommendationMapper recommendationMapper;
 
     @ResponseStatus(OK)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @GetMapping(path = ANIME_RECOMMENDATIONS, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RecommendationResponse>> getAnimeRecommendations(@PathVariable("id") final int anilistId) {
         final List<Recommendation> recommendations = recommendationService.getAnimeRecommendations(anilistId);

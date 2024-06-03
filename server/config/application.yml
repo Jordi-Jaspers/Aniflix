@@ -58,7 +58,7 @@ spring:
   profiles.include: ${SPRING_PROFILES_INCLUDE:development}
 
   application:
-    version: 0.1.3
+    version: 0.1.4
     name: ${SPRING_APPLICATION_NAME:aniflix-development}
     url: ${SPRING_APPLICATION_URL:http://localhost:8080}
 

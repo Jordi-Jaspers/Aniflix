@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.1.4] - 2024-06-03
+### ANI-140:
+* Removed the default shadcn logo from the login page.
+
+### ANI-142:
+* Adding tailwind prettier configuration.
+
+### ANI-141:
+* Removed overkill password requirements in the server.
+* Made the client component more interactive by indicating the password requirements.
+* Strength meter is synced with server requirements.
+
+## [0.1.3] - 2024-06-02
+* Hotfix: password reset flow did not work because of wrong request form.
+
 ## [0.1.2] - 2024-06-01
 ### ANI-134:
 * Try-catch to not break the application when the database is down.

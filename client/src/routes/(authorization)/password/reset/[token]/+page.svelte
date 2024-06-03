@@ -10,8 +10,8 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { PasswordMeter } from '$lib/components/general/index.js';
-	import {writable} from 'svelte/store';
-	import type {Writable} from 'svelte/store';
+	import { writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
 	import toast from 'svelte-french-toast';
 
 	let isLoading: Writable<boolean> = writable(false);

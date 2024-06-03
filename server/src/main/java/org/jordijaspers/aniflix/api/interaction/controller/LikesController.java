@@ -23,7 +23,7 @@ public class LikesController {
     private final LikesService likesService;
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = LIKE_ANIME_PATH)
     public ResponseEntity<Void> likeAnime(@PathVariable("id") final int anilistId) {
         likesService.addToLikes(anilistId);
@@ -31,7 +31,7 @@ public class LikesController {
     }
 
     @ResponseStatus(NO_CONTENT)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @PostMapping(path = UNLIKE_ANIME_PATH)
     public ResponseEntity<Void> dislikeAnime(@PathVariable("id") final int anilistId) {
         likesService.removeFromLikes(anilistId);
