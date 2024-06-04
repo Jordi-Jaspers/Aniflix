@@ -1,53 +1,53 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { FilterBar, SearchFilter } from '$lib/components/filter/index.js';
-	import { PaginationBar } from '$lib/components/search/index.js';
-	import { AnimeCard } from '$lib/components/browse';
-	import { Skeleton } from '$lib/components/ui/skeleton';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { FilterBar, SearchFilter } from '$lib/components/filter/index.js';
+import { PaginationBar } from '$lib/components/search/index.js';
+import { AnimeCard } from '$lib/components/browse';
+import { Skeleton } from '$lib/components/ui/skeleton';
 
-	let paginatedAnime: PageResponse<AnimeResponse>;
+let paginatedAnime: PageResponse<AnimeResponse>;
 
-	let isLoading: boolean = false;
-	let isRequesting: boolean = true;
+let isLoading: boolean = false;
+let isRequesting: boolean = true;
 
-	let pageNumber: number = 1;
-	let request: LibrarySearchRequest = {
-		page: 0,
-		pageSize: 25,
-		query: '',
-		afterYear: 0,
-		beforeYear: 0,
-		minRating: 0,
-		maxRating: 0,
-		genre: [],
-		status: [],
-		watchStatus: []
-	};
+let pageNumber: number = 1;
+let request: LibrarySearchRequest = {
+	page: 0,
+	pageSize: 25,
+	query: '',
+	afterYear: 0,
+	beforeYear: 0,
+	minRating: 0,
+	maxRating: 0,
+	genre: [],
+	status: [],
+	watchStatus: []
+};
 
-	async function fetchAnime() {
-		isRequesting = true;
-		const response: Response = await curl(SERVER_URLS.ANIME_LIBRARY_SEARCH_PATH, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(request)
-		});
+async function fetchAnime() {
+	isRequesting = true;
+	const response: Response = await curl(SERVER_URLS.ANIME_LIBRARY_SEARCH_PATH, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(request)
+	});
 
-		if (response.ok) {
-			paginatedAnime = await response.json();
-			isRequesting = false;
-		}
-		window.scrollTo({ top: 0, behavior: 'smooth' });
+	if (response.ok) {
+		paginatedAnime = await response.json();
+		isRequesting = false;
 	}
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-	onMount(fetchAnime);
+onMount(fetchAnime);
 
-	$: if (request) fetchAnime();
-	$: request.page = pageNumber - 1;
-	$: isLoading = isRequesting || !paginatedAnime;
+$: if (request) fetchAnime();
+$: request.page = pageNumber - 1;
+$: isLoading = isRequesting || !paginatedAnime;
 </script>
 
 <svelte:head>
@@ -76,11 +76,11 @@
 		<div class="grid gap-2 pb-8" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each paginatedAnime.content as anime}
 				<div class="flex h-full flex-col overflow-hidden rounded-t-md">
-					<AnimeCard bind:anime />
+					<AnimeCard bind:anime={anime} />
 				</div>
 			{/each}
 		</div>
-		<PaginationBar bind:totalElements={paginatedAnime.totalElements} bind:pageNumber bind:pageSize={paginatedAnime.pageSize} />
+		<PaginationBar bind:totalElements={paginatedAnime.totalElements} bind:pageNumber={pageNumber} bind:pageSize={paginatedAnime.pageSize} />
 	{:else}
 		<div class="grid gap-2 pb-8" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each Array(10) as _}

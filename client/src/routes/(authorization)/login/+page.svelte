@@ -1,10 +1,10 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
-	import LoginBackground from '$lib/assets/images/aniflix-login.webp?enhanced';
-	import LoginCard from '$lib/components/login/login-card.svelte';
-	import RegisterCard from '$lib/components/login/register-card.svelte';
-	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
-	import { Badge } from '$lib/components/ui/badge/index';
+import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+import LoginBackground from '$lib/assets/images/aniflix-login.webp?enhanced';
+import LoginCard from '$lib/components/login/login-card.svelte';
+import RegisterCard from '$lib/components/login/register-card.svelte';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+import { Badge } from '$lib/components/ui/badge/index';
 </script>
 
 <head>

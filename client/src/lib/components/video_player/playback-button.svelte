@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { Content, Item, Root } from '$lib/components/ui/select';
-	import { Gauge } from 'lucide-svelte';
-	import type { Selected } from 'bits-ui';
-	import { Select as SelectPrimitive } from 'bits-ui';
+import { Content, Item, Root } from '$lib/components/ui/select';
+import { Gauge } from 'lucide-svelte';
+import type { Selected } from 'bits-ui';
+import { Select as SelectPrimitive } from 'bits-ui';
 
-	export let playbackRate;
+export let playbackRate;
 
-	let currentPlaybackRate: Selected<number> = { value: playbackRate, label: { playbackRate } + 'x' };
-	function setPlaybackRate(selectedPlaybackRate: Selected<number> | undefined) {
-		if (selectedPlaybackRate) {
-			currentPlaybackRate = selectedPlaybackRate;
-			playbackRate = currentPlaybackRate.value;
-		}
+let currentPlaybackRate: Selected<number> = { value: playbackRate, label: { playbackRate } + 'x' };
+function setPlaybackRate(selectedPlaybackRate: Selected<number> | undefined) {
+	if (selectedPlaybackRate) {
+		currentPlaybackRate = selectedPlaybackRate;
+		playbackRate = currentPlaybackRate.value;
 	}
+}
 </script>
 
 <Root onSelectedChange={(selectedPlaybackRate) => setPlaybackRate(selectedPlaybackRate)} selected={currentPlaybackRate}>

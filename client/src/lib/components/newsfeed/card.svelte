@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getNewsTopicColor } from '$lib/api/constants';
-	import { goto } from '$app/navigation';
-	import { CLIENT_URLS } from '$lib/api/paths';
+import { getNewsTopicColor } from '$lib/api/constants';
+import { goto } from '$app/navigation';
+import { CLIENT_URLS } from '$lib/api/paths';
 
-	export let post: NewsPostResponse;
+export let post: NewsPostResponse;
 </script>
 
 {#if post}

@@ -1,30 +1,30 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { Input } from '$lib/components/ui/input';
-	import { Label } from '$lib/components/ui/label';
-	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
-	import { curlNoAuth } from '$lib/api/client';
-	import { toast } from 'svelte-sonner';
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
-	import Footer from '$lib/components/app/footer/footer.svelte';
-	import { goto } from '$app/navigation';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
+import { curlNoAuth } from '$lib/api/client';
+import { toast } from 'svelte-sonner';
+import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+import Footer from '$lib/components/app/footer/footer.svelte';
+import { goto } from '$app/navigation';
 
-	let email: string;
-	let isLoading = false;
+let email: string;
+let isLoading = false;
 
-	async function handleSubmit() {
-		isLoading = true;
-		const response: Response = await curlNoAuth(SERVER_URLS.REQUEST_PASSWORD_RESET_PATH + `?email=${email}`, {
-			method: 'GET'
-		});
+async function handleSubmit() {
+	isLoading = true;
+	const response: Response = await curlNoAuth(SERVER_URLS.REQUEST_PASSWORD_RESET_PATH + `?email=${email}`, {
+		method: 'GET'
+	});
 
-		if (response.ok) {
-			toast.success('Password reset email sent successfully. Please check your email for further instructions.');
-		}
-
-		isLoading = false;
+	if (response.ok) {
+		toast.success('Password reset email sent successfully. Please check your email for further instructions.');
 	}
+
+	isLoading = false;
+}
 </script>
 
 <head>

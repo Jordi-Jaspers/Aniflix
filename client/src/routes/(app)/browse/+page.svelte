@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { AnimeCards, Banner, Carousel, EpisodeCards } from '$lib/components/browse/index';
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { getRandomValues } from '$lib/api/util';
-	import { LoadingScreen } from '$lib/components/general';
-	import {toast} from "svelte-sonner";
+import { AnimeCards, Banner, Carousel, EpisodeCards } from '$lib/components/browse/index';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { getRandomValues } from '$lib/api/util';
+import { LoadingScreen } from '$lib/components/general';
+import { toast } from 'svelte-sonner';
 
-	let genres: string[];
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_CONSTANT_PATH, { method: 'GET' });
-		if (response.ok) {
-			let constants: ConstantResponse = await response.json();
-			genres = getRandomValues(constants.genres, 3);
-		}
-	});
+let genres: string[];
+onMount(async () => {
+	const response: Response = await curl(SERVER_URLS.ANIME_CONSTANT_PATH, { method: 'GET' });
+	if (response.ok) {
+		let constants: ConstantResponse = await response.json();
+		genres = getRandomValues(constants.genres, 3);
+	}
+});
 
-	let isLoading = true;
-	let areEpisodesLoading = true;
-	$: isLoading = areEpisodesLoading;
+let isLoading = true;
+let areEpisodesLoading = true;
+$: isLoading = areEpisodesLoading;
 </script>
 
 <svelte:head>
@@ -51,7 +51,7 @@
 
 	{#each genres as genre}
 		<Carousel type={genre}>
-			<AnimeCards {genre} url={SERVER_URLS.ANIME_GENRE_PATH} />
+			<AnimeCards genre={genre} url={SERVER_URLS.ANIME_GENRE_PATH} />
 		</Carousel>
 	{/each}
 {/if}

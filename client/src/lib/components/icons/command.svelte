@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { IconProps } from 'lucide-svelte';
+import type { IconProps } from 'lucide-svelte';
 
-	type $$Props = IconProps;
+type $$Props = IconProps;
 </script>
 
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" {...$$restProps}>

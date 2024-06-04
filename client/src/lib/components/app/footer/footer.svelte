@@ -1,6 +1,6 @@
 <script lang="ts">
-	let applicationVersion = __VERSION__;
-	let applicationName = __NAME__;
+let applicationVersion = __VERSION__;
+let applicationName = __NAME__;
 </script>
 
 <footer class="px-[4%] py-10 text-center text-xs text-muted-foreground">

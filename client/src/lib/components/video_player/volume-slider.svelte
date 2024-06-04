@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { Volume, Volume1, Volume2, VolumeX } from 'lucide-svelte';
-	import { Slider } from 'bits-ui';
-	import Device from 'svelte-device-info';
+import { Volume, Volume1, Volume2, VolumeX } from 'lucide-svelte';
+import { Slider } from 'bits-ui';
+import Device from 'svelte-device-info';
 
-	export let volume: number;
-	export let muted: boolean;
-	export let showVolume: boolean;
+export let volume: number;
+export let muted: boolean;
+export let showVolume: boolean;
 
-	let prevVolume: number = 1;
+let prevVolume: number = 1;
 
-	function toggleMute() {
-		if (!muted) {
-			prevVolume = volume;
-			muted = true;
-			volume = 0;
-		} else {
-			volume = prevVolume;
-			muted = false;
-		}
+function toggleMute() {
+	if (!muted) {
+		prevVolume = volume;
+		muted = true;
+		volume = 0;
+	} else {
+		volume = prevVolume;
+		muted = false;
 	}
+}
 </script>
 
 <div
@@ -55,7 +55,7 @@
 			</span>
 			{#each thumbs as thumb}
 				<Slider.Thumb
-					{thumb}
+					thumb={thumb}
 					class="border-border-input hover:border-dark-40 active:scale-98 block size-[16px]
                                 -translate-x-1 cursor-pointer rounded-full border bg-background shadow
                                 ring-1 ring-primary transition-colors hover:scale-125

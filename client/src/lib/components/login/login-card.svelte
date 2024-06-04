@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import Socials from '$lib/components/login/socials.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { Input } from '$lib/components/ui/input';
-	import { Label } from '$lib/components/ui/label';
-	import { ShieldAlert, ShieldEllipsis } from 'lucide-svelte';
-	import { CLIENT_URLS } from '$lib/api/paths';
-	import { authorize } from '$lib/api/client';
+import { goto } from '$app/navigation';
+import Socials from '$lib/components/login/socials.svelte';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { ShieldAlert, ShieldEllipsis } from 'lucide-svelte';
+import { CLIENT_URLS } from '$lib/api/paths';
+import { authorize } from '$lib/api/client';
 
-	let formData: LoginRequest = {
-		email: '',
-		password: ''
-	};
+let formData: LoginRequest = {
+	email: '',
+	password: ''
+};
 
-	let errorMessage: string | undefined;
-	let authorizeResponse: AuthorizeResponse | undefined;
-	let isLoading = false;
+let errorMessage: string | undefined;
+let authorizeResponse: AuthorizeResponse | undefined;
+let isLoading = false;
 
-	async function handleSubmit() {
-		isLoading = true;
-		const response: AuthorizeResponse | string = await authorize(formData);
-		if (typeof response === 'string') {
-			errorMessage = response;
-		} else {
-			errorMessage = undefined;
-			authorizeResponse = response;
-			if (response.validated) {
-				goto(CLIENT_URLS.BROWSE_URL);
-			}
+async function handleSubmit() {
+	isLoading = true;
+	const response: AuthorizeResponse | string = await authorize(formData);
+	if (typeof response === 'string') {
+		errorMessage = response;
+	} else {
+		errorMessage = undefined;
+		authorizeResponse = response;
+		if (response.validated) {
+			goto(CLIENT_URLS.BROWSE_URL);
 		}
-		isLoading = false;
 	}
+	isLoading = false;
+}
 </script>
 
 <form id="login" on:submit|preventDefault={handleSubmit}>

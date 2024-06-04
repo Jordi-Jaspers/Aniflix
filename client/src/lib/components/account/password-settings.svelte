@@ -1,34 +1,34 @@
 <script lang="ts">
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { toast } from 'svelte-sonner';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { curl } from '$lib/api/client';
-	import { PasswordMeter } from '$lib/components/general';
-	import { writable } from 'svelte/store';
-	import type { Writable } from 'svelte/store';
-	import { useUserDetails } from '$lib/components/store/store';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
+import { Label } from '$lib/components/ui/label/index.js';
+import { Input } from '$lib/components/ui/input/index.js';
+import { Button } from '$lib/components/ui/button/index.js';
+import { toast } from 'svelte-sonner';
+import { SERVER_URLS } from '$lib/api/paths';
+import { curl } from '$lib/api/client';
+import { PasswordMeter } from '$lib/components/general';
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import { useUserDetails } from '$lib/components/store/store';
 
-	let isLoading: Writable<boolean> = writable(false);
-	let isFormValid: Writable<boolean> = writable(false);
-	let form: Writable<UpdatePasswordRequest> = writable<UpdatePasswordRequest>({ oldPassword: '', newPassword: '', confirmPassword: '' });
+let isLoading: Writable<boolean> = writable(false);
+let isFormValid: Writable<boolean> = writable(false);
+let form: Writable<UpdatePasswordRequest> = writable<UpdatePasswordRequest>({ oldPassword: '', newPassword: '', confirmPassword: '' });
 
-	async function handleSubmit() {
-		$isLoading = true;
-		const response: Response = await curl(SERVER_URLS.UPDATE_PASSWORD_PATH, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify($form)
-		});
+async function handleSubmit() {
+	$isLoading = true;
+	const response: Response = await curl(SERVER_URLS.UPDATE_PASSWORD_PATH, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify($form)
+	});
 
-		if (response.ok) {
-			$form = { oldPassword: '', newPassword: '', confirmPassword: '' };
-			toast.success('Password updated successfully');
-		}
-		$isLoading = false;
+	if (response.ok) {
+		$form = { oldPassword: '', newPassword: '', confirmPassword: '' };
+		toast.success('Password updated successfully');
 	}
+	$isLoading = false;
+}
 </script>
 
 <form id="update-password" on:submit|preventDefault={handleSubmit} data-bitwarden-watching="1">

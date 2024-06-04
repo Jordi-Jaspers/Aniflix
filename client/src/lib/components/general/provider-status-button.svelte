@@ -1,55 +1,55 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { HeartPulse } from 'lucide-svelte';
-	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
-	import { SERVER_BASE_URL } from '$lib/api/paths';
-	import { writable } from 'svelte/store';
+import { Button } from '$lib/components/ui/button/index.js';
+import { HeartPulse } from 'lucide-svelte';
+import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+import { SERVER_BASE_URL } from '$lib/api/paths';
+import { writable } from 'svelte/store';
 
-	let providers = writable([
-		{
-			name: 'Aniflix',
-			healthEndpoint: SERVER_BASE_URL + '/actuator/health',
-			status: 'Online'
-		},
-		{
-			name: 'Anilist',
-			healthEndpoint: 'https://anilist.co/',
-			status: 'Online'
-		},
-		{
-			name: 'Ani.zip',
-			healthEndpoint: 'https://api.ani.zip/mappings?anilist_id=1',
-			status: 'Online'
-		},
-		{
-			name: 'MyAnimeList',
-			healthEndpoint: 'https://myanimelist.net/',
-			status: 'Online'
-		},
-		{
-			name: 'GogoAnime',
-			healthEndpoint: 'https://anitaku.so/',
-			status: 'Online'
-		},
-		{
-			name: 'Zoro',
-			healthEndpoint: 'https://hianime.to/',
-			status: 'Online'
-		}
-	]);
-
-	async function pingProviders() {
-		const updatedProviders = $providers.map(async (provider) => {
-			try {
-				await fetch(provider.healthEndpoint, { method: 'HEAD', mode: 'no-cors' });
-				provider.status = 'Online';
-			} catch (error) {
-				provider.status = 'Offline';
-			}
-			return provider;
-		});
-		providers.set(await Promise.all(updatedProviders));
+let providers = writable([
+	{
+		name: 'Aniflix',
+		healthEndpoint: SERVER_BASE_URL + '/actuator/health',
+		status: 'Online'
+	},
+	{
+		name: 'Anilist',
+		healthEndpoint: 'https://anilist.co/',
+		status: 'Online'
+	},
+	{
+		name: 'Ani.zip',
+		healthEndpoint: 'https://api.ani.zip/mappings?anilist_id=1',
+		status: 'Online'
+	},
+	{
+		name: 'MyAnimeList',
+		healthEndpoint: 'https://myanimelist.net/',
+		status: 'Online'
+	},
+	{
+		name: 'GogoAnime',
+		healthEndpoint: 'https://anitaku.so/',
+		status: 'Online'
+	},
+	{
+		name: 'Zoro',
+		healthEndpoint: 'https://hianime.to/',
+		status: 'Online'
 	}
+]);
+
+async function pingProviders() {
+	const updatedProviders = $providers.map(async (provider) => {
+		try {
+			await fetch(provider.healthEndpoint, { method: 'HEAD', mode: 'no-cors' });
+			provider.status = 'Online';
+		} catch (error) {
+			provider.status = 'Offline';
+		}
+		return provider;
+	});
+	providers.set(await Promise.all(updatedProviders));
+}
 </script>
 
 <AlertDialog.Root closeOnOutsideClick={true}>

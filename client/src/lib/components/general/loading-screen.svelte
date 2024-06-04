@@ -1,5 +1,5 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
 </script>
 
 <div class="fixed inset-0 !z-[1000] flex h-screen w-screen items-center justify-center overflow-hidden overscroll-auto bg-background">

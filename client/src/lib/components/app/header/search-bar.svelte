@@ -1,42 +1,42 @@
 <script lang="ts">
-	import { Search } from 'lucide-svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { useSearchTerm, useShowSearchResults } from '$lib/components/store/store';
+import { Search } from 'lucide-svelte';
+import Input from '$lib/components/ui/input/input.svelte';
+import { Button } from '$lib/components/ui/button';
+import { useSearchTerm, useShowSearchResults } from '$lib/components/store/store';
 
-	let isOpen: boolean = false;
-	function closeSearchBar() {
-		const input = document.getElementById('search-bar') as HTMLInputElement;
-		if (input) {
-			input.blur();
-			isOpen = false;
-			$useSearchTerm = '';
-		}
+let isOpen: boolean = false;
+function closeSearchBar() {
+	const input = document.getElementById('search-bar') as HTMLInputElement;
+	if (input) {
+		input.blur();
+		isOpen = false;
+		$useSearchTerm = '';
 	}
+}
 
-	function openSearchBar() {
-		const input = document.getElementById('search-bar') as HTMLInputElement;
-		if (input) {
-			input.focus();
-			isOpen = true;
-		}
+function openSearchBar() {
+	const input = document.getElementById('search-bar') as HTMLInputElement;
+	if (input) {
+		input.focus();
+		isOpen = true;
 	}
+}
 
-	function handleEscape(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			closeSearchBar();
-		}
+function handleEscape(e: KeyboardEvent) {
+	if (e.key === 'Escape') {
+		closeSearchBar();
 	}
+}
 
-	function toggleSearchBar() {
-		if (isOpen) {
-			closeSearchBar();
-		} else {
-			openSearchBar();
-		}
+function toggleSearchBar() {
+	if (isOpen) {
+		closeSearchBar();
+	} else {
+		openSearchBar();
 	}
+}
 
-	$: $useShowSearchResults = $useSearchTerm.length > 0;
+$: $useShowSearchResults = $useSearchTerm.length > 0;
 </script>
 
 <div class="flex flex-row items-center">

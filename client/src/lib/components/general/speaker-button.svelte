@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Volume2, VolumeX } from 'lucide-svelte';
-	import { Button, type Events } from '$lib/components/ui/button';
+import { Volume2, VolumeX } from 'lucide-svelte';
+import { Button, type Events } from '$lib/components/ui/button';
 
-	type $$Events = Events;
-	export let isMuted: boolean = false;
+type $$Events = Events;
+export let isMuted: boolean = false;
 </script>
 
 <button

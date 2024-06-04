@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { useUserDetails } from '$lib/components/store/store.js';
-	import { toast } from 'svelte-sonner';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { curl } from '$lib/api/client';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
+import { Label } from '$lib/components/ui/label/index.js';
+import { Input } from '$lib/components/ui/input/index.js';
+import { Button } from '$lib/components/ui/button/index.js';
+import { useUserDetails } from '$lib/components/store/store.js';
+import { toast } from 'svelte-sonner';
+import { SERVER_URLS } from '$lib/api/paths';
+import { curl } from '$lib/api/client';
 
-	let isLoading: boolean;
-	let isChanged: boolean;
-	let request: UpdateUserDetailsRequest = { firstName: '', lastName: '' };
+let isLoading: boolean;
+let isChanged: boolean;
+let request: UpdateUserDetailsRequest = { firstName: '', lastName: '' };
 
-	async function handleSubmit() {
-		isLoading = true;
-		request.firstName = request.firstName !== '' ? request.firstName : $useUserDetails.firstName;
-		request.lastName = request.lastName !== '' ? request.lastName : $useUserDetails.lastName;
-		const response: Response = await curl(SERVER_URLS.USER_DETAILS_PATH, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(request)
-		});
+async function handleSubmit() {
+	isLoading = true;
+	request.firstName = request.firstName !== '' ? request.firstName : $useUserDetails.firstName;
+	request.lastName = request.lastName !== '' ? request.lastName : $useUserDetails.lastName;
+	const response: Response = await curl(SERVER_URLS.USER_DETAILS_PATH, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(request)
+	});
 
-		if (response.ok) {
-			$useUserDetails.firstName = request.firstName;
-			$useUserDetails.lastName = request.lastName;
-			request = { firstName: '', lastName: '' };
-			toast.success('User details updated successfully.');
-		}
-		isLoading = false;
+	if (response.ok) {
+		$useUserDetails.firstName = request.firstName;
+		$useUserDetails.lastName = request.lastName;
+		request = { firstName: '', lastName: '' };
+		toast.success('User details updated successfully.');
 	}
+	isLoading = false;
+}
 
-	$: isChanged = request.firstName !== '' || request.lastName !== '';
+$: isChanged = request.firstName !== '' || request.lastName !== '';
 </script>
 
 <form id="update-profile" on:submit|preventDefault={handleSubmit}>

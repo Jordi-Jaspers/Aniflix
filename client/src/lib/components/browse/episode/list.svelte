@@ -1,43 +1,43 @@
 <script lang="ts">
-	import { Content, Item, Root, Trigger, Value } from '$lib/components/ui/select';
-	import { EpisodeListCard } from '$lib/components/browse';
-	import type { Selected } from 'bits-ui';
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { closeModal } from '$lib/api/modal-util';
+import { Content, Item, Root, Trigger, Value } from '$lib/components/ui/select';
+import { EpisodeListCard } from '$lib/components/browse';
+import type { Selected } from 'bits-ui';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { closeModal } from '$lib/api/modal-util';
 
-	export let anilistId: number;
+export let anilistId: number;
 
-	let isLoading: boolean = true;
-	let episodes: EpisodeResponse[] = [];
-	let totalPages: number = 0;
-	const pageSize = 12;
-	let currentPage: Selected<number> = { value: 1, label: `Episodes 1 - ${pageSize}` };
+let isLoading: boolean = true;
+let episodes: EpisodeResponse[] = [];
+let totalPages: number = 0;
+const pageSize = 12;
+let currentPage: Selected<number> = { value: 1, label: `Episodes 1 - ${pageSize}` };
 
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_EPISODES_PATH.replace('{id}', anilistId.toString()), {
-			method: 'GET'
-		});
-
-		if (response.ok) {
-			episodes = await response.json();
-			totalPages = Math.ceil(episodes.length / pageSize);
-			isLoading = false;
-		} else {
-			closeModal();
-		}
+onMount(async () => {
+	const response: Response = await curl(SERVER_URLS.ANIME_EPISODES_PATH.replace('{id}', anilistId.toString()), {
+		method: 'GET'
 	});
 
-	$: lowerBound = (page: number) => (page === 1 ? 1 : (page - 1) * pageSize + 1);
-	$: upperBound = (page: number) => (page * pageSize < episodes.length ? page * pageSize : episodes.length);
-	$: currentPage.label = `Episodes ${lowerBound(currentPage.value)} - ${upperBound(currentPage.value)}`;
-
-	function setCurrentPage(selectedPage: Selected<number> | undefined) {
-		if (selectedPage) {
-			currentPage = selectedPage;
-		}
+	if (response.ok) {
+		episodes = await response.json();
+		totalPages = Math.ceil(episodes.length / pageSize);
+		isLoading = false;
+	} else {
+		closeModal();
 	}
+});
+
+$: lowerBound = (page: number) => (page === 1 ? 1 : (page - 1) * pageSize + 1);
+$: upperBound = (page: number) => (page * pageSize < episodes.length ? page * pageSize : episodes.length);
+$: currentPage.label = `Episodes ${lowerBound(currentPage.value)} - ${upperBound(currentPage.value)}`;
+
+function setCurrentPage(selectedPage: Selected<number> | undefined) {
+	if (selectedPage) {
+		currentPage = selectedPage;
+	}
+}
 </script>
 
 {#if isLoading}
@@ -63,7 +63,7 @@
 
 	{#each episodes as episode}
 		{#if episode.episodeNumber >= lowerBound(currentPage.value) && episode.episodeNumber <= upperBound(currentPage.value)}
-			<EpisodeListCard {episode} />
+			<EpisodeListCard episode={episode} />
 		{/if}
 	{/each}
 {:else}

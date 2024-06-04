@@ -1,11 +1,11 @@
 <script lang="ts">
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-	import * as Pagination from '$lib/components/ui/pagination/index.js';
+import ChevronLeft from 'lucide-svelte/icons/chevron-left';
+import ChevronRight from 'lucide-svelte/icons/chevron-right';
+import * as Pagination from '$lib/components/ui/pagination/index.js';
 
-	export let totalElements: number;
-	export let pageNumber: number;
-	export let pageSize: number;
+export let totalElements: number;
+export let pageNumber: number;
+export let pageSize: number;
 </script>
 
 <Pagination.Root bind:count={totalElements} bind:perPage={pageSize} bind:page={pageNumber} let:pages let:currentPage>
@@ -23,7 +23,7 @@
 				</Pagination.Item>
 			{:else}
 				<Pagination.Item>
-					<Pagination.Link {page} isActive={currentPage === page.value}>
+					<Pagination.Link page={page} isActive={currentPage === page.value}>
 						{page.value}
 					</Pagination.Link>
 				</Pagination.Item>

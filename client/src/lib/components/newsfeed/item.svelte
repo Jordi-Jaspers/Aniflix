@@ -1,26 +1,26 @@
 <script lang="ts">
-	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
-	import { getNewsTopicColor } from '$lib/api/constants';
-	import { goto } from '$app/navigation';
-	import { CLIENT_URLS } from '$lib/api/paths';
+import { Skeleton } from '$lib/components/ui/skeleton/index.js';
+import { getNewsTopicColor } from '$lib/api/constants';
+import { goto } from '$app/navigation';
+import { CLIENT_URLS } from '$lib/api/paths';
 
-	export let post: NewsPostResponse;
+export let post: NewsPostResponse;
 
-	// Function to get time since upload
-	function getTimeSinceUpload(date: Date) {
-		const now = new Date();
-		const diff = now.getTime() - date.getTime();
-		const diffInMinutes = Math.floor(diff / 60000);
-		if (diffInMinutes < 60) {
-			return `${diffInMinutes} minutes ago`;
-		}
-		const diffInHours = Math.floor(diffInMinutes / 60);
-		if (diffInHours < 24) {
-			return `${diffInHours} hours ago`;
-		}
-		const diffInDays = Math.floor(diffInHours / 24);
-		return `${diffInDays} days ago`;
+// Function to get time since upload
+function getTimeSinceUpload(date: Date) {
+	const now = new Date();
+	const diff = now.getTime() - date.getTime();
+	const diffInMinutes = Math.floor(diff / 60000);
+	if (diffInMinutes < 60) {
+		return `${diffInMinutes} minutes ago`;
 	}
+	const diffInHours = Math.floor(diffInMinutes / 60);
+	if (diffInHours < 24) {
+		return `${diffInHours} hours ago`;
+	}
+	const diffInDays = Math.floor(diffInHours / 24);
+	return `${diffInDays} days ago`;
+}
 </script>
 
 {#if post}

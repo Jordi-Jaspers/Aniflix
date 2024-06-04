@@ -1,41 +1,41 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { Input } from '$lib/components/ui/input';
-	import { Label } from '$lib/components/ui/label';
-	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
-	import { curlNoAuth } from '$lib/api/client';
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
-	import Footer from '$lib/components/app/footer/footer.svelte';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { PasswordMeter } from '$lib/components/general/index.js';
-	import { writable } from 'svelte/store';
-	import type { Writable } from 'svelte/store';
-	import { toast } from 'svelte-sonner';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
+import { curlNoAuth } from '$lib/api/client';
+import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+import Footer from '$lib/components/app/footer/footer.svelte';
+import { goto } from '$app/navigation';
+import { page } from '$app/stores';
+import { PasswordMeter } from '$lib/components/general/index.js';
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import { toast } from 'svelte-sonner';
 
-	let isLoading: Writable<boolean> = writable(false);
-	let isFormValid: Writable<boolean> = writable(false);
-	let form: Writable<ForgotPasswordRequest> = writable<ForgotPasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
+let isLoading: Writable<boolean> = writable(false);
+let isFormValid: Writable<boolean> = writable(false);
+let form: Writable<ForgotPasswordRequest> = writable<ForgotPasswordRequest>({ token: '', newPassword: '', confirmPassword: '' });
 
-	async function handleSubmit() {
-		$isLoading = true;
-		$form.token = $page.params.token.toString();
-		const response = await curlNoAuth(SERVER_URLS.PUBLIC_PASSWORD_RESET_PATH, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify($form)
-		});
+async function handleSubmit() {
+	$isLoading = true;
+	$form.token = $page.params.token.toString();
+	const response = await curlNoAuth(SERVER_URLS.PUBLIC_PASSWORD_RESET_PATH, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify($form)
+	});
 
-		if (response.ok) {
-			$form = { token: '', newPassword: '', confirmPassword: '' };
-			toast.success('Password reset email sent successfully. Please check your email for further instructions.');
-			await goto(CLIENT_URLS.LOGIN_URL);
-		}
-		$isLoading = false;
+	if (response.ok) {
+		$form = { token: '', newPassword: '', confirmPassword: '' };
+		toast.success('Password reset email sent successfully. Please check your email for further instructions.');
+		await goto(CLIENT_URLS.LOGIN_URL);
 	}
+	$isLoading = false;
+}
 </script>
 
 <head>
