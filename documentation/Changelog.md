@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Rerouted all the anime requests to the new api.
 * Removed Tracing from the application because it is unnecessary.
 * Database changes:
+  * Added version to the user table for optimistic locking.
   * Dropped image_url column from the episode table.
   * Added a summary to the episode table.
   * Added fan_art and clear_logo to the anime table.
