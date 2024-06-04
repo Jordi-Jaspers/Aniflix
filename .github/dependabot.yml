@@ -35,3 +35,15 @@ updates:
     commit-message:
       prefix: "[spring] bump: "
       include: "scope"
+
+  # Update dependencies for Server using Gradle.
+  - package-ecosystem: "gradle"
+    directory: "/liquibase"
+    target-branch: develop
+    labels:
+      - "dependencies"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "[liquibase] bump: "
+      include: "scope"

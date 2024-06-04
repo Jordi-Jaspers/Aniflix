@@ -5,7 +5,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
 	import { curlNoAuth } from '$lib/api/client';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
 	import Footer from '$lib/components/app/footer/footer.svelte';
 	import { goto } from '$app/navigation';
@@ -20,11 +20,7 @@
 		});
 
 		if (response.ok) {
-			toast.success('Password reset email sent successfully. Please check your email for further instructions.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.success('Password reset email sent successfully. Please check your email for further instructions.');
 		}
 
 		isLoading = false;

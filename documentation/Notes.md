@@ -192,6 +192,7 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * Consumet Documentation: <https://docs.consumet.org/>
 * Svelte Motion: <https://www.npmjs.com/package/svelte-motion>
 * Svelte French Toast: <https://svelte-french-toast.com/>
+* Svelte Sonner: <https://sonner.emilkowal.ski/>
 * Svelte Player: <https://www.npmjs.com/package/svelte-player>
 * Svelte Player docs: <https://fikryfahrezy.github.io/svelte-player>
 * Svelte Player example: <https://github.com/fikryfahrezy/svelte-player/blob/main/src/routes/%2Bpage.svelte>
@@ -208,3 +209,4 @@ docker run -p 3000:3000 --name aniflix-frontend -d aniflix-frontend
 * HLS Issue: <https://github.com/CookPete/react-player/issues/699>
 * Speed analysis: https://pagespeed.web.dev/analysis/>
 * Web audit: <https://stackoverflow.com/questions/10650107/spring-aop-best-way-to-implement-an-activities-log-in-the-database>
+

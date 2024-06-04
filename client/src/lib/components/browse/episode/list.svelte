@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { curl } from '$lib/api/client';
 	import { SERVER_URLS } from '$lib/api/paths';
-	import { closeModal } from '$lib/api/util';
+	import { closeModal } from '$lib/api/modal-util';
 
 	export let anilistId: number;
 

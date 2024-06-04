@@ -4,7 +4,8 @@
     import {Label} from '$lib/components/ui/label';
 
     export let password = '';
-    export let isValidPassword: boolean;
+    export let confirmation = '';
+    export let isValid: boolean = false;
 
     let strength = writable(0);
     let label = writable('Very Weak');
@@ -14,13 +15,18 @@
 
     $: {
         const {score, missing} = calculatePasswordStrength(password);
+        const isMatch: boolean = password === confirmation;
+        if (!isMatch) {
+            missing.push('Password should match confirmation');
+        }
+
         strength.set(score);
         label.set(getPasswordStrengthLabel(score));
         missingRequirements.set(missing);
         bgColor = score >= 7 ? 'bg-green-500' : score >= 4 ? 'bg-orange-500' : 'bg-red-500';
         textColor = score >= 7 ? 'text-green-500' : score >= 4 ? 'text-orange-500' : 'text-red-500';
 
-        isValidPassword = score === 7;
+        isValid = score === 7 && isMatch;
     }
 </script>
 

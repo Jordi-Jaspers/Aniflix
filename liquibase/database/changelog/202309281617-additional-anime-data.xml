@@ -11,12 +11,25 @@
         </ext:documentation>
         <sql>
             ALTER TABLE anime
+                MODIFY COLUMN updated TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00';
+
+            ALTER TABLE anime
                 ADD COLUMN IF NOT EXISTS clear_logo_url TEXT,
                 ADD COLUMN IF NOT EXISTS fan_art_url TEXT;
 
             ALTER TABLE episode
                 ADD COLUMN IF NOT EXISTS summary TEXT,
-                DROP COLUMN IF EXISTS image;
+                DROP COLUMN IF EXISTS image,
+                DROP CONSTRAINT IF EXISTS episode_id;
+        </sql>
+    </changeSet>
+    <changeSet id="202309281617-additional-anime-data-2" author="jordi.jaspers">
+        <ext:documentation>
+            Adding a version for optimistic locking of the user.
+        </ext:documentation>
+        <sql>
+            ALTER TABLE user
+                ADD COLUMN version INT DEFAULT 0 NOT NULL;
         </sql>
     </changeSet>
 </databaseChangeLog>

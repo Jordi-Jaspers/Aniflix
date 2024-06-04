@@ -4,7 +4,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { useUserDetails } from '$lib/components/store/store.js';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { curl } from '$lib/api/client';
 
@@ -26,11 +26,7 @@
 			$useUserDetails.firstName = request.firstName;
 			$useUserDetails.lastName = request.lastName;
 			request = { firstName: '', lastName: '' };
-			toast.success('User details updated successfully.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.success('User details updated successfully.');
 		}
 		isLoading = false;
 	}

@@ -1,22 +1,29 @@
 package org.jordijaspers.aniflix.api.consumed.anizip.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * The response object containing the information of an anime information from ani.zip.
  */
 @Data
-public class AnizipInfo {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AnizipInfo implements Serializable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AnizipInfo.class);
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     private int anilistId;
 
@@ -44,12 +51,10 @@ public class AnizipInfo {
         episodes.forEach((key, value) -> {
             try {
                 Integer.parseInt(key);
-
                 final AnizipEpisode anizipEpisode = objectMapper.convertValue(value, AnizipEpisode.class);
-                LOGGER.info("########## Adding episode: {}", anizipEpisode);
                 this.episodes.add(anizipEpisode);
-            } catch (final NumberFormatException e) {
-                LOGGER.warn("Episode key '{}' is not a number, skipping", key);
+            } catch (final NumberFormatException exception) {
+                // Ignore the key if it is not a number
             }
         });
     }

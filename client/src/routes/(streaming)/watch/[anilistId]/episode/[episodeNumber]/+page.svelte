@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { curl } from '$lib/api/client';
 	import { LoadingScreen } from '$lib/components/general';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import Hls from 'hls.js';
 	import { isIOS } from '$lib/api/util';

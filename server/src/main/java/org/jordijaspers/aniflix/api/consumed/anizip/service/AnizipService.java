@@ -11,14 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.time.format.DateTimeFormatter.ISO_DATE;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 
 /**
@@ -60,8 +63,8 @@ public class AnizipService {
                     .orElse(null);
 
             if (nonNull(source)) {
-                episode.setAirDate(LocalDateTime.parse(source.getAirdate()));
-                episode.setDuration(source.getLength());
+                episode.setAirDate(LocalDate.parse(source.getAirdate(), ISO_DATE).atStartOfDay());
+                episode.setDuration(source.getDuration() * 60L);
                 episode.setTitle(source.getTitle());
                 episode.setSummary(source.getSummary());
                 episode.setActiveEpisodeId(getActiveProvider());
@@ -74,15 +77,20 @@ public class AnizipService {
         final List<Episode> episodes = anizipInfo.getEpisodes().stream()
                 .map(anizipEpisode -> {
                     final Episode episode = new Episode();
-                    episode.setAirDate(LocalDateTime.parse(anizipEpisode.getAirdate()));
-                    episode.setDuration(anizipEpisode.getLength());
-                    episode.setTitle(anizipEpisode.getTitle());
+                    final String title = isBlank(anizipEpisode.getTitle())
+                            ? "Episode " + anizipEpisode.getEpisode()
+                            : anizipEpisode.getTitle();
+
+                    episode.setTitle(title);
+                    episode.setActiveEpisodeId(getActiveProvider());
+                    episode.setAirDate(LocalDate.parse(anizipEpisode.getAirdate(), ISO_DATE).atStartOfDay());
+                    episode.setDuration(anizipEpisode.getDuration() * 60L);
                     episode.setSummary(anizipEpisode.getSummary());
                     episode.setNumber(anizipEpisode.getEpisode());
-                    episode.setActiveEpisodeId(getActiveProvider());
                     episode.setAnime(anime);
                     return episode;
                 })
+                .filter(episode -> episode.getAirDate().isBefore(LocalDateTime.now()))
                 .sorted(Comparator.comparingInt(Episode::getNumber))
                 .toList();
 
@@ -94,10 +102,18 @@ public class AnizipService {
         anime.setTotalEpisodes(anizipInfo.getEpisodeCount());
         anizipInfo.getImages().forEach(anizipImage -> {
             switch (anizipImage.getCoverType()) {
-                case BANNER -> anime.setCoverUrl(anizipImage.getUrl());
+                case POSTER -> {
+                    if (isBlank(anime.getImageUrl())) {
+                        anime.setImageUrl(anizipImage.getUrl());
+                    }
+                }
+                case BANNER -> {
+                    if (isBlank(anime.getCoverUrl())) {
+                        anime.setCoverUrl(anizipImage.getUrl());
+                    }
+                }
                 case CLEARLOGO -> anime.setClearLogoUrl(anizipImage.getUrl());
                 case FANART -> anime.setFanArtUrl(anizipImage.getUrl());
-                case POSTER -> anime.setImageUrl(anizipImage.getUrl());
                 default -> LOGGER.warn("Found an unknown cover type during mapping.");
             }
         });

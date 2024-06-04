@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { InfoIcon, PlayIcon, StarIcon } from 'lucide-svelte';
-	import { openModal } from '$lib/api/util';
+	import { openModal } from '$lib/api/modal-util';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { curl } from '$lib/api/client';

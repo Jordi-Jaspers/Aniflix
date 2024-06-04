@@ -13,10 +13,12 @@ import org.jordijaspers.aniflix.common.exception.UserAlreadyExistsException;
 import org.jordijaspers.aniflix.email.service.sender.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.authentication.model.Authority.USER;
-import static org.jordijaspers.aniflix.common.constant.Constants.Time.MILLIS_PER_SECOND;
+import static org.jordijaspers.aniflix.common.constant.Constants.Time.*;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.*;
 
 /**
@@ -48,24 +50,29 @@ public class UserService implements UserDetailsService {
     private final EmailService emailService;
 
     @Override
+    @Transactional
     public User loadUserByUsername(final String username) {
-        return userRepository.findByEmail(username)
-                .map(user -> {
-                    if (!user.isEnabled()) {
-                        throw new AuthorizationException(USER_DISABLED_ERROR);
-                    } else if (!user.isValidated()) {
-                        throw new AuthorizationException(USER_UNVALIDATED_ERROR);
-                    }
-                    user.setLastLogin(LocalDateTime.now());
-                    return userRepository.save(user);
-                })
-                .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
+        try {
+            return userRepository.findByEmail(username)
+                    .filter(user -> {
+                        if (!user.isEnabled()) {
+                            throw new AuthorizationException(USER_DISABLED_ERROR);
+                        } else if (!user.isValidated()) {
+                            throw new AuthorizationException(USER_UNVALIDATED_ERROR);
+                        }
+                        return true;
+                    })
+                    .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
+        } catch (final OptimisticLockingFailureException exception) {
+            throw new AuthorizationException(INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
-     * Remove all expired tokens from the database.
+     * Delete all unvalidated accounts that are older than a month.
+     * This method is scheduled to run every hour.
      */
-    @Scheduled(fixedDelay = 30 * MILLIS_PER_SECOND)
+    @Scheduled(fixedDelay = 24 * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLIS_PER_SECOND)
     public void deleteUnvalidatedAccounts() {
         userRepository.deleteUnvalidatedAccounts(LocalDateTime.now().minusMonths(1));
     }

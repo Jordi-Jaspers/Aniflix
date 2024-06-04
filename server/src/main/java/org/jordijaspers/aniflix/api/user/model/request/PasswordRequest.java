@@ -7,9 +7,10 @@ import lombok.EqualsAndHashCode;
  * The password update request.
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UpdatePasswordRequest extends PasswordRequest {
+public class PasswordRequest {
 
-    private String oldPassword;
+    private String newPassword;
+
+    private String confirmPassword;
 
 }

@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus.COMPLETED;
 
 /**
  * The service which handles the anime data.
@@ -110,6 +110,7 @@ public class AnimeService {
 
     public Anime saveAnime(final Anime anime) {
         LOGGER.info("Anime with title '{}' not yet in the database, attempting to save it.", anime.getTitle());
+        anime.setUpdated(LocalDate.of(2000, 1, 1).atStartOfDay());
 
         // Detach episodes from the anime temporarily
         final Set<Episode> episodes = anime.getEpisodes();
@@ -131,6 +132,8 @@ public class AnimeService {
     }
 
     public boolean isAnimeStatusCompleted(final int anilistId) {
-        return animeRepository.existsByAnilistIdAndStatus(anilistId, COMPLETED);
+        return animeRepository.findDetailsByAnilistId(anilistId)
+                .filter(Anime::isCompleted)
+                .isPresent();
     }
 }

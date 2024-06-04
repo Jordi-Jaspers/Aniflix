@@ -6,7 +6,7 @@
 	import { isUserAuthenticated } from '$lib/api/client';
 	import { CLIENT_URLS } from '$lib/api/paths';
 	import { InfoModal } from '$lib/components/modal/index.js';
-	import { onMount } from 'svelte';
+	import {afterUpdate, onMount} from 'svelte';
 	import { SearchResults } from '$lib/components/search/index.js';
 	import { useShowInfoModal } from '$lib/components/store/localstorage';
 
@@ -19,10 +19,18 @@
 			$useHasAuthError = true;
 		}
 	});
+
+	afterUpdate(() => {
+		if ($useShowInfoModal) {
+			document.body.classList.add('no-scroll');
+		} else {
+			document.body.classList.remove('no-scroll');
+		}
+	});
 </script>
 
 {#if isAuthenticated}
-	<main class="h-screen {$useShowInfoModal && 'overflow-hidden'}">
+	<main class="h-screen">
 		<InfoModal />
 		<div class="relative flex h-full w-full flex-col">
 			<Header />

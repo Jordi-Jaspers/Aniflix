@@ -135,7 +135,7 @@ public class ConsumetService {
         final Anime anime = Optional.of(consumetRepository.getAnimeInfo(anilistId))
                 .map(animeMapper::toDomainObject)
                 .orElseThrow(() -> new DataNotFoundException(ANIME_NOT_FOUND_ERROR));
-        return anizipService.applyAnimeInfo(anime);
+        return anizipService.applyAnimeDetails(anime);
     }
 
     public Anime getAnimeDetailsForProvider(final Integer anilistId, final String provider) {

@@ -110,9 +110,9 @@
 					<Moon class="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
 					<span>Toggle Mode</span>
 				</DropdownMenu.Item>
-				<DropdownMenu.Item href={import.meta.env.VITE_STRIPE_DONATION_URL}>
+				<DropdownMenu.Item href={import.meta.env.VITE_DONATION_URL}>
 					<Coffee class="mr-2 h-4 w-4" />
-					<span>Donate Coffee</span>
+					<span>Buy me a Coffee</span>
 				</DropdownMenu.Item>
 			</DropdownMenu.Group>
 			<DropdownMenu.Separator />

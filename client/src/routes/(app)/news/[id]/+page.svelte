@@ -7,7 +7,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { getNewsTopicColor } from '$lib/api/constants';
 	import { Content, Root, Trigger } from '$lib/components/ui/tooltip/index.js';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 
 	let post: NewsPostResponse;
 	onMount(async () => {
@@ -30,17 +30,9 @@
 	function copyToClipboard() {
 		try {
 			navigator.clipboard.writeText(window.location.href);
-			toast.success('Successfully copied link to clipboard.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.success('Successfully copied link to clipboard.');
 		} catch (err) {
-			toast.error('Failed to copy link to clipboard.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.error('Failed to copy link to clipboard.');
 		}
 	}
 </script>

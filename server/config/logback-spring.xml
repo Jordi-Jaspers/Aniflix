@@ -52,7 +52,7 @@
     <logger name="org.springframework.web.socket" level="${SPRING_LOG_LEVEL:-INFO}"/>
     <logger name="org.springframework.web.socket.handler" level="${SPRING_LOG_LEVEL:-INFO}"/>
     <logger name="org.springframework.security.web.FilterChainProxy" level="${SPRING_LOG_LEVEL:-INFO}"/>
-    <logger name="org.springframework.data.repository.config.*" level="${SPRING_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.springframework.data.repository.config" level="${SPRING_LOG_LEVEL:-ERROR}"/>
 
     <logger name="org.hawaiiframework" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>
     <logger name="org.hawaiiframework.async" level="${HAWAII_LOG_LEVEL:-DEBUG}"/>

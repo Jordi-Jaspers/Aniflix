@@ -12,7 +12,7 @@
 	import { PasswordMeter } from '$lib/components/general/index.js';
 	import { writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 
 	let isLoading: Writable<boolean> = writable(false);
 	let isFormValid: Writable<boolean> = writable(false);
@@ -31,12 +31,7 @@
 
 		if (response.ok) {
 			$form = { token: '', newPassword: '', confirmPassword: '' };
-			toast.success('Password reset email sent successfully. Please check your email for further instructions.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
-
+			toast.success('Password reset email sent successfully. Please check your email for further instructions.');
 			await goto(CLIENT_URLS.LOGIN_URL);
 		}
 		$isLoading = false;
@@ -69,7 +64,7 @@
 						<Label>Confirm New Password</Label>
 						<Input type="password" required bind:value={$form.confirmPassword} />
 					</div>
-					<PasswordMeter bind:password={$form.newPassword} bind:isValidPassword={$isFormValid} />
+					<PasswordMeter bind:password={$form.newPassword} bind:confirmation={$form.confirmPassword} bind:isValid={$isFormValid} />
 				</CardContent>
 				<CardFooter class="my-4 space-x-2">
 					<Button form="change-password" type="submit" class="w-full" disabled={$isLoading || !$isFormValid}>

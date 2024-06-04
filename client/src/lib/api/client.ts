@@ -1,11 +1,11 @@
 import { useAuthenticated, useHasAuthError } from '$lib/components/store/store';
 import { goto } from '$app/navigation';
 import { CLIENT_URLS, SERVER_URLS } from '$lib/api/paths';
-import toast from 'svelte-french-toast';
+import { toast } from 'svelte-sonner';
 import { accessToken } from '$lib/components/store/sessionstorage';
 import { refreshToken } from '$lib/components/store/localstorage';
 import { get } from 'svelte/store';
-import { closeModal } from '$lib/api/util';
+import { closeModal } from '$lib/api/modal-util';
 
 const ISSUER: string = import.meta.env.VITE_SERVER_ISSUER;
 
@@ -64,23 +64,13 @@ export async function validateAccount(token: string): Promise<void> {
 	});
 
 	if (response.ok) {
-		toast.success('Account successfully activated! Have fun streaming.', {
-			duration: 5000,
-			position: 'bottom-center',
-			style: 'background: #262626; color: #ffffff;'
-		});
-
+		toast.success('Account successfully activated! Have fun streaming.');
 		const data: AuthorizeResponse = await response.json();
 		updateTokens(data);
 
 		await goto(CLIENT_URLS.BROWSE_URL);
 	} else {
-		toast.error(await getErrorMessage(response), {
-			duration: 5000,
-			position: 'bottom-center',
-			style: 'background: #262626; color: #ffffff;'
-		});
-
+		toast.error(await getErrorMessage(response));
 		await goto(CLIENT_URLS.LOGIN_URL);
 	}
 }
@@ -97,11 +87,7 @@ export async function curl(endpoint: string, options: RequestInit = {}): Promise
 		const tokens = await refreshTokens();
 		if (typeof tokens === 'string') {
 			await goto(CLIENT_URLS.LOGIN_URL);
-			toast.error(tokens, {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.error(tokens);
 		} else {
 			updateTokens(tokens);
 		}
@@ -140,11 +126,7 @@ async function fetchWithRetry(endpoint: string, options: RequestInit, headers: H
 		if (retryResponse.ok || retryResponse.status === 401) {
 			return retryResponse;
 		} else {
-			toast.error(await getErrorMessage(retryResponse), {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.error(await getErrorMessage(retryResponse));
 			return retryResponse;
 		}
 	}
@@ -166,11 +148,7 @@ export async function isUserAuthenticated(): Promise<boolean> {
 			return true;
 		}
 
-		toast.error('You are unauthorized or your session has expired.', {
-			duration: 5000,
-			position: 'bottom-center',
-			style: 'background: #262626; color: #ffffff;'
-		});
+		toast.error('You are unauthorized or your session has expired.');
 	}
 
 	return false;

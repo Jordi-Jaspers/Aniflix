@@ -56,7 +56,7 @@ public class EpisodeService {
         LOGGER.info("Retrieving episodes of anime with anilist id '{}'", anilistId);
         final Set<Episode> episodes = animeService.isAnimeStatusCompleted(anilistId)
                 ? episodeRepository.findAllByAnilistId(anilistId)
-                : getEpisodesFromApi(anilistId, getActiveProvider());
+                : getEpisodesFromApi(anilistId);
 
         episodes.forEach(episode -> episode.getEpisodeProgresses().stream()
                 .filter(episodeProgress -> episodeProgress.getUser().equals(getLoggedInUser()))
@@ -99,6 +99,16 @@ public class EpisodeService {
                             final EpisodeProgress progress = new EpisodeProgress(request.getLastSeen(), episode, loggedInUser);
                             progressRepository.save(progress);
                         });
+    }
+
+    private Set<Episode> getEpisodesFromApi(final int anilistId) {
+        final Anime anime = consumetService.getAnimeInfo(anilistId);
+        if (!animeService.isAnimeInDatabase(anilistId)) {
+            animeService.saveAnime(anime);
+        }
+
+        synchronizationService.synchronizeData(anilistId);
+        return anime.getEpisodes();
     }
 
     private Set<Episode> getEpisodesFromApi(final int anilistId, final AnilistProviders provider) {

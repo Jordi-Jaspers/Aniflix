@@ -5,6 +5,7 @@
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { getRandomValues } from '$lib/api/util';
 	import { LoadingScreen } from '$lib/components/general';
+	import {toast} from "svelte-sonner";
 
 	let genres: string[];
 	onMount(async () => {

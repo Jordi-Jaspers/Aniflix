@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { openModal } from '$lib/api/util';
+	import { openModal } from '$lib/api/modal-util';
 	import { setAnime } from '$lib/components/store/anime-context-store';
 
 	export let result: AnimeResponse;

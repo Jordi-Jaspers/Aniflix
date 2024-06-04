@@ -4,7 +4,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { useUserDetails } from '$lib/components/store/store.js';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-sonner';
 	import { SERVER_URLS } from '$lib/api/paths';
 	import { curl, logout } from '$lib/api/client';
 	import Check from 'lucide-svelte/icons/check';
@@ -33,11 +33,7 @@
 		if (response.ok) {
 			$useUserDetails.email = $request.email;
 			request.set({ email: '' });
-			toast.success('Email updated successfully. Check your email for further instructions.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
+			toast.success('Email updated successfully. Check your email for further instructions.');
 			await logout();
 		}
 		isLoading.set(false);

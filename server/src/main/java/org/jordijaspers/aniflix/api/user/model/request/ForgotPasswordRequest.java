@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UpdatePasswordRequest extends PasswordRequest {
+public class ForgotPasswordRequest extends PasswordRequest {
 
-    private String oldPassword;
+    private String token;
 
 }

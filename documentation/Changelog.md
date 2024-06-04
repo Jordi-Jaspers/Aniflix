@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+### ANI-149:
+* Showing a changelog in the application to keep users informed about the changes via a dialog.
+* The dialog contains the changes between the current version and the previous version.
+
+### ANI-147:
+* Introduced a loading indicator when interacting with an anime for more user feedback.
+  * Loading indicator is necessary because of high latency of some API's
+
+### ANI-148:
+* Replacing current toast notifications with a more user-friendly version.
+
+### ANI-146:
+* Replace Stripe with 'buy me a coffee' link in the header.
+
 ### ANI-133:
 * Retrieving the episodes from (api.ani.zip) because that api is more up-to-date, stable and faster.
 * Rerouted all the anime requests to the new api.

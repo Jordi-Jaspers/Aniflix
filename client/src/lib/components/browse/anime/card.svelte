@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { LibraryButton } from '$lib/components/general';
-	import { openModal } from '$lib/api/util';
+	import { openModal } from '$lib/api/modal-util';
 	import { setAnime } from '$lib/components/store/anime-context-store';
 
 	export let anime: AnimeResponse;

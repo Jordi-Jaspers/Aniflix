@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { InfoIcon } from 'lucide-svelte';
-	import { openModal } from '$lib/api/util';
+	import { openModal } from '$lib/api/modal-util';
 	import { getAnilistId } from '$lib/components/store/anime-context-store';
 	import type { Writable } from 'svelte/store';
 
