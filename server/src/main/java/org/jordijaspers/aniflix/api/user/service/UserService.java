@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
                     })
                     .orElseThrow(() -> new AuthorizationException(INVALID_CREDENTIALS));
         } catch (final OptimisticLockingFailureException exception) {
-            throw new AuthorizationException(INTERNAL_SERVER_ERROR);
+            throw new AuthorizationException(INTERNAL_SERVER_ERROR, exception);
         }
     }
 

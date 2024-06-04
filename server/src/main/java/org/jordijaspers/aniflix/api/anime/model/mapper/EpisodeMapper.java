@@ -3,14 +3,11 @@ package org.jordijaspers.aniflix.api.anime.model.mapper;
 import org.jordijaspers.aniflix.api.anime.model.Episode;
 import org.jordijaspers.aniflix.api.anime.model.response.EpisodeResponse;
 import org.jordijaspers.aniflix.config.SharedMapperConfiguration;
-import org.mapstruct.AfterMapping;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 

@@ -1,7 +1,6 @@
 package org.jordijaspers.aniflix.api.user.model.request;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * The password update request.

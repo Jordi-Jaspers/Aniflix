@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -46,6 +44,7 @@ public class AnizipInfo implements Serializable {
         this.malId = (int) mappings.get("mal_id");
     }
 
+    @SuppressWarnings("PMD.EmptyCatchBlock")
     private void setEpisodes(final Map<String, Object> episodes) {
         final ObjectMapper objectMapper = new ObjectMapper();
         episodes.forEach((key, value) -> {
