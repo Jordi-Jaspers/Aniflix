@@ -10,6 +10,7 @@ import org.jordijaspers.aniflix.api.anime.model.mapper.AnimeMapper;
 import org.jordijaspers.aniflix.api.consumed.anizip.service.AnizipService;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
+import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
@@ -35,12 +36,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.getProviderByProvider;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.STREAMING_LINKS_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.StringUtil.toInteger;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The ConsumetService is responsible for fetching data from the Consumet API.
@@ -85,7 +88,11 @@ public class ConsumetService {
     @Cacheable(value = "animeRecommendations", key = "#anilistId")
     public List<Recommendation> getRecommendationsForAnime(final int anilistId) {
         LOGGER.info("[Consumet API] Fetching anime recommendations for Anilist ID '{}'.", anilistId);
-        return consumetRepository.getAnimeRecommendations(anilistId).stream()
+        final AnilistInfoResult result = consumetRepository.getAnimeInfo(anilistId);
+        return isNull(result) || isEmpty(result.getRecommendations())
+                ? List.of()
+                : result.getRecommendations().stream()
+                .filter(recommendation -> nonNull(recommendation.getId()))
                 .map(recommendationMapper::toRecommendation)
                 .toList();
     }
@@ -93,7 +100,8 @@ public class ConsumetService {
     @Cacheable(value = "animeNextAiring", key = "#anilistId")
     public NextAiringEpisode getNextAiringEpisode(final int anilistId) {
         LOGGER.info("[Consumet API] Fetching next airing episode for Anilist ID '{}'.", anilistId);
-        final AnilistNextAiringEpisode anilistInfo = consumetRepository.getNextAiringEpisode(anilistId);
+        final AnilistNextAiringEpisode anilistInfo = consumetRepository.getAnimeInfo(anilistId)
+                .getNextAiringEpisode();
         return scheduleMapper.toNextAiringEpisode(anilistInfo);
     }
 

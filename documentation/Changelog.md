@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Retrieving the episodes from (api.ani.zip) because that api is more up-to-date, stable and faster.
 * Rerouted all the anime requests to the new api.
 * Removed Tracing from the application because it is unnecessary.
+* Adding datasource proxy for query debugging.
 * Database changes:
   * Added version to the user table for optimistic locking.
   * Dropped image_url column from the episode table.

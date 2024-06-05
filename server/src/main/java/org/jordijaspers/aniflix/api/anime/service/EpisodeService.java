@@ -41,8 +41,6 @@ public class EpisodeService {
 
     private final AnimeService animeService;
 
-    private final SynchronizationService synchronizationService;
-
     private final ConsumetService consumetService;
 
     public Episode getInteractedEpisode(final int anilistId, final int episodeNumber, final AnilistProviders provider) {
@@ -106,8 +104,6 @@ public class EpisodeService {
         if (!animeService.isAnimeInDatabase(anilistId)) {
             animeService.saveAnime(anime);
         }
-
-        synchronizationService.synchronizeData(anilistId);
         return anime.getEpisodes();
     }
 
@@ -116,8 +112,6 @@ public class EpisodeService {
         if (!animeService.isAnimeInDatabase(anilistId)) {
             animeService.saveAnime(anime);
         }
-
-        synchronizationService.synchronizeData(anilistId);
         return anime.getEpisodes();
     }
 

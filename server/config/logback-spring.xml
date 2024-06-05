@@ -33,9 +33,8 @@
     </appender>
 
     <!-- Logging levels -->
-    <logger name="org.jordijaspers" level="${APPLICATION_LOG_LEVEL:-DEBUG}"/>
+    <logger name="org.jordijaspers" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
     <logger name="org.hibernate.sql" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
-
     <logger name="javax.net.ssl" level="${APPLICATION_LOG_LEVEL:-INFO}"/>
     <logger name="org.hibernate" level="${APPLICATION_LOG_LEVEL:-ERROR}"/>
     <logger name="com.zaxxer" level="${APPLICATION_LOG_LEVEL:-INFO}"/>

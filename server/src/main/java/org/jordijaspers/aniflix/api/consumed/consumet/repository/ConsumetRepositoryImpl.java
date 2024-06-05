@@ -6,15 +6,14 @@ import org.jordijaspers.aniflix.api.consumed.consumet.model.ResultPage;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistInfoResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsFeed;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNewsPost;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistNextAiringEpisode;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistOverview;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecentEpisode;
-import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistRecommendation;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistSearchResult;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.anilist.AnilistStreamingLinks;
 import org.jordijaspers.aniflix.api.consumed.consumet.model.exception.ConsumetError;
 import org.jordijaspers.aniflix.api.news.model.NewsGenre;
 import org.jordijaspers.aniflix.common.exception.ConsumetAPIException;
+import org.jordijaspers.aniflix.common.util.logging.LogAnilistTime;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +31,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.Endpoints.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.ConsumetConstants.QueryParams.*;
 import static org.jordijaspers.aniflix.api.consumed.consumet.model.AnilistProviders.ZORO;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The implementation of the {@link ConsumetRepository} interface.
@@ -63,6 +60,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistSearchResult> searchAnime(final String query) {
         return searchAnime(Map.of(QUERY_PARAM, query));
     }
@@ -72,6 +70,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistSearchResult> searchAnime(final Map<String, String> filters) {
         return client.get()
                 .uri(uriBuilder -> {
@@ -93,6 +92,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public AnilistInfoResult getAnimeDetails(final int id) {
         return getAnimeDetails(id, getActiveProvider().getProvider());
     }
@@ -102,6 +102,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public AnilistInfoResult getAnimeDetails(final int id, final String provider) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -121,6 +122,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     @Cacheable(value = "animeInfo", key = "#id")
     public AnilistInfoResult getAnimeInfo(final int id) {
         return client.get()
@@ -141,41 +143,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
-    public List<AnilistRecommendation> getAnimeRecommendations(final int id) {
-        AnilistInfoResult result;
-        try {
-            result = getAnimeInfo(id);
-        } catch (final Exception exception) {
-            result = getAnimeDetails(id);
-        }
-
-        return isNull(result) || isEmpty(result.getRecommendations())
-                ? List.of()
-                : result.getRecommendations().stream()
-                .filter(recommendation -> nonNull(recommendation.getId()))
-                .toList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @LogExecutionTime
-    public AnilistNextAiringEpisode getNextAiringEpisode(final int id) {
-        AnilistInfoResult result;
-        try {
-            result = getAnimeInfo(id);
-        } catch (final Exception exception) {
-            result = getAnimeDetails(id);
-        }
-        return isNull(result) ? null : result.getNextAiringEpisode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistOverview> getPopularAnime(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -198,6 +166,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistOverview> getTrendingAnime(final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -219,6 +188,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistRecentEpisode> getRecentEpisodes(final int results, final int page, final String provider) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -241,6 +211,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public ResultPage<AnilistOverview> getAnimeByGenre(final String genre, final int results, final int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -303,6 +274,7 @@ public class ConsumetRepositoryImpl implements ConsumetRepository {
      */
     @Override
     @LogExecutionTime
+    @LogAnilistTime
     public AnilistStreamingLinks getEpisodeLinks(final String episodeId, final String provider) {
         try {
             return client.get()
