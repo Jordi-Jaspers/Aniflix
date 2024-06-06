@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.2.0] - 2024-06-06
 ### ANI-149:
 * Showing a changelog in the application to keep users informed about the changes via a dialog.
 * The dialog contains the changes between the current version and the previous version.
