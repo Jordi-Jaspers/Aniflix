@@ -35,14 +35,11 @@ $: lowerBound = (page: number) => (page === 1 ? 1 : (page - 1) * pageSize + 1);
 $: upperBound = (page: number) => (page * pageSize < episodes.length ? page * pageSize : episodes.length);
 $: {
 	if ($useModalEpisodeSelector.value === 0) {
-		const page: number = getPageOfEpisode(lastSeenEpisode);
-		$useModalEpisodeSelector = {
-			value: page,
-			label: `Episodes ${lowerBound($useModalEpisodeSelector.value)} - ${upperBound($useModalEpisodeSelector.value)}`
-		};
-	} else {
-		$useModalEpisodeSelector.label = `Episodes ${lowerBound($useModalEpisodeSelector.value)} - ${upperBound($useModalEpisodeSelector.value)}`;
+		$useModalEpisodeSelector.value = lastSeenEpisode !== 0
+				? getPageOfEpisode(lastSeenEpisode)
+				: 1;
 	}
+	$useModalEpisodeSelector.label = `Episodes ${lowerBound($useModalEpisodeSelector.value)} - ${upperBound($useModalEpisodeSelector.value)}`;
 }
 
 function setCurrentPage(selectedPage: Selected<number> | undefined) {
