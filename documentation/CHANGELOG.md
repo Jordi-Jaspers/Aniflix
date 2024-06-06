@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.2.4] - 2024-06-06
+### Hotfix:
+* Refactor the password meter to be more user-friendly.
+
 ## [0.2.3] - 2024-06-06
 ### Hotfix:
 * Wrong progress assigned to the wrong episode when the episode is watched.

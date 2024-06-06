@@ -62,7 +62,7 @@ async function handleSubmit() {
 				/>
 			</div>
 
-			<PasswordMeter bind:password={$formData.password} bind:isValidPassword={$isFormValid} />
+			<PasswordMeter bind:password={$formData.password} bind:confirmation={$formData.passwordConfirmation} bind:isValid={$isFormValid} />
 
 			{#if errorMessage && registerResponse === undefined}
 				<div class="mx-1 flex flex-row content-center justify-center space-x-2 text-sm text-red-500">
