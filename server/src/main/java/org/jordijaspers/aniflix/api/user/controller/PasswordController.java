@@ -1,6 +1,7 @@
 package org.jordijaspers.aniflix.api.user.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jordijaspers.aniflix.api.user.model.request.ForgotPasswordRequest;
 import org.jordijaspers.aniflix.api.user.model.request.UpdatePasswordRequest;
 import org.jordijaspers.aniflix.api.user.service.PasswordService;
 import org.jordijaspers.aniflix.api.user.validator.ChangePasswordValidator;
@@ -39,7 +40,7 @@ public class PasswordController {
 
     @ResponseStatus(NO_CONTENT)
     @PostMapping(path = PUBLIC_RESET_PASSWORD_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> resetPassword(@RequestBody final UpdatePasswordRequest request) {
+    public ResponseEntity<?> resetPassword(@RequestBody final ForgotPasswordRequest request) {
         passwordValidator.validateAndThrow(request);
         passwordService.changePassword(request.getNewPassword(), request.getToken());
         return ResponseEntity.status(NO_CONTENT).build();

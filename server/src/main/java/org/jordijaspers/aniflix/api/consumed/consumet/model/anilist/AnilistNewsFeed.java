@@ -3,18 +3,24 @@ package org.jordijaspers.aniflix.api.consumed.consumet.model.anilist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
 
 /**
  * The news feed of an anime.
  */
 @Data
-public class AnilistNewsFeed {
+public class AnilistNewsFeed implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @JsonProperty("id")
     private String id;

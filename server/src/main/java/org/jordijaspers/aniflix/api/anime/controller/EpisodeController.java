@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +48,7 @@ public class EpisodeController {
     public ResponseEntity<List<EpisodeResponse>> getEpisodesOfAnime(@PathVariable("id") final int anilistId) {
         final Set<Episode> episodes = episodeService.getEpisodesOfAnime(anilistId);
         final List<EpisodeResponse> episodeResponse = episodeMapper.toEpisodeResponse(episodes);
+        episodeResponse.sort(Comparator.comparingInt(EpisodeResponse::getEpisodeNumber));
         return ResponseEntity.status(OK).body(episodeResponse);
     }
 }

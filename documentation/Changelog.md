@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.2.0] - 2024-06-06
+### ANI-149:
+* Showing a changelog in the application to keep users informed about the changes via a dialog.
+* The dialog contains the changes between the current version and the previous version.
+
+### ANI-147:
+* Introduced a loading indicator when interacting with an anime for more user feedback.
+  * Loading indicator is necessary because of high latency of some API's
+
+### ANI-148:
+* Replacing current toast notifications with a more user-friendly version.
+
+### ANI-146:
+* Replace Stripe with 'buy me a coffee' link in the header.
+
+### ANI-133:
+* Retrieving the episodes from (api.ani.zip) because that api is more up-to-date, stable and faster.
+* Rerouted all the anime requests to the new api.
+* Removed Tracing from the application because it is unnecessary.
+* Adding datasource proxy for query debugging.
+* Database changes:
+  * Added version to the user table for optimistic locking.
+  * Dropped image_url column from the episode table.
+  * Added a summary to the episode table.
+  * Added fan_art and clear_logo to the anime table.
+
 ## [0.1.4] - 2024-06-03
 ### ANI-140:
 * Removed the default shadcn logo from the login page.

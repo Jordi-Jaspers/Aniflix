@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { Duration } from '$lib/components/general';
-	import type { SveltePlayerRef } from 'svelte-player/dist/types';
+import { Duration } from '$lib/components/general';
+import type { SveltePlayerRef } from 'svelte-player/dist/types';
 
-	export let played: number;
-	export let loaded: number;
-	export let duration: number;
-	export let seeking: boolean;
-	export let showVolume: boolean;
-	export let playerRef: SveltePlayerRef;
+export let played: number;
+export let loaded: number;
+export let duration: number;
+export let seeking: boolean;
+export let showVolume: boolean;
+export let playerRef: SveltePlayerRef;
 
-	function handleSeekMouseDown() {
-		seeking = true;
-	}
+function handleSeekMouseDown() {
+	seeking = true;
+}
 
-	function handleSeekMouseUp() {
-		seeking = false;
-		playerRef.seekTo(parseFloat(String(played)));
-	}
+function handleSeekMouseUp() {
+	seeking = false;
+	playerRef.seekTo(parseFloat(String(played)));
+}
 </script>
 
 {#if !showVolume}

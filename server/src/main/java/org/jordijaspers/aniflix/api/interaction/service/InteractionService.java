@@ -36,8 +36,14 @@ public class InteractionService {
                     LOGGER.info("User '{}' has not interacted with anime ('{}') yet.", user.getUsername(), anilistId);
                     return animeService.isAnimeInDatabase(anilistId)
                             ? new Interaction(user, anilistId)
-                            : new Interaction(user, animeService.findDetailsByAnilistId(anilistId));
+                            : new Interaction(user, animeService.findInfoByAnilistId(anilistId));
                 });
+    }
+
+    public void setLastSeenEpisode(final int anilistId, final int episodeNumber) {
+        final Interaction interaction = getInteractedAnime(anilistId);
+        interaction.setLastSeenEpisode(episodeNumber);
+        interactionRepository.save(interaction);
     }
 
     public void updateInteraction(final Interaction interaction) {

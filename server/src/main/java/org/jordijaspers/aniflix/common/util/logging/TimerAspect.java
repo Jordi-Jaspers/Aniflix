@@ -30,7 +30,25 @@ public class TimerAspect {
         final long endTime = System.currentTimeMillis();
 
         final String methodName = joinPoint.getSignature().getName();
-        LOGGER.info("[Execution Timer] Signature '{}' took '{}' ms to finish.", methodName, endTime - startTime);
+        LOGGER.debug("[Execution Timer] Signature '{}' took '{}' ms to finish.", methodName, endTime - startTime);
+        return proceed;
+    }
+
+    /**
+     * Logs the execution time of the annotated method.
+     *
+     * @param joinPoint The join point.
+     * @return The result of the method.
+     * @throws Throwable If something goes wrong.
+     */
+    @Around("@annotation(LogAnilistTime)")
+    public Object logAnilistTime(final ProceedingJoinPoint joinPoint) throws Throwable {
+        final long startTime = System.currentTimeMillis();
+        final Object proceed = joinPoint.proceed();
+        final long endTime = System.currentTimeMillis();
+
+        final String methodName = joinPoint.getSignature().getName();
+        LOGGER.info("[Anilist Timer] Signature '{}' took '{}' ms to finish.", methodName, endTime - startTime);
         return proceed;
     }
 }

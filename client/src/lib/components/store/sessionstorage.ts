@@ -1,6 +1,6 @@
 import { type Writable, writable } from 'svelte/store';
 import { browser } from '$app/environment';
-import toast from 'svelte-french-toast';
+import { toast } from 'svelte-sonner';
 
 class SessionStorage<T> {
 	key: string;
@@ -18,11 +18,7 @@ class SessionStorage<T> {
 					const parsedValue = this.parseValue(storedValue);
 					this.value.set(parsedValue);
 				} catch (e) {
-					toast.error('Failed to parse stored value', {
-						duration: 5000,
-						position: 'bottom-center',
-						style: 'background: #262626; color: #ffffff;'
-					});
+					toast.error('Failed to parse stored value');
 				}
 			}
 

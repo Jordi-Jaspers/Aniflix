@@ -1,40 +1,40 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import { InfoIcon, PlayIcon, StarIcon } from 'lucide-svelte';
-	import { openModal } from '$lib/api/util';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
+import { Button } from '$lib/components/ui/button';
+import { InfoIcon, PlayIcon, StarIcon } from 'lucide-svelte';
+import { openModal } from '$lib/api/modal-util';
+import { goto } from '$app/navigation';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
 
-	let anime: AnimeResponse;
-	let genres: string[];
-	let description: string;
-	let lastOpenTagIndex: number;
-	let lastEpisode: number;
+let anime: AnimeResponse;
+let genres: string[];
+let description: string;
+let lastOpenTagIndex: number;
+let lastEpisode: number;
 
-	onMount(async () => {
-		const response: Response = await curl(SERVER_URLS.ANIME_BANNER_PATH, { method: 'GET' });
-		if (response.ok) {
-			anime = await response.json();
+onMount(async () => {
+	const response: Response = await curl(SERVER_URLS.ANIME_BANNER_PATH, { method: 'GET' });
+	if (response.ok) {
+		anime = await response.json();
 
-			genres = anime.genres
-				.filter((genre) => genre !== 'UNKNOWN')
-				.slice(0, 3)
-				.map((genre) => genre.charAt(0) + genre.slice(1).toLowerCase());
+		genres = anime.genres
+			.filter((genre) => genre !== 'UNKNOWN')
+			.slice(0, 3)
+			.map((genre) => genre.charAt(0) + genre.slice(1).toLowerCase());
 
-			const max_characters: number = 575;
-			description = anime.description.replace(/\(Source:.*\)/, '');
-			description = description.length > max_characters ? description.substring(0, max_characters) : description;
+		const max_characters: number = 575;
+		description = anime.description.replace(/\(Source:.*\)/, '');
+		description = description.length > max_characters ? description.substring(0, max_characters) : description;
 
-			lastOpenTagIndex = description.lastIndexOf('<');
-			if (lastOpenTagIndex > 0) {
-				description = description.substring(0, lastOpenTagIndex);
-			}
-
-			lastEpisode = anime.lastSeenEpisode !== 0 ? anime.lastSeenEpisode : 1;
+		lastOpenTagIndex = description.lastIndexOf('<');
+		if (lastOpenTagIndex > 0) {
+			description = description.substring(0, lastOpenTagIndex);
 		}
-	});
+
+		lastEpisode = anime.lastSeenEpisode !== 0 ? anime.lastSeenEpisode : 1;
+	}
+});
 </script>
 
 {#if anime}

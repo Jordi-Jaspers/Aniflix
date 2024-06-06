@@ -1,40 +1,40 @@
 <script lang="ts">
-	import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
-	import { PlayIcon, StarIcon, X } from 'lucide-svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { LibraryButton, LikeButton, SpeakerButton } from '$lib/components/general/index.js';
-	import { Badge } from '$lib/components/ui/badge';
-	import { closeModal } from '$lib/api/util';
-	import { EpisodeList, RecommendationCards } from '$lib/components/browse';
-	import { Content, List, Root, Trigger } from '$lib/components/ui/tabs';
-	import { setAnime } from '$lib/components/store/anime-context-store';
-	import { goto } from '$app/navigation';
-	import { Separator } from '$lib/components/ui/separator/index.js';
-	import { NextAiringEpisodeTimer, YoutubePlayer } from '$lib/components/modal/index.js';
+import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
+import { PlayIcon, StarIcon, X } from 'lucide-svelte';
+import { Button } from '$lib/components/ui/button';
+import { LibraryButton, LikeButton, SpeakerButton } from '$lib/components/general/index.js';
+import { Badge } from '$lib/components/ui/badge';
+import { closeModal } from '$lib/api/modal-util';
+import { EpisodeList, RecommendationCards } from '$lib/components/browse';
+import { Content, List, Root, Trigger } from '$lib/components/ui/tabs';
+import { setAnime } from '$lib/components/store/anime-context-store';
+import { goto } from '$app/navigation';
+import { Separator } from '$lib/components/ui/separator/index.js';
+import { NextAiringEpisodeTimer, YoutubePlayer } from '$lib/components/modal/index.js';
 
-	let isPlaying: boolean;
-	let isMuted: boolean;
-	let anime: AnimeResponse;
+let isPlaying: boolean;
+let isMuted: boolean;
+let anime: AnimeResponse;
 
-	let nextEpisode: number = 1;
+let nextEpisode: number = 1;
 
-	useModalInfo.subscribe((value: AnimeResponse) => {
-		if (value) {
-			anime = value;
-		}
-	});
-
-	function handleEscape(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			closeModal();
-		}
+useModalInfo.subscribe((value: AnimeResponse) => {
+	if (value) {
+		anime = value;
 	}
+});
 
-	$: if (anime) {
-		setAnime(anime);
-		let lastSeenEpisode: number = anime.lastSeenEpisode !== 0 ? anime.lastSeenEpisode : 1;
-		nextEpisode = lastSeenEpisode !== anime.totalEpisodes ? lastSeenEpisode + 1 : lastSeenEpisode;
+function handleEscape(e: KeyboardEvent) {
+	if (e.key === 'Escape') {
+		closeModal();
 	}
+}
+
+$: if (anime) {
+	setAnime(anime);
+	let lastSeenEpisode: number = anime.lastSeenEpisode !== 0 ? anime.lastSeenEpisode : 1;
+	nextEpisode = lastSeenEpisode !== anime.totalEpisodes ? lastSeenEpisode + 1 : lastSeenEpisode;
+}
 </script>
 
 {#if $useShowInfoModal}
@@ -58,7 +58,7 @@
 				src={anime.cover}
 				alt="thumbnail"
 			/>
-			<YoutubePlayer {anime} bind:muted={isMuted} bind:playing={isPlaying} />
+			<YoutubePlayer anime={anime} bind:muted={isMuted} bind:playing={isPlaying} />
 			<div class="absolute bottom-10 flex w-full items-center justify-between px-10">
 				<div class="flex items-center space-x-2">
 					<Button
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 				{#if isPlaying}
-					<SpeakerButton bind:isMuted />
+					<SpeakerButton bind:isMuted={isMuted} />
 				{/if}
 			</div>
 		</div>
@@ -85,12 +85,12 @@
 			<div class="space-y-2">
 				<h3 class="flex items-center">
 					{anime.title
-						.split(' ')
-						.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-						.join(' ')
-						.split('-')
-						.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-						.join('-')}
+                        .split(' ')
+                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ')
+                        .split('-')
+                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join('-')}
 					<Badge variant="outline" class="ml-4 bg-blue-500">
 						{#if anime.subbed}
 							SUB
@@ -122,9 +122,9 @@
 					<p>
 						<span class="text-muted-foreground">Genres:</span>{' '}
 						{anime.genres
-							.filter((genre) => genre !== 'UNKNOWN')
-							.map((genre) => genre.charAt(0) + genre.slice(1).toLowerCase())
-							.join(', ')}
+                            .filter((genre) => genre !== 'UNKNOWN')
+                            .map((genre) => genre.charAt(0) + genre.slice(1).toLowerCase())
+                            .join(', ')}
 					</p>
 					<p>
 						<span class="text-muted-foreground">Media:</span>{' '}

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { PictureInPicture2 } from 'lucide-svelte';
-	import Device from 'svelte-device-info';
+import { PictureInPicture2 } from 'lucide-svelte';
+import Device from 'svelte-device-info';
 
-	export let pip: boolean;
+export let pip: boolean;
 
-	function togglePiP() {
-		pip = !pip;
-	}
+function togglePiP() {
+	pip = !pip;
+}
 </script>
 
 {#if !Device.isMobile && !Device.isTablet}

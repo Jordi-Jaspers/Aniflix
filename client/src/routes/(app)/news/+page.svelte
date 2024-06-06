@@ -1,69 +1,69 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { NewsFeedCard, NewsFeedItem } from '$lib/components/newsfeed/index';
-	import { LoadingScreen } from '$lib/components/general';
-	import { PaginationBar } from '$lib/components/search';
+import { onDestroy, onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { NewsFeedCard, NewsFeedItem } from '$lib/components/newsfeed/index';
+import { LoadingScreen } from '$lib/components/general';
+import { PaginationBar } from '$lib/components/search';
 
-	let bannerCards: NewsPostResponse[] = [];
-	let listCards: NewsPostResponse[] = [];
-	let isMobile: boolean = false;
+let bannerCards: NewsPostResponse[] = [];
+let listCards: NewsPostResponse[] = [];
+let isMobile: boolean = false;
 
-	// Add event listener on component mount
-	onMount(async () => {
-		await getNewsFeed();
-		window.addEventListener('resize', handleResize);
+// Add event listener on component mount
+onMount(async () => {
+	await getNewsFeed();
+	window.addEventListener('resize', handleResize);
+});
+
+// Remove event listener on component destroy
+onDestroy(() => {
+	window.removeEventListener('resize', handleResize);
+});
+
+// Call setNewsFeed on mount and resize
+let isLoading: boolean = true;
+let pageNumber: number = 1;
+let request: PageRequest = { page: 0, perPage: 25 };
+let page: PageResponse<NewsPostResponse>;
+
+async function getNewsFeed() {
+	const response: Response = await curl(SERVER_URLS.NEWS_PATH, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(request)
 	});
 
-	// Remove event listener on component destroy
-	onDestroy(() => {
-		window.removeEventListener('resize', handleResize);
-	});
+	if (response.ok) {
+		page = await response.json();
+		setNewsFeed(page.content);
+		isLoading = false;
 
-	// Call setNewsFeed on mount and resize
-	let isLoading: boolean = true;
-	let pageNumber: number = 1;
-	let request: PageRequest = { page: 0, perPage: 25 };
-	let page: PageResponse<NewsPostResponse>;
-
-	async function getNewsFeed() {
-		const response: Response = await curl(SERVER_URLS.NEWS_PATH, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(request)
-		});
-
-		if (response.ok) {
-			page = await response.json();
-			setNewsFeed(page.content);
-			isLoading = false;
-
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		}
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
+}
 
-	// Function to set news feed based on window width
-	function setNewsFeed(newsFeed: NewsPostResponse[]) {
-		const mobile_threshold = 768;
-		if (window.innerWidth < mobile_threshold) {
-			bannerCards = [];
-			listCards = newsFeed;
-			isMobile = true;
-		} else {
-			bannerCards = newsFeed.slice(0, 4);
-			listCards = newsFeed.slice(4);
-			isMobile = false;
-		}
+// Function to set news feed based on window width
+function setNewsFeed(newsFeed: NewsPostResponse[]) {
+	const mobile_threshold = 768;
+	if (window.innerWidth < mobile_threshold) {
+		bannerCards = [];
+		listCards = newsFeed;
+		isMobile = true;
+	} else {
+		bannerCards = newsFeed.slice(0, 4);
+		listCards = newsFeed.slice(4);
+		isMobile = false;
 	}
+}
 
-	// Function to handle window resize
-	function handleResize() {
-		setNewsFeed([...bannerCards, ...listCards]);
-	}
+// Function to handle window resize
+function handleResize() {
+	setNewsFeed([...bannerCards, ...listCards]);
+}
 
-	$: if (request) getNewsFeed();
-	$: request.page = pageNumber - 1;
+$: if (request) getNewsFeed();
+$: request.page = pageNumber - 1;
 </script>
 
 <svelte:head>
@@ -101,10 +101,10 @@
 
 		<div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
 			{#each listCards as post}
-				<NewsFeedItem {post} />
+				<NewsFeedItem post={post} />
 			{/each}
 		</div>
 
-		<PaginationBar bind:totalElements={page.totalElements} bind:pageNumber bind:pageSize={request.perPage} />
+		<PaginationBar bind:totalElements={page.totalElements} bind:pageNumber={pageNumber} bind:pageSize={request.perPage} />
 	</div>
 {/if}

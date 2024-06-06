@@ -1,58 +1,58 @@
 <script lang="ts">
-	import {
-		Fullscreen,
-		MediaControls,
-		NavigationSlider,
-		PictureInPicture,
-		PlaybackRate,
-		PreviousEpisode,
-		Resolution,
-		VolumeSlider
-	} from '$lib/components/video_player/index';
-	import { onDestroy, onMount } from 'svelte';
-	import ArrowLeft from 'lucide-svelte/icons/arrow-left';
-	import { NextEpisode } from '$lib/components/video_player/index.js';
-	import type { SveltePlayerRef } from 'svelte-player/dist/types';
-	import { goto } from '$app/navigation';
-	import { CLIENT_URLS } from '$lib/api/paths';
-	import type { PlayerUrl } from 'svelte-player/dist/players/types';
+import {
+	Fullscreen,
+	MediaControls,
+	NavigationSlider,
+	PictureInPicture,
+	PlaybackRate,
+	PreviousEpisode,
+	Resolution,
+	VolumeSlider
+} from '$lib/components/video_player/index';
+import { onDestroy, onMount } from 'svelte';
+import ArrowLeft from 'lucide-svelte/icons/arrow-left';
+import { NextEpisode } from '$lib/components/video_player/index.js';
+import type { SveltePlayerRef } from 'svelte-player/dist/types';
+import { goto } from '$app/navigation';
+import { CLIENT_URLS } from '$lib/api/paths';
+import type { PlayerUrl } from 'svelte-player/dist/players/types';
 
-	export let pip: boolean;
-	export let playing: boolean;
-	export let episode: EpisodeResponse;
-	export let currentUrl: PlayerUrl;
-	export let playerRef: SveltePlayerRef;
-	export let volume: number;
-	export let muted: boolean;
-	export let showVolume: boolean;
-	export let played: number;
-	export let loaded: number;
-	export let duration: number;
-	export let seeking: boolean;
-	export let playbackRate: number;
+export let pip: boolean;
+export let playing: boolean;
+export let episode: EpisodeResponse;
+export let currentUrl: PlayerUrl;
+export let playerRef: SveltePlayerRef;
+export let volume: number;
+export let muted: boolean;
+export let showVolume: boolean;
+export let played: number;
+export let loaded: number;
+export let duration: number;
+export let seeking: boolean;
+export let playbackRate: number;
 
-	let overlayVisible: boolean = true;
-	let mouseMoveTimer: Timer;
+let overlayVisible: boolean = true;
+let mouseMoveTimer: Timer;
 
-	function hideOverlayAfterDelay() {
-		mouseMoveTimer = setTimeout(() => {
-			overlayVisible = false;
-		}, 3000);
-	}
+function hideOverlayAfterDelay() {
+	mouseMoveTimer = setTimeout(() => {
+		overlayVisible = false;
+	}, 3000);
+}
 
-	function resetMouseMoveTimer() {
-		clearTimeout(mouseMoveTimer);
-		overlayVisible = true;
-		hideOverlayAfterDelay();
-	}
+function resetMouseMoveTimer() {
+	clearTimeout(mouseMoveTimer);
+	overlayVisible = true;
+	hideOverlayAfterDelay();
+}
 
-	onMount(() => {
-		hideOverlayAfterDelay();
-	});
+onMount(() => {
+	hideOverlayAfterDelay();
+});
 
-	onDestroy(() => {
-		clearTimeout(mouseMoveTimer);
-	});
+onDestroy(() => {
+	clearTimeout(mouseMoveTimer);
+});
 </script>
 
 <div
@@ -75,21 +75,28 @@
 
 	<!-- Bottom row functionalities  -->
 	<div class="flex flex-col space-y-4">
-		<NavigationSlider {playerRef} bind:played bind:duration bind:seeking bind:showVolume bind:loaded />
+		<NavigationSlider
+			playerRef={playerRef}
+			bind:played={played}
+			bind:duration={duration}
+			bind:seeking={seeking}
+			bind:showVolume={showVolume}
+			bind:loaded={loaded}
+		/>
 		<div class="flex-grow-1 flex h-[4vw] max-h-12 min-h-6 items-center justify-between">
 			<!-- Left Side  -->
 			<div class="flex h-full space-x-4 md:space-x-8">
-				<MediaControls {playerRef} bind:playing />
-				<VolumeSlider bind:muted bind:volume bind:showVolume />
+				<MediaControls playerRef={playerRef} bind:playing={playing} />
+				<VolumeSlider bind:muted={muted} bind:volume={volume} bind:showVolume={showVolume} />
 			</div>
 
 			<!-- Right Side  -->
 			<div class="flex h-full space-x-4 md:space-x-8">
-				<PreviousEpisode bind:episode />
-				<NextEpisode bind:episode />
-				<Resolution bind:episode bind:currentUrl />
-				<PictureInPicture bind:pip />
-				<PlaybackRate bind:playbackRate />
+				<PreviousEpisode bind:episode={episode} />
+				<NextEpisode bind:episode={episode} />
+				<Resolution bind:episode={episode} bind:currentUrl={currentUrl} />
+				<PictureInPicture bind:pip={pip} />
+				<PlaybackRate bind:playbackRate={playbackRate} />
 				<Fullscreen />
 			</div>
 		</div>

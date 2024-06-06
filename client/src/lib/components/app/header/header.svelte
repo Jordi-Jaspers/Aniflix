@@ -1,26 +1,26 @@
 <script lang="ts">
-	import FullLogo from '$lib/assets/icons/aniflix-logo-small.webp?enhanced';
-	import SmallLogo from '$lib/assets/icons/aniflix-icon-small.webp?enhanced';
-	import SearchBar from '$lib/components/app/header/search-bar.svelte';
-	import UserButton from '$lib/components/app/header/user-button.svelte';
-	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
-	import { ProviderStatusButton } from '$lib/components/general/index.js';
-	import { Badge } from '$lib/components/ui/badge';
+import FullLogo from '$lib/assets/icons/aniflix-logo-small.webp?enhanced';
+import SmallLogo from '$lib/assets/icons/aniflix-icon-small.webp?enhanced';
+import SearchBar from '$lib/components/app/header/search-bar.svelte';
+import UserButton from '$lib/components/app/header/user-button.svelte';
+import { onMount } from 'svelte';
+import { page } from '$app/stores';
+import { ProviderStatusButton } from '$lib/components/general/index.js';
+import { Badge } from '$lib/components/ui/badge';
 
-	let currentPath = '';
-	$: currentPath = $page.url.pathname;
+let currentPath = '';
+$: currentPath = $page.url.pathname;
 
-	let isScrolled: boolean = false;
-	onMount(() => {
-		const handleScroll = () => {
-			isScrolled = window.scrollY > 0;
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	});
+let isScrolled: boolean = false;
+onMount(() => {
+	const handleScroll = () => {
+		isScrolled = window.scrollY > 0;
+	};
+	window.addEventListener('scroll', handleScroll);
+	return () => {
+		window.removeEventListener('scroll', handleScroll);
+	};
+});
 </script>
 
 <header

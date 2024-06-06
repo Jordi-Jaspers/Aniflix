@@ -52,9 +52,11 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
     // #################### Resource Mapping ####################
 
     @Named("toResourceObject")
-    @Mapping(source = "imageUrl", target = "image")
     @Mapping(source = "coverUrl", target = "cover")
+    @Mapping(source = "imageUrl", target = "image")
+    @Mapping(source = "fanArtUrl", target = "fanArt")
     @Mapping(source = "trailerUrl", target = "trailer")
+    @Mapping(source = "clearLogoUrl", target = "clearLogo")
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
     @Mapping(target = "watchStatus", expression = "java(anime.getWatchStatus().getValue())")
     public abstract AnimeResponse toResourceObject(Anime anime);
@@ -63,11 +65,13 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
     public abstract List<AnimeResponse> toResourceObject(List<Anime> anime);
 
     @Named("toResponseWithEpisodes")
-    @Mapping(source = "imageUrl", target = "image")
     @Mapping(source = "coverUrl", target = "cover")
+    @Mapping(source = "imageUrl", target = "image")
+    @Mapping(source = "fanArtUrl", target = "fanArt")
+    @Mapping(source = "trailerUrl", target = "trailer")
+    @Mapping(source = "clearLogoUrl", target = "clearLogo")
     @Mapping(target = "genres", expression = "java(toGenres(anime.getGenres()))")
     @Mapping(target = "episodes", expression = "java(toEpisodeResponse(anime))")
-    @Mapping(target = "trailer", source = "trailerUrl")
     @Mapping(target = "watchStatus", expression = "java(anime.getWatchStatus().getValue())")
     public abstract DetailedAnimeResponse toResponseWithEpisodes(Anime anime);
 
@@ -149,7 +153,6 @@ public abstract class AnimeMapper extends PageMapper<AnimeResponse, Anime> {
                     response.setEpisodeTitle(episode.getTitle());
                     response.setEpisodeNumber(episode.getNumber());
                     response.setDuration(episode.getDuration());
-                    response.setImage(episode.getImage());
                     if (nonNull(episode.getAirDate())) {
                         response.setAirDate(ZonedDateTime.of(episode.getAirDate(), UTC));
                     }

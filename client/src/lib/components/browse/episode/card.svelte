@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { InfoButton } from '$lib/components/general';
-	import { setAnilistId } from '$lib/components/store/anime-context-store';
-	import { goto } from '$app/navigation';
-	import { PlayIcon } from 'lucide-svelte';
+import { InfoButton } from '$lib/components/general';
+import { setAnilistId } from '$lib/components/store/anime-context-store';
+import { goto } from '$app/navigation';
+import { PlayIcon } from 'lucide-svelte';
 
-	let hovering: boolean = false;
+let hovering: boolean = false;
 
-	export let episode: EpisodeResponse;
-	setAnilistId(episode.anilistId);
+export let episode: EpisodeResponse;
+setAnilistId(episode.anilistId);
 </script>
 
 <div class="flex h-full w-48 flex-col overflow-hidden rounded-t-[0.75rem] md:w-56">

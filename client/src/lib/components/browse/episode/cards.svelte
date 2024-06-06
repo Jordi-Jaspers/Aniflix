@@ -1,43 +1,43 @@
 <script lang="ts">
-	import { Item } from '$lib/components/ui/carousel/index';
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { Skeleton } from '$lib/components/ui/skeleton';
-	import { EpisodeCard } from '$lib/components/browse';
-	import { SERVER_URLS } from '$lib/api/paths';
+import { Item } from '$lib/components/ui/carousel/index';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { Skeleton } from '$lib/components/ui/skeleton';
+import { EpisodeCard } from '$lib/components/browse';
+import { SERVER_URLS } from '$lib/api/paths';
 
-	export let isLoading = true;
-	let collection: EpisodeResponse[];
+export let isLoading = true;
+let collection: EpisodeResponse[];
 
-	onMount(async () => {
-		const body: AnimeRequest = {
-			page: 1,
-			perPage: 25,
-			title: '',
-			genre: '',
-			season: ''
-		};
+onMount(async () => {
+	const body: AnimeRequest = {
+		page: 1,
+		perPage: 25,
+		title: '',
+		genre: '',
+		season: ''
+	};
 
-		const response: Response = await curl(SERVER_URLS.ANIME_RECENT_PATH, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(body)
-		});
-
-		if (response.ok) {
-			collection = await response.json();
-		}
+	const response: Response = await curl(SERVER_URLS.ANIME_RECENT_PATH, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
 	});
 
-	$: isLoading = !collection || collection.length === 0;
+	if (response.ok) {
+		collection = await response.json();
+	}
+});
+
+$: isLoading = !collection || collection.length === 0;
 </script>
 
 {#if collection}
 	{#each collection as episode}
 		<Item class="basis-auto">
-			<EpisodeCard {episode} />
+			<EpisodeCard episode={episode} />
 		</Item>
 	{/each}
 {:else}

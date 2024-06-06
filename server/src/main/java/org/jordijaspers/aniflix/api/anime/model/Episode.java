@@ -60,14 +60,14 @@ public class Episode implements Serializable {
     @Column(name = "number")
     private int number;
 
-    @Column(name = "image")
-    private String image;
-
     @Column(name = "duration")
     private long duration;
 
     @Column(name = "air_date")
     private LocalDateTime airDate;
+
+    @Column(name = "summary")
+    private String summary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Anime anime;
@@ -123,10 +123,12 @@ public class Episode implements Serializable {
     /**
      * Check if the episode is completed and contains all the necessary information.
      */
+    @SuppressWarnings("BooleanExpressionComplexity")
     public boolean isCompleted() {
         return nonNull(airDate)
                 && isNotBlank(gogoanimeId)
                 && isNotBlank(zoroId)
-                && isNotBlank(title);
+                && isNotBlank(title)
+                && isNotBlank(summary);
     }
 }

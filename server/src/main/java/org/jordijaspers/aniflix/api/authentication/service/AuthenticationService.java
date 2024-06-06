@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 import static java.util.Objects.nonNull;
 import static org.jordijaspers.aniflix.api.token.model.TokenType.*;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.AUTHORIZATION_ERROR;
@@ -41,6 +43,9 @@ public class AuthenticationService {
     public User authorize(final String username, final String password) {
         authenticate(username, password);
         final User user = userService.loadUserByUsername(username);
+        user.setLastLogin(LocalDateTime.now());
+        userService.updateUserDetails(user);
+
         LOGGER.info("User '{}' successfully authenticated", username);
         return tokenService.generateAuthorizationTokens(user);
     }

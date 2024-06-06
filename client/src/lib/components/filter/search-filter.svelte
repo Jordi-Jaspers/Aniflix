@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { CircleX, ScanSearch } from 'lucide-svelte';
+import { CircleX, ScanSearch } from 'lucide-svelte';
 
-	export let query: string = '';
+export let query: string = '';
 </script>
 
 <div id="search" class="flex h-10 items-center justify-between rounded-md border border-input bg-transparent px-2 text-sm md:w-1/2">

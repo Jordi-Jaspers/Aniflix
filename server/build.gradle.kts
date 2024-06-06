@@ -1,3 +1,4 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.spring.gradle.dependencymanagement.org.apache.commons.lang3.StringUtils.lowerCase
 import org.cyclonedx.gradle.CycloneDxTask
 import org.gradle.api.JavaVersion.VERSION_17
@@ -8,14 +9,14 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 // Both "group" and "version" are default Gradle properties, so they need to be set here
 group = "org.jordijaspers"
-version = "0.1.4"
+version = "0.2.0"
 
 // Other, non-default Gradle, properties need to be defined here
 val author = "Jordi Jaspers"
 val github = "https://github.com/Jordi-Jaspers"
 
 val applicationName = "aniflix"
-val applicationDescription = "A backend system which consumes the 'consumet/api.consumet.org' api"
+val applicationDescription = "A api for the Aniflix website. A streaming service for anime."
 val applicationUrl = "https://aniflix.stream"
 
 /**
@@ -103,9 +104,6 @@ dependencies {
 
     // Open API documentation generation.
     implementation(group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.5.0")
-
-    // Adds logging for the hibernate queries.
-    implementation(group = "com.github.gavlyukovskiy", name = "datasource-proxy-spring-boot-starter", version = "1.9.1")
 
     // Provides the core of hawaii framework such as the response entity exception handling.
     implementation(group = "org.hawaiiframework", name = "hawaii-starter-async", version = hawaiiVersion)
@@ -216,6 +214,11 @@ tasks.withType<Test> {
     testLogging {
         events = setOf(FAILED, PASSED, SKIPPED)
     }
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    checkForGradleUpdate = true
+    gradleReleaseChannel="current"
 }
 
 tasks.named<DefaultTask>("build") {

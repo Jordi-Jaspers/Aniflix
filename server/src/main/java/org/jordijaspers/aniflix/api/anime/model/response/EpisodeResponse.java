@@ -22,6 +22,8 @@ public class EpisodeResponse {
 
     private int totalEpisodes;
 
+    private String summary;
+
     private String image;
 
     private ZonedDateTime airDate;
