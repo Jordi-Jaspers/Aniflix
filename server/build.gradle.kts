@@ -83,6 +83,9 @@ dependencies {
     // Provides Mapstruct annotations for spring.
     annotationProcessor(group = "org.mapstruct", name = "mapstruct-processor", version = mapStructVersion)
 
+    // ======= DEV TOOL PROCESSORS =======
+    developmentOnly(group = "org.springframework.boot", name = "spring-boot-devtools")
+
     // ======= RUNTIME DEPENDENCIES =======
     // Jdbc driver to connect with the MariaDB database.
     runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
@@ -100,6 +103,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-security")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-validation")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf")
+    implementation(group = "org.springframework.boot", name = "spring-boot-configuration-processor")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.

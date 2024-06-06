@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.2.3] - 2024-06-06
+### Hotfix:
+* Wrong progress assigned to the wrong episode when the episode is watched.
+
 ## [0.2.2] - 2024-06-06
 ### Hotfix:
 * Set the default episode progress to 0 when the episode is not watched.
