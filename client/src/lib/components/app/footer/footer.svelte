@@ -1,5 +1,5 @@
 <script lang="ts">
-import {ChangelogDialog} from "$lib/components/changelog";
+import { ChangelogDialog } from '$lib/components/changelog';
 
 let applicationVersion = __VERSION__;
 let applicationName = __NAME__;
@@ -9,8 +9,10 @@ let applicationName = __NAME__;
 	<div>
 		<span>{applicationName}</span>
 		<span>|</span>
-		<ChangelogDialog bind:applicationVersion/>
+		<ChangelogDialog bind:applicationVersion={applicationVersion} />
 		<span>|</span>
-		<span>© <a href="https://github.com/Jordi-Jaspers" target="_blank" class="hover:underline"> Jordi Jaspers</a> 2024, All rights reserved.</span>
+		<span
+			>© <a href="https://github.com/Jordi-Jaspers" target="_blank" class="hover:underline"> Jordi Jaspers</a> 2024, All rights reserved.</span
+		>
 	</div>
 </footer>
