@@ -1,6 +1,7 @@
 import { type Writable, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import toast from 'svelte-french-toast';
+import type { Selected } from 'bits-ui';
 
 class LocalStorage<T> {
 	key: string;
@@ -84,6 +85,9 @@ export const useShowInfoModal: Writable<boolean> = useShowInfoModalStore.get();
 
 const useModalInfoStore: LocalStorage<AnimeResponse> = new LocalStorage('modalInfo', {} as AnimeResponse);
 export const useModalInfo: Writable<AnimeResponse> = useModalInfoStore.get();
+
+const useModalEpisodeSelectorStore: LocalStorage<Selected<number>> = new LocalStorage('modalEpisodeSelector', { value: 0, label: '0' });
+export const useModalEpisodeSelector: Writable<Selected<number>> = useModalEpisodeSelectorStore.get();
 
 const useRefreshTokenStore: LocalStorage<string> = new LocalStorage('ANIFLIX_REFRESH_TOKEN', '');
 export const refreshToken: Writable<string> = useRefreshTokenStore.get();

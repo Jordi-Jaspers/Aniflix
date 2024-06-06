@@ -164,7 +164,7 @@ $: if (anime) {
 					</Trigger>
 				</List>
 				<Content value="Episodes">
-					<EpisodeList anilistId={anime.anilistId} />
+					<EpisodeList anilistId={anime.anilistId} lastSeenEpisode={anime.lastSeenEpisode} />
 				</Content>
 				<Content value="Recommended">
 					<RecommendationCards anilistId={anime.anilistId} />

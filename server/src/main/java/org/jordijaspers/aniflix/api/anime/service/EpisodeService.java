@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_EPISODE_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
@@ -104,6 +105,21 @@ public class EpisodeService {
         if (!animeService.isAnimeInDatabase(anilistId)) {
             animeService.saveAnime(anime);
         }
+
+        final Set<Episode> episodes = anime.getEpisodes();
+        final List<EpisodeProgress> episodeProgresses = episodeRepository.findAllByAnilistId(anilistId)
+                .stream()
+                .filter(episode -> isNotEmpty(episode.getEpisodeProgresses()))
+                .map(Episode::getEpisodeProgresses)
+                .filter(progress -> progress.stream().anyMatch(progress1 -> progress1.getUser().equals(getLoggedInUser())))
+                .findFirst()
+                .orElse(List.of());
+
+        episodeProgresses.forEach(episodeProgress -> episodes.stream()
+                .filter(episode -> episode.getNumber() == episodeProgress.getEpisode().getNumber())
+                .findFirst()
+                .ifPresent(episode -> episode.setEpisodeProgresses(episodeProgresses)));
+
         return anime.getEpisodes();
     }
 
@@ -112,6 +128,7 @@ public class EpisodeService {
         if (!animeService.isAnimeInDatabase(anilistId)) {
             animeService.saveAnime(anime);
         }
+
         return anime.getEpisodes();
     }
 

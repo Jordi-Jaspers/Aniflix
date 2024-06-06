@@ -6,14 +6,16 @@ import { onMount } from 'svelte';
 import { curl } from '$lib/api/client';
 import { SERVER_URLS } from '$lib/api/paths';
 import { closeModal } from '$lib/api/modal-util';
+import { useModalEpisodeSelector } from '$lib/components/store/localstorage';
 
 export let anilistId: number;
+export let lastSeenEpisode: number;
 
 let isLoading: boolean = true;
 let episodes: EpisodeResponse[] = [];
 let totalPages: number = 0;
+
 const pageSize = 12;
-let currentPage: Selected<number> = { value: 1, label: `Episodes 1 - ${pageSize}` };
 
 onMount(async () => {
 	const response: Response = await curl(SERVER_URLS.ANIME_EPISODES_PATH.replace('{id}', anilistId.toString()), {
@@ -31,12 +33,26 @@ onMount(async () => {
 
 $: lowerBound = (page: number) => (page === 1 ? 1 : (page - 1) * pageSize + 1);
 $: upperBound = (page: number) => (page * pageSize < episodes.length ? page * pageSize : episodes.length);
-$: currentPage.label = `Episodes ${lowerBound(currentPage.value)} - ${upperBound(currentPage.value)}`;
+$: {
+	if ($useModalEpisodeSelector.value === 0) {
+		const page: number = getPageOfEpisode(lastSeenEpisode);
+		$useModalEpisodeSelector = {
+			value: page,
+			label: `Episodes ${lowerBound($useModalEpisodeSelector.value)} - ${upperBound($useModalEpisodeSelector.value)}`
+		};
+	} else {
+		$useModalEpisodeSelector.label = `Episodes ${lowerBound($useModalEpisodeSelector.value)} - ${upperBound($useModalEpisodeSelector.value)}`;
+	}
+}
 
 function setCurrentPage(selectedPage: Selected<number> | undefined) {
 	if (selectedPage) {
-		currentPage = selectedPage;
+		$useModalEpisodeSelector = selectedPage;
 	}
+}
+
+function getPageOfEpisode(episodeNumber: number) {
+	return Math.ceil(episodeNumber / pageSize);
 }
 </script>
 
@@ -49,7 +65,7 @@ function setCurrentPage(selectedPage: Selected<number> | undefined) {
 	</div>
 {:else if episodes.length > 0}
 	<div class="items-center rounded-b-md py-4">
-		<Root onSelectedChange={setCurrentPage} selected={currentPage}>
+		<Root onSelectedChange={setCurrentPage} selected={$useModalEpisodeSelector}>
 			<Trigger class="w-fit min-w-[200px] space-x-2 px-4">
 				<Value placeholder="{episodes.length} Episodes" />
 			</Trigger>
@@ -62,7 +78,7 @@ function setCurrentPage(selectedPage: Selected<number> | undefined) {
 	</div>
 
 	{#each episodes as episode}
-		{#if episode.episodeNumber >= lowerBound(currentPage.value) && episode.episodeNumber <= upperBound(currentPage.value)}
+		{#if episode.episodeNumber >= lowerBound($useModalEpisodeSelector.value) && episode.episodeNumber <= upperBound($useModalEpisodeSelector.value)}
 			<EpisodeListCard episode={episode} />
 		{/if}
 	{/each}
