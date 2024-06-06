@@ -1,6 +1,6 @@
 {
 	"name": "aniflix.stream",
-	"version": "0.3.0-SNAPSHOT",
+	"version": "0.2.1",
 	"private": true,
 	"engines": {
 		"node": ">=20.10.0 <21.0.0",
