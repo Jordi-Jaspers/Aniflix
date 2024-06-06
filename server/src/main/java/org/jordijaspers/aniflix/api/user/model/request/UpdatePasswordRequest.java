@@ -1,19 +1,15 @@
 package org.jordijaspers.aniflix.api.user.model.request;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * The password update request.
  */
 @Data
-public class UpdatePasswordRequest {
+@EqualsAndHashCode(callSuper = true)
+public class UpdatePasswordRequest extends PasswordRequest {
 
     private String oldPassword;
-
-    private String newPassword;
-
-    private String confirmPassword;
-
-    private String token;
 
 }

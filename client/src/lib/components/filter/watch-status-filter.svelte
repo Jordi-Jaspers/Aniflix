@@ -1,23 +1,23 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Check } from 'lucide-svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+import { Button } from '$lib/components/ui/button/index.js';
+import { Check } from 'lucide-svelte';
+import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
-	export let watchStatus: string[] = [];
-	export let possibleWatchStatus: string[];
-	function handleCheckboxChange(event: Event, status: string) {
-		const isChecked = (event.target as HTMLInputElement).checked;
-		if (isChecked) {
-			watchStatus = [...watchStatus, status];
-		} else {
-			watchStatus = watchStatus.filter((s) => s !== status);
-		}
+export let watchStatus: string[] = [];
+export let possibleWatchStatus: string[];
+function handleCheckboxChange(event: Event, status: string) {
+	const isChecked = (event.target as HTMLInputElement).checked;
+	if (isChecked) {
+		watchStatus = [...watchStatus, status];
+	} else {
+		watchStatus = watchStatus.filter((s) => s !== status);
 	}
+}
 
-	let isActive = false;
-	$: {
-		isActive = watchStatus.length > 0;
-	}
+let isActive = false;
+$: {
+	isActive = watchStatus.length > 0;
+}
 </script>
 
 <DropdownMenu.Root>

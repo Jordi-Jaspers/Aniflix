@@ -1,7 +1,7 @@
 <script lang="ts">
-	import '../app.pcss';
-	import { Toaster } from 'svelte-french-toast';
-	import { ModeWatcher } from 'mode-watcher';
+import '../app.pcss';
+import { ModeWatcher } from 'mode-watcher';
+import { Toaster } from '$lib/components/ui/sonner';
 </script>
 
 <main>

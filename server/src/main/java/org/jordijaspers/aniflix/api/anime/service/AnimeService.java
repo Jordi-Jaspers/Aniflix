@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * The service which handles the anime data.
@@ -77,17 +77,6 @@ public class AnimeService {
         return anime;
     }
 
-    public Anime findDetailsByAnilistId(final int anilistId) {
-        LOGGER.info("Attempting to look up anime details with Anilist ID '{}'", anilistId);
-        final Anime anime = animeRepository.findDetailsByAnilistId(anilistId)
-                .filter(entry -> !isEmpty(entry.getEpisodes()) && entry.getEpisodes().size() == entry.getTotalEpisodes())
-                .orElseGet(() -> saveAnime(consumetService.getAnimeDetails(anilistId)));
-
-        userInteractionEnhancer.applyAnime(anime);
-        synchronizationService.synchronizeData(anilistId);
-        return anime;
-    }
-
     public Anime findInfoByAnilistId(final int anilistId) {
         LOGGER.info("Attempting to look up anime info with Anilist ID '{}'", anilistId);
         final Anime anime = animeRepository.findInfoByAnilistId(anilistId)
@@ -119,12 +108,9 @@ public class AnimeService {
         return anime;
     }
 
-    public boolean isAnimeInDatabase(final int anilistId) {
-        return animeRepository.existsById(anilistId);
-    }
-
-    private Anime saveAnime(final Anime anime) {
+    public Anime saveAnime(final Anime anime) {
         LOGGER.info("Anime with title '{}' not yet in the database, attempting to save it.", anime.getTitle());
+        anime.setUpdated(LocalDate.of(2000, 1, 1).atStartOfDay());
 
         // Detach episodes from the anime temporarily
         final Set<Episode> episodes = anime.getEpisodes();
@@ -139,5 +125,15 @@ public class AnimeService {
 
         // Save the anime with episodes
         return animeRepository.save(preSave);
+    }
+
+    public boolean isAnimeInDatabase(final int anilistId) {
+        return animeRepository.existsById(anilistId);
+    }
+
+    public boolean isAnimeStatusCompleted(final int anilistId) {
+        return animeRepository.findDetailsByAnilistId(anilistId)
+                .filter(Anime::isCompleted)
+                .isPresent();
     }
 }

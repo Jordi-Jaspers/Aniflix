@@ -1,48 +1,40 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { page } from '$app/stores';
-	import { Clock, Link } from 'lucide-svelte';
-	import { Badge } from '$lib/components/ui/badge';
-	import { getNewsTopicColor } from '$lib/api/constants';
-	import { Content, Root, Trigger } from '$lib/components/ui/tooltip/index.js';
-	import toast from 'svelte-french-toast';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { page } from '$app/stores';
+import { Clock, Link } from 'lucide-svelte';
+import { Badge } from '$lib/components/ui/badge';
+import { getNewsTopicColor } from '$lib/api/constants';
+import { Content, Root, Trigger } from '$lib/components/ui/tooltip/index.js';
+import { toast } from 'svelte-sonner';
 
-	let post: NewsPostResponse;
-	onMount(async () => {
-		const id: string = $page.params.id.toString();
-		const response: Response = await curl(SERVER_URLS.NEWS_DETAILS_PATH.replace('{id}', id), { method: 'GET' });
+let post: NewsPostResponse;
+onMount(async () => {
+	const id: string = $page.params.id.toString();
+	const response: Response = await curl(SERVER_URLS.NEWS_DETAILS_PATH.replace('{id}', id), { method: 'GET' });
 
-		if (response.ok) {
-			post = await response.json();
-		}
-	});
-
-	// Function to get time since upload
-	function calculateReadingTime(text: string, wordsPerMinute: number = 150): number {
-		const words = text.trim().split(/\s+/).length;
-		const minutes = words / wordsPerMinute;
-		return Math.ceil(minutes);
+	if (response.ok) {
+		post = await response.json();
 	}
+});
 
-	// Function to copy link to clipboard
-	function copyToClipboard() {
-		try {
-			navigator.clipboard.writeText(window.location.href);
-			toast.success('Successfully copied link to clipboard.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
-		} catch (err) {
-			toast.error('Failed to copy link to clipboard.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
-		}
+// Function to get time since upload
+function calculateReadingTime(text: string, wordsPerMinute: number = 150): number {
+	const words = text.trim().split(/\s+/).length;
+	const minutes = words / wordsPerMinute;
+	return Math.ceil(minutes);
+}
+
+// Function to copy link to clipboard
+function copyToClipboard() {
+	try {
+		navigator.clipboard.writeText(window.location.href);
+		toast.success('Successfully copied link to clipboard.');
+	} catch (err) {
+		toast.error('Failed to copy link to clipboard.');
 	}
+}
 </script>
 
 {#if post}

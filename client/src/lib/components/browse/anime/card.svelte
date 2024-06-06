@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { LibraryButton } from '$lib/components/general';
-	import { openModal } from '$lib/api/util';
-	import { setAnime } from '$lib/components/store/anime-context-store';
+import { LibraryButton } from '$lib/components/general';
+import { openModal } from '$lib/api/modal-util';
+import { setAnime } from '$lib/components/store/anime-context-store';
 
-	export let anime: AnimeResponse;
-	setAnime(anime);
+export let anime: AnimeResponse;
+setAnime(anime);
 </script>
 
 <div class="relative aspect-[420/600] h-full w-auto bg-card-accent opacity-100 transition-all hover:opacity-75">

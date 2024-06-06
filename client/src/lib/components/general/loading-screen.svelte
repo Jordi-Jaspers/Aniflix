@@ -1,8 +1,8 @@
 <script>
-	import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
+import Logo from '$lib/assets/icons/aniflix-logo-large.webp?enhanced';
 </script>
 
-<div class="fixed inset-0 !z-[1000] flex h-screen w-screen items-center justify-center overflow-hidden overscroll-auto bg-black">
+<div class="fixed inset-0 !z-[1000] flex h-screen w-screen items-center justify-center overflow-hidden overscroll-auto bg-background">
 	<div class="flex h-screen flex-col items-center justify-center space-y-4">
 		<div class="mx-auto flex w-[350px] flex-col justify-center space-y-6">
 			<div class="px-16">

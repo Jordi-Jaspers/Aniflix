@@ -29,6 +29,10 @@ public class AnimeResponse implements PageableItemResource {
 
     private String cover;
 
+    private String clearLogo;
+
+    private String fanArt;
+
     private String trailer;
 
     private int releaseYear;

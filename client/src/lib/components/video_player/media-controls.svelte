@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { Pause, Play, RotateCcw, RotateCw } from 'lucide-svelte';
-	import type { SveltePlayerRef } from 'svelte-player/dist/types';
+import { Pause, Play, RotateCcw, RotateCw } from 'lucide-svelte';
+import type { SveltePlayerRef } from 'svelte-player/dist/types';
 
-	export let playing: boolean;
-	export let playerRef: SveltePlayerRef;
+export let playing: boolean;
+export let playerRef: SveltePlayerRef;
 
-	function togglePlay() {
-		playing = !playing;
-	}
+function togglePlay() {
+	playing = !playing;
+}
 
-	function rewind() {
-		playerRef.seekTo(playerRef.getCurrentTime() - 15);
-	}
+function rewind() {
+	playerRef.seekTo(playerRef.getCurrentTime() - 15);
+}
 
-	function forward() {
-		playerRef.seekTo(playerRef.getCurrentTime() + 15);
-	}
+function forward() {
+	playerRef.seekTo(playerRef.getCurrentTime() + 15);
+}
 </script>
 
 <button aria-label="rewind" class="h-full w-full" on:click={rewind}>

@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { SkipBack } from 'lucide-svelte';
-	import { isIOS } from '$lib/api/util';
+import { SkipBack } from 'lucide-svelte';
+import { isIOS } from '$lib/api/util';
 
-	export let episode: EpisodeResponse;
+export let episode: EpisodeResponse;
 
-	let isIOSDevice: boolean = isIOS(navigator.userAgent);
+let isIOSDevice: boolean = isIOS(navigator.userAgent);
 
-	function hasPrevEpisode(): boolean {
-		return episode.episodeNumber > 1;
+function hasPrevEpisode(): boolean {
+	return episode.episodeNumber > 1;
+}
+
+function navigate() {
+	if (episode) {
+		window.location.href = `/watch/${episode.anilistId}/episode/${episode.episodeNumber - 1}`;
 	}
+}
 
-	function navigate() {
-		if (episode) {
-			window.location.href = `/watch/${episode.anilistId}/episode/${episode.episodeNumber - 1}`;
-		}
-	}
-
-	$: showPrevEpisodeButton = episode && hasPrevEpisode();
+$: showPrevEpisodeButton = episode && hasPrevEpisode();
 </script>
 
 {#if episode}

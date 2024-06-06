@@ -1,29 +1,29 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import * as Popover from '$lib/components/ui/popover/index.js';
-	import { round } from '$lib/utils';
+import { Button } from '$lib/components/ui/button/index.js';
+import { Input } from '$lib/components/ui/input/index.js';
+import { Label } from '$lib/components/ui/label/index.js';
+import * as Popover from '$lib/components/ui/popover/index.js';
+import { round } from '$lib/utils';
 
-	export let minRating: number = 0;
-	export let maxRating: number = 0;
+export let minRating: number = 0;
+export let maxRating: number = 0;
 
-	let minInputRating: number = 0;
-	let maxInputRating: number = 0;
+let minInputRating: number = 0;
+let maxInputRating: number = 0;
 
-	let isActive = false;
-	$: {
-		isActive = minRating > 0 || maxRating > 0;
+let isActive = false;
+$: {
+	isActive = minRating > 0 || maxRating > 0;
+}
+
+$: {
+	if (minInputRating > 0) {
+		minRating = round(minInputRating, 1) * 10;
 	}
-
-	$: {
-		if (minInputRating > 0) {
-			minRating = round(minInputRating, 1) * 10;
-		}
-		if (maxInputRating > 0) {
-			maxRating = round(maxInputRating, 1) * 10;
-		}
+	if (maxInputRating > 0) {
+		maxRating = round(maxInputRating, 1) * 10;
 	}
+}
 </script>
 
 <Popover.Root portal={null}>

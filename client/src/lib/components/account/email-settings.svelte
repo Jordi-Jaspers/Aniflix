@@ -1,74 +1,70 @@
 <script lang="ts">
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { useUserDetails } from '$lib/components/store/store.js';
-	import toast from 'svelte-french-toast';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { curl, logout } from '$lib/api/client';
-	import Check from 'lucide-svelte/icons/check';
-	import { X } from 'lucide-svelte';
-	import { writable } from 'svelte/store';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
+import { Label } from '$lib/components/ui/label/index.js';
+import { Input } from '$lib/components/ui/input/index.js';
+import { Button } from '$lib/components/ui/button/index.js';
+import { useUserDetails } from '$lib/components/store/store.js';
+import { toast } from 'svelte-sonner';
+import { SERVER_URLS } from '$lib/api/paths';
+import { curl, logout } from '$lib/api/client';
+import Check from 'lucide-svelte/icons/check';
+import { X } from 'lucide-svelte';
+import { writable } from 'svelte/store';
 
-	let isLoading = writable(false);
-	let request = writable<UpdateEmailRequest>({ email: '' });
-	let emailAvailable = writable(false);
+let isLoading = writable(false);
+let request = writable<UpdateEmailRequest>({ email: '' });
+let emailAvailable = writable(false);
 
-	$: isButtonDisabled = $isLoading || !$request.email || !$emailAvailable;
+$: isButtonDisabled = $isLoading || !$request.email || !$emailAvailable;
 
-	async function handleSubmit() {
-		isLoading.set(true);
-		request.update((req) => {
-			req.email = req.email !== '' ? req.email : $useUserDetails.email;
-			return req;
-		});
+async function handleSubmit() {
+	isLoading.set(true);
+	request.update((req) => {
+		req.email = req.email !== '' ? req.email : $useUserDetails.email;
+		return req;
+	});
 
-		const response: Response = await curl(SERVER_URLS.USER_DETAILS_EMAIL_PATH, {
+	const response: Response = await curl(SERVER_URLS.USER_DETAILS_EMAIL_PATH, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify($request)
+	});
+
+	if (response.ok) {
+		$useUserDetails.email = $request.email;
+		request.set({ email: '' });
+		toast.success('Email updated successfully. Check your email for further instructions.');
+		await logout();
+	}
+	isLoading.set(false);
+}
+
+let checkingEmail: boolean = writable(false);
+let debounceTimeout: Timer;
+async function isEmailInAlreadyUse() {
+	checkingEmail.set(true);
+	if (!$request.email) return;
+
+	if (debounceTimeout) {
+		clearTimeout(debounceTimeout);
+	}
+
+	debounceTimeout = setTimeout(async () => {
+		const response: Response = await curl(SERVER_URLS.EMAIL_VALIDATION_PATH, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify($request)
 		});
 
 		if (response.ok) {
-			$useUserDetails.email = $request.email;
-			request.set({ email: '' });
-			toast.success('Email updated successfully. Check your email for further instructions.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
-			await logout();
+			const result: boolean = await response.json();
+			emailAvailable.set(!result);
 		}
-		isLoading.set(false);
-	}
+		checkingEmail.set(false);
+	}, 300);
+}
 
-	let checkingEmail: boolean = writable(false);
-	let debounceTimeout: Timer;
-	async function isEmailInAlreadyUse() {
-		checkingEmail.set(true);
-		if (!$request.email) return;
-
-		if (debounceTimeout) {
-			clearTimeout(debounceTimeout);
-		}
-
-		debounceTimeout = setTimeout(async () => {
-			const response: Response = await curl(SERVER_URLS.EMAIL_VALIDATION_PATH, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify($request)
-			});
-
-			if (response.ok) {
-				const result: boolean = await response.json();
-				emailAvailable.set(!result);
-			}
-			checkingEmail.set(false);
-		}, 300);
-	}
-
-	$: $request.email && isEmailInAlreadyUse();
+$: $request.email && isEmailInAlreadyUse();
 </script>
 
 <form id="change-email" on:submit|preventDefault={handleSubmit}>

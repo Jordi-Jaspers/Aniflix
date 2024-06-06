@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { Play, StarIcon } from 'lucide-svelte';
-	import { LibraryButton, LikeButton } from '$lib/components/general';
-	import { goto } from '$app/navigation';
-	import { setAnime } from '$lib/components/store/anime-context-store';
+import { Play, StarIcon } from 'lucide-svelte';
+import { LibraryButton, LikeButton } from '$lib/components/general';
+import { goto } from '$app/navigation';
+import { setAnime } from '$lib/components/store/anime-context-store';
 
-	export let recommendation: RecommendationResponse;
-	setAnime(recommendation);
+export let recommendation: RecommendationResponse;
+setAnime(recommendation);
 
-	function getLastSeenEpisode(): number {
-		if (recommendation.lastSeenEpisode === 0) {
-			return 1;
-		}
-		return recommendation.lastSeenEpisode;
+function getLastSeenEpisode(): number {
+	if (recommendation.lastSeenEpisode === 0) {
+		return 1;
 	}
+	return recommendation.lastSeenEpisode;
+}
 </script>
 
 <div class={'m-[0.1em] h-[100%] min-h-[14em] overflow-hidden rounded bg-card-accent shadow-lg'}>

@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { SkipForward } from 'lucide-svelte';
-	import { isIOS } from '$lib/api/util';
+import { SkipForward } from 'lucide-svelte';
+import { isIOS } from '$lib/api/util';
 
-	export let episode: EpisodeResponse;
-	let isIOSDevice: boolean = isIOS(navigator.userAgent);
+export let episode: EpisodeResponse;
+let isIOSDevice: boolean = isIOS(navigator.userAgent);
 
-	function hasNextEpisode(): boolean {
-		return episode.episodeNumber < episode.totalEpisodes;
+function hasNextEpisode(): boolean {
+	return episode.episodeNumber < episode.totalEpisodes;
+}
+
+function navigate() {
+	if (episode) {
+		window.location.href = `/watch/${episode.anilistId}/episode/${episode.episodeNumber + 1}`;
 	}
+}
 
-	function navigate() {
-		if (episode) {
-			window.location.href = `/watch/${episode.anilistId}/episode/${episode.episodeNumber + 1}`;
-		}
-	}
-
-	$: showNextEpisodeButton = episode && hasNextEpisode();
+$: showNextEpisodeButton = episode && hasNextEpisode();
 </script>
 
 {#if episode}

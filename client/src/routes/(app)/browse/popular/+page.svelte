@@ -1,39 +1,39 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { curl } from '$lib/api/client';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { PaginationBar } from '$lib/components/search/index.js';
-	import { AnimeCard } from '$lib/components/browse';
-	import { Skeleton } from '$lib/components/ui/skeleton';
+import { onMount } from 'svelte';
+import { curl } from '$lib/api/client';
+import { SERVER_URLS } from '$lib/api/paths';
+import { PaginationBar } from '$lib/components/search/index.js';
+import { AnimeCard } from '$lib/components/browse';
+import { Skeleton } from '$lib/components/ui/skeleton';
 
-	let page: PageResponse<AnimeResponse>;
+let page: PageResponse<AnimeResponse>;
 
-	let isLoading: boolean = true;
-	let isRequesting: boolean = false;
+let isLoading: boolean = true;
+let isRequesting: boolean = false;
 
-	let pageSize: number = 10 * 25;
-	let request: PageRequest = { page: 1, perPage: 25 };
+let pageSize: number = 10 * 25;
+let request: PageRequest = { page: 1, perPage: 25 };
 
-	async function fetchAnime() {
-		isRequesting = true;
-		const response: Response = await curl(SERVER_URLS.ANIME_POPULAR_PATH, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(request)
-		});
+async function fetchAnime() {
+	isRequesting = true;
+	const response: Response = await curl(SERVER_URLS.ANIME_POPULAR_PATH, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(request)
+	});
 
-		if (response.ok) {
-			page = await response.json();
-			isRequesting = false;
-		}
-		window.scrollTo({ top: 0, behavior: 'smooth' });
+	if (response.ok) {
+		page = await response.json();
+		isRequesting = false;
 	}
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-	onMount(fetchAnime);
-	$: if (request) fetchAnime();
-	$: isLoading = !page || page.content.length === 0 || isRequesting;
+onMount(fetchAnime);
+$: if (request) fetchAnime();
+$: isLoading = !page || page.content.length === 0 || isRequesting;
 </script>
 
 <svelte:head>
@@ -48,7 +48,7 @@
 		<div class="grid gap-2 pb-8" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
 			{#each page.content as anime}
 				<div class="flex h-full flex-col overflow-hidden rounded-t-md">
-					<AnimeCard bind:anime />
+					<AnimeCard bind:anime={anime} />
 				</div>
 			{/each}
 		</div>

@@ -4,11 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import static org.jordijaspers.aniflix.config.GlobalConfiguration.SERIAL_VERSION_UID;
+
 /**
  * The relation of an anime.
  */
 @Data
-public class AnilistRelation {
+public class AnilistRelation implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = SERIAL_VERSION_UID;
 
     @JsonProperty("id")
     private Long id;

@@ -1,6 +1,7 @@
 package org.jordijaspers.aniflix.api.anime.repository;
 
 import org.jordijaspers.aniflix.api.anime.model.Anime;
+import org.jordijaspers.aniflix.api.anime.model.constant.AnimeStatus;
 import org.jordijaspers.aniflix.common.util.logging.LogExecutionTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -39,4 +40,7 @@ public interface AnimeRepository extends JpaRepository<Anime, Integer>, JpaSpeci
             + "LEFT JOIN FETCH a.interactions interactions "
             + "WHERE a.anilistId = ?1")
     Optional<Anime> findInfoByAnilistId(int anilistId);
+
+    @LogExecutionTime
+    boolean existsByAnilistIdAndStatus(int anilistId, AnimeStatus status);
 }

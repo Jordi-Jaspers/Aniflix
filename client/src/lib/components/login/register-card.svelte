@@ -1,38 +1,38 @@
 <script lang="ts">
-	import Socials from '$lib/components/login/socials.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { Input } from '$lib/components/ui/input';
-	import { Label } from '$lib/components/ui/label';
-	import { ShieldAlert, ShieldCheck } from 'lucide-svelte';
-	import { register } from '$lib/api/client';
-	import { PasswordMeter } from '$lib/components/general';
-	import type { Writable } from 'svelte/store';
-	import { writable } from 'svelte/store';
+import Socials from '$lib/components/login/socials.svelte';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { ShieldAlert, ShieldCheck } from 'lucide-svelte';
+import { register } from '$lib/api/client';
+import { PasswordMeter } from '$lib/components/general';
+import type { Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-	let isFormValid: Writable<boolean> = writable(false);
-	let formData: Writable<RegisterRequest> = writable<RegisterRequest>({
-		email: '',
-		password: '',
-		passwordConfirmation: ''
-	});
+let isFormValid: Writable<boolean> = writable(false);
+let formData: Writable<RegisterRequest> = writable<RegisterRequest>({
+	email: '',
+	password: '',
+	passwordConfirmation: ''
+});
 
-	let errorMessage: string | undefined;
-	let registerResponse: RegisterResponse | undefined;
-	let isLoading = false;
+let errorMessage: string | undefined;
+let registerResponse: RegisterResponse | undefined;
+let isLoading = false;
 
-	async function handleSubmit() {
-		isLoading = true;
-		const response: AuthorizeResponse | string = await register($formData);
-		if (typeof response === 'string') {
-			registerResponse = undefined;
-			errorMessage = response;
-		} else {
-			registerResponse = response;
-			errorMessage = undefined;
-		}
-		isLoading = false;
+async function handleSubmit() {
+	isLoading = true;
+	const response: AuthorizeResponse | string = await register($formData);
+	if (typeof response === 'string') {
+		registerResponse = undefined;
+		errorMessage = response;
+	} else {
+		registerResponse = response;
+		errorMessage = undefined;
 	}
+	isLoading = false;
+}
 </script>
 
 <form id="register" on:submit|preventDefault={handleSubmit}>

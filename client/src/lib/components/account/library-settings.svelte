@@ -1,45 +1,40 @@
 <script lang="ts">
-	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { useUserDetails } from '$lib/components/store/store.js';
-	import toast from 'svelte-french-toast';
-	import { SERVER_URLS } from '$lib/api/paths';
-	import { curl } from '$lib/api/client';
-	import { writable } from 'svelte/store';
-	import { Textarea } from '$lib/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card/index.js';
+import { Label } from '$lib/components/ui/label/index.js';
+import { Button } from '$lib/components/ui/button/index.js';
+import toast from 'svelte-french-toast';
+import { SERVER_URLS } from '$lib/api/paths';
+import { curl } from '$lib/api/client';
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import { Textarea } from '$lib/components/ui/textarea';
 
-	let isLoading: boolean = writable(false);
-	let json = writable<string>('');
+let isLoading: Writable<boolean> = writable(false);
+let json = writable<string>('');
 
-	async function handleSubmit() {
-		$isLoading = true;
-		const response: Response = await curl(SERVER_URLS.LIBRARY_IMPORT_PATH, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(json)
-		});
+async function handleSubmit() {
+	$isLoading = true;
+	const response: Response = await curl(SERVER_URLS.LIBRARY_IMPORT_PATH, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(json)
+	});
 
-		if (response.ok) {
-			toast('Successfully received the json. Importing asynchronously, please wait.', {
-				duration: 5000,
-				position: 'bottom-center',
-				style: 'background: #262626; color: #ffffff;'
-			});
-		}
-		$isLoading = false;
+	if (response.ok) {
+		toast('Successfully received the json. Importing asynchronously, please wait.');
 	}
+	$isLoading = false;
+}
 
-	async function handleExport() {
-		$isLoading = true;
-		toast('Exporting your library preferences. Please wait.', {
-			duration: 5000,
-			position: 'bottom-center',
-			style: 'background: #262626; color: #ffffff;'
-		});
-		$isLoading = false;
-	}
+async function handleExport() {
+	$isLoading = true;
+	toast('Exporting your library preferences. Please wait.', {
+		duration: 5000,
+		position: 'bottom-center',
+		style: 'background: #262626; color: #ffffff;'
+	});
+	$isLoading = false;
+}
 </script>
 
 <form id="import-library" on:submit|preventDefault={handleSubmit}>

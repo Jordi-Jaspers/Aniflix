@@ -1,30 +1,30 @@
 <script lang="ts">
-	import { Content, Item, Root } from '$lib/components/ui/select';
-	import { Select as SelectPrimitive } from 'bits-ui';
-	import { Proportions } from 'lucide-svelte';
-	import type { Selected } from 'bits-ui';
-	import type { PlayerUrl } from 'svelte-player/dist/players/types';
-	import { onMount } from 'svelte';
+import { Content, Item, Root } from '$lib/components/ui/select';
+import { Select as SelectPrimitive } from 'bits-ui';
+import { Proportions } from 'lucide-svelte';
+import type { Selected } from 'bits-ui';
+import type { PlayerUrl } from 'svelte-player/dist/players/types';
+import { onMount } from 'svelte';
 
-	export let episode: EpisodeResponse;
-	export let currentUrl: PlayerUrl;
+export let episode: EpisodeResponse;
+export let currentUrl: PlayerUrl;
 
-	let currentResolution: Selected<string> | undefined;
-	function setResolution(selectedResolution: Selected<string> | undefined) {
-		if (selectedResolution) {
-			currentResolution = selectedResolution;
-			currentUrl = selectedResolution.value;
-		}
+let currentResolution: Selected<string> | undefined;
+function setResolution(selectedResolution: Selected<string> | undefined) {
+	if (selectedResolution) {
+		currentResolution = selectedResolution;
+		currentUrl = selectedResolution.value;
 	}
+}
 
-	onMount(() => {
-		if (episode) {
-			setResolution({
-				value: episode.streamingLinks.sources[0].src,
-				label: episode.streamingLinks.sources[0].quality
-			});
-		}
-	});
+onMount(() => {
+	if (episode) {
+		setResolution({
+			value: episode.streamingLinks.sources[0].src,
+			label: episode.streamingLinks.sources[0].quality
+		});
+	}
+});
 </script>
 
 <Root onSelectedChange={(selectedResolution) => setResolution(selectedResolution)} selected={currentResolution}>

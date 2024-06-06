@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { LoadingScreen } from '$lib/components/general';
-	import { EmailSettings, LibrarySettings, PasswordSettings, ProfileSettings } from '$lib/components/account/index.js';
+import { LoadingScreen } from '$lib/components/general';
+import { EmailSettings, LibrarySettings, PasswordSettings, ProfileSettings } from '$lib/components/account/index.js';
 
-	let isLoading: boolean;
+let isLoading: boolean;
 </script>
 
 <svelte:head>

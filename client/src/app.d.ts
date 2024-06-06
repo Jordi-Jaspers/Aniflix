@@ -47,16 +47,16 @@ class UpdateEpisodeProgressRequest {
 	lastSeen: number;
 }
 
-class UpdatePasswordRequest {
-	oldPassword: string;
+class PasswordRequest {
 	newPassword: string;
 	confirmPassword: string;
-	token: string;
 }
 
-class ForgotPasswordRequest {
-	newPassword: string;
-	confirmPassword: string;
+class UpdatePasswordRequest extends PasswordRequest {
+	oldPassword: string;
+}
+
+class ForgotPasswordRequest extends PasswordRequest {
 	token: string;
 }
 
@@ -188,6 +188,8 @@ class AnimeResponse {
 	status: string;
 	image: string;
 	cover: string;
+	clearLogo: string;
+	fanArt: string;
 	trailer: string;
 	releaseYear: number;
 	genres: string[];
@@ -208,6 +210,7 @@ class EpisodeResponse {
 	episodeTitle: string;
 	episodeNumber: number;
 	totalEpisodes: number;
+	summary: string;
 	image: string;
 	airDate: Date;
 	duration: number;

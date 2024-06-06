@@ -5,7 +5,7 @@ import org.hawaiiframework.validation.ValidationException;
 import org.hawaiiframework.validation.ValidationResult;
 import org.hawaiiframework.validation.Validator;
 import org.jordijaspers.aniflix.api.authentication.validator.CustomPasswordValidator;
-import org.jordijaspers.aniflix.api.user.model.request.UpdatePasswordRequest;
+import org.jordijaspers.aniflix.api.user.model.request.PasswordRequest;
 import org.passay.RuleResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("MultipleStringLiterals")
-public class ChangePasswordValidator implements Validator<UpdatePasswordRequest> {
+public class ChangePasswordValidator implements Validator<PasswordRequest> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChangePasswordValidator.class);
 
@@ -29,7 +29,7 @@ public class ChangePasswordValidator implements Validator<UpdatePasswordRequest>
      * {@inheritDoc}
      */
     @Override
-    public void validate(final UpdatePasswordRequest request, final ValidationResult result) {
+    public void validate(final PasswordRequest request, final ValidationResult result) {
         if (isNull(request)) {
             result.reject("Request body is missing, please provide a request body with the correct configuration");
             throw new ValidationException(result);

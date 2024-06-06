@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Content, Next, Previous, Root } from '$lib/components/ui/carousel';
-	import { ChevronRight } from 'lucide-svelte';
-	import { goto } from '$app/navigation';
-	import { CLIENT_URLS } from '$lib/api/paths';
+import { Content, Next, Previous, Root } from '$lib/components/ui/carousel';
+import { ChevronRight } from 'lucide-svelte';
+import { goto } from '$app/navigation';
+import { CLIENT_URLS } from '$lib/api/paths';
 
-	export let type: string = '';
-	export let showAll: boolean = true;
+export let type: string = '';
+export let showAll: boolean = true;
 </script>
 
 <div class="px-[4%] pt-8 lg:px-[60px]">
