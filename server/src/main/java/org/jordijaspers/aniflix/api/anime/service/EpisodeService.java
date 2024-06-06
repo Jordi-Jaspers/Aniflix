@@ -18,9 +18,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.jordijaspers.aniflix.api.consumed.consumet.service.DomainHealthChecker.getActiveProvider;
 import static org.jordijaspers.aniflix.common.exception.ApiErrorCode.ANIME_EPISODE_NOT_FOUND_ERROR;
 import static org.jordijaspers.aniflix.common.util.SecurityUtil.getLoggedInUser;
@@ -107,21 +108,23 @@ public class EpisodeService {
         }
 
         final Set<Episode> episodes = anime.getEpisodes();
-        final List<EpisodeProgress> episodeProgresses = episodeRepository.findAllByAnilistId(anilistId)
+        final User loggedInUser = getLoggedInUser();
+
+        final Map<Integer, List<EpisodeProgress>> episodeProgressMap = episodeRepository.findAllByAnilistId(anilistId)
                 .stream()
-                .filter(episode -> isNotEmpty(episode.getEpisodeProgresses()))
-                .map(Episode::getEpisodeProgresses)
-                .filter(progress -> progress.stream().anyMatch(progress1 -> progress1.getUser().equals(getLoggedInUser())))
-                .findFirst()
-                .orElse(List.of());
+                .flatMap(episode -> episode.getEpisodeProgresses().stream())
+                .filter(progress -> progress.getUser().equals(loggedInUser))
+                .collect(Collectors.groupingBy(progress -> progress.getEpisode().getNumber()));
 
-        episodeProgresses.forEach(episodeProgress -> episodes.stream()
-                .filter(episode -> episode.getNumber() == episodeProgress.getEpisode().getNumber())
-                .findFirst()
-                .ifPresent(episode -> episode.setEpisodeProgresses(episodeProgresses)));
+        episodes.forEach(episode -> {
+            if (episodeProgressMap.containsKey(episode.getNumber())) {
+                episode.setEpisodeProgresses(episodeProgressMap.get(episode.getNumber()));
+            }
+        });
 
-        return anime.getEpisodes();
+        return episodes;
     }
+
 
     private Set<Episode> getEpisodesFromApi(final int anilistId, final AnilistProviders provider) {
         final Anime anime = consumetService.getAnimeDetailsForProvider(anilistId, provider.getProvider());

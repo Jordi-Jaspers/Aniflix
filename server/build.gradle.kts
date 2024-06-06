@@ -9,7 +9,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 // Both "group" and "version" are default Gradle properties, so they need to be set here
 group = "org.jordijaspers"
-version = "0.2.2"
+version = "0.2.3"
 
 // Other, non-default Gradle, properties need to be defined here
 val author = "Jordi Jaspers"
@@ -83,6 +83,9 @@ dependencies {
     // Provides Mapstruct annotations for spring.
     annotationProcessor(group = "org.mapstruct", name = "mapstruct-processor", version = mapStructVersion)
 
+    // ======= DEV TOOL PROCESSORS =======
+    developmentOnly(group = "org.springframework.boot", name = "spring-boot-devtools")
+
     // ======= RUNTIME DEPENDENCIES =======
     // Jdbc driver to connect with the MariaDB database.
     runtimeOnly(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
@@ -100,6 +103,7 @@ dependencies {
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-security")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-validation")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf")
+    implementation(group = "org.springframework.boot", name = "spring-boot-configuration-processor")
     implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-redis")
 
     // Open API documentation generation.
@@ -145,7 +149,7 @@ dependencies {
     implementation(group = "commons-io", name = "commons-io", version = "2.16.1")
 
     // Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
-    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.39.3")
+    implementation(group = "com.nimbusds", name = "nimbus-jose-jwt", version = "9.40")
 
     // Hawaii-framework must-have logging dependencies.
     implementation(group = "org.slf4j", name = "jcl-over-slf4j", version = "2.1.0-alpha1")
