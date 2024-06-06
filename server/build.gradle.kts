@@ -9,7 +9,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 // Both "group" and "version" are default Gradle properties, so they need to be set here
 group = "org.jordijaspers"
-version = "0.2.2"
+version = "0.3.0-SNAPSHOT"
 
 // Other, non-default Gradle, properties need to be defined here
 val author = "Jordi Jaspers"
