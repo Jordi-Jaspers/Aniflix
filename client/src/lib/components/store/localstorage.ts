@@ -87,3 +87,6 @@ export const useModalInfo: Writable<AnimeResponse> = useModalInfoStore.get();
 
 const useRefreshTokenStore: LocalStorage<string> = new LocalStorage('ANIFLIX_REFRESH_TOKEN', '');
 export const refreshToken: Writable<string> = useRefreshTokenStore.get();
+
+const useShowChangelogStore: LocalStorage<boolean> = new LocalStorage('showChangelog', true);
+export const useShowChangelog: Writable<boolean> = useShowChangelogStore.get();

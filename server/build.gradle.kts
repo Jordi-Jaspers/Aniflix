@@ -58,7 +58,10 @@ plugins {
     // The project-report plugin provides file reports on dependencies, tasks, etc.
     id("project-report")
 
-    // The CycloneDX Gradle plugin creates an aggregate of all direct and transitive dependencies of a project.
+    // Automatic lombok and delombok configuration.
+    id("io.freefair.lombok") version "8.6"
+
+    // SBOM generation for vulnerabilities
     id("org.cyclonedx.bom") version "1.8.2"
 
     // Automatically generates a list of updatable dependencies.
