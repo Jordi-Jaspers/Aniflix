@@ -9,15 +9,28 @@ import { InfoModal } from '$lib/components/modal/index.js';
 import { afterUpdate, onMount } from 'svelte';
 import { SearchResults } from '$lib/components/search/index.js';
 import { useShowInfoModal } from '$lib/components/store/localstorage';
+import { closeModal } from '$lib/api/modal-util';
+import { openSearchBar } from '$lib/api/search-bar-util';
 
 let isAuthenticated: boolean;
-
 onMount(async () => {
 	isAuthenticated = await isUserAuthenticated();
 	if (!isAuthenticated) {
 		goto(CLIENT_URLS.LOGIN_URL);
 		$useHasAuthError = true;
 	}
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'k' && e.metaKey) {
+			if (!$useShowInfoModal) {
+				openSearchBar();
+			}
+		}
+
+		if (e.key === 'Escape') {
+			closeModal();
+		}
+	});
 });
 
 afterUpdate(() => {

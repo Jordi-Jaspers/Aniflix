@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+## [0.2.1] - 2024-06-06
+### Hotfix:
+* Adding episode progress on API calls.
+* Fixing the episode progress not updating when the episode is watched.
+* Remember the last episode list selection when navigating back to the anime.
+* Navigate the episode list to the last seen episode.
+* Fixed health status for all the endpoints.
+
 ## [0.2.0] - 2024-06-06
 ### ANI-149:
 * Showing a changelog in the application to keep users informed about the changes via a dialog.

@@ -1,6 +1,6 @@
 import { curl } from '$lib/api/client';
 import { SERVER_URLS } from '$lib/api/paths';
-import { useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
+import { useModalEpisodeSelector, useModalInfo, useShowInfoModal } from '$lib/components/store/localstorage';
 import { toast } from 'svelte-sonner';
 
 let isRequesting = false;
@@ -13,6 +13,7 @@ export async function openModal(anilistId: number): Promise<void> {
 
 export function closeModal(): void {
 	useModalInfo.set({} as AnimeResponse);
+	useModalEpisodeSelector.set({ value: 0, label: '0' });
 	useShowInfoModal.set(false);
 }
 

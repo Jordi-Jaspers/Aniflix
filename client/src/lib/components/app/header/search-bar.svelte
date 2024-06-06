@@ -2,25 +2,8 @@
 import { Search } from 'lucide-svelte';
 import Input from '$lib/components/ui/input/input.svelte';
 import { Button } from '$lib/components/ui/button';
-import { useSearchTerm, useShowSearchResults } from '$lib/components/store/store';
-
-let isOpen: boolean = false;
-function closeSearchBar() {
-	const input = document.getElementById('search-bar') as HTMLInputElement;
-	if (input) {
-		input.blur();
-		isOpen = false;
-		$useSearchTerm = '';
-	}
-}
-
-function openSearchBar() {
-	const input = document.getElementById('search-bar') as HTMLInputElement;
-	if (input) {
-		input.focus();
-		isOpen = true;
-	}
-}
+import { useOpenSearchBar, useSearchTerm, useShowSearchResults } from '$lib/components/store/store';
+import { closeSearchBar, openSearchBar } from '$lib/api/search-bar-util';
 
 function handleEscape(e: KeyboardEvent) {
 	if (e.key === 'Escape') {
@@ -28,8 +11,8 @@ function handleEscape(e: KeyboardEvent) {
 	}
 }
 
-function toggleSearchBar() {
-	if (isOpen) {
+export function toggleSearchBar() {
+	if ($useOpenSearchBar) {
 		closeSearchBar();
 	} else {
 		openSearchBar();
@@ -42,7 +25,7 @@ $: $useShowSearchResults = $useSearchTerm.length > 0;
 <div class="flex flex-row items-center">
 	<Input
 		id="search-bar"
-		class="mr-1 h-6 rounded-[0.75rem] {isOpen
+		class="mr-1 h-6 rounded-[0.75rem] {$useOpenSearchBar
 			? 'w-36 bg-background transition-all duration-500 ease-out sm:w-48'
 			: 'w-0 border-0 duration-500 ease-in'}"
 		placeholder="Search"

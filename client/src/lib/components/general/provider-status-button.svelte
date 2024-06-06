@@ -9,31 +9,37 @@ let providers = writable([
 	{
 		name: 'Aniflix',
 		healthEndpoint: SERVER_BASE_URL + '/actuator/health',
+		method: 'HEAD',
 		status: 'Online'
 	},
 	{
 		name: 'Anilist',
 		healthEndpoint: 'https://anilist.co/',
+		method: 'HEAD',
 		status: 'Online'
 	},
 	{
 		name: 'Ani.zip',
-		healthEndpoint: 'https://api.ani.zip/mappings?anilist_id=1',
+		healthEndpoint: 'https://api.ani.zip/mappings?anilist_id=5',
+		method: 'HEAD',
 		status: 'Online'
 	},
 	{
 		name: 'MyAnimeList',
 		healthEndpoint: 'https://myanimelist.net/',
+		method: 'HEAD',
 		status: 'Online'
 	},
 	{
 		name: 'GogoAnime',
 		healthEndpoint: 'https://anitaku.so/',
+		method: 'HEAD',
 		status: 'Online'
 	},
 	{
 		name: 'Zoro',
 		healthEndpoint: 'https://hianime.to/',
+		method: 'HEAD',
 		status: 'Online'
 	}
 ]);
@@ -41,7 +47,7 @@ let providers = writable([
 async function pingProviders() {
 	const updatedProviders = $providers.map(async (provider) => {
 		try {
-			await fetch(provider.healthEndpoint, { method: 'HEAD', mode: 'no-cors' });
+			await fetch(provider.healthEndpoint, { method: provider.method, mode: 'no-cors' });
 			provider.status = 'Online';
 		} catch (error) {
 			provider.status = 'Offline';
