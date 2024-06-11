@@ -121,7 +121,7 @@ dependencies {
 
     // Used to validate entities and beans
     implementation(group = "jakarta.validation", name = "jakarta.validation-api", version = "3.1.0")
-    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0-M2")
+    implementation(group = "jakarta.servlet", name = "jakarta.servlet-api", version = "6.1.0")
 
     // Mail service provider that supports thymeleaf templating.
     implementation(group = "jakarta.mail", name = "jakarta.mail-api", version = "2.1.3")
