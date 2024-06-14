@@ -16,7 +16,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/enhanced-img": "^0.2.0",
+		"@sveltejs/enhanced-img": "^0.3.0",
 		"bits-ui": "^0.21.10",
 		"clsx": "^2.1.1",
 		"embla-carousel-svelte": "^8.0.4",
