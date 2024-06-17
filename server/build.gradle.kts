@@ -158,7 +158,7 @@ dependencies {
 
     // ======= TEST DEPENDENCIES =======
     testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
-    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.3.0")
+    testImplementation(group = "org.springframework.security", name = "spring-security-test", version = "6.3.1")
 }
 
 // ============== PLUGIN CONFIGURATION ================
