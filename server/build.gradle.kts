@@ -137,7 +137,7 @@ dependencies {
     implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.14.0")
 
     // Contain types that extend and augment the Java Collections Framework.
-    implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M1")
+    implementation(group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M2")
 
     // Provide a datasource proxy that can inject your own logic into all queries.
     implementation(group = "net.ttddyy", name = "datasource-proxy", version = "1.10")
