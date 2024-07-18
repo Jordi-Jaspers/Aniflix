@@ -39,7 +39,7 @@ dependencies {
     liquibaseRuntime(group = "org.liquibase", name = "liquibase-core", version = "4.28.0")
     liquibaseRuntime(group = "info.picocli", name = "picocli", version = "4.7.6")
     liquibaseRuntime(group = "org.yaml", name = "snakeyaml", version = "2.2")
-    liquibaseRuntime(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.0")
+    liquibaseRuntime(group = "org.mariadb.jdbc", name = "mariadb-java-client", version = "3.4.1")
 }
 
 /**
