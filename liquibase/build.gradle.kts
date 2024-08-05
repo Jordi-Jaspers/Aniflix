@@ -17,7 +17,7 @@ plugins {
     id("java-library")
 
     // Liquibase Plugin
-    id("org.liquibase.gradle") version "2.2.2"
+    id("org.liquibase.gradle") version "3.0.0"
 
     // Automatically generates a list of updatable dependencies.
     id("com.github.ben-manes.versions") version "0.51.0"
